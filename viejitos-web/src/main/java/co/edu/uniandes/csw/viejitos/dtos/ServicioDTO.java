@@ -21,7 +21,6 @@ public class ServicioDTO {
     
     private String descripcion;
     
-    private Boolean finalizado;
-    
+    private boolean finalizado;
     
 }

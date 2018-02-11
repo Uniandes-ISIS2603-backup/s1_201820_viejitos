@@ -13,4 +13,10 @@ public class QuejaDetailDTO extends QuejaDTO{
     
     private ServicioDTO servicio;
     
+    private PagoDTO pagoInicial;
+    
+    private PagoDTO pagoFinal;
+    
+    private FacturaDTO factura;
+    
 }

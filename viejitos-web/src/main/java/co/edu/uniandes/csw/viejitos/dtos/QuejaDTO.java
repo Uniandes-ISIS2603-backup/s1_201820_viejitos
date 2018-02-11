@@ -11,5 +11,8 @@ package co.edu.uniandes.csw.viejitos.dtos;
  */
 public class QuejaDTO {
     
+    private String reclamo;
+    
+    private boolean resuelto;
     
 }
