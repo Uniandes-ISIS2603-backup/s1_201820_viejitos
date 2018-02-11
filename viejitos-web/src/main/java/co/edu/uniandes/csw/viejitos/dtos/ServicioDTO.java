@@ -23,4 +23,5 @@ public class ServicioDTO {
     
     private Boolean finalizado;
     
+    
 }
