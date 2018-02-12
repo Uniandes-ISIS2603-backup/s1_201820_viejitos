@@ -15,11 +15,11 @@ public class PagoDTO {
 
     private String medio;
     
-    private boolean pagado;
+    private Boolean pagado;
     
     private Date fechaLimite;
     
-    private double valor;
+    private Double valor;
     
     /**
      * @return the medio
@@ -38,14 +38,14 @@ public class PagoDTO {
     /**
      * @return the pagado
      */
-    public boolean isPagado() {
+    public Boolean isPagado() {
         return pagado;
     }
 
     /**
      * @param pagado the pagado to set
      */
-    public void setPagado(boolean pagado) {
+    public void setPagado(Boolean pagado) {
         this.pagado = pagado;
     }
 
@@ -66,14 +66,14 @@ public class PagoDTO {
     /**
      * @return the valor
      */
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
     /**
      * @param valor the valor to set
      */
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
     

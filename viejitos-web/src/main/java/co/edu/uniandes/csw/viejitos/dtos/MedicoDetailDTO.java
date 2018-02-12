@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 /**
@@ -12,38 +13,58 @@ import java.util.Iterator;
  * @author l.pardo
  */
 public class MedicoDetailDTO extends MedicoDTO{
-   private List<CitaDTO> citas;
-   private List<HistoriaClinicaDTO> historiasClinicas;
-   private List<ClienteDTO> clientes; 
+
    
-   public List<CitaDTO> getCitas()
+   private Collection<CitaDTO> citas;
+   private Collection<HistoriaClinicaDTO> historiasClinicas;
+   private Collection<ClienteDTO> clientes; 
+   private CalendarioSemanalDTO calendario;
+   
+   public MedicoDetailDTO()
+   {
+       
+   }
+   public Collection<CitaDTO> getCitas()
    {
        return citas;
    }
     
-   public List<HistoriaClinicaDTO> getHistoriasClinicas()
+   public Collection<HistoriaClinicaDTO> getHistoriasClinicas()
    {
        return historiasClinicas;
    }
    
-   public List<ClienteDTO> getClientes()
+   public Collection<ClienteDTO> getClientes()
    {
        return clientes;
    }
    
-   public void setCitas(List<CitaDTO> l)
+   public void setCitas(Collection<CitaDTO> l)
    {
        citas= l;
    }
    
-   public void setHistoriasClinicas(List<HistoriaClinicaDTO> l)
+   public void setHistoriasClinicas(Collection<HistoriaClinicaDTO> l)
    {
        historiasClinicas= l;
    }
    
-   public void setHistoriasClinicas(List<ClienteDTO> l)
+   public void setClientes(Collection<ClienteDTO> l)
    {
        clientes= l;
    }
+    /**
+     * @return the calendario
+     */
+    public CalendarioSemanalDTO getCalendario() {
+        return calendario;
+    }
+
+    /**
+     * @param calendario the calendario to set
+     */
+    public void setCalendario(CalendarioSemanalDTO calendario) {
+        this.calendario = calendario;
+    }
       
 }

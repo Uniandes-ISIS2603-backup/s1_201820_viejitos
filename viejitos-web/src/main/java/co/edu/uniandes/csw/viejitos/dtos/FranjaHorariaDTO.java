@@ -10,17 +10,20 @@ package co.edu.uniandes.csw.viejitos.dtos;
  * @author lf.naranjo11
  */
 public class FranjaHorariaDTO {
-    private int horaInicio;
-    private int horaFin;
-    private boolean ocupado;
+    private Integer horaInicio;
+    private Integer horaFin;
+    private Boolean ocupado;
     private String diaSemana;
     
+    public FranjaHorariaDTO()
+    {
+    }
             
     private int getHoraInicio()
             {
                 return horaInicio;
             }
-    private void setHoraInicio(int pHoraInicio)
+    private void setHoraInicio(Integer pHoraInicio)
             {
                 horaInicio=pHoraInicio;
             }
@@ -30,19 +33,19 @@ public class FranjaHorariaDTO {
             {
                 return horaFin;
             }
-    private void setHoraFin(int pHoraFin)
+    private void setHoraFin(Integer pHoraFin)
             {
                 horaFin=pHoraFin;
             }
     
     
     
-    private boolean getOcupado()
+    private Boolean getOcupado()
             {
                 return ocupado;
             }
     
-    private void setOcupado(int pOcupado)
+    private void setOcupado(Integer pOcupado)
             {
                 ocupado=pOcupado;
             }
@@ -53,7 +56,7 @@ public class FranjaHorariaDTO {
                 return diaSemana;
             }
     
-    private void setDiaSemana(int pDiaSemana)
+    private void setDiaSemana(Integer pDiaSemana)
             {
                 horaInicio=pDiaSemana;
             }

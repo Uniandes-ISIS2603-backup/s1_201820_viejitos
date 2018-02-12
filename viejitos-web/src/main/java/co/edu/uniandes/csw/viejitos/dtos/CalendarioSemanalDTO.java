@@ -11,18 +11,18 @@ package co.edu.uniandes.csw.viejitos.dtos;
  */
 public class CalendarioSemanalDTO {
     
-    private long ultimaModficacion;
+    private Long ultimaModficacion;
     
     
     
-    private long getUltimaModificacion()
+    private Long getUltimaModificacion()
             {
                 return ultimaModificacion;
             }
-    private void setUltimaModificacion(long pUltimaModificacion;)
-            static {
+    private void setUltimaModificacion(Long pUltimaModificacion;)
+    {
                 ultimaModificacion=pUltimaModificacion;
-            }
+           }
     
     
     public CalendarioSemanalDTO()
