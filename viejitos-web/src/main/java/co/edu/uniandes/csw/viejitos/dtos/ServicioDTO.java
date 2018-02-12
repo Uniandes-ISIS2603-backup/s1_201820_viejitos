@@ -8,9 +8,36 @@ package co.edu.uniandes.csw.viejitos.dtos;
 import java.util.Date;
 
 /**
+ * ServicioDTO Objeto de transferencia de datos de Servicios. Los DTO contienen las
+ * represnetaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
+ * 
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "tipo": number,
+ *      "fecha": string,
+ *      "hora": string,
+ *      "descripción": string,
+ *      "finalizado": boolean,
+ *   }
+ * </pre>
+ * Por ejemplo un servicio se representa asi:<br>
+ * 
+ * <pre>
+ * 
+ *   {
+ *      "tipo": 1,
+ *      "fecha: "12/02/2018",
+ *      "hora": "8:37",
+ *      "descripción": "Acompañamiento a cita médica",
+ *      "finalizado": true,
+ *   }
  *
+ * </pre>
  * @author c.gomezs
  */
+
 public class ServicioDTO {
     
     private Integer tipo;
