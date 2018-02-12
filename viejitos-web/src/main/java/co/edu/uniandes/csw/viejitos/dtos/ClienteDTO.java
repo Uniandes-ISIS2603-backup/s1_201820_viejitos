@@ -5,19 +5,42 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
-/**
+/**Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": number,
+ *      "nombre: string,
+ *      "login": string,
+ *      "contrasena": string,
+ *      "estado": number,
+ *      "tipo": number
+ *   }
+ * </pre>
+ * Por ejemplo una entidad de Cliente se representa asi:<br>
+ * <p>
+ * <pre>
  *
+ *   {
+ *      "id": 12345,
+ *      "nombre: "John Doe",
+ *      "login": "johndoe23",
+ *      "contrasena": "jd124",
+ *      "estado": 1,
+ *      "tipo": 1
+ *   }
+ *
+ * </pre>
  * @author jj.silva
  */
 public class ClienteDTO
 {
     private Long id;
     
-    private int estado;
+    private Integer estado;
     
     private String nombre;
     
-    private int tipo;
+    private Integer tipo;
     
     private String login;
     
@@ -38,12 +61,12 @@ public class ClienteDTO
         id = pId;
     }
     
-    public int getEstado()
+    public Integer getEstado()
     {
         return estado;
     }
     
-    public void setEstado(int pEstado)
+    public void setEstado(Integer pEstado)
     {
         estado = pEstado;
     }
@@ -58,12 +81,12 @@ public class ClienteDTO
         nombre = pNombre;
     }
     
-    public int getTipo()
+    public Integer getTipo()
     {
         return tipo;
     }
     
-    public void setTipo(int pTipo)
+    public void setTipo(Integer pTipo)
     {
         tipo = pTipo;
     }

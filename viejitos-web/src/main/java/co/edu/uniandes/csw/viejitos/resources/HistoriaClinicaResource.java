@@ -21,17 +21,18 @@ import javax.ws.rs.Produces;
 
 /**
  * <pre>Clase que implementa el recurso "historia clinica".
- * URL: /api/historiasClinicas
+ * URL: /api/historiasc
+ * </pre>
  * @author jj.silva
  */
-@Path( "historiasClinicas" )
+@Path( "historiasc" )
 @Produces( "application/json" )
 @Consumes( "application/json" )
 @RequestScoped
 public class HistoriaClinicaResource
 {
     /**
-	 * <h1>POST /api/historiasClinicas : Crear una entidad de HistoriaClinica.</h1>
+	 * <h1>POST /api/historiasc : Crear una entidad de HistoriaClinica.</h1>
 	 * <p>
 	 * <pre>Cuerpo de petición: JSON {@link HistoriaClinicaDetailDTO}.
 	 *
@@ -48,7 +49,7 @@ public class HistoriaClinicaResource
 	}
         
         /**
-	 * <h1>GET /api/historiasClinicas : Obtener todas las entidades de HistoriaClinica.</h1>
+	 * <h1>GET /api/historiasc : Obtener todas las entidades de HistoriaClinica.</h1>
 	 * <p>
 	 * <pre>Busca y devuelve todas las entidades de HistoriaClinica que existen en la aplicacion.
 	 * @return JSONArray {@link HistoriaClinicaDetailDTO} - Las entidades de HistoriaClinica encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
@@ -60,7 +61,7 @@ public class HistoriaClinicaResource
 	}
         
         /**
-	 * <h1>GET /api/historiasClinicas/{id} : Obtener una entidad de HistoriaClinica por id.</h1>
+	 * <h1>GET /api/historiasc/{id} : Obtener una entidad de HistoriaClinica por id.</h1>
 	 * <p>
 	 * <pre>Busca la entidad de HistoriaClinica con el id asociado recibido en la URL y la devuelve.
 	 * @param id Identificador de la entidad de HistoriaClinica que se esta buscando. Este debe ser una cadena de dígitos.
