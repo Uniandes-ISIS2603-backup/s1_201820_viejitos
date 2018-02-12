@@ -15,6 +15,9 @@ public class FranjaHorariaDTO {
     private boolean ocupado;
     private String diaSemana;
     
+    public FranjaHorariaDTO()
+    {
+    }
             
     private int getHoraInicio()
             {
