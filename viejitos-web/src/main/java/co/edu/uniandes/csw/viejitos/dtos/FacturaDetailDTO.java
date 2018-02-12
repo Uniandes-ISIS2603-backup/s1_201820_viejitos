@@ -11,24 +11,28 @@ package co.edu.uniandes.csw.viejitos.dtos;
  */
 public class FacturaDetailDTO extends FacturaDTO {
 
+    /**
+     * Servicio al que pertenece la factura
+     */
     private ServicioDTO servicio;
     
     /**
-     * @return the servicio
+     * @return servicio
      */
     public ServicioDTO getServicio() {
         return servicio;
     }
 
     /**
-     * @param servicio the servicio to set
+     * @param servicio el nuevo servicio
      */
     public void setServicio(ServicioDTO servicio) {
         this.servicio = servicio;
     }
     
-    
-    
+    /**
+     * COnstructor
+     */
     public FacturaDetailDTO()
     {
         

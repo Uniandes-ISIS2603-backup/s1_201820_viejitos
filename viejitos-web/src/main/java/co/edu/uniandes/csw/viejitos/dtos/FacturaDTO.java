@@ -43,85 +43,125 @@ import java.util.Date;
  */
 public class FacturaDTO {
 
+    /**
+     * id de la factura
+     */
+    private Long id;
+    
+    /**
+     * costo total del servicio
+     */
     private Double costoTotal;
     
+    /**
+     * fecha de expedicion de la factura
+     */
     private Date fechaExpedicion;
     
+    /**
+     * descripcion del servicio
+     */
     private String descripcion;
     
+    /**
+     * nombre del cliente
+     */
     private String nombreCliente;
     
+    /**
+     * cedula del cliente
+     */
     private Integer ccCliente;
     
+    /**
+     * servicio que se prestó
+     */
     private String servicioPrestado;
     
+    /**
+     * nombre de la empresa
+     */
     private String nombreEmpresa;
     
     /**
-     * @return the costoTotal
+     * @return id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id el nuevo id
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    /**
+     * @return costoTotal
      */
     public Double getCostoTotal() {
         return costoTotal;
     }
 
     /**
-     * @param costoTotal the costoTotal to set
+     * @param costoTotal el nuevo costoTotal
      */
     public void setCostoTotal(Double costoTotal) {
         this.costoTotal = costoTotal;
     }
 
     /**
-     * @return the fechaExpedicion
+     * @return fechaExpedicion
      */
     public Date getFechaExpedicion() {
         return fechaExpedicion;
     }
 
     /**
-     * @param fechaExpedicion the fechaExpedicion to set
+     * @param fechaExpedicion la nueva fechaExpedicion
      */
     public void setFechaExpedicion(Date fechaExpedicion) {
         this.fechaExpedicion = fechaExpedicion;
     }
 
     /**
-     * @return the descripcion
+     * @return descripcion
      */
     public String getDescripcion() {
         return descripcion;
     }
 
     /**
-     * @param descripcion the descripcion to set
+     * @param descripcion la nueva descripcion
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
     /**
-     * @return the nombreCliente
+     * @return nombreCliente
      */
     public String getNombreCliente() {
         return nombreCliente;
     }
 
     /**
-     * @param nombreCliente the nombreCliente to set
+     * @param nombreCliente el nuevo nombreCliente
      */
     public void setNombreCliente(String nombreCliente) {
         this.nombreCliente = nombreCliente;
     }
 
     /**
-     * @return the ccCliente
+     * @return ccCliente
      */
     public Integer getCcCliente() {
         return ccCliente;
     }
 
     /**
-     * @param ccCliente the ccCliente to set
+     * @param ccCliente la nueva ccCliente 
      */
     public void setCcCliente(Integer ccCliente) {
         this.ccCliente = ccCliente;
@@ -142,20 +182,22 @@ public class FacturaDTO {
     }
 
     /**
-     * @return the nombreEmpresa
+     * @return nombreEmpresa
      */
     public String getNombreEmpresa() {
         return nombreEmpresa;
     }
 
     /**
-     * @param nombreEmpresa the nombreEmpresa to set
+     * @param nombreEmpresa el nuevo nombreEmpresa
      */
     public void setNombreEmpresa(String nombreEmpresa) {
         this.nombreEmpresa = nombreEmpresa;
     }
     
-    
+    /**
+     * Constructor
+     */
     public FacturaDTO()
     {
         
