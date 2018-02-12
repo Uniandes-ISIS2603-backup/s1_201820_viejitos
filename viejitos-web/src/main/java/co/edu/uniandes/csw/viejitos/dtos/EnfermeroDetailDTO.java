@@ -20,4 +20,21 @@ public class EnfermeroDetailDTO extends EnfermeroDTO{
     public EnfermeroDetailDTO(){
     
     }
+
+    public List<CalificacionDTO> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(List<CalificacionDTO> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    public List<ServicioDTO> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<ServicioDTO> servicios) {
+        this.servicios = servicios;
+    }
+    
 }

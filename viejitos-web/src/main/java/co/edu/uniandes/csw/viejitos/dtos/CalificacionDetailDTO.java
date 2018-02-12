@@ -16,4 +16,13 @@ public class CalificacionDetailDTO extends CalificacionDTO{
     public CalificacionDetailDTO(){
     
     }
+
+    public ServicioDTO getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(ServicioDTO servicio) {
+        this.servicio = servicio;
+    }
+    
 }

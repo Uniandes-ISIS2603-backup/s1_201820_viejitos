@@ -11,9 +11,9 @@ package co.edu.uniandes.csw.viejitos.dtos;
  */
 public class CalificacionDTO {
     
-    private long idCalificacion;
+    private Long idCalificacion;
     
-    private double puntaje;
+    private Double puntaje;
     
     private String comentario;
     
@@ -28,4 +28,61 @@ public class CalificacionDTO {
     public CalificacionDTO(){
     
     }
+
+    public Long getIdCalificacion() {
+        return idCalificacion;
+    }
+
+    public void setIdCalificacion(Long idCalificacion) {
+        this.idCalificacion = idCalificacion;
+    }
+
+    public Double getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(Double puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public String getLoginCalificado() {
+        return loginCalificado;
+    }
+
+    public void setLoginCalificado(String loginCalificado) {
+        this.loginCalificado = loginCalificado;
+    }
+
+    public String getTipoCalificado() {
+        return tipoCalificado;
+    }
+
+    public void setTipoCalificado(String tipoCalificado) {
+        this.tipoCalificado = tipoCalificado;
+    }
+
+    public String getLoginCalificador() {
+        return loginCalificador;
+    }
+
+    public void setLoginCalificador(String loginCalificador) {
+        this.loginCalificador = loginCalificador;
+    }
+
+    public String getTipoCalificador() {
+        return tipoCalificador;
+    }
+
+    public void setTipoCalificador(String tipoCalificador) {
+        this.tipoCalificador = tipoCalificador;
+    }
+    
 }
