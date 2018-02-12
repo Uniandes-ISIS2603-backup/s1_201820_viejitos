@@ -15,4 +15,9 @@ public class QuejaDTO {
     
     private boolean resuelto;
     
+    public QuejaDTO()
+    {
+        
+    }
+    
 }
