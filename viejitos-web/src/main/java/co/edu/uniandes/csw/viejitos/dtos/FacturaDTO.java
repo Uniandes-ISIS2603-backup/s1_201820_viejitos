@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class FacturaDTO {
 
-    private double costoTotal;
+    private Double costoTotal;
     
     private Date fechaExpedicion;
     
@@ -21,7 +21,7 @@ public class FacturaDTO {
     
     private String nombreCliente;
     
-    private int ccCliente;
+    private Integer ccCliente;
     
     private String servicioPrestado;
     
@@ -30,14 +30,14 @@ public class FacturaDTO {
     /**
      * @return the costoTotal
      */
-    public double getCostoTotal() {
+    public Double getCostoTotal() {
         return costoTotal;
     }
 
     /**
      * @param costoTotal the costoTotal to set
      */
-    public void setCostoTotal(double costoTotal) {
+    public void setCostoTotal(Double costoTotal) {
         this.costoTotal = costoTotal;
     }
 
@@ -86,14 +86,14 @@ public class FacturaDTO {
     /**
      * @return the ccCliente
      */
-    public int getCcCliente() {
+    public Integer getCcCliente() {
         return ccCliente;
     }
 
     /**
      * @param ccCliente the ccCliente to set
      */
-    public void setCcCliente(int ccCliente) {
+    public void setCcCliente(Integer ccCliente) {
         this.ccCliente = ccCliente;
     }
 
