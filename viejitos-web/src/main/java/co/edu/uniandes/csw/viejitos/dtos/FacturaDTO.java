@@ -27,4 +27,9 @@ public class FacturaDTO {
     
     private String nombreEmpresa;
     
+    public FacturaDTO()
+    {
+        
+    }
+    
 }

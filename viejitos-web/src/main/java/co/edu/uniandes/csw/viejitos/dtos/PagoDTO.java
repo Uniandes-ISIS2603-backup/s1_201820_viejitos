@@ -20,4 +20,9 @@ public class PagoDTO {
     private Date fechaLimite;
     
     private double valor;
+    
+    public PagoDTO()
+    {
+        
+    }
 }

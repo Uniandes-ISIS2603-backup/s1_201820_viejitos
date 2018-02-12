@@ -12,4 +12,9 @@ package co.edu.uniandes.csw.viejitos.dtos;
 public class PagoDetailDTO extends PagoDTO {
     
     private ServicioDTO servicio;
+    
+    public PagoDetailDTO()
+    {
+        
+    }
 }
