@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class ServicioDetailDTO extends ServicioDTO{
     
-     private List<QuejaDTO> quejas;
+    private List<QuejaDTO> quejas;
     
     private PagoDTO pagoInicial;
     

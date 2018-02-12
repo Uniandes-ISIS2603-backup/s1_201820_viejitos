@@ -13,7 +13,7 @@ public class QuejaDTO {
     
     private String reclamo;
     
-    private boolean resuelto;
+    private Boolean resuelto;
 
     /**
      * @return the reclamo
@@ -42,7 +42,6 @@ public class QuejaDTO {
     public void setResuelto(boolean resuelto) {
         this.resuelto = resuelto;
     }
-    
     
     
     public QuejaDTO()
