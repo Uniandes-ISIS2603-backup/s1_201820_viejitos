@@ -10,14 +10,16 @@ package co.edu.uniandes.csw.viejitos.dtos;
  * @author l.pardo
  */
 public class CitaDetailDTO extends CitaDTO{
-   private Cliente cliente;
-   
-   public Cliente getCliente()
+   private ClienteDTO cliente;
+   public CitaDetailDTO()
+   {
+   }
+   public ClienteDTO getCliente()
    {
        return cliente;
    }
    
-   public void setCliente(Cliente c)
+   public void setClienteDTO(ClienteDTO c)
    {
        cliente=c;
    }
