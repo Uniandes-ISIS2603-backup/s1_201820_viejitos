@@ -49,81 +49,84 @@ public class ServicioDTO {
     private String descripcion;
     
     private Boolean finalizado;
+    
+     /**
+     * Constructor por defecto
+     */
+    public ServicioDTO()
+    {
+        
+    }
 
     /**
-     * @return the tipo
+     * @return el tipo del servicio
      */
     public int getTipo() {
         return tipo;
     }
 
     /**
-     * @param tipo the tipo to set
+     * @param tipo el nuevo tipo del servicio
      */
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
     /**
-     * @return the fecha
+     * @return la fecha del servicio
      */
     public Date getFecha() {
         return fecha;
     }
 
     /**
-     * @param fecha the fecha to set
+     * @param fecha la nueva fecha del servicio
      */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
     /**
-     * @return the hora
+     * @return la hora del servicio
      */
     public String getHora() {
         return hora;
     }
 
     /**
-     * @param hora the hora to set
+     * @param hora la nueva hora del servicio
      */
     public void setHora(String hora) {
         this.hora = hora;
     }
 
     /**
-     * @return the descripcion
+     * @return la descripción del servicio
      */
     public String getDescripcion() {
         return descripcion;
     }
 
     /**
-     * @param descripcion the descripcion to set
+     * @param descripcion la nueva descripción del servicio
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
     /**
-     * @return the finalizado
+     * @return true si ha finalizado el servicio, false de lo contrario.
      */
     public boolean isFinalizado() {
         return finalizado;
     }
 
     /**
-     * @param finalizado the finalizado to set
+     * @param finalizado nuevo estado del servicio
      */
     public void setFinalizado(boolean finalizado) {
         this.finalizado = finalizado;
     }
    
-    
-    public ServicioDTO()
-    {
-        
-    }
     
 }
