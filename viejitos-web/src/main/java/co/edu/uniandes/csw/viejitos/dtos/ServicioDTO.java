@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class ServicioDTO {
     
-    private int tipo;
+    private Integer tipo;
     
     private Date fecha;
     
@@ -21,7 +21,7 @@ public class ServicioDTO {
     
     private String descripcion;
     
-    private boolean finalizado;
+    private Boolean finalizado;
 
     /**
      * @return the tipo

@@ -13,7 +13,7 @@ public class QuejaDTO {
     
     private String reclamo;
     
-    private boolean resuelto;
+    private Boolean resuelto;
 
     /**
      * @return the reclamo
