@@ -11,7 +11,7 @@ package co.edu.uniandes.csw.viejitos.dtos;
  */
 public class QuejaDetailDTO extends QuejaDTO{
     
-     private ServicioDTO servicio;
+    private ServicioDTO servicio;
     
     private ClienteDTO cliente;
 
