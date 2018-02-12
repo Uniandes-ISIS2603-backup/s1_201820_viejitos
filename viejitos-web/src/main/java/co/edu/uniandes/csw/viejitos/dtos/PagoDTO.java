@@ -10,7 +10,32 @@ import java.util.Date;
 /**
  *
  * @author f.escobar
+ * PagoDTO Objeto de transferencia de datos de Pagos. Los DTO contienen las
+ represnetaciones de los JSON que se transfieren entre el cliente y el
+ servidor.
+ 
+ Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ <pre>
+   {
+      "medio": String,
+      "pagado": Boolean,
+      "fechaLimite": Date,
+      "valor": Double
+   }
+ </pre>
+ Por ejemplo una ciudad se representa asi:<br>
+ 
+ <pre>
+ 
+   {
+      "medio": "Efectivo",
+      "pagado": TRUE,
+      "fechaLimite": 12/04/18,
+      "valor": 150000
+   }
+   </pre>
  */
+
 public class PagoDTO {
 
     private String medio;

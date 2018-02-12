@@ -8,7 +8,37 @@ package co.edu.uniandes.csw.viejitos.dtos;
 import java.util.Date;
 
 /**
+ * FacturaDTO Objeto de transferencia de datos de Facturas. Los DTO contienen las
+ * representaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
+ * 
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "costoTotal": Double,
+ *      "fechaExpedicion": Date,
+ *      "descripcion": String,
+ *      "nombreCliente": String,
+ *      "ccCliente": Integer,
+ *      "servicioPrestado": String,
+ *      "nombreEmpresa": String
+ *   }
+ * </pre>
+ * Por ejemplo una ciudad se representa asi:<br>
+ * 
+ * <pre>
+ * 
+ *   {
+ *      "costoTotal": 120100,
+ *      "fechaExpedicion": 12/04/18,
+ *      "descripcion": "Acompanar al banco",
+ *      "nombreCliente": "Felipe Escobar",
+ *      "ccCliente": 1234567,
+ *      "servicioPrestado": "Acompanamiento",
+ *      "nombreEmpresa": "Hospital"
+ *   }
  *
+ * </pre>
  * @author f.escobar
  */
 public class FacturaDTO {
