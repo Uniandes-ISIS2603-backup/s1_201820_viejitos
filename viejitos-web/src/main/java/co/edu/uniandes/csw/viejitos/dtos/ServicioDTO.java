@@ -92,8 +92,7 @@ public class ServicioDTO {
     public void setFinalizado(boolean finalizado) {
         this.finalizado = finalizado;
     }
-    
-    
+   
     
     public ServicioDTO()
     {

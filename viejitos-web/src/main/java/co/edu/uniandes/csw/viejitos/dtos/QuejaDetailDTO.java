@@ -42,8 +42,7 @@ public class QuejaDetailDTO extends QuejaDTO{
     public void setCliente(ClienteDTO cliente) {
         this.cliente = cliente;
     }
-    
-   
+  
     
     public QuejaDetailDTO()
     {
