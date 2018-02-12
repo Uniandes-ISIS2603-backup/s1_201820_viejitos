@@ -6,7 +6,32 @@
 package co.edu.uniandes.csw.viejitos.dtos;
 
 /**
- *
+ * Objeto de transferencia de datos para una calificacion general.
+ * Al serializarse como DTO se genera un JSON de la siguiente manera
+ * <pre>
+ *  {
+ *      "id":number,
+ *      "puntaje":double,
+ *      "comentario":string,
+ *      "tipoCalificador":string,
+ *      "loginCalificador":string,
+ *      "tipoCalificado":string,
+ *      "loginCalificado":string,
+ *  }
+ * </pre>
+ * 
+ * Por ejemplo, una calificacion se representa asi:
+ * <pre>
+ *  {
+ *      "id":209873,
+ *      "puntaje":4.5,
+ *      "comentario":"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado",
+ *      "tipoCalificador":"cliente",
+ *      "loginCalificador":"af.ramirez",
+ *      "tipoCalificado":"enfermero",
+ *      "loginCalificado":"ma.marulanda",
+ *  }
+ * </pre>
  * @author js.espitia
  */
 public class CalificacionDTO {
