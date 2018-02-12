@@ -16,7 +16,7 @@ import java.util.Date;
  * <pre>
  *   {
  *      "tipo": number,
- *      "fecha": string,
+ *      "fecha": date,
  *      "hora": string,
  *      "descripción": string,
  *      "finalizado": boolean,
