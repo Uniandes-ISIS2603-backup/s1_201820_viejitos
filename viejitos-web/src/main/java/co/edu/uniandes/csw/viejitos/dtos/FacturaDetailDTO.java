@@ -7,17 +7,14 @@ package co.edu.uniandes.csw.viejitos.dtos;
 
 /**
  *
- * @author c.gomezs
+ * @author f.escobar
  */
-public class QuejaDetailDTO extends QuejaDTO{
+public class FacturaDetailDTO extends FacturaDTO {
     
     private ServicioDTO servicio;
     
-    private ClienteDTO cliente;
-    
-    public QuejaDetailDTO()
+    public FacturaDetailDTO()
     {
         
     }
-    
 }

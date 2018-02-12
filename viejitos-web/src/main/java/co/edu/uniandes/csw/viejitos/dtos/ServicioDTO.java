@@ -23,4 +23,10 @@ public class ServicioDTO {
     
     private boolean finalizado;
     
+    
+    public ServicioDTO()
+    {
+        
+    }
+    
 }

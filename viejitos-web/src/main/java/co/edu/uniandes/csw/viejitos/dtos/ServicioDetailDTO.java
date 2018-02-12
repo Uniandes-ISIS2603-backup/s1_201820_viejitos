@@ -21,4 +21,15 @@ public class ServicioDetailDTO extends ServicioDTO{
     
     private FacturaDTO factura;
     
+    private ClienteDTO cliente;
+    
+    private CalificacionDTO calificacion;
+    
+    private EnfermeroDTO enfermero;
+    
+    public ServicioDetailDTO()
+    {
+        
+    }
+    
 }
