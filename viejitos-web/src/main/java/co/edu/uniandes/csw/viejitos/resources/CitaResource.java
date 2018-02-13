@@ -52,7 +52,7 @@ public class CitaResource
 	 * <h1>GET /api/Cita : Obtener todas las entidades de Cita.</h1>
 	 * <p>
 	 * <pre>Busca y devuelve todas las entidades de Cita que existen en la aplicacion.</pre>
-	 * @return JSONArray {@link MedicoDetailDTO} - Las entidades de Medico encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+	 * @return JSONArray {@link CitaDetailDTO} - Las entidades de Cita encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
 	public List<CitaDetailDTO> getCitas( )
@@ -65,7 +65,7 @@ public class CitaResource
 	 * <p>
 	 * <pre>Busca la entidad de Cita con el id asociado recibido en la URL y la devuelve.</pre>
 	 * @param id Identificador de la entidad de Cita que se esta buscando. Este debe ser una cadena de dígitos.
-	 * @return JSON {@link ServicioDetailDTO} - La entidad de Cita buscada
+	 * @return JSON {@link CitaDetailDTO} - La entidad de Cita buscada
 	 */
 	@GET
 	@Path( "{id: \\d+}" )

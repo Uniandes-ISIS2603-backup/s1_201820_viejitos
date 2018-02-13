@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.viejitos.dtos.QuejaDetailDTO;
+import co.edu.uniandes.csw.viejitos.dtos.QuejaDTO;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;

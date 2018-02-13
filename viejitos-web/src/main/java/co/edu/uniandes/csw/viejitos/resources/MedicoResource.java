@@ -63,7 +63,7 @@ public class MedicoResource
 	 * <p>
 	 * <pre>Busca la entidad de Medico con el id asociado recibido en la URL y la devuelve.</pre>
 	 * @param id Identificador de la entidad de Medico que se esta buscando. Este debe ser una cadena de dígitos.
-	 * @return JSON {@link ServicioDetailDTO} - La entidad de Medico buscada
+	 * @return JSON {@link MedicoDetailDTO} - La entidad de Medico buscada
 	 */
 	@GET
 	@Path( "{id: \\d+}" )
