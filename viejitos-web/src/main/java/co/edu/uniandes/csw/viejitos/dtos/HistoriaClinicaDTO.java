@@ -5,7 +5,27 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
-/**
+/**Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": number,
+ *      "cirugias": string,
+ *      "enfermedades": string,
+ *      "medicamentos": string
+ *   }
+ * </pre>
+ * Por ejemplo una entidad de HistoriaClinica se representa asi:<br>
+ * <p>
+ * <pre>
+ *
+ *   {
+ *      "id": 12345,
+ *      "cirugias": "Reemplazo de cadera.",
+ *      "enfermedades": "Ninguna",
+ *      "medicamentos": "Ninguno"
+ *   }
+ *
+ * </pre>
  *
  * @author jj.silva
  */

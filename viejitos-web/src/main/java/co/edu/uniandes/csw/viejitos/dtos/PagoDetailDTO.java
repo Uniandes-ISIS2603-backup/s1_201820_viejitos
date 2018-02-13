@@ -11,24 +11,28 @@ package co.edu.uniandes.csw.viejitos.dtos;
  */
 public class PagoDetailDTO extends PagoDTO {
 
+    /**
+     * Servicio al que pertenece el pago
+     */
     private ServicioDTO servicio;
     
     /**
-     * @return the servicio
+     * @return servicio
      */
     public ServicioDTO getServicio() {
         return servicio;
     }
 
     /**
-     * @param servicio the servicio to set
+     * @param servicio el nuevo servicio
      */
     public void setServicio(ServicioDTO servicio) {
         this.servicio = servicio;
     }
     
-    
-    
+    /**
+     * COnstructor
+     */
     public PagoDetailDTO()
     {
         

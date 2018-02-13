@@ -6,14 +6,39 @@
 package co.edu.uniandes.csw.viejitos.dtos;
 
 /**
- *
+ * Objeto de transferencia de datos para una calificacion general.
+ * Al serializarse como DTO se genera un JSON de la siguiente manera
+ * <pre>
+ *  {
+ *      "id":number,
+ *      "puntaje":double,
+ *      "comentario":string,
+ *      "tipoCalificador":string,
+ *      "loginCalificador":string,
+ *      "tipoCalificado":string,
+ *      "loginCalificado":string,
+ *  }
+ * </pre>
+ * 
+ * Por ejemplo, una calificacion se representa asi:
+ * <pre>
+ *  {
+ *      "id":209873,
+ *      "puntaje":4.5,
+ *      "comentario":"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado",
+ *      "tipoCalificador":"cliente",
+ *      "loginCalificador":"af.ramirez",
+ *      "tipoCalificado":"enfermero",
+ *      "loginCalificado":"ma.marulanda",
+ *  }
+ * </pre>
  * @author js.espitia
  */
 public class CalificacionDTO {
     
-    private long idCalificacion;
+    private Long idCalificacion;
     
-    private double puntaje;
+    private Double puntaje;
     
     private String comentario;
     
@@ -28,4 +53,61 @@ public class CalificacionDTO {
     public CalificacionDTO(){
     
     }
+
+    public Long getIdCalificacion() {
+        return idCalificacion;
+    }
+
+    public void setIdCalificacion(Long idCalificacion) {
+        this.idCalificacion = idCalificacion;
+    }
+
+    public Double getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(Double puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public String getLoginCalificado() {
+        return loginCalificado;
+    }
+
+    public void setLoginCalificado(String loginCalificado) {
+        this.loginCalificado = loginCalificado;
+    }
+
+    public String getTipoCalificado() {
+        return tipoCalificado;
+    }
+
+    public void setTipoCalificado(String tipoCalificado) {
+        this.tipoCalificado = tipoCalificado;
+    }
+
+    public String getLoginCalificador() {
+        return loginCalificador;
+    }
+
+    public void setLoginCalificador(String loginCalificador) {
+        this.loginCalificador = loginCalificador;
+    }
+
+    public String getTipoCalificador() {
+        return tipoCalificador;
+    }
+
+    public void setTipoCalificador(String tipoCalificador) {
+        this.tipoCalificador = tipoCalificador;
+    }
+    
 }

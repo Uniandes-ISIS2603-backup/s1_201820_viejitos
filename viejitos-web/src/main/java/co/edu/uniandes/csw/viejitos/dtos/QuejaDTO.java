@@ -6,7 +6,27 @@
 package co.edu.uniandes.csw.viejitos.dtos;
 
 /**
+ * QuejaDTO Objeto de transferencia de datos de Quejas. Los DTO contienen las
+ * represnetaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
+ * 
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "reclamo": string,
+ *      "resuelto": boolean
+ *   }
+ * </pre>
+ * Por ejemplo una queja se representa asi:<br>
+ * 
+ * <pre>
+ * 
+ *   {
+ *      "reclamo": "El enfermero tenia una actitud muy grosera.",
+ *      "resuelto: true,
+ *   }
  *
+ * </pre>
  * @author c.gomezs
  */
 public class QuejaDTO {
@@ -14,39 +34,56 @@ public class QuejaDTO {
     private String reclamo;
     
     private Boolean resuelto;
+    
+    private Long id;
+    
+    /**
+     * Constructor por defecto
+     */
+    public QuejaDTO()
+    {
+        
+    }
+    
+    /**
+     * @return el id
+     */
+    public Long getId() {
+        return id;
+    }
 
     /**
-     * @return the reclamo
+     * @param id nuevo id
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return el reclamo
      */
     public String getReclamo() {
         return reclamo;
     }
 
     /**
-     * @param reclamo the reclamo to set
+     * @param reclamo nuevo reclamo
      */
     public void setReclamo(String reclamo) {
         this.reclamo = reclamo;
     }
 
     /**
-     * @return the resuelto
+     * @return true si esta resuelto, false de lo contrario.
      */
     public boolean isResuelto() {
         return resuelto;
     }
 
     /**
-     * @param resuelto the resuelto to set
+     * @param resuelto nuevo estado de la queja
      */
     public void setResuelto(boolean resuelto) {
         this.resuelto = resuelto;
-    }
-    
-    
-    public QuejaDTO()
-    {
-        
-    }
-    
+    }  
 }

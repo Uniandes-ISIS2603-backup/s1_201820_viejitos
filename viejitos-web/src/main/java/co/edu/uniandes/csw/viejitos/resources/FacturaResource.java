@@ -20,18 +20,29 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
- * <pre>Clase que implementa el recurso "Factura".
- * URL: /api/Factura
- * @author f.escobar
+ * <pre>Clase que implementa el recurso "facturas".
+ * URL: /api/facturas
+ * </pre>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
+ * este recurso tiene la ruta "facturas".</i>
+ *
+ * <h2>Anotaciones </h2>
+ * <pre>
+ * Path: indica la dirección después de "api" para acceder al recurso
+ * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * </pre>
+ * @author ISIS2603  
+ * @version 1.0
  */
-@Path( "Facturas" )
+@Path( "facturas" )
 @Produces( "application/json" )
 @Consumes( "application/json" )
 @RequestScoped
 public class FacturaResource
 {
     /**
-	 * <h1>POST /api/Facturas : Crear una entidad de Factura.</h1>
+	 * <h1>POST /api/facturas : Crear una entidad de Factura.</h1>
 	 * <p>
 	 * <pre>Cuerpo de petición: JSON {@link FacturaDetailDTO}.
 	 *
@@ -48,7 +59,7 @@ public class FacturaResource
 	}
         
         /**
-	 * <h1>GET /api/Facturas : Obtener todas las entidades de Factura.</h1>
+	 * <h1>GET /api/facturas : Obtener todas las entidades de Factura.</h1>
 	 * <p>
 	 * <pre>Busca y devuelve todas las entidades de Factura que existen en la aplicacion.
 	 * @return JSONArray {@link FacturaDetailDTO} - Las entidades de Factura encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
@@ -60,7 +71,7 @@ public class FacturaResource
 	}
         
         /**
-	 * <h1>GET /api/Facturas/{id} : Obtener una entidad de Factura por id.</h1>
+	 * <h1>GET /api/facturas/{id} : Obtener una entidad de Factura por id.</h1>
 	 * <p>
 	 * <pre>Busca la entidad de Factura con el id asociado recibido en la URL y la devuelve.
 	 * @param id Identificador de la entidad de Factura que se esta buscando. Este debe ser una cadena de dígitos.
@@ -74,7 +85,7 @@ public class FacturaResource
 	}
         
         /**
-	 * <h1>PUT /api/Facturas/{id} : Actualizar una entidad de Factura con el id dado.</h1>
+	 * <h1>PUT /api/facturas/{id} : Actualizar una entidad de Factura con el id dado.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link FacturaDetailDTO}.
 	 *
 	 * Actualiza la entidad de Factura con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
@@ -91,7 +102,7 @@ public class FacturaResource
 	}
         
         /**
-	 * <h1>DELETE /api/Facturas/{id} : Borrar una entidad de Factura por id.</h1>
+	 * <h1>DELETE /api/facturas/{id} : Borrar una entidad de Factura por id.</h1>
 	 * <p>
 	 * <pre>Borra la entidad de Factura con el id asociado recibido en la URL.
 	 * </pre>
