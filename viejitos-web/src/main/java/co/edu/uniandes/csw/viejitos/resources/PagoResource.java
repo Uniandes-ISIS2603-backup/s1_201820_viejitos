@@ -20,18 +20,29 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
- * <pre>Clase que implementa el recurso "pago".
- * URL: /api/Pagos
- * @author f.escobar
+ * <pre>Clase que implementa el recurso "pagos".
+ * URL: /api/pagos
+ * </pre>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
+ * este recurso tiene la ruta "pagos".</i>
+ *
+ * <h2>Anotaciones </h2>
+ * <pre>
+ * Path: indica la dirección después de "api" para acceder al recurso
+ * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * </pre>
+ * @author ISIS2603  
+ * @version 1.0
  */
-@Path( "Pagos" )
+@Path( "pagos" )
 @Produces( "application/json" )
 @Consumes( "application/json" )
 @RequestScoped
 public class PagoResource
 {
     /**
-	 * <h1>POST /api/Pagos : Crear una entidad de Pago.</h1>
+	 * <h1>POST /api/pagos : Crear una entidad de Pago.</h1>
 	 * <p>
 	 * <pre>Cuerpo de petición: JSON {@link PagoDetailDTO}.
 	 *
@@ -48,7 +59,7 @@ public class PagoResource
 	}
         
         /**
-	 * <h1>GET /api/Pagos : Obtener todas las entidades de Pago.</h1>
+	 * <h1>GET /api/pagos : Obtener todas las entidades de Pago.</h1>
 	 * <p>
 	 * <pre>Busca y devuelve todas las entidades de Pago que existen en la aplicacion.
 	 * @return JSONArray {@link PagoDetailDTO} - Las entidades de Pago encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
@@ -60,7 +71,7 @@ public class PagoResource
 	}
         
         /**
-	 * <h1>GET /api/Pagos/{id} : Obtener una entidad de Pago por id.</h1>
+	 * <h1>GET /api/pagos/{id} : Obtener una entidad de Pago por id.</h1>
 	 * <p>
 	 * <pre>Busca la entidad de Pago con el id asociado recibido en la URL y la devuelve.
 	 * @param id Identificador de la entidad de Pago que se esta buscando. Este debe ser una cadena de dígitos.
@@ -74,7 +85,7 @@ public class PagoResource
 	}
         
         /**
-	 * <h1>PUT /api/Pagos/{id} : Actualizar una entidad de Pago con el id dado.</h1>
+	 * <h1>PUT /api/pagos/{id} : Actualizar una entidad de Pago con el id dado.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link PagoDetailDTO}.
 	 *
 	 * Actualiza la entidad de Pago con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
@@ -91,7 +102,7 @@ public class PagoResource
 	}
         
         /**
-	 * <h1>DELETE /api/Pagos/{id} : Borrar una entidad de Pago por id.</h1>
+	 * <h1>DELETE /api/pagos/{id} : Borrar una entidad de Pago por id.</h1>
 	 * <p>
 	 * <pre>Borra la entidad de Pago con el id asociado recibido en la URL.
 	 * </pre>
