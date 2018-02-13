@@ -21,6 +21,7 @@ import javax.ws.rs.Produces;
 
 /**
  * <pre>Clase que implementa el recurso "cliente".
+ * </pre>
  * URL: /api/clientes
  * @author jj.silva
  */
@@ -32,25 +33,24 @@ public class ClienteResource
 {
     /**
 	 * <h1>POST /api/clientes : Crear una entidad de Cliente.</h1>
-	 * <p>
 	 * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
-	 *
+	 *</pre>
 	 * Crea una nueva entidad de Cliente con la informacion que se recibe en el cuerpo
 	 * de la petición.
 	 * @param dto {@link ClienteDetailDTO} - La entidad de Cliente que se desea guardar.
 	 * @return JSON {@link ClienteDetailDTO}  - La entidad de Cliente guardada.
-	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de Cliente.
+	 *
 	 */
 	@POST
-	public ClienteDetailDTO createCliente( ClienteDetailDTO dto ) throws BusinessLogicException
+	public ClienteDetailDTO createCliente( ClienteDetailDTO dto ) 
 	{
 		return dto;
 	}
         
         /**
 	 * <h1>GET /api/clientes : Obtener todas las entidades de Cliente.</h1>
-	 * <p>
 	 * <pre>Busca y devuelve todas las entidades de Cliente que existen en la aplicacion.
+         * </pre>
 	 * @return JSONArray {@link ClienteDetailDTO} - Las entidades de Cliente encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
@@ -61,8 +61,8 @@ public class ClienteResource
         
         /**
 	 * <h1>GET /api/clientes/{id} : Obtener una entidad de Cliente por id.</h1>
-	 * <p>
 	 * <pre>Busca la entidad de Cliente con el id asociado recibido en la URL y la devuelve.
+         * </pre>
 	 * @param id Identificador de la entidad de Cliente que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link ClienteDetailDTO} - La entidad de Cliente buscada
 	 */
@@ -76,23 +76,22 @@ public class ClienteResource
         /**
 	 * <h1>PUT /api/clientes/{id} : Actualizar una entidad de Cliente con el id dado.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
-	 *
+	 *</pre>
 	 * Actualiza la entidad de Cliente con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Cliente que se desea actualizar. Este debe ser una cadena de dígitos.
 	 * @param detailDTO {@link ClienteDetailDTO} La entidad de Cliente que se desea guardar.
 	 * @return JSON {@link ClienteDetailDTO} - La entidad de Cliente guardada.
-	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la entidad de Cliente porque ya existe una con ese nombre.
+	 * 
 	 */
 	@PUT
 	@Path( "{id: \\d+}" )
-	public ClienteDetailDTO updateCliente( @PathParam( "id" ) Long id, ClienteDetailDTO detailDTO ) throws BusinessLogicException
+	public ClienteDetailDTO updateCliente( @PathParam( "id" ) Long id, ClienteDetailDTO detailDTO ) 
 	{
 		return detailDTO;
 	}
         
         /**
 	 * <h1>DELETE /api/clientes/{id} : Borrar una entidad de Cliente por id.</h1>
-	 * <p>
 	 * <pre>Borra la entidad de Cliente con el id asociado recibido en la URL.
 	 * </pre>
 	 *

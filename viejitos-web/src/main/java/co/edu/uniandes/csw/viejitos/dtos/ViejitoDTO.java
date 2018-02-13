@@ -38,7 +38,6 @@ import co.edu.uniandes.csw.viejitos.entities.ViejitoEntity;
  *   }
  * </pre>
  * Por ejemplo una entidad de Viejito se representa asi:<br>
- * <p>
  * <pre>
  *
  *   {

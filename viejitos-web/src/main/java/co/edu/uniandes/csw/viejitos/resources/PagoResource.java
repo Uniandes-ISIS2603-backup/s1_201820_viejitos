@@ -43,9 +43,8 @@ public class PagoResource
 {
     /**
 	 * <h1>POST /api/pagos : Crear una entidad de Pago.</h1>
-	 * <p>
 	 * <pre>Cuerpo de petición: JSON {@link PagoDetailDTO}.
-	 *
+	 * </pre>
 	 * Crea una nueva entidad de Pago con la informacion que se recibe en el cuerpo
 	 * de la petición.
 	 * @param dto {@link PagoDetailDTO} - La entidad de Pago que se desea guardar.
@@ -60,8 +59,8 @@ public class PagoResource
         
         /**
 	 * <h1>GET /api/pagos : Obtener todas las entidades de Pago.</h1>
-	 * <p>
 	 * <pre>Busca y devuelve todas las entidades de Pago que existen en la aplicacion.
+         * </pre>
 	 * @return JSONArray {@link PagoDetailDTO} - Las entidades de Pago encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
@@ -72,8 +71,8 @@ public class PagoResource
         
         /**
 	 * <h1>GET /api/pagos/{id} : Obtener una entidad de Pago por id.</h1>
-	 * <p>
 	 * <pre>Busca la entidad de Pago con el id asociado recibido en la URL y la devuelve.
+         * </pre>
 	 * @param id Identificador de la entidad de Pago que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link PagoDetailDTO} - La entidad de Pago buscada
 	 */
@@ -87,7 +86,7 @@ public class PagoResource
         /**
 	 * <h1>PUT /api/pagos/{id} : Actualizar una entidad de Pago con el id dado.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link PagoDetailDTO}.
-	 *
+	 * </pre>
 	 * Actualiza la entidad de Pago con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Pago que se desea actualizar. Este debe ser una cadena de dígitos.
 	 * @param detailDTO {@link PagoDetailDTO} La entidad de Pago que se desea guardar.
@@ -103,7 +102,6 @@ public class PagoResource
         
         /**
 	 * <h1>DELETE /api/pagos/{id} : Borrar una entidad de Pago por id.</h1>
-	 * <p>
 	 * <pre>Borra la entidad de Pago con el id asociado recibido en la URL.
 	 * </pre>
 	 *

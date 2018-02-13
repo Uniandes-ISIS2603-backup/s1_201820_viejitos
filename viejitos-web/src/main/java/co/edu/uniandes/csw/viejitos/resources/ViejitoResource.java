@@ -46,7 +46,6 @@ import javax.ws.rs.Produces;
  * </pre>
  * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
  * este recurso tiene la ruta "viejitos".</i>
- * <p>
  * <h2>Anotaciones </h2>
  * <pre>
  * Path: indica la dirección después de "api" para acceder al recurso
@@ -66,7 +65,6 @@ public class ViejitoResource
 
 	/**
 	 * <h1>POST /api/viejitos : Crear una entidad de Viejito.</h1>
-	 * <p>
 	 * <pre>Cuerpo de petición: JSON {@link ViejitoDetailDTO}.
 	 *
 	 * Crea una nueva entidad de Viejito con la informacion que se recibe en el cuerpo
@@ -94,7 +92,6 @@ public class ViejitoResource
 
 	/**
 	 * <h1>GET /api/viejitos : Obtener todas las entidadese de Viejito.</h1>
-	 * <p>
 	 * <pre>Busca y devuelve todas las entidades de Viejito que existen en la aplicacion.
 	 *
 	 * Codigos de respuesta:
@@ -112,7 +109,6 @@ public class ViejitoResource
 
 	/**
 	 * <h1>GET /api/viejitos/{id} : Obtener una entidad de Viejito por id.</h1>
-	 * <p>
 	 * <pre>Busca la entidad de Viejito con el id asociado recibido en la URL y la devuelve.
 	 *
 	 * Codigos de respuesta:
@@ -162,7 +158,6 @@ public class ViejitoResource
 
 	/**
 	 * <h1>DELETE /api/viejitos/{id} : Borrar una entidad de Viejito por id.</h1>
-	 * <p>
 	 * <pre>Borra la entidad de Viejito con el id asociado recibido en la URL.
 	 *
 	 * Códigos de respuesta:<br>

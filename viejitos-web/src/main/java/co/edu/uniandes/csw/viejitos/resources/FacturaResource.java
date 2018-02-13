@@ -43,9 +43,8 @@ public class FacturaResource
 {
     /**
 	 * <h1>POST /api/facturas : Crear una entidad de Factura.</h1>
-	 * <p>
 	 * <pre>Cuerpo de petición: JSON {@link FacturaDetailDTO}.
-	 *
+	 * </pre>
 	 * Crea una nueva entidad de Factura con la informacion que se recibe en el cuerpo
 	 * de la petición.
 	 * @param dto {@link FacturaDetailDTO} - La entidad de Factura que se desea guardar.
@@ -60,8 +59,8 @@ public class FacturaResource
         
         /**
 	 * <h1>GET /api/facturas : Obtener todas las entidades de Factura.</h1>
-	 * <p>
 	 * <pre>Busca y devuelve todas las entidades de Factura que existen en la aplicacion.
+         * </pre>
 	 * @return JSONArray {@link FacturaDetailDTO} - Las entidades de Factura encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
@@ -72,8 +71,8 @@ public class FacturaResource
         
         /**
 	 * <h1>GET /api/facturas/{id} : Obtener una entidad de Factura por id.</h1>
-	 * <p>
 	 * <pre>Busca la entidad de Factura con el id asociado recibido en la URL y la devuelve.
+         * </pre>
 	 * @param id Identificador de la entidad de Factura que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link FacturaDetailDTO} - La entidad de Factura buscada
 	 */
@@ -87,6 +86,7 @@ public class FacturaResource
         /**
 	 * <h1>PUT /api/facturas/{id} : Actualizar una entidad de Factura con el id dado.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link FacturaDetailDTO}.
+         * </pre>
 	 *
 	 * Actualiza la entidad de Factura con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Factura que se desea actualizar. Este debe ser una cadena de dígitos.
@@ -103,7 +103,6 @@ public class FacturaResource
         
         /**
 	 * <h1>DELETE /api/facturas/{id} : Borrar una entidad de Factura por id.</h1>
-	 * <p>
 	 * <pre>Borra la entidad de Factura con el id asociado recibido en la URL.
 	 * </pre>
 	 *
