@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.viejitos.resources;
 import co.edu.uniandes.csw.viejitos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.viejitos.dtos.QuejaDetailDTO;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -46,7 +47,7 @@ public class QuejaResource {
      /**
 	 * <h1>POST /api/quejas : Crear una entidad de Queja.</h1>
 	 * <p>
-	 * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
+	 * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.</pre>
 	 *
 	 * Crea una nueva entidad de Queja con la informacion que se recibe en el cuerpo
 	 * de la petición.
@@ -64,7 +65,7 @@ public class QuejaResource {
         /**
 	 * <h1>GET /api/quejas : Obtener todas las entidades de Queja.</h1>
 	 * <p>
-	 * <pre>Busca y devuelve todas las entidades de Queja que existen en la aplicacion.
+	 * <pre>Busca y devuelve todas las entidades de Queja que existen en la aplicacion.</pre>
 	 * @return JSONArray {@link ClienteDetailDTO} - Las entidades de Queja encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
         @GET
@@ -76,7 +77,7 @@ public class QuejaResource {
         /**
 	 * <h1>GET /api/quejas/{id} : Obtener una entidad de Queja por id.</h1>
 	 * <p>
-	 * <pre>Busca la entidad de Queja con el id asociado recibido en la URL y la devuelve.
+	 * <pre>Busca la entidad de Queja con el id asociado recibido en la URL y la devuelve.</pre>
 	 * @param id Identificador de la entidad de Queja que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link QuejaDetailDTO} - La entidad de Queja buscada
 	 */
@@ -89,7 +90,7 @@ public class QuejaResource {
         
         /**
 	 * <h1>PUT /api/Quejas/{id} : Actualizar una entidad de Queja con el id dado.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link QuejaDetailDTO}.
+	 * <pre>Cuerpo de petición: JSON {@link QuejaDetailDTO}.</pre>
 	 *
 	 * Actualiza la entidad de Queja con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Queja que se desea actualizar. Este debe ser una cadena de dígitos.
