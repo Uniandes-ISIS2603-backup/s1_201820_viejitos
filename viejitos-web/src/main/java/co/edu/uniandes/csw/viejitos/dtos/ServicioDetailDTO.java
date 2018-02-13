@@ -11,6 +11,32 @@ import java.util.List;
  * Clase que extiende de {@link ServicioDTO} para manejar la transformacion entre
  * los objetos JSON y las Entidades de la base de datos. Para conocer el
  * contenido del servicio vaya a la documentacion de {@link ServicioDTO}
+ * 
+ * <pre>
+ *   {
+ *      "tipo": number,
+ *      "fecha": date,
+ *      "hora": string,
+ *      "descripción": string,
+ *      "finalizado": boolean,
+ *      "quejas":[]
+ *   }
+ * </pre>
+ * 
+ * Por ejemplo un servicio se representa asi:<br>
+ * 
+ * <pre>
+ * 
+ *   {
+ *      "tipo": 1,
+ *      "fecha: "12/02/2018",
+ *      "hora": "8:37",
+ *      "descripción": "Acompañamiento a cita médica",
+ *      "finalizado": true
+ *   }
+ *
+ * </pre>
+ * 
  * @author c.gomezs
  */
 public class ServicioDetailDTO extends ServicioDTO{
