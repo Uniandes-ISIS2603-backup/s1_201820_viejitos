@@ -39,6 +39,7 @@ import java.util.Date;
  */
 
 public class ServicioDTO {
+
     
     private Integer tipo;
     
@@ -50,12 +51,29 @@ public class ServicioDTO {
     
     private Boolean finalizado;
     
+    private Long id;
+    
+    
      /**
      * Constructor por defecto
      */
     public ServicioDTO()
     {
         
+    }
+    
+    /**
+     * @return el id del servicio
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id nuevo id
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**

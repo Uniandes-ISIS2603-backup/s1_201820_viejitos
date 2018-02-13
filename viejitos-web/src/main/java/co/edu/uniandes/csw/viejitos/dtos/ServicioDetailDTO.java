@@ -8,7 +8,9 @@ package co.edu.uniandes.csw.viejitos.dtos;
 import java.util.List;
 
 /**
- *
+ * Clase que extiende de {@link ServicioDTO} para manejar la transformacion entre
+ * los objetos JSON y las Entidades de la base de datos. Para conocer el
+ * contenido del servicio vaya a la documentacion de {@link ServicioDTO}
  * @author c.gomezs
  */
 public class ServicioDetailDTO extends ServicioDTO{
@@ -28,107 +30,109 @@ public class ServicioDetailDTO extends ServicioDTO{
     private EnfermeroDTO enfermero;
 
     /**
-     * @return the quejas
+     * Constructor por defecto
+     */
+    public ServicioDetailDTO()
+    {
+        
+    }
+    
+    /**
+     * @return lista de quejas
      */
     public List<QuejaDTO> getQuejas() {
         return quejas;
     }
 
     /**
-     * @param quejas the quejas to set
+     * @param quejas nueva lista de quejas
      */
     public void setQuejas(List<QuejaDTO> quejas) {
         this.quejas = quejas;
     }
 
     /**
-     * @return the pagoInicial
+     * @return el pago inicial
      */
     public PagoDTO getPagoInicial() {
         return pagoInicial;
     }
 
     /**
-     * @param pagoInicial the pagoInicial to set
+     * @param pagoInicial nuevo pago inicial
      */
     public void setPagoInicial(PagoDTO pagoInicial) {
         this.pagoInicial = pagoInicial;
     }
 
     /**
-     * @return the pagoFinal
+     * @return el pago final
      */
     public PagoDTO getPagoFinal() {
         return pagoFinal;
     }
 
     /**
-     * @param pagoFinal the pagoFinal to set
+     * @param pagoFinal el nuevo pago final
      */
     public void setPagoFinal(PagoDTO pagoFinal) {
         this.pagoFinal = pagoFinal;
     }
 
     /**
-     * @return the factura
+     * @return la factura
      */
     public FacturaDTO getFactura() {
         return factura;
     }
 
     /**
-     * @param factura the factura to set
+     * @param factura la nueva factura
      */
     public void setFactura(FacturaDTO factura) {
         this.factura = factura;
     }
 
     /**
-     * @return the cliente
+     * @return el cliente
      */
     public ClienteDTO getCliente() {
         return cliente;
     }
 
     /**
-     * @param cliente the cliente to set
+     * @param cliente nuevo cliente
      */
     public void setCliente(ClienteDTO cliente) {
         this.cliente = cliente;
     }
 
     /**
-     * @return the calificacion
+     * @return la clasificación
      */
     public CalificacionDTO getCalificacion() {
         return calificacion;
     }
 
     /**
-     * @param calificacion the calificacion to set
+     * @param calificacion nueva clasificación
      */
     public void setCalificacion(CalificacionDTO calificacion) {
         this.calificacion = calificacion;
     }
 
     /**
-     * @return the enfermero
+     * @return el enfermero
      */
     public EnfermeroDTO getEnfermero() {
         return enfermero;
     }
 
     /**
-     * @param enfermero the enfermero to set
+     * @param enfermero nuevo enfermero
      */
     public void setEnfermero(EnfermeroDTO enfermero) {
         this.enfermero = enfermero;
-    }
-    
-    
-    public ServicioDetailDTO()
-    {
-        
     }
     
 }
