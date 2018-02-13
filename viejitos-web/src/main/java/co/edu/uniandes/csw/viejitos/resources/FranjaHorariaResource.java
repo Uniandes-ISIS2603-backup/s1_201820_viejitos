@@ -33,18 +33,25 @@ import javax.ws.rs.Produces;
 
 public class FranjaHorariaResource {
     
-    @Path("FranjasHorarias")
+    @Path("franjashorarias")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
     
      /**
 	 * <h1>POST /api/ : Crear una entidad de FranjaHoraria.</h1>
-	 * <p>
 	 * <pre>Cuerpo de petición: JSON {@link FranjaHorariaDetailDTO}.
 	 *
 	 * Crea una nueva entidad de franjaHoraria con la informacion que se recibe en el cuerpo
 	 * de la petición.
+         *  Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Creó la nueva ciudad .
+         * </code>
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 412 Precodition Failed: Ya existe la ciudad.
+         * </code>
+         * </pre>
 	 * @param dto {@link  FranjaHorariaDetailDTO} - La entidad de franja  que se desea guardar.
 	 * @return JSON {@link  FranjaHorariaDetailDTO}  - La entidad de franja guardada.
 	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de Servicio.
