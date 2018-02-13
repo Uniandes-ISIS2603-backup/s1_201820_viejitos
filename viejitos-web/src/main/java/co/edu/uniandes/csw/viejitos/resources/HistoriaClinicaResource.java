@@ -43,7 +43,7 @@ public class HistoriaClinicaResource
 	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de HistoriaClinica.
 	 */
 	@POST
-	public HistoriaClinicaDetailDTO createCliente( HistoriaClinicaDetailDTO dto ) throws BusinessLogicException
+	public HistoriaClinicaDetailDTO createHistoriaC( HistoriaClinicaDetailDTO dto ) throws BusinessLogicException
 	{
 		return dto;
 	}
@@ -55,7 +55,7 @@ public class HistoriaClinicaResource
 	 * @return JSONArray {@link HistoriaClinicaDetailDTO} - Las entidades de HistoriaClinica encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
-	public List<HistoriaClinicaDetailDTO> getHistoriasClinicas( )
+	public List<HistoriaClinicaDetailDTO> getHistoriasC( )
 	{
 		return new ArrayList<>();
 	}
@@ -69,13 +69,13 @@ public class HistoriaClinicaResource
 	 */
 	@GET
 	@Path( "{id: \\d+}" )
-	public HistoriaClinicaDetailDTO getHistoriaClinica( @PathParam( "id" ) Long id )
+	public HistoriaClinicaDetailDTO getHistoriaC( @PathParam( "id" ) Long id )
 	{
 		return null;
 	}
         
         /**
-	 * <h1>PUT /api/historiasClinicas/{id} : Actualizar una entidad de HistoriaClinica con el id dado.</h1>
+	 * <h1>PUT /api/historiasc/{id} : Actualizar una entidad de HistoriaClinica con el id dado.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link HistoriaClinicaDetailDTO}.
 	 *
 	 * Actualiza la entidad de HistoriaClinica con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
@@ -86,13 +86,13 @@ public class HistoriaClinicaResource
 	 */
 	@PUT
 	@Path( "{id: \\d+}" )
-	public HistoriaClinicaDetailDTO updateHistoriaClinica( @PathParam( "id" ) Long id, HistoriaClinicaDetailDTO detailDTO ) throws BusinessLogicException
+	public HistoriaClinicaDetailDTO updateHistoriaC( @PathParam( "id" ) Long id, HistoriaClinicaDetailDTO detailDTO ) throws BusinessLogicException
 	{
 		return detailDTO;
 	}
         
         /**
-	 * <h1>DELETE /api/historiasClinicas/{id} : Borrar una entidad de HistoriaClinica por id.</h1>
+	 * <h1>DELETE /api/historiasc/{id} : Borrar una entidad de HistoriaClinica por id.</h1>
 	 * <p>
 	 * <pre>Borra la entidad de HistoriaClinica con el id asociado recibido en la URL.
 	 * </pre>
@@ -101,7 +101,7 @@ public class HistoriaClinicaResource
 	 */
 	@DELETE
 	@Path( "{id: \\d+}" )
-	public void deleteHistoriaClinica( @PathParam( "id" ) Long id )
+	public void deleteHistoriaC( @PathParam( "id" ) Long id )
 	{
 		// Void
 	}

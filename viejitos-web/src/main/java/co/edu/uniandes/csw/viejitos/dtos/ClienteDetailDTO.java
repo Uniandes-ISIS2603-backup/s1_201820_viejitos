@@ -31,9 +31,35 @@ import java.util.List;
  *          "loginCalificado": string,
  *          "tipoCalificado": string,
  *          "loginCalificador": string,
- *          "tipoCalificador": string }`]
- *      "cita": 
- * 
+ *          "tipoCalificador": string }]
+ *      "cita": {
+ *          "fecha": Date,
+ *          "hora": Date },
+ *      "enfermero": {
+ *          "nombre": string,
+ *          "id": string,
+ *          "contrasena": string,
+ *          "cv": string,
+ *          "tipo": number },
+ *      "historiaC": {
+ *          "id": number,
+ *          "enfermedades": string,
+ *          "medicamentos": string,
+ *          "cirugias": string },
+ *      "medico": {
+ *          "nombre": string,
+ *          "tipo": number,
+ *          "id": string,
+ *          "contrasena": string },
+ *      "quejas": [ {
+ *          "reclamo": string,
+ *          "resuelto": boolean } ]
+ *      "servicios": [ {
+ *          "tipo": number,
+ *          "fecha": Date,
+ *          "hora": string,
+ *          "descripcion": string,
+ *          "finalizado": boolean } ]
  *   }
  * </pre>
  * Por ejemplo una entidad de Cliente se representa asi:<br>
@@ -41,12 +67,56 @@ import java.util.List;
  * <pre>
  *
  *   {
- *      "id": 12345,
+ *      "id": 1234,
  *      "nombre: "John Doe",
  *      "login": "johndoe23",
  *      "contrasena": "jd124",
  *      "estado": 1,
- *      "tipo": 1
+ *      "tipo": 1,
+ *      "calificacion": {
+ *          "idCalificacion": 1111,
+ *          "puntaje": 4,
+ *          "comentario": "Excelente persona.",
+ *          "loginCalificado": "johndoe23",
+ *          "tipoCalificado": "1",
+ *          "loginCalificador": "jblack45",
+ *          "tipoCalificador": "2" },
+ *      "calificaciones": [ {
+ *          "idCalificacion": 1112,
+ *          "puntaje": 5,
+ *          "comentario": "Enfermero de muy alta calidad.",
+ *          "loginCalificado": "jblack45",
+ *          "tipoCalificado": "2",
+ *          "loginCalificador": "johndoe23",
+ *          "tipoCalificador": "1" }]
+ *      "cita": {
+ *          "fecha": 15/02/2018,
+ *          "hora": 14:00 },
+ *      "enfermero": {
+ *          "nombre": "Jack Black",
+ *          "id": "1113",
+ *          "contrasena": "jb125",
+ *          "cv": string,
+ *          "tipo": 2 },
+ *      "historiaC": {
+ *          "id": 1114,
+ *          "enfermedades": "Ninguna.",
+ *          "medicamentos": "Ninguna",
+ *          "cirugias": "Reemplazo de cadera." },
+ *      "medico": {
+ *          "nombre": "Carlos Gonzalez",
+ *          "tipo": 3,
+ *          "id": "1115",
+ *          "contrasena": "cg777" },
+ *      "quejas": [ {
+ *          "reclamo": "El cliente se demoro en pagar.",
+ *          "resuelto": true } ]
+ *      "servicios": [ {
+ *          "tipo": 1,
+ *          "fecha": 15/02/2018,
+ *          "hora": "14:00",
+ *          "descripcion": "Caminata",
+ *          "finalizado": false } ]
  *   }
  *
  * </pre>

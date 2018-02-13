@@ -11,7 +11,7 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *      "id": number,
  *      "cirugias": string,
  *      "enfermedades": string,
- *      "medicamentos": string,
+ *      "medicamentos": string
  *   }
  * </pre>
  * Por ejemplo una entidad de HistoriaClinica se representa asi:<br>
@@ -22,7 +22,7 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *      "id": 12345,
  *      "cirugias": "Reemplazo de cadera.",
  *      "enfermedades": "Ninguna",
- *      "medicamentos": "Ninguno",
+ *      "medicamentos": "Ninguno"
  *   }
  *
  * </pre>
