@@ -20,14 +20,55 @@ SOFTWARE.
 
 package co.edu.uniandes.csw.viejitos.dtos;
 /**
- * Clase que extiende de {@link MedicoDTO} para manejar la transformacion entre
- * los objetos JSON y las Entidades de la base de datos. Para conocer el
- * contenido de la ciudad vaya a la documentacion de {@link MedicoDTO}
+ * MedicoDTO Objeto de transferencia de datos de Medicos. Los DTO contienen las
+ * represnetaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
+ * 
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *         "nombre":string,
+ *          "tipo": String,
+ *          "login":string
+ *          "contrasena":String,
+ *          "id":number, 
+ *          "citas":[], 
+ *          "historiasClinicas":[], 
+ *          "clientes":[],
+ *          "calendario":CalendarioSemanalDTO
+ *   }
+ * </pre>
+ * Por ejemplo un medico se representa asi:<br>
+ * 
+ * <pre>
+ * 
+ *   {
+ *          "nombre":"Juan Perez",
+ *          "tipo": "Medico",
+ *          "login":"j.perez",
+ *          "contrasena":"megustanlosgatos2",
+ *          "id":"1010233999"
+ *          "citas":"[{"fecha":"08-06-2018",
+ *          "hora": "2:00 PM",
+ *          "id":"192837465"}], 
+ *          "historiasClinicas":[{"id": 12345,
+ *      "cirugias": "Reemplazo de cadera.",
+ *      "enfermedades": "Ninguna",
+ *      "medicamentos": "Ninguno"}], 
+ *          "clientes":[{ "id": 12345,
+ *      "nombre: "John Doe",
+ *      "login": "johndoe23",
+ *      "contrasena": "jd124",
+ *      "estado": 1,
+ *      "tipo": 1}],
+ *          "calendario":,
+ *   }
+ *
+ * </pre>
  * @author l.pardo
  */
-import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
+
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 /**
  *
