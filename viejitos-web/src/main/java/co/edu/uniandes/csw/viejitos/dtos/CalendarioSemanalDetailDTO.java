@@ -21,11 +21,19 @@ public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
     
     
     
-
+/**
+     *
+     * @param pfranjas las frnajas nueva
+     * 
+     */
     public void setFranjasHorarias(List<FranjaHorariaDTO> pfranjas) {
         this.franjasHorarias = pfranjas;
     }
 
+    /**
+     *
+     * @return las franjas
+     */
     public List<FranjaHorariaDTO> getFranjasHorarias() {
         return franjasHorarias;
     }
