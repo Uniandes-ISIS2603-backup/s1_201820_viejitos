@@ -33,25 +33,23 @@ public class HistoriaClinicaResource
 {
     /**
 	 * <h1>POST /api/historiasc : Crear una entidad de HistoriaClinica.</h1>
-	 * <p>
 	 * <pre>Cuerpo de petición: JSON {@link HistoriaClinicaDetailDTO}.
-	 *
+	 *</pre>
 	 * Crea una nueva entidad de HistoriaClinica con la informacion que se recibe en el cuerpo
 	 * de la petición.
 	 * @param dto {@link HistoriaClinicaDetailDTO} - La entidad de HistoriaClinica que se desea guardar.
 	 * @return JSON {@link HistoriaClinicaDetailDTO}  - La entidad de HistoriaClinica guardada.
-	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de HistoriaClinica.
 	 */
 	@POST
-	public HistoriaClinicaDetailDTO createHistoriaC( HistoriaClinicaDetailDTO dto ) throws BusinessLogicException
+	public HistoriaClinicaDetailDTO createHistoriaC( HistoriaClinicaDetailDTO dto ) 
 	{
 		return dto;
 	}
         
         /**
 	 * <h1>GET /api/historiasc : Obtener todas las entidades de HistoriaClinica.</h1>
-	 * <p>
 	 * <pre>Busca y devuelve todas las entidades de HistoriaClinica que existen en la aplicacion.
+         * </pre>
 	 * @return JSONArray {@link HistoriaClinicaDetailDTO} - Las entidades de HistoriaClinica encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
@@ -62,8 +60,8 @@ public class HistoriaClinicaResource
         
         /**
 	 * <h1>GET /api/historiasc/{id} : Obtener una entidad de HistoriaClinica por id.</h1>
-	 * <p>
 	 * <pre>Busca la entidad de HistoriaClinica con el id asociado recibido en la URL y la devuelve.
+         * </pre>
 	 * @param id Identificador de la entidad de HistoriaClinica que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link HistoriaClinicaDetailDTO} - La entidad de HistoriaClinica buscada
 	 */
@@ -77,17 +75,16 @@ public class HistoriaClinicaResource
         /**
 	 * <h1>PUT /api/historiasc/{id} : Actualizar una entidad de HistoriaClinica con el id dado.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link HistoriaClinicaDetailDTO}.
-	 *
+	 *</pre>
 	 * Actualiza la entidad de HistoriaClinica con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de HistoriaClinica que se desea actualizar. Este debe ser una cadena de dígitos.
 	 * @param detailDTO {@link HistoriaClinicaDetailDTO} La entidad de HistoriaClinica que se desea guardar.
 	 * @return JSON {@link HistoriaClinicaDetailDTO} - La entidad de HistoriaClinica guardada.
-	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la entidad de HistoriaClinica porque ya existe una con ese nombre.
 	 */
 	@PUT
 	@Path( "{id: \\d+}" )
-	public HistoriaClinicaDetailDTO updateHistoriaC( @PathParam( "id" ) Long id, HistoriaClinicaDetailDTO detailDTO ) throws BusinessLogicException
-	{
+	public HistoriaClinicaDetailDTO updateHistoriaC( @PathParam( "id" ) Long id, HistoriaClinicaDetailDTO detailDTO ) 
+        {
 		return detailDTO;
 	}
         
