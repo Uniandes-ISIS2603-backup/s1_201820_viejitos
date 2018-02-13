@@ -29,21 +29,29 @@ public class CalendarioSemanalResource {
  * <pre>Clase que implementa el recurso "calendarioSemanal".
  * URL: /api/CalendarioSemanal
  */
-@Path( "CalendarioSemanal" )
+@Path( "calendariosemanal" )
 @Produces( "application/json" )
 @Consumes( "application/json" )
 @RequestScoped
 
     /**
-	 * <h1>POST /api/calendarioSemanal : Crear una entidad de calendarioSemanal.</h1>
-	 * <p>
+	 * <h1>POST /api/calendariosemanal : Crear una entidad(la unica) de calendarioSemanal9.</h1>
+         * 
 	 * <pre>Cuerpo de petición: JSON {@link calendarioSemanalDetailDTO}.
 	 *
-	 * Crea una nueva entidad de calendario semanl con la informacion que se recibe en el cuerpo
+	 * Crea una nueva entidad de calendario semanal con la informacion que se recibe en el cuerpo
 	 * de la petición.
          * 
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Creó la nueva ciudad .
+          * </code>
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+          * 412 Precodition Failed: Ya existe la ciudad.
+         * </code>
+         * </pre>
 	 * @param dto {@link  calendarioSemanalDetailDTO} - La entidad de calendario que se desea guardar.
-          * @return dto {@link calendarioSemanalDetailDTO} - La entidad de calendario que se desea guardar.
+          * @return JSON {@link calendarioSemanalDetailDTO} - La entidad de calendario que se desea guardar.
 	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de Cliente.
 	 */
 	@POST
