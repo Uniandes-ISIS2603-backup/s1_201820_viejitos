@@ -18,44 +18,64 @@ public class FranjaHorariaDTO {
     public FranjaHorariaDTO()
     {
     }
-            
+     
+    /**
+     * @return  la  hora de inicio de la cita
+     */
     private int getHoraInicio()
             {
                 return horaInicio;
             }
+    
+    /**
+     * @param pHoraInicio la nueva hora de inicio de la franja
+     */
     private void setHoraInicio(Integer pHoraInicio)
             {
                 horaInicio=pHoraInicio;
             }
     
-    
+    /**
+     * @return la  hora de finalizacion de la franja
+     */
     private int getHoraFin ()
             {
                 return horaFin;
             }
+    /**
+     * @param pHoraFin la nueva hora de finalizacion de la franja
+     */
     private void setHoraFin(Integer pHoraFin)
             {
                 horaFin=pHoraFin;
             }
     
     
-    
+    /**
+     * @return el estado de la franja horaria
+     */
     private Boolean getOcupado()
             {
                 return ocupado;
             }
-    
+    /**
+     * @param pOcupado el nuevo estado de la franja horaria
+     */
     private void setOcupado(Integer pOcupado)
             {
                 ocupado=pOcupado;
             }
     
-    
+    /**
+     * @return dia de la semana de la franja
+     */
     private String getDiaSemana()
             {
                 return diaSemana;
             }
-    
+    /**
+     * @param pDiaSemana el nuevo dia de la semana de la franja
+     */
     private void setDiaSemana(Integer pDiaSemana)
             {
                 horaInicio=pDiaSemana;
