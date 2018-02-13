@@ -61,7 +61,7 @@ public class CalendarioSemanalResource {
          * </pre>
 	 * @param dto {@link  calendarioSemanalDetailDTO} - La entidad de calendario que se desea guardar.
           * @return JSON {@link calendarioSemanalDetailDTO} - La entidad de calendario que se desea guardar.
-	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de Cliente.
+	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de calnedario semanal.
 	 */
 	@POST
 	public CalendarioSemanalDetailDTO createCalendario( CalendarioSemanalDetailDTO dto ) throws BusinessLogicException
@@ -101,7 +101,7 @@ public class CalendarioSemanalResource {
 	 * Actualiza la entidad de calendario  con la informacion que se recibe en el cuerpo de la petición.
          * @param detailDTO {@link CalendarioSemanalDetailDTO} La entidad de calendario que se desea guardar.
 	 * @return JSON {@link CalendarioSemanalDetailDTO} - La entidad de calendario guardada.
-	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la entidad de Cliente porque ya existe una con ese nombre.
+	 * @throws BusinessLogicException {@link mappers.BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la entidad de Cliente porque ya existe una con ese nombre.
 	 */
 	@PUT
 	public CalendarioSemanalDetailDTO updateCalendario(  CalendarioSemanalDetailDTO detailDTO ) throws BusinessLogicException
