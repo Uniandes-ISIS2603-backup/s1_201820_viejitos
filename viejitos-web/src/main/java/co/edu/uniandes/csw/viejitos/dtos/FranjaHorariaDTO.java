@@ -61,7 +61,7 @@ public class FranjaHorariaDTO {
     /**
      * @param pOcupado el nuevo estado de la franja horaria
      */
-    private void setOcupado(Integer pOcupado)
+    private void setOcupado(Boolean pOcupado)
             {
                 ocupado=pOcupado;
             }
