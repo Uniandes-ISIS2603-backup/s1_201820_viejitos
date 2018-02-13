@@ -21,7 +21,7 @@ import javax.ws.rs.Produces;
 
 /**
  * <pre>Clase que implementa el recurso "cliente".
- * URL: /api/cliente
+ * URL: /api/clientes
  * @author jj.silva
  */
 @Path( "clientes" )
