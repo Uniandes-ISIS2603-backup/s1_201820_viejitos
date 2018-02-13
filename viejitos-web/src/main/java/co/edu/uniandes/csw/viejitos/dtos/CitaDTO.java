@@ -19,7 +19,7 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 /**
- * MedicoDTO Objeto de transferencia de datos de Medicos. Los DTO contienen las
+ * CitaDTO Objeto de transferencia de datos de Cita. Los DTO contienen las
  * represnetaciones de los JSON que se transfieren entre el cliente y el
  * servidor.
  * 
