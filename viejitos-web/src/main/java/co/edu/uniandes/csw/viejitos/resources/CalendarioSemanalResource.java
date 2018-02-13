@@ -7,6 +7,18 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 /**
  *
+ * <pre>Clase que implementa el recurso "calendarioSemanal".
+ * URL: /api/calendariosemanal
+ *</pre>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
+ * este recurso tiene la ruta "calendariosemanal".</i>
+ *
+ * <h2>Anotaciones </h2>
+ * <pre>
+ * Path: indica la dirección después de "api" para acceder al recurso
+ * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * </pre>
  * @author lf.naranjo11
  */
 
@@ -25,10 +37,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 public class CalendarioSemanalResource {
     
-    /**
- * <pre>Clase que implementa el recurso "calendarioSemanal".
- * URL: /api/CalendarioSemanal
- */
+ 
 @Path( "calendariosemanal" )
 @Produces( "application/json" )
 @Consumes( "application/json" )
@@ -44,10 +53,10 @@ public class CalendarioSemanalResource {
          * 
          * Codigos de respuesta:
          * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Creó la nueva ciudad .
+         * 200 OK Creó el calendario semanal .
           * </code>
          * <code style="color: #c7254e; background-color: #f9f2f4;">
-          * 412 Precodition Failed: Ya existe la ciudad.
+          * 412 Precodition Failed: Ya existe el calendario.
          * </code>
          * </pre>
 	 * @param dto {@link  calendarioSemanalDetailDTO} - La entidad de calendario que se desea guardar.
@@ -63,25 +72,34 @@ public class CalendarioSemanalResource {
        
         
         /**
-	 * <h1>GET /api/calendarioSemanal/ : Obtener la entidad de calendario </h1>
-	 * <p>
+	 * <h1>GET /api/calendariosemanal/ : Obtener la entidad de calendario </h1>
+
 	 * <pre>Busca la entidad de calendario  y la devuelve.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve el calendario semanal.</code> 
+        * </pre>
 	 * @return JSON {@link CalendarioSemanalDetailDTO} - La entidad de calenadrio buscada
 	 */
 	@GET
 	
-	public CalendarioSemanalDetailDTO getCliente(  )
+	public CalendarioSemanalDetailDTO getCalendario(  )
 	{
 		return null;
 	}
         
         /**
-	 * <h1>PUT /api/calendarioSemanal/ : Actualizar la entidad de calendario .</h1>
+	 * <h1>PUT /api/calendariosemanal/ : Actualizar la entidad de calendario .</h1>
 	 * <pre>Cuerpo de petición: JSON {@link CalendarioSemanalDetailDTO}.
-	 *
+          * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Actualiza el calendario con la información enviada como parámetro. Retorna un objeto identico.</code> 
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe un calendario semanal.
+     * </code> 
+     * </pre>
 	 * Actualiza la entidad de calendario  con la informacion que se recibe en el cuerpo de la petición.
-	
-	 * @param detailDTO {@link CalendarioSemanalDetailDTO} La entidad de calendario que se desea guardar.
+         * @param detailDTO {@link CalendarioSemanalDetailDTO} La entidad de calendario que se desea guardar.
 	 * @return JSON {@link CalendarioSemanalDetailDTO} - La entidad de calendario guardada.
 	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la entidad de Cliente porque ya existe una con ese nombre.
 	 */
@@ -93,11 +111,16 @@ public class CalendarioSemanalResource {
         
         /**
 	 * <h1>DELETE /api/calendarioSemanal Borrar la entidad de calendario .</h1>
-	 * <p>
 	 * <pre>Borra la entidad de calendario asociado recibido en la URL.
+         * Códigos de respuesta:<br>
+        * <code style="color: mediumseagreen; background-color: #eaffe0;">
+        * 200 OK Elimina el calendario semanal.</code>
+        * <code style="color: #c7254e; background-color: #f9f2f4;">
+       * 404 Not Found. No existe un calendario semanal
+        * </code>
+        * </pre> 
 	*/
 	@DELETE
-	
 	public void deleteCalendario( )
 	{
 		// Void
