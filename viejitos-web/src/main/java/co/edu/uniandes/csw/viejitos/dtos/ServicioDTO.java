@@ -31,7 +31,7 @@ import java.util.Date;
  *      "fecha: "12/02/2018",
  *      "hora": "8:37",
  *      "descripción": "Acompañamiento a cita médica",
- *      "finalizado": true
+ *      "finalizado": false
  *   }
  *
  * </pre>
