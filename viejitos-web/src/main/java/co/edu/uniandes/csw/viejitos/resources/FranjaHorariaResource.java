@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.viejitos.resources;
 /**
  **<pre>Clase que implementa el recurso "FranjaHoraria".
  * URL: /api/FranjasHorarias </pre>
- * <p>
  * <h2>Anotaciones </h2>
  * <pre>
  * Path: indica la dirección después de "api" para acceder al recurso
@@ -119,11 +118,17 @@ public class FranjaHorariaResource {
         
          /**
 	 * <h1>GET /api/franjasHorarias/dia : Obtener todas las entidades de franja horaria de un dia.</h1>
-	 * <pre>Busca y devuelve todas las entidades de franja que se relacion a un dia dado.
+	 * <pre>Busca y devuelve todas las entidades de franja que se relacion a un dia dado.  
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve todas las ciudades de la aplicacion.</code> 
+     * </pre>
+         * 
 	 * @return JSONArray {@link FranjaHorariaDTO} - Las entidades de calendario semanal encontradas en la aplicación.
 	 */
 	@GET
-	public List<FranjaHorariaDTO> getCitas( )
+	public List<FranjaHorariaDTO> getFranjas( )
 	{
 		return new ArrayList<FranjaHorariaDTO>();
 	}
