@@ -5,13 +5,15 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import java.util.List;
+
 /**
  *
  * @author lf.naranjo11
  */
-public class CalendarioSemanalDetailDTO extends calendarioSemanalDTO{
+public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
     
-    private List<FrangaHorariaDTO> franjaHoraria;
+    private List<FranjaHorariaDTO> franjasHorarias;
     
     
 }
