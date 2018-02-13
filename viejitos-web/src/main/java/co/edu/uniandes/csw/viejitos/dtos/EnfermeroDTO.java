@@ -5,8 +5,31 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
-/**
- *
+/** 
+ * Objeto de transferencia de datos para un enfermero.
+ * Al serializarse como DTO se genera un JSON de la siguiente manera
+ * <pre>
+ *  {
+ *      "id":number,
+ *      "nombre":string,
+ *      "cv":string,
+ *      "login":string,
+ *      "contrasenia":string,
+ *      "tipo":string,
+ *  }
+ * </pre>
+ * 
+ * Por ejemplo, un enfermero se representa asi:
+ * <pre>
+ *  {
+ *      "id":2678389,
+ *      "nombre":"Juan Espitia",
+ *      "cv":"./documents/juanHDV.pdf",
+ *      "login":,"js.espitia"
+ *      "contrasenia":"a89ess0909",
+ *      "tipo":"Enfermero",
+ *  }
+ * </pre>
  * @author js.espitia
  */
 public class EnfermeroDTO {
