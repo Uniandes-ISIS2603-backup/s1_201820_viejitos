@@ -56,7 +56,7 @@ public class FranjaHorariaResource {
 @RequestScoped
     
      /**
-	 * <h1>POST /api/ : Crear una entidad de FranjaHoraria.</h1>
+	 * <h1>POST /api/franjashorarias : Crear una entidad de FranjaHoraria.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link FranjaHorariaDetailDTO}.
 	 *
 	 * Crea una nueva entidad de franjaHoraria con la informacion que se recibe en el cuerpo
@@ -81,7 +81,7 @@ public class FranjaHorariaResource {
         
         /**
 	 * <h1>GET /api/franjashorarias : Obtener todas las entidades de franja horaria correspondientes a un calendario semanal.</h1>
-	 * <pre>Busca y devuelve todas las entidades de Cita que se relacion a un calendariosemanal.
+	 * <pre>Busca y devuelve todas las entidades de franja que se relacion a un calendariosemanal.
           * Codigos de respuesta:
         * <code style="color: mediumseagreen; background-color: #eaffe0;">
         * 200 OK Devuelve todas las franjas horarias.</code> 
@@ -97,11 +97,18 @@ public class FranjaHorariaResource {
         
         
         /**
-            * <h1>GET /api/FranjaHoraria/{id} : Obtener una entidad de franja Horaria por id.</h1>
-	 * <p>
+            * <h1>GET /api/franjashorarias/{id} : Obtener una entidad de franja Horaria por id.</h1>
 	 * <pre>Busca la entidad de franja horaria con el id asociado recibido en la URL y la devuelve.
-	 * @param id Identificador de la entidad de franja horaria que se esta buscando. Este debe ser una cadena de dígitos.
-	 * @return JSON {@link CalendarioSemanalDetailDetailDTO} - La entidad de franja buscada
+	 * Codigos de respuesta:
+        * <code style="color: mediumseagreen; background-color: #eaffe0;">
+        * 200 OK Devuelve la franja correspondiente al id.
+        * </code> 
+        * <code style="color: #c7254e; background-color: #f9f2f4;">
+        * 404 Not Found No existe una franja con el id dado.
+       * </code> 
+       * </pre>
+         * @param id Identificador de la entidad de franja horaria que se esta buscando. Este debe ser una cadena de dígitos.
+	 * @return JSON {@link FranjaHorariaDetailDTO} - La entidad de franja buscada
 	 */
 	@GET
 	@Path( "{id: \\d+}" )
@@ -112,9 +119,8 @@ public class FranjaHorariaResource {
         
          /**
 	 * <h1>GET /api/franjasHorarias/dia : Obtener todas las entidades de franja horaria de un dia.</h1>
-	 * <p>
-	 * <pre>Busca y devuelve todas las entidades de Cita que se relacion a un dia dado.
-	 * @return JSONArray {@link CalendarioSemanalDetailDTO} - Las entidades de calendario semanal encontradas en la aplicación.
+	 * <pre>Busca y devuelve todas las entidades de franja que se relacion a un dia dado.
+	 * @return JSONArray {@link FranjaHorariaDetailDTO} - Las entidades de calendario semanal encontradas en la aplicación.
 	 */
 	@GET
 	public List<FranjaHorariaDetailDTO> getCitas( )
@@ -124,8 +130,15 @@ public class FranjaHorariaResource {
         
         /**
 	 * <h1>DELETE /api/FranjasHorarias/{id} : Borrar una entidad de franja por id.</h1>
-	 * <p>
+	 
 	 * <pre>Borra la entidad de franja con el id asociado recibido en la URL.
+         * * Códigos de respuesta:<br>
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Elimina la ciudad correspondiente al id dado.</code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe una ciudad con el id dado.
+     * </code>
+         * 
 	 * </pre>
 	 *
 	 * @param id Identificador de la entidad de franja que se desea borrar. Este debe ser una cadena de dígitos.
