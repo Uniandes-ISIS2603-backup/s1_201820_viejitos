@@ -30,6 +30,23 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+/**
+ * <pre>Clase que implementa el recurso "franjaHoraria".
+ * URL: /api/franjashorarias
+ * </pre>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
+ * este recurso tiene la ruta "franjashorarias".</i>
+ *
+ * <h2>Anotaciones </h2>
+ * <pre>
+ * Path: indica la dirección después de "api" para acceder al recurso
+ * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * </pre>
+ * @author ISIS2603  
+ * @version 1.0
+ */
+
 
 public class FranjaHorariaResource {
     
@@ -63,16 +80,21 @@ public class FranjaHorariaResource {
 	}
         
         /**
-	 * <h1>GET /api/franjasHorarias : Obtener todas las entidades de franja horaria.</h1>
-	 * <p>
-	 * <pre>Busca y devuelve todas las entidades de Cita que se relacion a un medico o enfermero.
-	 * @return JSONArray {@link CalendarioSemanalDetailDTO} - Las entidades de calendario semanal encontradas en la aplicación.
+	 * <h1>GET /api/franjashorarias : Obtener todas las entidades de franja horaria correspondientes a un calendario semanal.</h1>
+	 * <pre>Busca y devuelve todas las entidades de Cita que se relacion a un calendariosemanal.
+          * Codigos de respuesta:
+        * <code style="color: mediumseagreen; background-color: #eaffe0;">
+        * 200 OK Devuelve todas las franjas horarias.</code> 
+        * </pre>
+	 * @return JSONArray {@link FranjaHorariaDetailDTO} - Las entidades de calendario semanal encontradas en la aplicación.
 	 */
 	@GET
-	public List<FranjaHorariaDetailDTO> getCitas( )
+	public List<FranjaHorariaDetailDTO> getFranjasHorarias( )
 	{
 		return new ArrayList<FranjaHorariaDetailDTO>();
 	}
+        
+        
         
         /**
             * <h1>GET /api/FranjaHoraria/{id} : Obtener una entidad de franja Horaria por id.</h1>
