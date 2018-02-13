@@ -15,5 +15,22 @@ public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
     
     private List<FranjaHorariaDTO> franjasHorarias;
     
+    public CalendarioSemanalDetailDTO()
+    {
+    }
+    
+    
+    
+
+    public void setFranjasHorarias(List<FranjaHorariaDTO> pfranjas) {
+        this.franjasHorarias = pfranjas;
+    }
+
+    public List<FranjaHorariaDTO> getFranjasHorarias() {
+        return franjasHorarias;
+    }
+
+
+    
     
 }
