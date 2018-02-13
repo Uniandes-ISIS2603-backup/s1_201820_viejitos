@@ -8,13 +8,18 @@ package co.edu.uniandes.csw.viejitos.dtos;
 import java.util.List;
 
 /**
- *
+ 
+ * Clase que extiende de {@link CalendarioSemanalDTO} para manejar la transformacion entre
+ * los objetos JSON y las Entidades de la base de datos. Para conocer el
+ * contenido de la ciudad vaya a la documentacion de {@link CalendarioSemanalDTO}
  * @author lf.naranjo11
  */
 public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
     
     private List<FranjaHorariaDTO> franjasHorarias;
-    
+     /**
+     * Constructor por defecto
+     */
     public CalendarioSemanalDetailDTO()
     {
     }
