@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.viejitos.resources;
 /**
  **<pre>Clase que implementa el recurso "FranjaHoraria".
  * URL: /api/FranjasHorarias </pre>
- * <p>
  * <h2>Anotaciones </h2>
  * <pre>
  * Path: indica la dirección después de "api" para acceder al recurso
@@ -17,7 +16,7 @@ package co.edu.uniandes.csw.viejitos.resources;
  * </pre>
  * @author lf.naranjo11
  */
-import co.edu.uniandes.csw.viejitos.dtos.FranjaHorariaDetailDTO;
+import co.edu.uniandes.csw.viejitos.dtos.FranjaHorariaDTO;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +56,7 @@ public class FranjaHorariaResource {
     
      /**
 	 * <h1>POST /api/franjashorarias : Crear una entidad de FranjaHoraria.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link FranjaHorariaDetailDTO}.
+	 * <pre>Cuerpo de petición: JSON {@link FranjaHorariaDTO}.
 	 *
 	 * Crea una nueva entidad de franjaHoraria con la informacion que se recibe en el cuerpo
 	 * de la petición.
@@ -69,12 +68,12 @@ public class FranjaHorariaResource {
          * 412 Precodition Failed: Ya existe la ciudad.
          * </code>
          * </pre>
-	 * @param dto {@link  FranjaHorariaDetailDTO} - La entidad de franja  que se desea guardar.
-	 * @return JSON {@link  FranjaHorariaDetailDTO}  - La entidad de franja guardada.
+	 * @param dto {@link  FranjaHorariaDTO} - La entidad de franja  que se desea guardar.
+	 * @return JSON {@link  FranjaHorariaDTO}  - La entidad de franja guardada.
 	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de Servicio.
 	 */
 	@POST
-	public FranjaHorariaDetailDTO createFranjaHoraria( FranjaHorariaDetailDTO dto ) throws BusinessLogicException
+	public FranjaHorariaDTO createFranjaHoraria( FranjaHorariaDTO dto ) throws BusinessLogicException
 	{
 		return dto;
 	}
@@ -86,12 +85,12 @@ public class FranjaHorariaResource {
         * <code style="color: mediumseagreen; background-color: #eaffe0;">
         * 200 OK Devuelve todas las franjas horarias.</code> 
         * </pre>
-	 * @return JSONArray {@link FranjaHorariaDetailDTO} - Las entidades de calendario semanal encontradas en la aplicación.
+	 * @return JSONArray {@link FranjaHorariaDTO} - Las entidades de calendario semanal encontradas en la aplicación.
 	 */
 	@GET
-	public List<FranjaHorariaDetailDTO> getFranjasHorarias( )
+	public List<FranjaHorariaDTO> getFranjasHorarias( )
 	{
-		return new ArrayList<FranjaHorariaDetailDTO>();
+		return new ArrayList<FranjaHorariaDTO>();
 	}
         
         
@@ -108,35 +107,41 @@ public class FranjaHorariaResource {
        * </code> 
        * </pre>
          * @param id Identificador de la entidad de franja horaria que se esta buscando. Este debe ser una cadena de dígitos.
-	 * @return JSON {@link FranjaHorariaDetailDTO} - La entidad de franja buscada
+	 * @return JSON {@link FranjaHorariaDTO} - La entidad de franja buscada
 	 */
 	@GET
 	@Path( "{id: \\d+}" )
-	public FranjaHorariaDetailDTO getFranja( @PathParam( "id" ) Long id )
+	public FranjaHorariaDTO getFranja( @PathParam( "id" ) Long id )
 	{
 		return null;
 	}
         
          /**
 	 * <h1>GET /api/franjasHorarias/dia : Obtener todas las entidades de franja horaria de un dia.</h1>
-	 * <pre>Busca y devuelve todas las entidades de franja que se relacion a un dia dado.
-	 * @return JSONArray {@link FranjaHorariaDetailDTO} - Las entidades de calendario semanal encontradas en la aplicación.
+	 * <pre>Busca y devuelve todas las entidades de franja que se relacion a un dia dado.  
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve todas las ciudades de la aplicacion.</code> 
+     * </pre>
+         * 
+	 * @return JSONArray {@link FranjaHorariaDTO} - Las entidades de calendario semanal encontradas en la aplicación.
 	 */
 	@GET
-	public List<FranjaHorariaDetailDTO> getCitas( )
+	public List<FranjaHorariaDTO> getFranjas( )
 	{
-		return new ArrayList<FranjaHorariaDetailDTO>();
+		return new ArrayList<FranjaHorariaDTO>();
 	}
         
         /**
-	 * <h1>DELETE /api/FranjasHorarias/{id} : Borrar una entidad de franja por id.</h1>
+	 * <h1>DELETE /api/franjashorarias/{id} : Borrar una entidad de franja por id.</h1>
 	 
 	 * <pre>Borra la entidad de franja con el id asociado recibido en la URL.
          * * Códigos de respuesta:<br>
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Elimina la ciudad correspondiente al id dado.</code>
+     * 200 OK Elimina la franja correspondiente al id dado.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found. No existe una ciudad con el id dado.
+     * 404 Not Found. No existe una frnaja con el id dado.
      * </code>
          * 
 	 * </pre>

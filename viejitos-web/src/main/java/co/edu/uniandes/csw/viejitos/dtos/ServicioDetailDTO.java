@@ -11,6 +11,46 @@ import java.util.List;
  * Clase que extiende de {@link ServicioDTO} para manejar la transformacion entre
  * los objetos JSON y las Entidades de la base de datos. Para conocer el
  * contenido del servicio vaya a la documentacion de {@link ServicioDTO}
+ * 
+ * <pre>
+ *   {
+ *      "tipo": number,
+ *      "fecha": date,
+ *      "hora": string,
+ *      "descripción": string,
+ *      "finalizado": boolean,
+ *      "quejas":[],
+ *      "pagoInicial": pagoDTO,
+ *      "pagoFinal": pagoDTO,
+ *      "factura": facturaDTO,
+ *      "cliente": clienteDTO,
+ *      "calificacion": calificacionDTO,
+ *      "enfermero": enfermeroDTO
+ *   }
+ * </pre>
+ * 
+ * Por ejemplo un servicio se representa asi:<br>
+ * 
+ * <pre>
+ * 
+ *   {
+ *      "tipo": 1,
+ *      "fecha: "12/02/2018",
+ *      "hora": "8:37",
+ *      "descripción": "Acompañamiento a cita médica",
+ *      "finalizado": false
+ *      "quejas": [{"reclamo": "El enfermero tenia una actitud muy grosera.",
+ *      "resuelto: true}]
+ *      "pagoInicial": {"medio": "Efectivo", "pagado": TRUE, "fechaLimite": 12/04/18, "valor": 150000},
+ *      "pagoFinal": null,
+ *      "factura": {"costoTotal": 120100, "fechaExpedicion": 12/04/18, "descripcion": "Acompanar al banco", "nombreCliente": "Felipe Escobar", "ccCliente": 1234567, "servicioPrestado": "Acompanamiento", "nombreEmpresa": "Hospital"},
+ *      "cliente": {"id": 12345, "nombre: "John Doe", "login": "johndoe23", "contrasena": "jd124", "estado": 1, "tipo": 1},
+ *      "calificacion": {"id":209873, "puntaje":4.5, "comentario":"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado", "tipoCalificador":"cliente", "loginCalificador":"af.ramirez", "tipoCalificado":"enfermero", "loginCalificado":"ma.marulanda",},
+ *      "enfermero": {"id":2678389, "nombre":"Juan Espitia", "cv":"./documents/juanHDV.pdf", "login":,"js.espitia" "contrasenia":"a89ess0909", "tipo":"Enfermero",}
+ *   }
+ *
+ * </pre>
+ * 
  * @author c.gomezs
  */
 public class ServicioDetailDTO extends ServicioDTO{

@@ -23,7 +23,7 @@ package co.edu.uniandes.csw.viejitos.dtos;
  * 
  *   {
  *      "reclamo": "El enfermero tenia una actitud muy grosera.",
- *      "resuelto: true,
+ *      "resuelto: true
  *   }
  *
  * </pre>

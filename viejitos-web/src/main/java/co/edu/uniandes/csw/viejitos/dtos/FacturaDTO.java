@@ -15,6 +15,7 @@ import java.util.Date;
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
+ *      "id": Long,
  *      "costoTotal": Double,
  *      "fechaExpedicion": Date,
  *      "descripcion": String,
@@ -29,6 +30,7 @@ import java.util.Date;
  * <pre>
  * 
  *   {
+ *      "id": 123,
  *      "costoTotal": 120100,
  *      "fechaExpedicion": 12/04/18,
  *      "descripcion": "Acompanar al banco",

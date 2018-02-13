@@ -9,6 +9,7 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *
  * @author lf.naranjo11
  */
-public class FranjaHorariaDetailDTO extends FranjaHorariaDTO {
+public class FranjaHorariaDetailDTO 
+{
     
 }

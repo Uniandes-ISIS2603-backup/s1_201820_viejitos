@@ -5,21 +5,55 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
-/**
+
+ /**
+ * FranjaHorariaDTO Objeto de transferencia de datos de franjaHOraria. Los DTO contienen las
+ * represnetaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
+ * 
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": number,
+ *      "diaSemana": string,
+ *        "horaInicio": number,
+ *       "horaFin": number,
+ *       "ocupado": boolean
+ *   }
+ * </pre>
+ * Por ejemplo una franja se representa asi:<br>
+ * 
+ * <pre>
+ * 
+ *   {
+ * "id": 001101,
+ *      "diaSemana": lunes,
+ *        "horaInicio": 0800,
+ *       "horaFin": 0900,
+ *       "ocupado": true     
+ * 
+ *   }
  *
- * @author lf.naranjo11
+ * </pre>
+
+  @author lf.naranjo11
  */
+
 public class FranjaHorariaDTO {
     private Integer horaInicio;
     private Integer horaFin;
     private Boolean ocupado;
     private String diaSemana;
     private Integer id;
-    
+     /**
+     * Constructor por defecto
+     */
     public FranjaHorariaDTO()
     {
     }
      
+    
+    
     /**
      * @return  la  hora de inicio de la cita
      */

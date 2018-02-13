@@ -19,7 +19,7 @@ import java.util.Date;
  *      "fecha": date,
  *      "hora": string,
  *      "descripción": string,
- *      "finalizado": boolean,
+ *      "finalizado": boolean
  *   }
  * </pre>
  * Por ejemplo un servicio se representa asi:<br>
@@ -31,7 +31,7 @@ import java.util.Date;
  *      "fecha: "12/02/2018",
  *      "hora": "8:37",
  *      "descripción": "Acompañamiento a cita médica",
- *      "finalizado": true,
+ *      "finalizado": false
  *   }
  *
  * </pre>

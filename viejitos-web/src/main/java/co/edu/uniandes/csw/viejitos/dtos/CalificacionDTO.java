@@ -29,7 +29,7 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *      "tipoCalificador":"cliente",
  *      "loginCalificador":"af.ramirez",
  *      "tipoCalificado":"enfermero",
- *      "loginCalificado":"ma.marulanda",
+ *      "loginCalificado":"ma.marulanda"
  *  }
  * </pre>
  * @author js.espitia

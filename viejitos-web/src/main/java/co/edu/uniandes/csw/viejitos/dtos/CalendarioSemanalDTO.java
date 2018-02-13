@@ -8,8 +8,31 @@ package co.edu.uniandes.csw.viejitos.dtos;
 import java.util.Date;
 
 /**
+ * CalendarioSemanalDTO Objeto de transferencia de datos de calendarioSemanal. Los DTO contienen las
+ * represnetaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
+ * 
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": number,
+ *      "ultimaModificacion": Date
+ *   }
+ * </pre>
+ * Por ejemplo un calendario semanal se representa asi:<br>
+ * 
+ * <pre>
+ * 
+ *   {
+ *     "id": 001101,
+ *      "ultimaModificacion": 01/07/2018 08:11:13pm
+ *           
+ * 
+ *   }
  *
- * @author lf.naranjo11
+ * </pre>
+
+  @author lf.naranjo11
  */
 public class CalendarioSemanalDTO {
     private Integer id;
@@ -49,7 +72,9 @@ public class CalendarioSemanalDTO {
             }
     
     
-    
+     /**
+     * Constructor por defecto
+     */
     public CalendarioSemanalDTO()
     { 
     }
