@@ -6,7 +6,9 @@
 package co.edu.uniandes.csw.viejitos.dtos;
 
 /**
- *
+ * Clase que extiende de {@link CitaDTO} para manejar la transformacion entre
+ * los objetos JSON y las Entidades de la base de datos. Para conocer el
+ * contenido de la ciudad vaya a la documentacion de {@link CitaDTO}
  * @author l.pardo
  */
 public class CitaDetailDTO extends CitaDTO{
