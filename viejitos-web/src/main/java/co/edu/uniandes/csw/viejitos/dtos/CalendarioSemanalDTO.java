@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import java.util.Date;
+
 /**
  *
  * @author lf.naranjo11
@@ -19,14 +21,14 @@ public class CalendarioSemanalDTO {
      */
     private Date getUltimaModificacion()
             {
-                return ultimaModificacion;
+                return ultimaModficacion;
             }
     /**
      * @param pUltimaModificacion la nueva fecha de modifcacion
      */
-    private void setUltimaModificacion(Date pUltimaModificacion;)
+    private void setUltimaModificacion(Date pUltimaModificacion)
     {
-                ultimaModificacion=pUltimaModificacion;
+                ultimaModficacion=pUltimaModificacion;
            }
     
     
