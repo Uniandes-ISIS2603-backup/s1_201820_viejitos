@@ -35,7 +35,7 @@ import java.util.Date;
   @author lf.naranjo11
  */
 public class CalendarioSemanalDTO {
-    private Integer id;
+    private Long id;
     private Date ultimaModficacion;
     
     
@@ -57,7 +57,7 @@ public class CalendarioSemanalDTO {
      /**
      * @return la  id de franja horaria
      */
-    public int getId()
+    public Long getId()
             {
                 return id;
             }
@@ -66,7 +66,7 @@ public class CalendarioSemanalDTO {
      /**
      * @param pId la nueva hora de finalizacion de la franja
      */
-    public void setid(Integer pId)
+    public void setid(Long pId)
             {
                 id=pId;
             }
