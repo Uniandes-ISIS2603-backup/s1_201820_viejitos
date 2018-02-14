@@ -42,14 +42,14 @@ public class CalendarioSemanalDTO {
 /**
      * @return la fecha de ultima modificacion
      */
-    private Date getUltimaModificacion()
+    public Date getUltimaModificacion()
             {
                 return ultimaModficacion;
             }
     /**
      * @param pUltimaModificacion la nueva fecha de modifcacion
      */
-    private void setUltimaModificacion(Date pUltimaModificacion)
+    public void setUltimaModificacion(Date pUltimaModificacion)
     {
                 ultimaModficacion=pUltimaModificacion;
            }
@@ -57,7 +57,7 @@ public class CalendarioSemanalDTO {
      /**
      * @return la  id de franja horaria
      */
-    private int getId()
+    public int getId()
             {
                 return id;
             }
@@ -66,7 +66,7 @@ public class CalendarioSemanalDTO {
      /**
      * @param pId la nueva hora de finalizacion de la franja
      */
-    private void setid(Integer pId)
+    public void setid(Integer pId)
             {
                 id=pId;
             }
