@@ -44,7 +44,7 @@ public class FranjaHorariaDTO {
     private Integer horaFin;
     private Boolean ocupado;
     private String diaSemana;
-    private Integer id;
+    private Long id;
      /**
      * Constructor por defecto
      */
@@ -87,7 +87,7 @@ public class FranjaHorariaDTO {
     /**
      * @return la  id de franja horaria
      */
-    public int getId()
+    public Long getId()
             {
                 return id;
             }
@@ -96,7 +96,7 @@ public class FranjaHorariaDTO {
      /**
      * @param pId la nueva hora de finalizacion de la franja
      */
-    public void setid(Integer pId)
+    public void setid(Long pId)
             {
                 id=pId;
             }
