@@ -57,7 +57,7 @@ public class FranjaHorariaDTO {
     /**
      * @return  la  hora de inicio de la cita
      */
-    private int getHoraInicio()
+    public int getHoraInicio()
             {
                 return horaInicio;
             }
@@ -65,7 +65,7 @@ public class FranjaHorariaDTO {
     /**
      * @param pHoraInicio la nueva hora de inicio de la franja
      */
-    private void setHoraInicio(Integer pHoraInicio)
+    public void setHoraInicio(Integer pHoraInicio)
             {
                 horaInicio=pHoraInicio;
             }
@@ -73,21 +73,21 @@ public class FranjaHorariaDTO {
     /**
      * @return la  hora de finalizacion de la franja
      */
-    private int getHoraFin ()
+    public int getHoraFin ()
             {
                 return horaFin;
             }
     /**
      * @param pHoraFin la nueva hora de finalizacion de la franja
      */
-    private void setHoraFin(Integer pHoraFin)
+    public void setHoraFin(Integer pHoraFin)
             {
                 horaFin=pHoraFin;
             }
     /**
      * @return la  id de franja horaria
      */
-    private int getId()
+    public int getId()
             {
                 return id;
             }
@@ -96,7 +96,7 @@ public class FranjaHorariaDTO {
      /**
      * @param pId la nueva hora de finalizacion de la franja
      */
-    private void setid(Integer pId)
+    public void setid(Integer pId)
             {
                 id=pId;
             }
@@ -106,14 +106,14 @@ public class FranjaHorariaDTO {
     /**
      * @return el estado de la franja horaria
      */
-    private Boolean getOcupado()
+    public Boolean getOcupado()
             {
                 return ocupado;
             }
     /**
      * @param pOcupado el nuevo estado de la franja horaria
      */
-    private void setOcupado(Boolean pOcupado)
+    public void setOcupado(Boolean pOcupado)
             {
                 ocupado=pOcupado;
             }
@@ -121,14 +121,14 @@ public class FranjaHorariaDTO {
     /**
      * @return dia de la semana de la franja
      */
-    private String getDiaSemana()
+    public String getDiaSemana()
             {
                 return diaSemana;
             }
     /**
      * @param pDiaSemana el nuevo dia de la semana de la franja
      */
-    private void setDiaSemana(Integer pDiaSemana)
+    public void setDiaSemana(Integer pDiaSemana)
             {
                 horaInicio=pDiaSemana;
             }
