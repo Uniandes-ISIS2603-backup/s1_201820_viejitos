@@ -26,7 +26,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
 		this.loginCalificador = loginCalificador;
 	}
 
-	public String getTipoCalificador{
+	public String getTipoCalificador(){
 		return tipoCalificador;
 	}
 	
@@ -34,7 +34,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
 		this.tipoCalificador = tipoCalificador;
 	}
 
-	public String getLoginCalificado{
+	public String getLoginCalificado(){
 		return loginCalificado;
 	}
 
@@ -42,7 +42,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
 		this.loginCalificado = loginCalificado;
 	}
 	
-	public String getTipoCalificado{
+	public String getTipoCalificado(){
 		return tipoCalificado;
 	}
 
@@ -50,7 +50,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
 		this.tipoCalificado = tipoCalificado;
 	}
 	
-	public Double getPuntaje{
+	public Double getPuntaje(){
 		return puntaje;
 	}
 
@@ -58,7 +58,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
 		this.puntaje = puntaje;
 	}
 	
-	public String getComentario{
+	public String getComentario(){
 		return comentario;
 	}
 	
