@@ -7,30 +7,75 @@ package co.edu.uniandes.csw.viejitos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author jj.silva
  */
 @Entity
-@XmlRootElement
 public class HistoriaClinicaEntity extends BaseEntity implements Serializable
 {
-    private String atributo;
+    
+    private Long id;
+    
+    private String enfermedades;
+    
+    private String medicamentos;
+    
+    private String cirugias;
 
-	/**
-	 * @return the atribute
-	 */
-	public String getAtributo( )
-	{
-		return atributo;
-	}
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
 
-	/**
-	 * @param atributo the atribute to set
-	 */
-	public void setAtributo( String atributo )
-	{
-		this.atributo = atributo;
-	}
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the enfermedades
+     */
+    public String getEnfermedades() {
+        return enfermedades;
+    }
+
+    /**
+     * @param enfermedades the enfermedades to set
+     */
+    public void setEnfermedades(String enfermedades) {
+        this.enfermedades = enfermedades;
+    }
+
+    /**
+     * @return the medicamentos
+     */
+    public String getMedicamentos() {
+        return medicamentos;
+    }
+
+    /**
+     * @param medicamentos the medicamentos to set
+     */
+    public void setMedicamentos(String medicamentos) {
+        this.medicamentos = medicamentos;
+    }
+
+    /**
+     * @return the cirugias
+     */
+    public String getCirugias() {
+        return cirugias;
+    }
+
+    /**
+     * @param cirugias the cirugias to set
+     */
+    public void setCirugias(String cirugias) {
+        this.cirugias = cirugias;
+    }	
 }
