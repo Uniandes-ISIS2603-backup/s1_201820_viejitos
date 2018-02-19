@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.resources;
 import co.edu.uniandes.csw.viejitos.dtos.MedicoDetailDTO;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -18,7 +19,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 /**
- * <pre>Clase que implementa el recurso "Medico".
+ * <pre>Clase que implementa el recurso "Medico".</pre>
  * URL: /api/Medico
  * @author l.pardo
  */
@@ -31,7 +32,7 @@ public class MedicoResource
     /**
 	 * <h1>POST /api/Medicos : Crear una entidad de Medico.</h1>
 	 * <p>
-	 * <pre>Cuerpo de petición: JSON {@link MedicoDetailDTO}.
+	 * <pre>Cuerpo de petición: JSON {@link MedicoDetailDTO}.</pre>
 	 *
 	 * Crea una nueva entidad de Medico con la informacion que se recibe en el cuerpo
 	 * de la petición.
@@ -48,21 +49,21 @@ public class MedicoResource
         /**
 	 * <h1>GET /api/Medicos : Obtener todas las entidades de Medico.</h1>
 	 * <p>
-	 * <pre>Busca y devuelve todas las entidades de Medico que existen en la aplicacion.
+	 * <pre>Busca y devuelve todas las entidades de Medico que existen en la aplicacion.</pre>
 	 * @return JSONArray {@link MedicoDetailDTO} - Las entidades de Medico encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
 	public List<MedicoDetailDTO> getMedicos( )
 	{
-		return new ArrayList<MedicoDetailDTO>();
+		return new ArrayList<>();
 	}
         
         /**
 	 * <h1>GET /api/Medicos/{id} : Obtener una entidad de Medico por id.</h1>
 	 * <p>
-	 * <pre>Busca la entidad de Medico con el id asociado recibido en la URL y la devuelve.
+	 * <pre>Busca la entidad de Medico con el id asociado recibido en la URL y la devuelve.</pre>
 	 * @param id Identificador de la entidad de Medico que se esta buscando. Este debe ser una cadena de dígitos.
-	 * @return JSON {@link ServicioDetailDTO} - La entidad de Medico buscada
+	 * @return JSON {@link MedicoDetailDTO} - La entidad de Medico buscada
 	 */
 	@GET
 	@Path( "{id: \\d+}" )
@@ -73,7 +74,7 @@ public class MedicoResource
         
         /**
 	 * <h1>PUT /api/Medicos/{id} : Actualizar una entidad de Medico con el id dado.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link MedicoDetailDTO}.
+	 * <pre>Cuerpo de petición: JSON {@link MedicoDetailDTO}.</pre>
 	 *
 	 * Actualiza la entidad de Medico con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Medico que se desea actualizar. Este debe ser una cadena de dígitos.

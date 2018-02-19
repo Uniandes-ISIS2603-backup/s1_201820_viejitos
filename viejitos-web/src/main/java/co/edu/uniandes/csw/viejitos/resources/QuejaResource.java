@@ -7,7 +7,9 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.viejitos.dtos.QuejaDetailDTO;
+import co.edu.uniandes.csw.viejitos.dtos.QuejaDTO;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -85,7 +87,7 @@ public class QuejaResource {
         
         /**
 	 * <h1>PUT /api/Quejas/{id} : Actualizar una entidad de Queja con el id dado.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link QuejaDetailDTO}.
+	 * <pre>Cuerpo de petición: JSON {@link QuejaDetailDTO}.</pre>
 	 *
 	 * Actualiza la entidad de Queja con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Queja que se desea actualizar. Este debe ser una cadena de dígitos.

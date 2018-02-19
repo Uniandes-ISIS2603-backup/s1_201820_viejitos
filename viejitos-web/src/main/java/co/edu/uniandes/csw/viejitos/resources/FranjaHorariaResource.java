@@ -133,7 +133,33 @@ public class FranjaHorariaResource {
 		return new ArrayList<FranjaHorariaDTO>();
 	}
         
-        /**
+      /**
+       * <h1> PUT api/franjashorarias/{id}: actualizar la franja con el id dado</h1>
+     * <pre>Cuerpo de peticion: JSON {@link FranjaHorariaDTO}.
+     * 
+     * Actualiza la franja con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Actualiza la franaj con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe una franja con el id dado.
+     * </code> 
+     * </pre>
+     * @param id Identificador de la ciudad que se desea actualizar.Este debe ser una cadena de dígitos.
+     * @param franja {@link FranjaHorariaDTO} La franja que se desea guardar.
+     * @return JSON {@link FranjaHorariaDTO} - La franja guardada.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la ciudad porque ya existe una con ese nombre.
+     */
+        @PUT
+        @Path ("{id: \\d+}")
+        public FranjaHorariaDTO updateFranja(@PathParam("id") Long id, FranjaHorariaDTO franja) throws BusinessLogicException
+        {
+        return franja;
+        
+        }
+ 
+                /**
 	 * <h1>DELETE /api/franjashorarias/{id} : Borrar una entidad de franja por id.</h1>
 	 
 	 * <pre>Borra la entidad de franja con el id asociado recibido en la URL.

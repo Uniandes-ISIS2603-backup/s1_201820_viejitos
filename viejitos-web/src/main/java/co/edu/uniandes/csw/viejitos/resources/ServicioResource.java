@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.ServicioDetailDTO;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -45,7 +46,7 @@ public class ServicioResource
     /**
 	 * <h1>POST /api/Servicios : Crear una entidad de Servicio.</h1>
 	 * <p>
-	 * <pre>Cuerpo de petición: JSON {@link ServicioDetailDTO}.
+	 * <pre>Cuerpo de petición: JSON {@link ServicioDetailDTO}.</pre>
 	 *
 	 * Crea una nueva entidad de Servicio con la informacion que se recibe en el cuerpo
 	 * de la petición.
@@ -62,7 +63,7 @@ public class ServicioResource
         /**
 	 * <h1>GET /api/Servicios : Obtener todas las entidades de Servicio.</h1>
 	 * <p>
-	 * <pre>Busca y devuelve todas las entidades de Servicio que existen en la aplicacion.
+	 * <pre>Busca y devuelve todas las entidades de Servicio que existen en la aplicacion.</pre>
 	 * @return JSONArray {@link ServicioDetailDTO} - Las entidades de Servicio encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
@@ -74,7 +75,7 @@ public class ServicioResource
         /**
 	 * <h1>GET /api/Servicios/{id} : Obtener una entidad de Servicio por id.</h1>
 	 * <p>
-	 * <pre>Busca la entidad de Servicio con el id asociado recibido en la URL y la devuelve.
+	 * <pre>Busca la entidad de Servicio con el id asociado recibido en la URL y la devuelve.</pre>
 	 * @param id Identificador de la entidad de Servicio que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link ServicioDetailDTO} - La entidad de Servicio buscada
 	 */
@@ -87,7 +88,7 @@ public class ServicioResource
         
         /**
 	 * <h1>PUT /api/Servicios/{id} : Actualizar una entidad de Servicio con el id dado.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link ServicioDetailDTO}.
+	 * <pre>Cuerpo de petición: JSON {@link ServicioDetailDTO}. </pre>
 	 *
 	 * Actualiza la entidad de Servicio con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Servicio que se desea actualizar. Este debe ser una cadena de dígitos.

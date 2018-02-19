@@ -24,6 +24,7 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.CalendarioSemanalDetailDTO;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -61,7 +62,7 @@ public class CalendarioSemanalResource {
          * </pre>
 	 * @param dto {@link  calendarioSemanalDetailDTO} - La entidad de calendario que se desea guardar.
           * @return JSON {@link calendarioSemanalDetailDTO} - La entidad de calendario que se desea guardar.
-	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de Cliente.
+	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de calnedario semanal.
 	 */
 	@POST
 	public CalendarioSemanalDetailDTO createCalendario( CalendarioSemanalDetailDTO dto ) throws BusinessLogicException

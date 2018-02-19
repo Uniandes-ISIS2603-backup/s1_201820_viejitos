@@ -15,7 +15,6 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *   }
  * </pre>
  * Por ejemplo una entidad de HistoriaClinica se representa asi:<br>
- * <p>
  * <pre>
  *
  *   {

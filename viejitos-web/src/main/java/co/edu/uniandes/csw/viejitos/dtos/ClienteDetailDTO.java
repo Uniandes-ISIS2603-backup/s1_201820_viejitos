@@ -63,7 +63,6 @@ import java.util.List;
  *   }
  * </pre>
  * Por ejemplo una entidad de Cliente se representa asi:<br>
- * <p>
  * <pre>
  *
  *   {

@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.CitaDetailDTO;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -20,7 +21,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 /**
- * <pre>Clase que implementa el recurso "Cita".
+ * <pre>Clase que implementa el recurso "Cita".</pre>
  * URL: /api/Cita
  * @author l.pardo
  */
@@ -33,7 +34,7 @@ public class CitaResource
     /**
 	 * <h1>POST /api/Citas : Crear una entidad de Cita.</h1>
 	 * <p>
-	 * <pre>Cuerpo de petición: JSON {@link CitaDetailDTO}.
+	 * <pre>Cuerpo de petición: JSON {@link CitaDetailDTO}.</pre>
 	 *
 	 * Crea una nueva entidad de Cita con la informacion que se recibe en el cuerpo
 	 * de la petición.
@@ -50,21 +51,21 @@ public class CitaResource
         /**
 	 * <h1>GET /api/Cita : Obtener todas las entidades de Cita.</h1>
 	 * <p>
-	 * <pre>Busca y devuelve todas las entidades de Cita que existen en la aplicacion.
-	 * @return JSONArray {@link MedicoDetailDTO} - Las entidades de Medico encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+	 * <pre>Busca y devuelve todas las entidades de Cita que existen en la aplicacion.</pre>
+	 * @return JSONArray {@link CitaDetailDTO} - Las entidades de Cita encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
 	public List<CitaDetailDTO> getCitas( )
 	{
-		return new ArrayList<CitaDetailDTO>();
+		return new ArrayList<>();
 	}
         
         /**
 	 * <h1>GET /api/Cita/{id} : Obtener una entidad de Cita por id.</h1>
 	 * <p>
-	 * <pre>Busca la entidad de Cita con el id asociado recibido en la URL y la devuelve.
+	 * <pre>Busca la entidad de Cita con el id asociado recibido en la URL y la devuelve.</pre>
 	 * @param id Identificador de la entidad de Cita que se esta buscando. Este debe ser una cadena de dígitos.
-	 * @return JSON {@link ServicioDetailDTO} - La entidad de Cita buscada
+	 * @return JSON {@link CitaDetailDTO} - La entidad de Cita buscada
 	 */
 	@GET
 	@Path( "{id: \\d+}" )
@@ -75,7 +76,7 @@ public class CitaResource
         
         /**
 	 * <h1>PUT /api/Citas/{id} : Actualizar una entidad de Cita con el id dado.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link CitaDetailDTO}.
+	 * <pre>Cuerpo de petición: JSON {@link CitaDetailDTO}.</pre>
 	 *
 	 * Actualiza la entidad de Medico con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Cita que se desea actualizar. Este debe ser una cadena de dígitos.
