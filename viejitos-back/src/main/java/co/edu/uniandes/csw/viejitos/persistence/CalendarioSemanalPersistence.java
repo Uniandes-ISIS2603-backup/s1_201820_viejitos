@@ -22,7 +22,7 @@ public class CalendarioSemanalPersistence {
     
     
     private static final Logger LOGGER= Logger.getLogger(CalendarioSemanalPersistence.class.getName());
-      @PersistenceContext(unitName="CompanyPU")
+      @PersistenceContext(unitName="ViejitosPU")
     protected EntityManager em;
       
       public CalendarioSemanalEntity create(CalendarioSemanalEntity entity)
