@@ -17,6 +17,46 @@ import javax.persistence.Entity;
 public class FacturaEntity extends BaseEntity implements Serializable  {
 
     /**
+     * id de la factura
+     */
+    private Long id;
+    
+    /**
+     * costo total del servicio
+     */
+    private Double costoTotal;
+    
+    /**
+     * fecha de expedicion de la factura
+     */
+    private Date fechaExpedicion;
+    
+    /**
+     * descripcion del servicio
+     */
+    private String descripcion;
+    
+    /**
+     * nombre del cliente
+     */
+    private String nombreCliente;
+    
+    /**
+     * cedula del cliente
+     */
+    private Integer ccCliente;
+    
+    /**
+     * servicio que se prestó
+     */
+    private String servicioPrestado;
+    
+    /**
+     * nombre de la empresa
+     */
+    private String nombreEmpresa;
+    
+    /**
      * @return the id
      */
     public Long getId() {
@@ -128,43 +168,5 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
         this.nombreEmpresa = nombreEmpresa;
     }
     
-    /**
-     * id de la factura
-     */
-    private Long id;
     
-    /**
-     * costo total del servicio
-     */
-    private Double costoTotal;
-    
-    /**
-     * fecha de expedicion de la factura
-     */
-    private Date fechaExpedicion;
-    
-    /**
-     * descripcion del servicio
-     */
-    private String descripcion;
-    
-    /**
-     * nombre del cliente
-     */
-    private String nombreCliente;
-    
-    /**
-     * cedula del cliente
-     */
-    private Integer ccCliente;
-    
-    /**
-     * servicio que se prestó
-     */
-    private String servicioPrestado;
-    
-    /**
-     * nombre de la empresa
-     */
-    private String nombreEmpresa;
 }

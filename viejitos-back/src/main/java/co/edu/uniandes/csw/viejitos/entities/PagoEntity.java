@@ -17,6 +17,31 @@ import javax.persistence.Entity;
 public class PagoEntity extends BaseEntity implements Serializable{
 
     /**
+     * id del pago
+     */
+    private Long id;
+    
+    /**
+     * medio de pago
+     */
+    private String medio;
+    
+    /**
+     * estado de pago booleano
+     */
+    private Boolean pagado;
+    
+    /**
+     * fecha limite de pago
+     */
+    private Date fechaLimite;
+    
+    /**
+     * valor monetario del pago
+     */
+    private Double valor;
+    
+    /**
      * @return the id
      */
     public Long getId() {
@@ -86,28 +111,5 @@ public class PagoEntity extends BaseEntity implements Serializable{
         this.valor = valor;
     }
     
-    /**
-     * id del pago
-     */
-    private Long id;
     
-    /**
-     * medio de pago
-     */
-    private String medio;
-    
-    /**
-     * estado de pago booleano
-     */
-    private Boolean pagado;
-    
-    /**
-     * fecha limite de pago
-     */
-    private Date fechaLimite;
-    
-    /**
-     * valor monetario del pago
-     */
-    private Double valor;
 }
