@@ -44,8 +44,10 @@ public class CalendarioSemanalPersistence {
         em.remove(entity);
     }
       
-       public CalendarioSemanalEntity find()
-      {   return null;
+       public CalendarioSemanalEntity find(Long id)
+      {   
+       LOGGER.log(Level.INFO, "Consultando employee con id={0}", id);
+        return em.find(CalendarioSemanalEntity.class, id);  
        }
     
 }
