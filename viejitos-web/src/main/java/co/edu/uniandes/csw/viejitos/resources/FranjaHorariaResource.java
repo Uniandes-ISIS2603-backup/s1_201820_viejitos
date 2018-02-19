@@ -70,7 +70,7 @@ public class FranjaHorariaResource {
          * </pre>
 	 * @param dto {@link  FranjaHorariaDTO} - La entidad de franja  que se desea guardar.
 	 * @return JSON {@link  FranjaHorariaDTO}  - La entidad de franja guardada.
-	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de Servicio.
+	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de franja.
 	 */
 	@POST
 	public FranjaHorariaDTO createFranjaHoraria( FranjaHorariaDTO dto ) throws BusinessLogicException
@@ -149,7 +149,7 @@ public class FranjaHorariaResource {
      * @param id Identificador de la ciudad que se desea actualizar.Este debe ser una cadena de dígitos.
      * @param franja {@link FranjaHorariaDTO} La franja que se desea guardar.
      * @return JSON {@link FranjaHorariaDTO} - La franja guardada.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la ciudad porque ya existe una con ese nombre.
+     * @throws BusinessLogicException {@link mappers.BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la franaja porque ya existe una con ese nombre.
      */
         @PUT
         @Path ("{id: \\d+}")
