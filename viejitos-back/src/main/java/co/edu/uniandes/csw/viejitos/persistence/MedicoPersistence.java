@@ -21,7 +21,7 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class MedicoPersistence {
-     private static final Logger LOGGER = Logger.getLogger(CitaPersistence.class.getName());
+     private static final Logger LOGGER = Logger.getLogger(MedicoPersistence.class.getName());
          @PersistenceContext(unitName = "ViejitosPU")
     protected EntityManager em;
              public MedicoEntity find(Long id) {
