@@ -26,7 +26,7 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     private String descripcion;
     
     private Boolean finalizado;
-    
+   
     private Long id;
     
     /**
