@@ -22,7 +22,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class FranjaHorariaPersistence {
     
-      @PersistenceContext(unitName="ViejitosPU")
+      @PersistenceContext(unitName = "ViejitosPU")
     protected EntityManager em;
       
       
