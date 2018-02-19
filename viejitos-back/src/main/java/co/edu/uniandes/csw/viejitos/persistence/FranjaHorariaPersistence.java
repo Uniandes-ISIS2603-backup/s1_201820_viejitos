@@ -39,7 +39,7 @@ public class FranjaHorariaPersistence {
       
       public FranjaHorariaEntity find(Long id)
       {
-       LOGGER.log(Level.INFO, "Consultando employee con id={0}", id);
+       LOGGER.log(Level.INFO, "Consultando franja con id={0}", id);
         return em.find(FranjaHorariaEntity.class, id);   
       }
       
