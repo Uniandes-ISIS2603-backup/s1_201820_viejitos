@@ -35,6 +35,11 @@ import javax.persistence.Entity;
 public class CitaEntity extends BaseEntity implements Serializable {
     private Date fecha;
     private Date hora;
+    
+    public CitaEntity()
+    {
+        
+    }
     /**
      * @return the fecha
      */

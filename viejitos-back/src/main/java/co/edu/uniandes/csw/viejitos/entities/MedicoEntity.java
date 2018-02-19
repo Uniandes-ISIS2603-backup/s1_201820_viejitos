@@ -37,6 +37,11 @@ public class MedicoEntity extends BaseEntity implements Serializable{
     private Integer tipo;
     private String login;
     private String contrasena;
+    
+    public MedicoEntity()
+    {
+        
+    }
     /**
      * @return the nombre
      */
