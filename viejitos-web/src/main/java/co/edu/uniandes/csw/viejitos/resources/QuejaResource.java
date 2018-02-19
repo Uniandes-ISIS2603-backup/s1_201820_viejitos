@@ -47,14 +47,12 @@ public class QuejaResource {
     
      /**
 	 * <h1>POST /api/quejas : Crear una entidad de Queja.</h1>
-	 * <p>
-	 * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.</pre>
-	 *
+	 * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
+	 *</pre>
 	 * Crea una nueva entidad de Queja con la informacion que se recibe en el cuerpo
 	 * de la petición.
 	 * @param dto {@link QuejaDetailDTO} - La entidad de Queja que se desea guardar.
 	 * @return JSON {@link QuejaDTO}  - La entidad de queja guardada.
-	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de Cliente.
 	 */
 	@POST
 	public QuejaDetailDTO createQueja(QuejaDetailDTO dto ) throws BusinessLogicException
@@ -65,8 +63,7 @@ public class QuejaResource {
         
         /**
 	 * <h1>GET /api/quejas : Obtener todas las entidades de Queja.</h1>
-	 * <p>
-	 * <pre>Busca y devuelve todas las entidades de Queja que existen en la aplicacion.</pre>
+	 * <pre>Busca y devuelve todas las entidades de Queja que existen en la aplicacion.
 	 * @return JSONArray {@link ClienteDetailDTO} - Las entidades de Queja encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
         @GET
@@ -77,8 +74,7 @@ public class QuejaResource {
     
         /**
 	 * <h1>GET /api/quejas/{id} : Obtener una entidad de Queja por id.</h1>
-	 * <p>
-	 * <pre>Busca la entidad de Queja con el id asociado recibido en la URL y la devuelve.</pre>
+	 * <pre>Busca la entidad de Queja con el id asociado recibido en la URL y la devuelve.
 	 * @param id Identificador de la entidad de Queja que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link QuejaDetailDTO} - La entidad de Queja buscada
 	 */
@@ -108,7 +104,6 @@ public class QuejaResource {
         
         /**
 	 * <h1>DELETE /api/Quejas/{id} : Borrar una entidad de Queja por id.</h1>
-	 * <p>
 	 * <pre>Borra la entidad de Queja con el id asociado recibido en la URL.
 	 * </pre>
 	 *
