@@ -18,7 +18,7 @@ public class QuejaEntity extends BaseEntity implements Serializable{
     private String reclamo;
     
     private Boolean resuelto;
-    
+  
     private Long id;
     
     /**
