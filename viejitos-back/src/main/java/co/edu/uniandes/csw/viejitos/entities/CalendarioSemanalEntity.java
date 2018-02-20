@@ -19,24 +19,10 @@ import javax.persistence.Id;
 @Entity
 public class CalendarioSemanalEntity extends BaseEntity implements Serializable
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+   
     private Date ultimaModficacion;
 
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+   
 
     /**
      * @return the ultimaModficacion
