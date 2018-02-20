@@ -16,8 +16,6 @@ import javax.persistence.Entity;
 public class ClienteEntity extends BaseEntity implements Serializable
 {
     
-    private Long id;
-    
     private Integer estado;
     
     private String nombre;
@@ -27,20 +25,6 @@ public class ClienteEntity extends BaseEntity implements Serializable
     private String login;
     
     private String contrasena;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the estado
