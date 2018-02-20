@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.viejitos.persistence.FranjaHorariaPersistence;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -45,7 +46,7 @@ public class FranjaHorariaPersistenceTest
     }
     
     /**
-     * Inyección de la dependencia a la clase EditorialPersistence cuyos métodos
+     * Inyección de la dependencia a la clase FranjaHorariaPersistence cuyos métodos
      * se van a probar.
      */
     @Inject
@@ -58,8 +59,18 @@ public class FranjaHorariaPersistenceTest
     @PersistenceContext
     private EntityManager em;
     
+    
+    /**
+     * Variable para martcar las transacciones del em anterior cuando se
+     * crean/borran datos para las pruebas.
+     */
+    @Inject
+    UserTransaction utx;
+
+    
+    
      /**
-     * Prueba para crear un Editorial.
+     * Prueba para crear una franja.
      *
      *
      */
@@ -72,9 +83,9 @@ public class FranjaHorariaPersistenceTest
 
         Assert.assertNotNull(result);
 
-        FranjaHorariaEntity entity = em.find(FranjaHorariaEntity.class, result.getId());
+      FranjaHorariaEntity entity = em.find(FranjaHorariaEntity.class, result.getId());
 
-        Assert.assertEquals(newEntity.getName(), entity.getName());
+       Assert.assertEquals(newEntity.getName(), entity.getName());
     }
     
 }

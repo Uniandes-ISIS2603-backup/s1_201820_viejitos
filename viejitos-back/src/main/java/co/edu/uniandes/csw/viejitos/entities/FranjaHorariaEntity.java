@@ -19,7 +19,7 @@ public class FranjaHorariaEntity extends BaseEntity implements Serializable {
     private Boolean ocupado;
     private String diaSemana;
     
-    private Long id;
+    
 
     /**
      * @return the horaInicio
@@ -77,18 +77,6 @@ public class FranjaHorariaEntity extends BaseEntity implements Serializable {
         this.diaSemana = diaSemana;
     }
 
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+   
     
 }
