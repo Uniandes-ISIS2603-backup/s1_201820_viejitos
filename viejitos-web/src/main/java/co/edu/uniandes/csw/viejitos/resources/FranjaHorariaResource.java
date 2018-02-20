@@ -149,7 +149,7 @@ public class FranjaHorariaResource {
      * @param id Identificador de la ciudad que se desea actualizar.Este debe ser una cadena de dígitos.
      * @param franja {@link FranjaHorariaDTO} La franja que se desea guardar.
      * @return JSON {@link FranjaHorariaDTO} - La franja guardada.
-     * @throws BusinessLogicException {@link mappers.BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la franaja porque ya existe una con ese nombre.
+     * @throws BusinessLogicException {@link co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la franaja porque ya existe una con ese nombre.
      */
         @PUT
         @Path ("{id: \\d+}")
