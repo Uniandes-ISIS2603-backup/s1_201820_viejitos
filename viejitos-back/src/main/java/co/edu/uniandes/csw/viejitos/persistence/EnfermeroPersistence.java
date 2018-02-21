@@ -18,7 +18,7 @@ public class EnfermeroPersistence
 {
 	private static final Logger LOGGER = Logger.getLogger( EnfermeroPersistence.class.getName( ) );
 
-	@PersistenceContext( unitName = "EnfermerosPU" )
+	@PersistenceContext( unitName = "ViejitosPU" )
 	protected EntityManager em;
 
 	/**
