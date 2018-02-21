@@ -43,7 +43,7 @@ public class QuejaDetailDTO extends QuejaDTO{
      */
      public QuejaDetailDTO()
     {
-        
+        super();
     }
 
     /**

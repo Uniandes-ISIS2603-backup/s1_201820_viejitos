@@ -36,7 +36,7 @@ import javax.ws.rs.Produces;
  * @author c.gomezs
  * @version 1.0
  */
-@Path( "Servicios" )
+@Path( "servicios" )
 @Produces( "application/json" )
 @Consumes( "application/json" )
 @RequestScoped

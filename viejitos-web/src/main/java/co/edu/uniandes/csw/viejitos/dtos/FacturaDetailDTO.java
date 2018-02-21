@@ -73,6 +73,6 @@ public class FacturaDetailDTO extends FacturaDTO {
      */
     public FacturaDetailDTO()
     {
-        
+        super();
     }
 }

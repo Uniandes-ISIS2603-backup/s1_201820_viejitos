@@ -74,7 +74,7 @@ public class ServicioDetailDTO extends ServicioDTO{
      */
     public ServicioDetailDTO()
     {
-        
+        super();
     }
     
     /**

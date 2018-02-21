@@ -67,6 +67,6 @@ public class PagoDetailDTO extends PagoDTO {
      */
     public PagoDetailDTO()
     {
-        
+        super();
     }
 }
