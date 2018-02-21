@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.viejitos.dtos;
 
 import java.util.List;
 
+import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
+
 /**
  * Objeto de transferencia de datos con relaciones para un enfermero.
  * Al serializarse como DTO se genera un JSON de la siguiente manera
@@ -46,7 +48,7 @@ public class EnfermeroDetailDTO extends EnfermeroDTO{
     private List<ServicioDTO> servicios;
     
     public EnfermeroDetailDTO(){
-    
+    	super();
     }
 
     public List<CalificacionDTO> getCalificaciones() {
@@ -65,4 +67,8 @@ public class EnfermeroDetailDTO extends EnfermeroDTO{
         this.servicios = servicios;
     }
     
+    public EnfermeroEntity toEntity(){
+    	EnfermeroEntity entidad = super.toEntity(); 
+    	return entidad;
+    }
 }

@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
+
 /**
  * Objeto de transferencia de datos para una calificacion con sus relaciones.
  * Al serializarse como DTO se genera un JSON de la siguiente manera
@@ -41,7 +43,7 @@ public class CalificacionDetailDTO extends CalificacionDTO{
     private ServicioDTO servicio;
     
     public CalificacionDetailDTO(){
-    
+    	super();
     }
 
     public ServicioDTO getServicio() {
@@ -50,6 +52,10 @@ public class CalificacionDetailDTO extends CalificacionDTO{
 
     public void setServicio(ServicioDTO servicio) {
         this.servicio = servicio;
+    }
+    
+    public CalificacionEntity toEntity(){
+    	return super.toEntity();
     }
     
 }

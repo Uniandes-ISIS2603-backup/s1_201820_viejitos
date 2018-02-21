@@ -123,6 +123,8 @@ import java.util.List;
  */
 public class ClienteDetailDTO extends ClienteDTO
 {
+
+    
     private List<ServicioDTO> servicios;
     private List<QuejaDTO> quejas;
     private CalificacionDTO calificacion;
@@ -163,6 +165,13 @@ public class ClienteDetailDTO extends ClienteDTO
      */
     public void setQuejas(List<QuejaDTO> quejas) {
         this.quejas = quejas;
+    }
+    
+    /**
+     * @return the calificacion
+     */
+    public CalificacionDTO getCalificacion() {
+        return calificacion;
     }
 
     /**
@@ -212,6 +221,34 @@ public class ClienteDetailDTO extends ClienteDTO
      */
     public void setHistoriaC(HistoriaClinicaDTO historiaC) {
         this.historiaC = historiaC;
+    }
+
+    /**
+     * @return the cita
+     */
+    public CitaDTO getCita() {
+        return cita;
+    }
+
+    /**
+     * @param cita the cita to set
+     */
+    public void setCita(CitaDTO cita) {
+        this.cita = cita;
+    }
+
+    /**
+     * @return the medico
+     */
+    public MedicoDTO getMedico() {
+        return medico;
+    }
+
+    /**
+     * @param medico the medico to set
+     */
+    public void setMedico(MedicoDTO medico) {
+        this.medico = medico;
     }
     
     

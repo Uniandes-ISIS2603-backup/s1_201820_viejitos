@@ -5,6 +5,9 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
+
 /**
  * Objeto de transferencia de datos para una calificacion general.
  * Al serializarse como DTO se genera un JSON de la siguiente manera
@@ -35,79 +38,93 @@ package co.edu.uniandes.csw.viejitos.dtos;
  * @author js.espitia
  */
 public class CalificacionDTO {
-    
-    private Long idCalificacion;
-    
-    private Double puntaje;
-    
-    private String comentario;
-    
-    private String loginCalificado;
-    
-    private String tipoCalificado;
-    
-    private String loginCalificador;
-    
-    private String tipoCalificador;
-    
-    public CalificacionDTO(){
-    
-    }
 
-    public Long getIdCalificacion() {
-        return idCalificacion;
-    }
+	private Long idCalificacion;
 
-    public void setIdCalificacion(Long idCalificacion) {
-        this.idCalificacion = idCalificacion;
-    }
+	private Double puntaje;
 
-    public Double getPuntaje() {
-        return puntaje;
-    }
+	private String comentario;
 
-    public void setPuntaje(Double puntaje) {
-        this.puntaje = puntaje;
-    }
+	private String loginCalificado;
 
-    public String getComentario() {
-        return comentario;
-    }
+	private String tipoCalificado;
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
+	private String loginCalificador;
 
-    public String getLoginCalificado() {
-        return loginCalificado;
-    }
+	private String tipoCalificador;
 
-    public void setLoginCalificado(String loginCalificado) {
-        this.loginCalificado = loginCalificado;
-    }
+	public CalificacionDTO(){
 
-    public String getTipoCalificado() {
-        return tipoCalificado;
-    }
+	}
 
-    public void setTipoCalificado(String tipoCalificado) {
-        this.tipoCalificado = tipoCalificado;
-    }
+	public Long getIdCalificacion() {
+		return idCalificacion;
+	}
 
-    public String getLoginCalificador() {
-        return loginCalificador;
-    }
+	public void setIdCalificacion(Long idCalificacion) {
+		this.idCalificacion = idCalificacion;
+	}
 
-    public void setLoginCalificador(String loginCalificador) {
-        this.loginCalificador = loginCalificador;
-    }
+	public Double getPuntaje() {
+		return puntaje;
+	}
 
-    public String getTipoCalificador() {
-        return tipoCalificador;
-    }
+	public void setPuntaje(Double puntaje) {
+		this.puntaje = puntaje;
+	}
 
-    public void setTipoCalificador(String tipoCalificador) {
-        this.tipoCalificador = tipoCalificador;
-    }
-    
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public String getLoginCalificado() {
+		return loginCalificado;
+	}
+
+	public void setLoginCalificado(String loginCalificado) {
+		this.loginCalificado = loginCalificado;
+	}
+
+	public String getTipoCalificado() {
+		return tipoCalificado;
+	}
+
+	public void setTipoCalificado(String tipoCalificado) {
+		this.tipoCalificado = tipoCalificado;
+	}
+
+	public String getLoginCalificador() {
+		return loginCalificador;
+	}
+
+	public void setLoginCalificador(String loginCalificador) {
+		this.loginCalificador = loginCalificador;
+	}
+
+	public String getTipoCalificador() {
+		return tipoCalificador;
+	}
+
+	public void setTipoCalificador(String tipoCalificador) {
+		this.tipoCalificador = tipoCalificador;
+	}
+
+	public CalificacionEntity toEntity() {
+		CalificacionEntity entidad = new CalificacionEntity();
+		entidad.setComentario(comentario);
+		entidad.setId(idCalificacion);
+		entidad.setLoginCalificado(loginCalificado);
+		entidad.setLoginCalificador(loginCalificador);
+		entidad.setPuntaje(puntaje);
+		entidad.setTipoCalificado(tipoCalificado);
+		entidad.setTipoCalificador(tipoCalificador);
+		return entidad;
+
+
+	}
+
 }
