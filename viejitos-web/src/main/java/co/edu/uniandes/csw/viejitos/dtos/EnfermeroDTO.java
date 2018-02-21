@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
+
 /** 
  * Objeto de transferencia de datos para un enfermero.
  * Al serializarse como DTO se genera un JSON de la siguiente manera
@@ -36,7 +38,7 @@ public class EnfermeroDTO {
     
     private String nombre;
     
-    private String id;
+    private Long id;
     
     private String contrasena;
     
@@ -44,8 +46,22 @@ public class EnfermeroDTO {
     
     private Integer tipo;
 
+	private String login;
+
     
-    public EnfermeroDTO(){
+    public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public EnfermeroDTO(){
     
     }  
 
@@ -55,14 +71,6 @@ public class EnfermeroDTO {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getContrasena() {
@@ -87,6 +95,17 @@ public class EnfermeroDTO {
 
     public void setTipo(Integer tipo) {
         this.tipo = tipo;
+    }
+    
+    public EnfermeroEntity toEntity(){
+    	EnfermeroEntity entidad = new EnfermeroEntity();
+    	entidad.setContrasenia(this.contrasena);
+    	entidad.setCV(this.cv);
+    	entidad.setId(this.id);
+    	entidad.setLogin(this.login);
+    	entidad.setName(nombre);
+    	entidad.setTipo(tipo);  
+    	return entidad;
     }
     
 }
