@@ -15,11 +15,6 @@ import javax.persistence.Entity;
  */
 @Entity
 public class FacturaEntity extends BaseEntity implements Serializable  {
-
-    /**
-     * id de la factura
-     */
-    private Long id;
     
     /**
      * costo total del servicio
@@ -55,20 +50,6 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
      * nombre de la empresa
      */
     private String nombreEmpresa;
-    
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the costoTotal

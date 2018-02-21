@@ -15,11 +15,6 @@ import javax.persistence.Entity;
  */
 @Entity
 public class PagoEntity extends BaseEntity implements Serializable{
-
-    /**
-     * id del pago
-     */
-    private Long id;
     
     /**
      * medio de pago
@@ -40,20 +35,6 @@ public class PagoEntity extends BaseEntity implements Serializable{
      * valor monetario del pago
      */
     private Double valor;
-    
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the medio
