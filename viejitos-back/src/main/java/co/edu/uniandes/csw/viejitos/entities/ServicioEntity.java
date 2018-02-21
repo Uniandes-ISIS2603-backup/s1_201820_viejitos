@@ -27,7 +27,6 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     
     private Boolean finalizado;
    
-    private Long id;
     
     /**
      * @return the tipo
@@ -97,20 +96,6 @@ public class ServicioEntity extends BaseEntity implements Serializable{
      */
     public void setFinalizado(Boolean finalizado) {
         this.finalizado = finalizado;
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
     }
     
 }

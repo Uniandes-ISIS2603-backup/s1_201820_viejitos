@@ -18,8 +18,6 @@ public class QuejaEntity extends BaseEntity implements Serializable{
     private String reclamo;
     
     private Boolean resuelto;
-  
-    private Long id;
     
     /**
      * @return the reclamo
@@ -48,21 +46,4 @@ public class QuejaEntity extends BaseEntity implements Serializable{
     public void setResuelto(Boolean resuelto) {
         this.resuelto = resuelto;
     }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    
-    
 }
