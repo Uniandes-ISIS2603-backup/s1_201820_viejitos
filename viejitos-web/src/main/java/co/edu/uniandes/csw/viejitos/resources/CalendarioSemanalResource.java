@@ -122,7 +122,8 @@ public class CalendarioSemanalResource {
         * </pre> 
 	*/
 	@DELETE
-	public void deleteCalendario( )
+        @Path( "{id: \\d+}" )
+	public void deleteCalendario(@PathParam( "id" ) Long id)
 	{
 		// Void
 	}
