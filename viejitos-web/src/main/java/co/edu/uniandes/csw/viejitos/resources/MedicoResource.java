@@ -32,8 +32,12 @@ public class MedicoResource
     /**
 	 * <h1>POST /api/medicos : Crear una entidad de Medico.</h1>
 	 * <p>
-	 * <pre>Cuerpo de petición: JSON {@link MedicoDetailDTO}.</pre>
-	 *
+	 * <pre>Cuerpo de petición: JSON {@link MedicoDetailDTO}.
+	 *         
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Crea el medico.</code> 
+         * </pre>
 	 * Crea una nueva entidad de Medico con la informacion que se recibe en el cuerpo
 	 * de la petición.
 	 * @param dto {@link MedicoDetailDTO} - La entidad de Medico que se desea guardar.
@@ -47,9 +51,14 @@ public class MedicoResource
 	}
         
         /**
-	 * <h1>GET /api/Medicos : Obtener todas las entidades de Medico.</h1>
+	 * <h1>GET /api/medicos : Obtener todas las entidades de Medico.</h1>
 	 * <p>
-	 * <pre>Busca y devuelve todas las entidades de Medico que existen en la aplicacion.</pre>
+	 * <pre>Busca y devuelve todas las entidades de Medico que existen en la aplicacion.
+         *          
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve los medicos.</code> 
+         * </pre>
 	 * @return JSONArray {@link MedicoDetailDTO} - Las entidades de Medico encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
@@ -59,9 +68,16 @@ public class MedicoResource
 	}
         
         /**
-	 * <h1>GET /api/Medicos/{id} : Obtener una entidad de Medico por id.</h1>
+	 * <h1>GET /api/medicos/{id} : Obtener una entidad de Medico por id.</h1>
 	 * <p>
-	 * <pre>Busca la entidad de Medico con el id asociado recibido en la URL y la devuelve.</pre>
+	 * <pre>Busca la entidad de Medico con el id asociado recibido en la URL y la devuelve.
+         *          
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve el medico.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe un medico con el id dado.
+         * </code></pre>
 	 * @param id Identificador de la entidad de Medico que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link MedicoDetailDTO} - La entidad de Medico buscada
 	 */
@@ -74,7 +90,14 @@ public class MedicoResource
         
         /**
 	 * <h1>PUT /api/Medicos/{id} : Actualizar una entidad de Medico con el id dado.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link MedicoDetailDTO}.</pre>
+	 * <pre>Cuerpo de petición: JSON {@link MedicoDetailDTO}.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Actualiza la cita con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe una cita con el id dado.
+         * </code> 
+         * </pre>
 	 *
 	 * Actualiza la entidad de Medico con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Medico que se desea actualizar. Este debe ser una cadena de dígitos.
@@ -92,8 +115,13 @@ public class MedicoResource
         /**
 	 * <h1>DELETE /api/Medicos/{id} : Borrar una entidad de Medico por id.</h1>
 	 * <p>
-	 * <pre>Borra la entidad de Cita con el id asociado recibido en la URL.
-	 * </pre>
+	 * <pre>Borra la entidad de Medico con el id asociado recibido en la URL.
+         * Códigos de respuesta:<br>
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Elimina el medico correspondiente al id dado.</code>
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe un medico con el id dado.</code>
+         * </pre>
 	 *
 	 * @param id Identificador de la entidad de Medico que se desea borrar. Este debe ser una cadena de dígitos.
 	 */
