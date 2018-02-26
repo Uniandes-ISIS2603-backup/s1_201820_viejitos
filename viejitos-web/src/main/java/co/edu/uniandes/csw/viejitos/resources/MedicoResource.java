@@ -23,14 +23,14 @@ import javax.ws.rs.Produces;
  * URL: /api/Medico
  * @author l.pardo
  */
-@Path( "Medicos" )
+@Path( "medicos" )
 @Produces( "application/json" )
 @Consumes( "application/json" )
 @RequestScoped
 public class MedicoResource
 {
     /**
-	 * <h1>POST /api/Medicos : Crear una entidad de Medico.</h1>
+	 * <h1>POST /api/medicos : Crear una entidad de Medico.</h1>
 	 * <p>
 	 * <pre>Cuerpo de petición: JSON {@link MedicoDetailDTO}.</pre>
 	 *

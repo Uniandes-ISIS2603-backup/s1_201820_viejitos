@@ -24,13 +24,14 @@ public class MedicoPersistence {
      private static final Logger LOGGER = Logger.getLogger(MedicoPersistence.class.getName());
          @PersistenceContext(unitName = "ViejitosPU")
     protected EntityManager em;
-             public MedicoEntity find(Long id) {
+    
+    public MedicoEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando medico con id={0}", id);
         return em.find(MedicoEntity.class, id);
     }
 
     public MedicoEntity findByName(String name) {
-        LOGGER.log(Level.INFO, "Consultando cita con name= ", name);
+        LOGGER.log(Level.INFO, "Consultando medico con name= ", name);
         TypedQuery<MedicoEntity> q
                 = em.createQuery("select u from MedicoEntity u where u.name = :name", MedicoEntity.class);
         q = q.setParameter("name", name);
