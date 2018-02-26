@@ -68,8 +68,15 @@ package co.edu.uniandes.csw.viejitos.dtos;
  * @author l.pardo
  */
 
+import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
+import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
+import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
+import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
+import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 /**
  *
  * @author l.pardo
@@ -77,41 +84,88 @@ import java.util.Iterator;
 public class MedicoDetailDTO extends MedicoDTO{
 
    
-   private Collection<CitaDTO> citas;
-   private Collection<HistoriaClinicaDTO> historiasClinicas;
-   private Collection<ClienteDTO> clientes; 
+   private List<CitaDTO> citas;
+   private List<HistoriaClinicaDTO> historiasClinicas;
+   private List<ClienteDTO> clientes; 
    private CalendarioSemanalDTO calendario;
    
    public MedicoDetailDTO()
    {
-       
+       super();
    }
-   public Collection<CitaDTO> getCitas()
+   public MedicoDetailDTO(MedicoEntity entity)
+   {
+       super(entity);
+       if(entity!=null)
+       {
+           this.citas = new ArrayList<CitaDTO>();
+           this.clientes= new ArrayList<ClienteDTO>();
+           this.historiasClinicas = new ArrayList<HistoriaClinicaDTO>();
+            for (CitaEntity entityCitas : entity.getCitas()) 
+            {
+                citas.add(new CitaDTO(entityCitas));
+            }
+            for (ClienteEntity entityClientes : entity.getClientes()) 
+            {
+                clientes.add(new ClienteDTO(entityClientes));
+            }
+            for (HistoriaClinicaEntity entityHistorias : entity.getHistoriasClinicas())
+            {
+                historiasClinicas.add(new HistoriaClinicaDTO(entityHistorias));
+            }
+            this.calendario= new CalendarioSemanalDTO(new CalendarioSemenalDTO(entity.getCalendario()));
+       }
+   }
+   public MedicoEntity toEntity()
+   {
+       MedicoEntity entity = new MedicoEntity();
+       List<HistoriaClinicaEntity> historias = new ArrayList<HistoriaClinicaEntity>();
+       List<CitaEntity> cs = new ArrayList<CitaEntity>();
+       List<ClienteEntity> clients = new ArrayList<ClienteEntity>();
+       for (CitaDTO cita : citas) 
+       {
+                cs.add(cita.toEntity());
+       }
+       for (ClienteDTO cliente : clientes) 
+       {
+                clients.add(cliente.toEntity());
+       }
+       for (HistoriaClinicaDTO hist : historiasClinicas)
+       {
+                historias.add(hist.toEntity());
+       }
+       entity.setCalendario(calendario.toEntity());
+       entity.setCitas(cs);
+       entity.setClientes(clients);
+       entity.setHistoriasClinicas(historias);
+       return entity;
+   }
+   public List<CitaDTO> getCitas()
    {
        return citas;
    }
     
-   public Collection<HistoriaClinicaDTO> getHistoriasClinicas()
+   public List<HistoriaClinicaDTO> getHistoriasClinicas()
    {
        return historiasClinicas;
    }
    
-   public Collection<ClienteDTO> getClientes()
+   public List<ClienteDTO> getClientes()
    {
        return clientes;
    }
    
-   public void setCitas(Collection<CitaDTO> l)
+   public void setCitas(List<CitaDTO> l)
    {
        citas= l;
    }
    
-   public void setHistoriasClinicas(Collection<HistoriaClinicaDTO> l)
+   public void setHistoriasClinicas(List<HistoriaClinicaDTO> l)
    {
        historiasClinicas= l;
    }
    
-   public void setClientes(Collection<ClienteDTO> l)
+   public void setClientes(List<ClienteDTO> l)
    {
        clientes= l;
    }

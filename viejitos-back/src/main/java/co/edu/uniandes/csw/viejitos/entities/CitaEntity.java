@@ -26,6 +26,7 @@ package co.edu.uniandes.csw.viejitos.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.websocket.ClientEndpointConfig;
 
 /**
  *
@@ -35,6 +36,7 @@ import javax.persistence.Entity;
 public class CitaEntity extends BaseEntity implements Serializable {
     private Date fecha;
     private Date hora;
+    private ClienteEntity cliente;
     
     public CitaEntity()
     {
@@ -66,6 +68,20 @@ public class CitaEntity extends BaseEntity implements Serializable {
      */
     public void setHora(Date hora) {
         this.hora = hora;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
     }
    
 }
