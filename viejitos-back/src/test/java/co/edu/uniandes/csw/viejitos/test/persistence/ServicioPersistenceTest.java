@@ -4,10 +4,8 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.viejitos.test.persistence;
-
-
-import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
-import co.edu.uniandes.csw.viejitos.persistence.QuejaPersistence;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
+import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,7 +18,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author c.gomezs
  */
-public class QuejaPersistenceTest {
+public class ServicioPersistenceTest {
     
     /**
      * Contexto de Persistencia que se va a utilizar para acceder a la Base de
@@ -30,22 +28,21 @@ public class QuejaPersistenceTest {
     private EntityManager em;
     
     /**
-     * Inyección de la dependencia a la clase QuejaPersistence cuyos métodos
+     * Inyección de la dependencia a la clase ServicioPersistence cuyos métodos
      * se van a probar.
      */
     @Inject
-    private QuejaPersistence quejaPersistence;
+    private ServicioPersistence servicioPersistence;
     
     @Test
-    public void createQuejaEntityTest() {
+    public void createServicioEntityTest() {
     PodamFactory factory = new PodamFactoryImpl();
-    QuejaEntity newEntity = factory.manufacturePojo(QuejaEntity.class);
-    QuejaEntity result = quejaPersistence.create(newEntity);
+    ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+    ServicioEntity result = servicioPersistence.create(newEntity);
 
     Assert.assertNotNull(result);
-    QuejaEntity entity = em.find(QuejaEntity.class, result.getId());
+    ServicioEntity entity = em.find(ServicioEntity.class, result.getId());
     Assert.assertNotNull(entity);
     Assert.assertEquals(newEntity.getName(), entity.getName());
-}
-    
+    }
 }
