@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
+
 /**Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
@@ -42,6 +44,35 @@ public class HistoriaClinicaDTO
     {
         
     }
+    
+     /**
+	 * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+	 * la entidad que viene de argumento.
+	 *
+	 * @param HistoriaClinicaEntity: Es la entidad que se va a convertir a DTO
+	 */
+	public HistoriaClinicaDTO( HistoriaClinicaEntity historiaCEntity )
+	{
+		this.id = historiaCEntity.getId( );
+		this.enfermedades = historiaCEntity.getEnfermedades();
+		this.medicamentos = historiaCEntity.getMedicamentos();
+                this.cirugias = historiaCEntity.getCirugias();
+	}
+        
+        /**
+	 * Convertir DTO a Entity
+	 *
+	 * @return Un Entity con los valores del DTO
+	 */
+	public HistoriaClinicaEntity toEntity( )
+	{
+		HistoriaClinicaEntity entity = new HistoriaClinicaEntity( );
+		entity.setId( this.id );
+		entity.setCirugias(this.cirugias );
+		entity.setEnfermedades(this.enfermedades );
+                entity.setMedicamentos(this.medicamentos);
+		return entity;
+	}
     
     public Long getId()
     {
