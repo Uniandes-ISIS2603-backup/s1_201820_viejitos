@@ -22,6 +22,7 @@ public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
      */
     public CalendarioSemanalDetailDTO()
     {
+        super();
     }
     
     

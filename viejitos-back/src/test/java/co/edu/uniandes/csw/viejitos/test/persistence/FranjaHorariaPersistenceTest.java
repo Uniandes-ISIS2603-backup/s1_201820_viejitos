@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.viejitos.test.persistence;
 
 import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
 import co.edu.uniandes.csw.viejitos.persistence.FranjaHorariaPersistence;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +18,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -69,6 +72,12 @@ public class FranjaHorariaPersistenceTest
 
     
     
+    /**
+     *coleccion de calendarios semanales
+     */
+    private List<FranjaHorariaEntity> data = new ArrayList<FranjaHorariaEntity>();
+    
+    
      /**
      * Prueba para crear una franja.
      *
@@ -87,5 +96,79 @@ public class FranjaHorariaPersistenceTest
 
        Assert.assertEquals(newEntity.getName(), entity.getName());
     }
+    
+    @Before
+    public void setUp() {
+    try {
+            utx.begin();
+            em.joinTransaction();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    
+    private void clearData() {
+        em.createQuery("delete from FranjaHorariaEntity").executeUpdate();
+    }
+
+
+ private void insertData() {
+        PodamFactory factory = new PodamFactoryImpl();
+        for (int i = 0; i < 3; i++) {
+            FranjaHorariaEntity entity = factory.manufacturePojo(FranjaHorariaEntity.class);
+
+            em.persist(entity);
+            data.add(entity);
+        }
+    }
+ 
+  /**
+     * Test of update method, of class CalendarioSemanalPersistence.
+     */
+    @Test
+    public void testUpdate() throws Exception {
+        FranjaHorariaEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        FranjaHorariaEntity newEntity = factory.manufacturePojo(FranjaHorariaEntity.class);
+
+        newEntity.setId(entity.getId());
+
+       franjaPersistence.update(newEntity);
+
+       FranjaHorariaEntity resp = em.find(FranjaHorariaEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getName(), resp.getName());
+    }
+    
+     /**
+     * Test of delete method, of class CalendarioSemanalPersistence.
+     */
+    @Test
+    public void testDelete() throws Exception {
+    FranjaHorariaEntity entity = data.get(0);
+        franjaPersistence.delete(entity.getId());
+        FranjaHorariaEntity deleted = em.find(FranjaHorariaEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+  /**
+     * Test of find method, of class CalendarioSemanalPersistence.
+     */
+    @Test
+    public void testFind() throws Exception {
+       
+        FranjaHorariaEntity entity = data.get(0);
+        FranjaHorariaEntity newEntity = franjaPersistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+       
     
 }

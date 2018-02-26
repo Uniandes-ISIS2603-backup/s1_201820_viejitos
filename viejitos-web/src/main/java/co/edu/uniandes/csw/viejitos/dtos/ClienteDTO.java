@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
+
 /**Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
@@ -50,6 +52,40 @@ public class ClienteDTO
     {
         
     }
+    
+    /**
+	 * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+	 * la entidad que viene de argumento.
+	 *
+	 * @param ClienteEntity: Es la entidad que se va a convertir a DTO
+	 */
+	public ClienteDTO( ClienteEntity clienteEntity )
+	{
+		this.id = clienteEntity.getId( );
+		this.nombre = clienteEntity.getNombre();
+		this.estado = clienteEntity.getEstado();
+                this.tipo = clienteEntity.getTipo();
+                this.login = clienteEntity.getLogin();
+                this.contrasena = clienteEntity.getContrasena();
+
+	}
+        
+        /**
+	 * Convertir DTO a Entity
+	 *
+	 * @return Un Entity con los valores del DTO
+	 */
+	public ClienteEntity toEntity( )
+	{
+		ClienteEntity entity = new ClienteEntity( );
+		entity.setId( this.id );
+		entity.setNombre( this.nombre );
+		entity.setContrasena(this.contrasena );
+                entity.setEstado(this.estado);
+                entity.setLogin(this.login);
+                entity.setTipo(this.tipo);
+		return entity;
+	}
     
     public Long getId()
     {

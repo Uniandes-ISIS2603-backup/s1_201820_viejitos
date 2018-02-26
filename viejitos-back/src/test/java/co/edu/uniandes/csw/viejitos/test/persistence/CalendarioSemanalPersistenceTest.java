@@ -138,7 +138,17 @@ public class CalendarioSemanalPersistenceTest {
      */
     @Test
     public void testUpdate() throws Exception {
-        fail("update");
+        CalendarioSemanalEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        CalendarioSemanalEntity newEntity = factory.manufacturePojo(CalendarioSemanalEntity.class);
+
+        newEntity.setId(entity.getId());
+
+       persistence.update(newEntity);
+
+       CalendarioSemanalEntity resp = em.find(CalendarioSemanalEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getName(), resp.getName());
     }
 
     /**
@@ -146,7 +156,10 @@ public class CalendarioSemanalPersistenceTest {
      */
     @Test
     public void testDelete() throws Exception {
-    fail("delete");
+    CalendarioSemanalEntity entity = data.get(0);
+        persistence.delete(entity.getId());
+        CalendarioSemanalEntity deleted = em.find(CalendarioSemanalEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
 
     /**
@@ -155,7 +168,10 @@ public class CalendarioSemanalPersistenceTest {
     @Test
     public void testFind() throws Exception {
        
-        Assert.assertNotNull(em);
+        CalendarioSemanalEntity entity = data.get(0);
+        CalendarioSemanalEntity newEntity = persistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
     }
     
     /**
