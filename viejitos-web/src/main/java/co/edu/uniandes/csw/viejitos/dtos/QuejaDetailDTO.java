@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
+
 /**
  * Clase que extiende de {@link QuejaDTO} para manejar la transformacion entre
  * los objetos JSON y las Entidades de la base de datos. Para conocer el
@@ -44,6 +46,32 @@ public class QuejaDetailDTO extends QuejaDTO{
      public QuejaDetailDTO()
     {
         super();
+    }
+     
+    /**
+    * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+    * la entidad que viene de argumento.
+    * @param QuejaEntity: Es la entidad que se va a convertir a DTO
+     */
+    public QuejaDetailDTO( QuejaEntity entity )
+    {
+        super(entity);
+        
+        if(entity!=null)
+        {
+        
+        }
+    }
+        
+    /**
+    * Convertir DTO a Entity
+    * @return Un Entity con los valores del DTO
+    */
+    public QuejaEntity toEntity( )
+    {
+        QuejaEntity entity = new QuejaEntity( );
+	
+        return entity;
     }
 
     /**
