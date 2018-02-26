@@ -136,7 +136,7 @@ public class ClienteDetailDTO extends ClienteDTO
     
     public ClienteDetailDTO()
     {
-        
+        super();
     }
 
     /**

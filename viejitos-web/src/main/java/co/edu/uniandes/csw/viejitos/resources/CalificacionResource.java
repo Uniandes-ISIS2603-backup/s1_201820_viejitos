@@ -44,6 +44,15 @@ public class CalificacionResource {
      * Crea una nueva entidad de Calificacion con la informacion que se recibe en el cuerpo
      * de la petición y se regresa un objeto identico con un id auto-generado
      * por la base de datos.
+     * 
+     * Codigos de respuesta:
+	 * <code style="color: mediumseagreen; background-color: #eaffe0;">
+	 * 200 OK Creó la nueva entidad de Viejito.
+	 * </code>
+	 * <code style="color: #c7254e; background-color: #f9f2f4;">
+	 * 412 Precodition Failed: Ya existe la entidad de Viejito.
+	 * </code>
+	 * </pre>
      * @param dto La entidad a guardar
      * @return JSON La entidad calificacion guardada con su id correspondiente
      * @throws BusinessLogicException Si ya existe una entidad de calificacion igual
@@ -68,6 +77,14 @@ public class CalificacionResource {
      * <h1>GET /api/Calificaciones/{id} : Obtener una entidad de Calificacion por id.</h1>
      * <p>
      * <pre>Busca la entidad de Calificacion con el id asociado recibido en la URL y la devuelve.
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Creó la nueva entidad de Calificacion.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe la entidad de Calificacion.
+     * </code>
      * </pre>
      * @param id el identificador que se asigna a la calificacion 
      * @return JSON con la informacion de la entidad calificacion

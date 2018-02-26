@@ -6,10 +6,12 @@
 package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.ClienteDetailDTO;
+import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,6 +33,8 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class ClienteResource
 {
+    @Inject
+    private ClienteLogic cLogic;
     /**
 	 * <h1>POST /api/clientes : Crear una entidad de Cliente.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.

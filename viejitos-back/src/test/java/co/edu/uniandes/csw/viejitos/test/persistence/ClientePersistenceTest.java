@@ -86,7 +86,22 @@ public class ClientePersistenceTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp()
+    {
+         try {
+            utx.begin();
+            em.joinTransaction();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
     }
     
     @After
