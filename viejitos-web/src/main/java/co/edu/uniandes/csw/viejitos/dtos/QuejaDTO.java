@@ -47,33 +47,33 @@ public class QuejaDTO {
         
     }
     
-     /**
-	 * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
-	 * la entidad que viene de argumento.
-	 * @param QuejaEntity: Es la entidad que se va a convertir a DTO
-	 */
-	public QuejaDTO( QuejaEntity quejaEntity )
-	{
-            if(quejaEntity!=null)
-            {
-		this.id = quejaEntity.getId();
-		this.reclamo = quejaEntity.getReclamo();
-		this.resuelto = quejaEntity.getResuelto();
-            }
-	}
+    /**
+    * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+    * la entidad que viene de argumento.
+    * @param QuejaEntity: Es la entidad que se va a convertir a DTO
+     */
+    public QuejaDTO( QuejaEntity quejaEntity )
+    {
+        if(quejaEntity!=null)
+        {
+            this.id = quejaEntity.getId();
+            this.reclamo = quejaEntity.getReclamo();
+            this.resuelto = quejaEntity.getResuelto();
+        }
+    }
         
-        /**
-	 * Convertir DTO a Entity
-	 * @return Un Entity con los valores del DTO
-	 */
-	public QuejaEntity toEntity( )
-	{
-		QuejaEntity entity = new QuejaEntity( );
-		entity.setId( this.id );
-		entity.setReclamo(this.reclamo);
-                entity.setResuelto(this.resuelto);
-		return entity;
-	}
+    /**
+    * Convertir DTO a Entity
+    * @return Un Entity con los valores del DTO
+    */
+    public QuejaEntity toEntity( )
+    {
+        QuejaEntity entity = new QuejaEntity( );
+	entity.setId( this.id );
+	entity.setReclamo(this.reclamo);
+        entity.setResuelto(this.resuelto);
+        return entity;
+    }
     
     /**
      * @return el id
