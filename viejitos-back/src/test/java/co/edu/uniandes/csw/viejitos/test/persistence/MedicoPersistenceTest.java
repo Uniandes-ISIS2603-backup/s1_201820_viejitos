@@ -93,7 +93,12 @@ public class MedicoPersistenceTest {
      * lista que tiene los datos de prueba
      */
     private List<MedicoEntity> data = new ArrayList<MedicoEntity>();
-
+    /**
+     * Variable para martcar las transacciones del em anterior cuando se
+     * crean/borran datos para las pruebas.
+     */
+    @Inject
+    UserTransaction utx;
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
@@ -111,9 +116,32 @@ public class MedicoPersistenceTest {
             data.add(entity);
         }
     }
+    
+    /**
+     * Configuración inicial de la prueba.
+     *
+     *
+     */
+    @Before
+    public void configTest() {
+        try {
+            utx.begin();
+            em.joinTransaction();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
 
     /**
-     * Prueba para crear un Editorial.
+     * Prueba para crear un Medico.
      *
      *
      */
@@ -129,4 +157,70 @@ public class MedicoPersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
     }
+        /**
+     * Prueba para consultar la lista de Medicos.
+     *
+     * 
+     */
+    @Test
+    public void getMedicosTest() {
+        List<MedicoEntity> list = medicoPersistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (MedicoEntity ent : list) {
+            boolean found = false;
+            for (MedicoEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+     /**
+     * Prueba para consultar un Medico.
+     *
+     * 
+     */
+    @Test
+    public void getMedicoTest() {
+        MedicoEntity entity = data.get(0);
+        MedicoEntity newEntity = medicoPersistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+
+    /**
+     * Prueba para eliminar un Medico.
+     *
+     * 
+     */
+    @Test
+    public void deleteMedicoTest() {
+        MedicoEntity entity = data.get(0);
+        medicoPersistence.delete(entity.getId());
+        MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+
+    /**
+     * Prueba para actualizar un Medico.
+     *
+     * 
+     */
+    @Test
+    public void updateMedicoTest() {
+        MedicoEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        medicoPersistence.update(newEntity);
+
+        MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getName(), resp.getName());
+    }
+
+
 }

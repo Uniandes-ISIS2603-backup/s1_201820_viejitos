@@ -49,7 +49,7 @@ public class HistoriaClinicaDetailDTO extends HistoriaClinicaDTO
     
     public HistoriaClinicaDetailDTO()
     {
-        
+        super();
     }
 
     /**

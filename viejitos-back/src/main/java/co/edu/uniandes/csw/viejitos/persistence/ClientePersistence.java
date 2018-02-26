@@ -60,6 +60,24 @@ public class ClientePersistence
                 return em.find(ClienteEntity.class, id);
         }
         
+        public ClienteEntity findByLogin( String login )
+	{
+		LOGGER.log( Level.INFO, "Consultando entidades de Clientes por login ", login );
+
+		TypedQuery<ClienteEntity> query = em.createQuery( "Select e From ClienteEntity e where e.login = :login", ClienteEntity.class );
+		query = query.setParameter( "login", login );
+		// Se invoca el query se obtiene la lista resultado
+		List<ClienteEntity> sameLogin = query.getResultList( );
+		if( sameLogin.isEmpty( ) )
+		{
+			return null;
+		}
+		else
+		{
+			return sameLogin.get( 0 );
+		}
+	}
+         
         /**
          * 
          * @param entity Objeto Cliente que se actualizara.

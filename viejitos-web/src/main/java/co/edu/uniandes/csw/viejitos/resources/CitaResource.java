@@ -25,17 +25,21 @@ import javax.ws.rs.Produces;
  * URL: /api/Cita
  * @author l.pardo
  */
-@Path( "Citas" )
+@Path( "citas" )
 @Produces( "application/json" )
 @Consumes( "application/json" )
 @RequestScoped
 public class CitaResource
 {
     /**
-	 * <h1>POST /api/Citas : Crear una entidad de Cita.</h1>
+	 * <h1>POST /api/citas : Crear una entidad de Cita.</h1>
 	 * <p>
-	 * <pre>Cuerpo de petición: JSON {@link CitaDetailDTO}.</pre>
+	 * <pre>Cuerpo de petición: JSON {@link CitaDetailDTO}.
 	 *
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Crea la cita.</code> 
+         * </pre>
 	 * Crea una nueva entidad de Cita con la informacion que se recibe en el cuerpo
 	 * de la petición.
 	 * @param dto {@link CitaDetailDTO} - La entidad de Cita que se desea guardar.
@@ -49,9 +53,14 @@ public class CitaResource
 	}
         
         /**
-	 * <h1>GET /api/Cita : Obtener todas las entidades de Cita.</h1>
+	 * <h1>GET /api/citas : Obtener todas las entidades de Cita.</h1>
 	 * <p>
-	 * <pre>Busca y devuelve todas las entidades de Cita que existen en la aplicacion.</pre>
+	 * <pre>Busca y devuelve todas las entidades de Cita que existen en la aplicacion.
+         *      
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve las citas.</code> 
+         * </pre>
 	 * @return JSONArray {@link CitaDetailDTO} - Las entidades de Cita encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
@@ -63,7 +72,14 @@ public class CitaResource
         /**
 	 * <h1>GET /api/Cita/{id} : Obtener una entidad de Cita por id.</h1>
 	 * <p>
-	 * <pre>Busca la entidad de Cita con el id asociado recibido en la URL y la devuelve.</pre>
+	 * <pre>Busca la entidad de Cita con el id asociado recibido en la URL y la devuelve.
+         *     
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve la cita.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe una cita con el id dado.
+         * </code></pre>
 	 * @param id Identificador de la entidad de Cita que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link CitaDetailDTO} - La entidad de Cita buscada
 	 */
@@ -76,9 +92,16 @@ public class CitaResource
         
         /**
 	 * <h1>PUT /api/Citas/{id} : Actualizar una entidad de Cita con el id dado.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link CitaDetailDTO}.</pre>
-	 *
-	 * Actualiza la entidad de Medico con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
+	 * <pre> 
+         * Actualiza la entidad de Medico con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
+         * Cuerpo de petición: JSON {@link CitaDetailDTO}.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Actualiza la cita con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe una cita con el id dado.
+         * </code> 
+         * </pre>
 	 * @param id        Identificador de la entidad de Cita que se desea actualizar. Este debe ser una cadena de dígitos.
 	 * @param detailDTO {@link CitaDetailDTO} La entidad de Cita que se desea guardar.
 	 * @return JSON {@link CitaDetailDTO} - La entidad de Cita guardada.
@@ -95,8 +118,13 @@ public class CitaResource
 	 * <h1>DELETE /api/Citas/{id} : Borrar una entidad de Cita por id.</h1>
 	 * <p>
 	 * <pre>Borra la entidad de Cita con el id asociado recibido en la URL.
-	 * </pre>
-	 *
+         *
+         * Códigos de respuesta:<br>
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Elimina la cita correspondiente al id dado.</code>
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe una cita con el id dado.</code>
+         * </pre>
 	 * @param id Identificador de la entidad de Cita que se desea borrar. Este debe ser una cadena de dígitos.
 	 */
 	@DELETE

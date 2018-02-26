@@ -25,17 +25,20 @@ package co.edu.uniandes.csw.viejitos.test.persistence;
 
 
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
+import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
 import co.edu.uniandes.csw.viejitos.persistence.CitaPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -92,7 +95,12 @@ public class CitaPersistenceTest {
      * lista que tiene los datos de prueba
      */
     private List<CitaEntity> data = new ArrayList<CitaEntity>();
-
+    /**
+     * Variable para martcar las transacciones del em anterior cuando se
+     * crean/borran datos para las pruebas.
+     */
+    @Inject
+    UserTransaction utx;
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
@@ -110,14 +118,36 @@ public class CitaPersistenceTest {
             data.add(entity);
         }
     }
+ /**
+     * Configuración inicial de la prueba.
+     *
+     *
+     */
+    @Before
+    public void configTest() {
+        try {
+            utx.begin();
+            em.joinTransaction();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
 
     /**
-     * Prueba para crear un Editorial.
+     * Prueba para crear una Cita.
      *
      *
      */
     @Test
-    public void createMedicoTest() {
+    public void createCitaTest() {
         PodamFactory factory = new PodamFactoryImpl();
         CitaEntity newEntity = factory.manufacturePojo(CitaEntity.class);
         CitaEntity result = citaPersistence.create(newEntity);
@@ -127,5 +157,69 @@ public class CitaPersistenceTest {
         CitaEntity entity = em.find(CitaEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
+    }
+            /**
+     * Prueba para consultar la lista de Citas.
+     *
+     * 
+     */
+    @Test
+    public void getCitasTest() {
+        List<CitaEntity> list = citaPersistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (CitaEntity ent : list) {
+            boolean found = false;
+            for (CitaEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+     /**
+     * Prueba para consultar una Cita.
+     *
+     * 
+     */
+    @Test
+    public void getCitaTest() {
+        CitaEntity entity = data.get(0);
+        CitaEntity newEntity = citaPersistence.find(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+
+    /**
+     * Prueba para eliminar una Cita.
+     *
+     * 
+     */
+    @Test
+    public void deleteCitaTest() {
+        CitaEntity entity = data.get(0);
+        citaPersistence.delete(entity.getId());
+        MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+
+    /**
+     * Prueba para actualizar una Cita.
+     *
+     * 
+     */
+    @Test
+    public void updateCitaTest() {
+        CitaEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        CitaEntity newEntity = factory.manufacturePojo(CitaEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        citaPersistence.update(newEntity);
+
+        CitaEntity resp = em.find(CitaEntity.class, entity.getId());
+
+        Assert.assertEquals(newEntity.getName(), resp.getName());
     }
 }
