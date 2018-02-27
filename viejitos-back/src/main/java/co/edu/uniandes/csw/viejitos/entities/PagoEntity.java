@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.viejitos.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -35,6 +37,9 @@ public class PagoEntity extends BaseEntity implements Serializable{
      * valor monetario del pago
      */
     private Double valor;
+    
+    @OneToOne 
+    private ServicioEntity servicio;
 
     /**
      * @return the medio
