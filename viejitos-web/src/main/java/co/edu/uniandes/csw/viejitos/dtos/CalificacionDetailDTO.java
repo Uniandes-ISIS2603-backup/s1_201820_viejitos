@@ -45,6 +45,11 @@ public class CalificacionDetailDTO extends CalificacionDTO{
     public CalificacionDetailDTO(){
     	super();
     }
+    
+    public CalificacionDetailDTO(CalificacionEntity entidad){
+        super(entidad);
+        this.servicio = new ServicioDTO(entidad.getServicio());
+    }
 
     public ServicioDTO getServicio() {
         return servicio;

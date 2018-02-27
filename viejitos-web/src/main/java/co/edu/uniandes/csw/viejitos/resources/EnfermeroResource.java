@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.EnfermeroDetailDTO;
+import co.edu.uniandes.csw.viejitos.ejb.EnfermeroLogic;
+import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
@@ -29,6 +31,13 @@ import javax.ws.rs.Produces;
  * Path: indica la dirección después de "api" para acceder al recurso
  * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
  * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio).
+ * Codigos de respuesta:
+ *<code style="color: mediumseagreen; background-color: #eaffe0;">
+ * 200 OK Creó la nueva entidad de Viejito.
+ * </code>
+ * <code style="color: #c7254e; background-color: #f9f2f4;">
+ * 412 Precodition Failed: Ya existe la entidad de Viejito.
+ * </code>
  * </pre>
  * @author js.espitia
  */
@@ -38,19 +47,30 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class EnfermeroResource {
     
+    private EnfermeroLogic logic;
+    
     /**
      * <h1>POST /api/Enfermeros : Crear una entidad de Enfermero.</h1>
      * <p>
-     * <pre>Cuerpo de petición: JSON {@link EnfermeroDetailDTO}. </pre>
+     * <pre>Cuerpo de petición: JSON {@link EnfermeroDetailDTO}. 
      * Crea una nueva entidad de Enfermero con la informacion que se recibe en el cuerpo
      * de la petición y se regresa un objeto identico con un id auto-generado
      * por la base de datos.
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Creó la nueva entidad de Viejito.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe la entidad de Viejito.
+     * </code>
+     * </pre>
      * @param enfermero La entidad a guardar
      * @return JSON La entidad enfermero guardada con su id correspondiente
      * @throws BusinessLogicException Si ya existe una entidad de enfermero igual
      */
     @POST
     public EnfermeroDetailDTO createEnfermero( EnfermeroDetailDTO enfermero ) throws BusinessLogicException{
+        logic.create(enfermero.toEntity());
         return enfermero;
     }
     
@@ -62,6 +82,7 @@ public class EnfermeroResource {
      */
     @GET
     public List<EnfermeroDetailDTO> getEnfermeros (){
+        List<EnfermeroEntity> entidades = logic.getAll();
         return new ArrayList<>();
     }
     
@@ -69,6 +90,13 @@ public class EnfermeroResource {
      * <h1>GET /api/Enfermeros/{id} : Obtener una entidad de Enfermeros por id.</h1>
      * <p>
      * <pre>Busca la entidad de Enfermero con el login asociado recibido en la URL y la devuelve.
+     *  * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Creó la nueva entidad de Viejito.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe la entidad de Viejito.
+     * </code>
      * </pre>
      * @param login el identificador que usa el enfermero 
      * @return JSON con la informacion de la entidad enfermero
@@ -83,6 +111,13 @@ public class EnfermeroResource {
      * <h1>PUT /api/Enfermeros/{id} : Actualizar una entidad de Enfermero con el login dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link EnfermeroDetailDTO}.
      * Actualiza la entidad de Enfermero con el login recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
+     *  * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Creó la nueva entidad de Viejito.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe la entidad de Viejito.
+     * </code>
      * </pre>
      * @param login nombre de usuario del enfermero que se desea actualizar.Este debe ser una cadena alfanumérica
      * @param dto {@link EnfermeroDetailDTO} La entidad de Enfermero que se desea guardar.
@@ -90,8 +125,9 @@ public class EnfermeroResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la entidad de Enfermero porque ya existe una con ese nombre.
      */
     @PUT
-    @Path("{login:[a-zA-Z][a-zA-Z0-9]*}")
+    @Path("{id:[a-zA-Z][a-zA-Z0-9]*}")
     public EnfermeroDetailDTO updateEnfermero(@PathParam("login") String login, EnfermeroDetailDTO dto) throws BusinessLogicException{
+        logic.update(dto.toEntity());
         return dto;
     }
     
@@ -99,6 +135,13 @@ public class EnfermeroResource {
      * <h1>DELETE /api/Enfermeros/{id} : Borrar una entidad de Enfermero por login.</h1>
      * <p>
      * <pre>Borra la entidad de Enfermero con el login asociado recibido en la URL.
+     *  * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Creó la nueva entidad de Viejito.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe la entidad de Viejito.
+     * </code>
      * </pre>
      * @param login nombre de usuario del enfermero que se desea borrar. Este debe ser una cadena alfanumerica.
      */

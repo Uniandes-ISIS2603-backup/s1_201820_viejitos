@@ -39,10 +39,10 @@ public class EnfermeroLogic {
     }
     
     public List<EnfermeroEntity> getAll(){
-	LOGGER.info( "Inicia proceso de consultar todas las entidades de Viejito" );
+	LOGGER.info( "Inicia proceso de consultar todas las entidades de Enfermero" );
 	// Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
 	List<EnfermeroEntity> entities = persistencia.findAll( );
-	LOGGER.info( "Termina proceso de consultar todas las entidades de Viejito" );
+	LOGGER.info( "Termina proceso de consultar todas las entidades de Enfermero" );
 	return entities;
     }
     

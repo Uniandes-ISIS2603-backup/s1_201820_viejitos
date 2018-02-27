@@ -2,6 +2,7 @@ package co.edu.uniandes.csw.viejitos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable{
@@ -17,6 +18,10 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
 	private Double puntaje;
 
 	private String comentario;
+        
+        //Relacion de entidad On
+        @OneToOne
+        private ServicioEntity servicio;
 
 	public String getLoginCalificador(){
 		return loginCalificador;
@@ -65,4 +70,12 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
 	public void setComentario(String comentario){
 		this.comentario = comentario;
 	}
+
+        public ServicioEntity getServicio() {
+            return servicio;
+        }
+
+        public void setServicio(ServicioEntity servicio) {
+            this.servicio = servicio;
+        }       
 }
