@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
 import java.util.Date;
 
 /**
@@ -75,8 +76,14 @@ public class CalendarioSemanalDTO {
      /**
      * Constructor por defecto
      */
-    public CalendarioSemanalDTO()
-    { 
+    public CalendarioSemanalDTO(CalendarioSemanalEntity entity)
+    { if(entity!=null)
+       {
+        ultimaModficacion=entity.getUltimaModficacion();
+        id=entity.getId();
+    
+        }
+        
     }
      
      
