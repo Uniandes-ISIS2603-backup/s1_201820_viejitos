@@ -25,7 +25,11 @@ package co.edu.uniandes.csw.viejitos.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -34,13 +38,21 @@ import javax.persistence.Entity;
 
 @Entity
 public class MedicoEntity extends BaseEntity implements Serializable{
-    private String nombre;
-    private Integer tipo;
-    private String login;
-    private String contrasena;
-    private List<CitaEntity> citas;
+   private String nombre;
+   private Integer tipo;
+   private String login;
+   private String contrasena;
+   @PodamExclude
+   @OneToMany(mappedBy="medico")
+   private List<CitaEntity> citas;
+   @PodamExclude
+   @OneToMany
    private List<HistoriaClinicaEntity> historiasClinicas;
+   @PodamExclude
+   @OneToMany
    private List<ClienteEntity> clientes; 
+   @PodamExclude
+   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)    
    private CalendarioSemanalEntity calendario;
     
     public MedicoEntity()

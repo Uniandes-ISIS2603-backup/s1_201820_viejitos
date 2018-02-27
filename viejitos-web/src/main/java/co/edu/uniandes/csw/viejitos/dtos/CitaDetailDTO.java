@@ -43,6 +43,7 @@ import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
  */
 public class CitaDetailDTO extends CitaDTO{
    private ClienteDTO cliente;
+   private MedicoDTO medico;
    public CitaDetailDTO()
    {
        super();
@@ -53,7 +54,16 @@ public class CitaDetailDTO extends CitaDTO{
        if(entity!=null)
        {
         this.cliente=new ClienteDTO(entity.getCliente());
+        this.medico= new MedicoDTO(entity.getMedico());
        }
+   }
+   
+   public CitaEntity toEntity()
+   {
+       CitaEntity c = new CitaEntity();
+       c.setCliente(cliente.toEntity());
+       c.setMedico(medico.toEntity());
+       return c;
    }
    public ClienteDTO getCliente()
    {
@@ -64,4 +74,18 @@ public class CitaDetailDTO extends CitaDTO{
    {
        cliente=c;
    }
+
+    /**
+     * @return the medico
+     */
+    public MedicoDTO getMedico() {
+        return medico;
+    }
+
+    /**
+     * @param medico the medico to set
+     */
+    public void setMedico(MedicoDTO medico) {
+        this.medico = medico;
+    }
 }
