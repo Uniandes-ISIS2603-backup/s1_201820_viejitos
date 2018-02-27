@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.ejb;
 
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
 import co.edu.uniandes.csw.viejitos.persistence.HistoriaClinicaPersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,11 +27,21 @@ public class HistoriaClinicaLogic
     @Inject
     private HistoriaClinicaPersistence persistence;
     
-    public HistoriaClinicaEntity create( HistoriaClinicaEntity entity )
+    @Inject
+    private ClientePersistence clientePersistence;
+    
+    public HistoriaClinicaEntity create( HistoriaClinicaEntity entity ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de HistoriaClinica" );
 		// Invoca la persistencia para crear la entidad de HistoriaClinica
-		persistence.create( entity );
+                if(clientePersistence.findByLogin(entity.getCliente().getLogin()) == null)
+                        {
+                            throw new BusinessLogicException("El cliente asociado a la historia Clínica, no existe.");
+                        }
+                else
+                {
+                    persistence.create( entity );
+                }
 		LOGGER.info( "Termina proceso de creación de entidad de HistoriaClinica" );
 		return entity;
 	}
