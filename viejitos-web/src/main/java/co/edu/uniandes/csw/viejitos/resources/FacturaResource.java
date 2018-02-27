@@ -45,6 +45,9 @@ public class FacturaResource
     /**
 	 * <h1>POST /api/facturas : Crear una entidad de Factura.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link FacturaDetailDTO}.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Crea la factura.</code>
 	 * </pre>
 	 * Crea una nueva entidad de Factura con la informacion que se recibe en el cuerpo
 	 * de la petición.
@@ -61,6 +64,9 @@ public class FacturaResource
         /**
 	 * <h1>GET /api/facturas : Obtener todas las entidades de Factura.</h1>
 	 * <pre>Busca y devuelve todas las entidades de Factura que existen en la aplicacion.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve las facturas.</code>
          * </pre>
 	 * @return JSONArray {@link FacturaDetailDTO} - Las entidades de Factura encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
@@ -73,6 +79,12 @@ public class FacturaResource
         /**
 	 * <h1>GET /api/facturas/{id} : Obtener una entidad de Factura por id.</h1>
 	 * <pre>Busca la entidad de Factura con el id asociado recibido en la URL y la devuelve.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve la factura.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe la factura con el id dado.
+         * </code>
          * </pre>
 	 * @param id Identificador de la entidad de Factura que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link FacturaDetailDTO} - La entidad de Factura buscada
@@ -87,6 +99,12 @@ public class FacturaResource
         /**
 	 * <h1>PUT /api/facturas/{id} : Actualizar una entidad de Factura con el id dado.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link FacturaDetailDTO}.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Actualiza la factura con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe una factura con el id dado.
+         * </code> 
          * </pre>
 	 *
 	 * Actualiza la entidad de Factura con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
@@ -105,6 +123,11 @@ public class FacturaResource
         /**
 	 * <h1>DELETE /api/facturas/{id} : Borrar una entidad de Factura por id.</h1>
 	 * <pre>Borra la entidad de Factura con el id asociado recibido en la URL.
+         * Códigos de respuesta:<br>
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Elimina la factura correspondiente al id dado.</code>
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe una factura con el id dado.</code>
 	 * </pre>
 	 *
 	 * @param id Identificador de la entidad de Factura que se desea borrar. Este debe ser una cadena de dígitos.

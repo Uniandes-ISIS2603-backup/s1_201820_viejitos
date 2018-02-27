@@ -52,6 +52,9 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
      */
     private String nombreEmpresa;
     
+    /**
+     * asociacion al servicio
+     */
     @OneToOne (mappedBy="factura") 
     private ServicioEntity servicio;
 
