@@ -21,8 +21,6 @@ import javax.persistence.OneToOne;
 @Entity
 public class ServicioEntity extends BaseEntity implements Serializable{
 
-        private Integer tipo;
-    
     private Date fecha;
     
     private String hora;
@@ -45,6 +43,41 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     
     @ManyToOne 
     private ClienteEntity cliente;
+    
+    @OneToOne 
+    private PagoEntity pagoInicial;
+    
+    @OneToOne 
+    private PagoEntity pagoFinal;
+    /**
+     * @return the pagoInicial
+     */
+    public PagoEntity getPagoInicial() {
+        return pagoInicial;
+    }
+
+    /**
+     * @param pagoInicial the pagoInicial to set
+     */
+    public void setPagoInicial(PagoEntity pagoInicial) {
+        this.pagoInicial = pagoInicial;
+    }
+
+    /**
+     * @return the pagoFinal
+     */
+    public PagoEntity getPagoFinal() {
+        return pagoFinal;
+    }
+
+    /**
+     * @param pagoFinal the pagoFinal to set
+     */
+    public void setPagoFinal(PagoEntity pagoFinal) {
+        this.pagoFinal = pagoFinal;
+    }
+
+        private Integer tipo;
     
     /**
      * @return the quejas
