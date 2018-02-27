@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.viejitos.dtos;
 
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
-import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 
 /**
  * Objeto de transferencia de datos para una calificacion general.
@@ -56,6 +55,16 @@ public class CalificacionDTO {
 	public CalificacionDTO(){
 
 	}
+        
+        public CalificacionDTO(CalificacionEntity entidad){
+            this.comentario = entidad.getComentario();
+            this.idCalificacion = entidad.getId();
+            this.loginCalificado = entidad.getLoginCalificado();
+            this.loginCalificador = entidad.getLoginCalificador();
+            this.puntaje = entidad.getPuntaje();
+            this.tipoCalificado = entidad.getTipoCalificado();
+            this.tipoCalificador = entidad.getTipoCalificador();
+        }
 
 	public Long getIdCalificacion() {
 		return idCalificacion;

@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.ejb;
 import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.QuejaPersistence;
+import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,9 @@ public class QuejaLogic {
 	@Inject
 	private QuejaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
+        @Inject
+        private ClientePersistence clientePersistence;
+        
 	public QuejaEntity create( QuejaEntity entity ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Queja" );

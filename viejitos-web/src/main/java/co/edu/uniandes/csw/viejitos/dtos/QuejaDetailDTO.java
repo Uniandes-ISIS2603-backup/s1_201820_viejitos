@@ -59,7 +59,8 @@ public class QuejaDetailDTO extends QuejaDTO{
         
         if(entity!=null)
         {
-        
+            this.cliente=new ClienteDTO(entity.getCliente());
+            this.servicio=new ServicioDTO(entity.getServicio());
         }
     }
         

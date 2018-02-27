@@ -50,6 +50,10 @@ public class EnfermeroDetailDTO extends EnfermeroDTO{
     
     private List<ServicioDTO> servicios;
     
+    private List<ClienteDTO> cliente;
+    
+    private CalendarioSemanalDTO calendar;
+    
     public EnfermeroDetailDTO(){
     	super();
     }
@@ -89,8 +93,9 @@ public class EnfermeroDetailDTO extends EnfermeroDTO{
         this.servicios = servicios;
     }
     
+    @Override
     public EnfermeroEntity toEntity(){
-    	EnfermeroEntity entidad = super.toEntity(); 
+    	EnfermeroEntity entidad = super.toEntity();
     	return entidad;
     }
 }

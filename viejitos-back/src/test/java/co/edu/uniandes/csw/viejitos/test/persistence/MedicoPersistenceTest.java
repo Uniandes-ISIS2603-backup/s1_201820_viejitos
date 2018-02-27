@@ -188,6 +188,18 @@ public class MedicoPersistenceTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }
+         /**
+     * Prueba para consultar un Medico.
+     *
+     * 
+     */
+    @Test
+    public void getMedicoByLoginTest() {
+        MedicoEntity entity = data.get(0);
+        MedicoEntity newEntity = medicoPersistence.findByLogin(entity.getLogin());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getLogin(), newEntity.getLogin());
+    }
 
     /**
      * Prueba para eliminar un Medico.

@@ -37,6 +37,13 @@ public class MedicoPersistence {
         q = q.setParameter("name", name);
         return q.getSingleResult();
     }
+        public MedicoEntity findByLogin(String login) {
+        LOGGER.log(Level.INFO, "Consultando medico con name= ", login);
+        TypedQuery<MedicoEntity> q
+                = em.createQuery("select u from MedicoEntity u where u.login = :login", MedicoEntity.class);
+        q = q.setParameter("login", login);
+        return q.getSingleResult();
+    }
 
     public List<MedicoEntity> findAll() {
         LOGGER.info("Consultando todos los Medicos");

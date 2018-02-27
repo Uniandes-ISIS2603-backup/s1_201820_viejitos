@@ -23,10 +23,18 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.viejitos.entities;
 
+import co.edu.uniandes.csw.viejitos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.websocket.ClientEndpointConfig;
+import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -34,9 +42,18 @@ import javax.websocket.ClientEndpointConfig;
  */
 @Entity
 public class CitaEntity extends BaseEntity implements Serializable {
+    @Temporal(TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
+    @Temporal(TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
     private Date hora;
+    @PodamExclude
+    @OneToOne(fetch = FetchType.LAZY, targetEntity = ClienteEntity.class)
     private ClienteEntity cliente;
+    @PodamExclude
+    @OneToMany
+    private MedicoEntity medico;
     
     public CitaEntity()
     {
@@ -82,6 +99,20 @@ public class CitaEntity extends BaseEntity implements Serializable {
      */
     public void setCliente(ClienteEntity cliente) {
         this.cliente = cliente;
+    }
+
+    /**
+     * @return the medico
+     */
+    public MedicoEntity getMedico() {
+        return medico;
+    }
+
+    /**
+     * @param medico the medico to set
+     */
+    public void setMedico(MedicoEntity medico) {
+        this.medico = medico;
     }
    
 }

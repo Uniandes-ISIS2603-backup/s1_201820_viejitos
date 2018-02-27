@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.CalificacionDetailDTO;
+import co.edu.uniandes.csw.viejitos.ejb.CalificacionLogic;
+import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
@@ -37,22 +39,24 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 public class CalificacionResource {
+    
+    private CalificacionLogic logic;
     /**
      * <h1>POST /api/Calificaciones : Crear una entidad de Calificacion.</h1>
      * <p>
-     * <pre>Cuerpo de petición: JSON {@link CalificacionDetailDTO}. </pre>
+     * <pre>Cuerpo de petición: JSON {@link CalificacionDetailDTO}. 
      * Crea una nueva entidad de Calificacion con la informacion que se recibe en el cuerpo
      * de la petición y se regresa un objeto identico con un id auto-generado
      * por la base de datos.
      * 
      * Codigos de respuesta:
-	 * <code style="color: mediumseagreen; background-color: #eaffe0;">
-	 * 200 OK Creó la nueva entidad de Viejito.
-	 * </code>
-	 * <code style="color: #c7254e; background-color: #f9f2f4;">
-	 * 412 Precodition Failed: Ya existe la entidad de Viejito.
-	 * </code>
-	 * </pre>
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Creó la nueva entidad de Viejito.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe la entidad de Viejito.
+     * </code>
+     * </pre>
      * @param dto La entidad a guardar
      * @return JSON La entidad calificacion guardada con su id correspondiente
      * @throws BusinessLogicException Si ya existe una entidad de calificacion igual
@@ -65,12 +69,25 @@ public class CalificacionResource {
     /**
      * <h1>GET /api/Calificaciones : Obtener todas las entidades de Calificacion.</h1>
      * <p>
-     * <pre>Busca y devuelve todas las entidades de Calificacion que existen en la aplicacion. </pre>
+     * <pre>Busca y devuelve todas las entidades de Calificacion que existen en la aplicacion. 
+     *  * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Creó la nueva entidad de Viejito.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe la entidad de Viejito.
+     * </code>
+     * </pre>
      * @return JSONArray con las entidades de Calificacion encontradas.
      */
     @GET
     public List<CalificacionDetailDTO> getCalificaciones (){
-        return new ArrayList<>();
+        List<CalificacionEntity> califs = logic.getAll();
+        List<CalificacionDetailDTO> resp = new ArrayList<>();
+        for(CalificacionEntity actual:califs){
+           resp.add( new CalificacionDetailDTO(actual));
+        }
+        return resp;
     }
     
     /**
@@ -92,6 +109,7 @@ public class CalificacionResource {
     @GET
     @Path("{id:[0-9]*}")
     public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id){
+        logic.getById(id);
         return null;
     }
     
@@ -99,6 +117,13 @@ public class CalificacionResource {
      * <h1>PUT /api/Calificaciones/{id} : Actualizar una entidad de Calificacion con el id dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link CalificacionDetailDTO}.
      * Actualiza la entidad de Calificacion con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
+     *  * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Creó la nueva entidad de Viejito.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe la entidad de Viejito.
+     * </code>
      * </pre>
      * @param id identificador de la calificacion que se desea actualizar.Este debe ser una cadena de numeros
      * @param dto {@link CalificacionDetailDTO} La entidad de Calificacion que se desea guardar.
@@ -108,6 +133,7 @@ public class CalificacionResource {
     @PUT
     @Path("{id:[0-9]*}")
     public CalificacionDetailDTO updateEnfermero(@PathParam("id") Long id, CalificacionDetailDTO dto) throws BusinessLogicException{
+        logic.update(dto.toEntity());
         return dto;
     }
     
@@ -115,11 +141,21 @@ public class CalificacionResource {
      * <h1>DELETE /api/Calificaciones/{id} : Borrar una entidad de Calificacion por id.</h1>
      * <p>
      * <pre>Borra la entidad de Calificacion con el id asociado recibido en la URL.
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Creó la nueva entidad de Viejito.
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe la entidad de Viejito.
+     * </code>
      * </pre>
      * @param id identificador de la calificacion que se desea borrar. Este debe ser una cadena de numeros.
      */
     @DELETE
     @Path( "{id: \\d+}" )
     public void deleteEnfermero( @PathParam( "id" ) Long id){
+        try{
+           logic.delete(logic.getById(id));
+        }catch(Exception e){}
     }
 }
