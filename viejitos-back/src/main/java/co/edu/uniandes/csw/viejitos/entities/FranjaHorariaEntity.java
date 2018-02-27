@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,6 +21,8 @@ public class FranjaHorariaEntity extends BaseEntity implements Serializable {
     private String diaSemana;
     
     
+@ManyToOne
+private CalendarioSemanalEntity calendario;
 
     /**
      * @return the horaInicio
@@ -59,7 +62,7 @@ public class FranjaHorariaEntity extends BaseEntity implements Serializable {
     /**
      * @param ocupado the ocupado to set
      */
-    public void setOcupado(Boolean ocupado) {
+    public void isOcupado(Boolean ocupado) {
         this.ocupado = ocupado;
     }
 
