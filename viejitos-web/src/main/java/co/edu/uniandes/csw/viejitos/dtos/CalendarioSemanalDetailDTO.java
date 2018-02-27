@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
 import java.util.List;
 
 /**
@@ -12,6 +13,52 @@ import java.util.List;
  * Clase que extiende de {@link CalendarioSemanalDTO} para manejar la transformacion entre
  * los objetos JSON y las Entidades de la base de datos. Para conocer el
  * contenido de la ciudad vaya a la documentacion de {@link CalendarioSemanalDTO}
+ * 
+ *  Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ *   {
+ *      "id": number,
+ *      "ultimaModificacion": Date,
+ * "franjasHorarias": [ {
+ * 
+ * "id": number,
+ *      "diaSemana": string,
+ *        "horaInicio": number,
+ *       "horaFin": number,
+ *       "ocupado": boolean
+ *         }]
+ *   }
+ * </pre>
+ * Por ejemplo un calendario semanal se representa asi:<br>
+ * 
+ * <pre>
+ * 
+ *   {
+ *     "id": 001101,
+ *      "ultimaModificacion": 01/07/2018 08:11:13pm,
+ * "franjasHorarias": [ {
+ * 
+ * "id": 1,
+ *      "diaSemana": 1,
+ *        "horaInicio": 0700,
+ *       "horaFin": 0900,
+ *       "ocupado": si
+ *         },
+ * {
+ * 
+ * "id": 2,
+ *      "diaSemana": 1,
+ *        "horaInicio": 0900,
+ *       "horaFin": 1100,
+ *       "ocupado": no
+ *         }
+ * ]
+ *           
+ * 
+ *   }
+ *
+ * 
+ * 
  * @author lf.naranjo11
  */
 public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
@@ -20,9 +67,9 @@ public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
      /**
      * Constructor por defecto
      */
-    public CalendarioSemanalDetailDTO()
+    public CalendarioSemanalDetailDTO(CalendarioSemanalEntity entity)
     {
-        super();
+        super(entity);
     }
     
     
