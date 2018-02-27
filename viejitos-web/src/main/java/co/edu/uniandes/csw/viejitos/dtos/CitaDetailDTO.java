@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
+
 /**
  * CitaDTO Objeto de transferencia de datos de Cita. Los DTO contienen las
  * represnetaciones de los JSON que se transfieren entre el cliente y el
@@ -43,6 +45,15 @@ public class CitaDetailDTO extends CitaDTO{
    private ClienteDTO cliente;
    public CitaDetailDTO()
    {
+       super();
+   }
+   public CitaDetailDTO(CitaEntity entity)
+   {
+       super(entity);
+       if(entity!=null)
+       {
+        this.cliente=new ClienteDTO(entity.getCliente());
+       }
    }
    public ClienteDTO getCliente()
    {

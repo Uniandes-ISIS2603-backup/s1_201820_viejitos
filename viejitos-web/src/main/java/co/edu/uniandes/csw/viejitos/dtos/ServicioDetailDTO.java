@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import java.util.List;
 
 /**
@@ -75,6 +76,32 @@ public class ServicioDetailDTO extends ServicioDTO{
     public ServicioDetailDTO()
     {
         super();
+    }
+    
+    /**
+    * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+    * la entidad que viene de argumento.
+    * @param ServicioEntity: Es la entidad que se va a convertir a DTO
+     */
+    public ServicioDetailDTO( ServicioEntity entity )
+    {
+        super(entity);
+        
+        if(entity!=null)
+        {
+        
+        }
+    }
+        
+    /**
+    * Convertir DTO a Entity
+    * @return Un Entity con los valores del DTO
+    */
+    public ServicioEntity toEntity( )
+    {
+        ServicioEntity entity = new ServicioEntity( );
+	
+        return entity;
     }
     
     /**

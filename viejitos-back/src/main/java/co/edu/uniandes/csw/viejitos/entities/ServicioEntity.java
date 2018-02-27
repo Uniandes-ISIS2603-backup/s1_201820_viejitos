@@ -7,7 +7,11 @@ package co.edu.uniandes.csw.viejitos.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -17,8 +21,6 @@ import javax.persistence.Entity;
 @Entity
 public class ServicioEntity extends BaseEntity implements Serializable{
 
-    private Integer tipo;
-    
     private Date fecha;
     
     private String hora;
@@ -26,8 +28,127 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     private String descripcion;
     
     private Boolean finalizado;
-   
     
+    @OneToMany (mappedBy="servicio") 
+    private List<QuejaEntity> quejas;
+    
+    @OneToOne (mappedBy="servicio", orphanRemoval = true) 
+    private CalificacionEntity calificacion;
+    
+    @ManyToOne  
+    private EnfermeroEntity enfermero;
+   
+    @OneToOne 
+    private FacturaEntity factura;
+    
+    @ManyToOne 
+    private ClienteEntity cliente;
+    
+    @OneToOne 
+    private PagoEntity pagoInicial;
+    
+    @OneToOne 
+    private PagoEntity pagoFinal;
+    /**
+     * @return the pagoInicial
+     */
+    public PagoEntity getPagoInicial() {
+        return pagoInicial;
+    }
+
+    /**
+     * @param pagoInicial the pagoInicial to set
+     */
+    public void setPagoInicial(PagoEntity pagoInicial) {
+        this.pagoInicial = pagoInicial;
+    }
+
+    /**
+     * @return the pagoFinal
+     */
+    public PagoEntity getPagoFinal() {
+        return pagoFinal;
+    }
+
+    /**
+     * @param pagoFinal the pagoFinal to set
+     */
+    public void setPagoFinal(PagoEntity pagoFinal) {
+        this.pagoFinal = pagoFinal;
+    }
+
+        private Integer tipo;
+    
+    /**
+     * @return the quejas
+     */
+    public List<QuejaEntity> getQuejas() {
+        return quejas;
+    }
+
+    /**
+     * @param quejas the quejas to set
+     */
+    public void setQuejas(List<QuejaEntity> quejas) {
+        this.quejas = quejas;
+    }
+
+    /**
+     * @return the calificacion
+     */
+    public CalificacionEntity getCalificacion() {
+        return calificacion;
+    }
+
+    /**
+     * @param calificacion the calificacion to set
+     */
+    public void setCalificacion(CalificacionEntity calificacion) {
+        this.calificacion = calificacion;
+    }
+
+    /**
+     * @return the enfermero
+     */
+    public EnfermeroEntity getEnfermero() {
+        return enfermero;
+    }
+
+    /**
+     * @param enfermero the enfermero to set
+     */
+    public void setEnfermero(EnfermeroEntity enfermero) {
+        this.enfermero = enfermero;
+    }
+
+    /**
+     * @return the factura
+     */
+    public FacturaEntity getFactura() {
+        return factura;
+    }
+
+    /**
+     * @param factura the factura to set
+     */
+    public void setFactura(FacturaEntity factura) {
+        this.factura = factura;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
+            
     /**
      * @return the tipo
      */

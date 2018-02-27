@@ -5,8 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.test.persistence;
 
-import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
-import co.edu.uniandes.csw.viejitos.persistence.FacturaPersistence;
+import co.edu.uniandes.csw.viejitos.entities.PagoEntity;
+import co.edu.uniandes.csw.viejitos.persistence.PagoPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -29,8 +29,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author f.escobar
  */
 @RunWith(Arquillian.class)
-public class FacturaPersistenceTest {
-   
+public class PagoPersistenceTest {
     
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
@@ -41,8 +40,8 @@ public class FacturaPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(FacturaEntity.class.getPackage())
-                .addPackage(FacturaPersistence.class.getPackage())
+                .addPackage(PagoEntity.class.getPackage())
+                .addPackage(PagoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -55,23 +54,23 @@ public class FacturaPersistenceTest {
     private EntityManager em;
     
     /**
-     * Inyección de la dependencia a la clase QuejaPersistence cuyos métodos
+     * Inyección de la dependencia a la clase PagoPersistence cuyos métodos
      * se van a probar.
      */
     @Inject
-    private FacturaPersistence facturaPersistence;
+    private PagoPersistence pagoPersistence;
     
      /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from FacturaEntity").executeUpdate();
+        em.createQuery("delete from PagoEntity").executeUpdate();
     }
     
      /**
      * Lista que tiene los datos de prueba.
      */
-    private List<FacturaEntity> data = new ArrayList<FacturaEntity>();
+    private List<PagoEntity> data = new ArrayList<PagoEntity>();
     
     /**
      * Variable para marcar las transacciones del em anterior cuando se
@@ -88,7 +87,7 @@ public class FacturaPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             
-            FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
+            PagoEntity entity = factory.manufacturePojo(PagoEntity.class);
 
             em.persist(entity);
             
@@ -119,27 +118,27 @@ public class FacturaPersistenceTest {
 
     
     @Test
-    public void createFacturaEntityTest() {
+    public void createPagoEntityTest() {
     PodamFactory factory = new PodamFactoryImpl();
-    FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
-    FacturaEntity result = facturaPersistence.create(newEntity);
+    PagoEntity newEntity = factory.manufacturePojo(PagoEntity.class);
+    PagoEntity result = pagoPersistence.create(newEntity);
 
     Assert.assertNotNull(result);
-    FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
+    PagoEntity entity = em.find(PagoEntity.class, result.getId());
     Assert.assertNotNull(entity);
     Assert.assertEquals(newEntity.getName(), entity.getName());
     }
     
     /**
-     * Prueba para consultar la lista de facturas. 
+     * Prueba para consultar la lista de pagos. 
      */
     @Test
-    public void getFacturasTest() {
-        List<FacturaEntity> list = facturaPersistence.findAll();
+    public void getPagosTest() {
+        List<PagoEntity> list = pagoPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
-        for (FacturaEntity ent : list) {
+        for (PagoEntity ent : list) {
             boolean found = false;
-            for (FacturaEntity entity : data) {
+            for (PagoEntity entity : data) {
                 if (ent.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -149,42 +148,43 @@ public class FacturaPersistenceTest {
     }
     
      /**
-     * Prueba para consultar una factura.
+     * Prueba para consultar un pago.
      */
     @Test
-    public void getFacturaTest() {
-        FacturaEntity entity = data.get(0);
-        FacturaEntity newEntity = facturaPersistence.find(entity.getId());
+    public void getPagoTest() {
+        PagoEntity entity = data.get(0);
+        PagoEntity newEntity = pagoPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }
 
     /**
-     * Prueba para eliminar una factura.
+     * Prueba para eliminar un pago.
      */
     @Test
-    public void deleteFacturaTest() {
-        FacturaEntity entity = data.get(0);
-        facturaPersistence.delete(entity.getId());
-        FacturaEntity deleted = em.find(FacturaEntity.class, entity.getId());
+    public void deletePagoTest() {
+        PagoEntity entity = data.get(0);
+        pagoPersistence.delete(entity.getId());
+        PagoEntity deleted = em.find(PagoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 
     /**
-     * Prueba para actualizar una factura.
+     * Prueba para actualizar un pago.
      */
     @Test
-    public void updateFacturaTest() {
-        FacturaEntity entity = data.get(0);
+    public void updatePagoTest() {
+        PagoEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
-        FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+        PagoEntity newEntity = factory.manufacturePojo(PagoEntity.class);
 
         newEntity.setId(entity.getId());
 
-        facturaPersistence.update(newEntity);
+        pagoPersistence.update(newEntity);
 
-        FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
+        PagoEntity resp = em.find(PagoEntity.class, entity.getId());
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
     }
+    
 }

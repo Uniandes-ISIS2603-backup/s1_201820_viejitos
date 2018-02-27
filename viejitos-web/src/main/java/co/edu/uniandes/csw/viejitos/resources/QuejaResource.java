@@ -48,6 +48,9 @@ public class QuejaResource {
      /**
 	 * <h1>POST /api/quejas : Crear una entidad de Queja.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Crea la queja.</code>
 	 *</pre>
 	 * Crea una nueva entidad de Queja con la informacion que se recibe en el cuerpo
 	 * de la petición.
@@ -64,6 +67,10 @@ public class QuejaResource {
         /**
 	 * <h1>GET /api/quejas : Obtener todas las entidades de Queja.</h1>
 	 * <pre>Busca y devuelve todas las entidades de Queja que existen en la aplicacion.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve las quejas.</code>
+         * </pre>
 	 * @return JSONArray {@link ClienteDetailDTO} - Las entidades de Queja encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
         @GET
@@ -75,6 +82,12 @@ public class QuejaResource {
         /**
 	 * <h1>GET /api/quejas/{id} : Obtener una entidad de Queja por id.</h1>
 	 * <pre>Busca la entidad de Queja con el id asociado recibido en la URL y la devuelve.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve la queja.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe la queja con el id dado.
+         * </code></pre>
 	 * @param id Identificador de la entidad de Queja que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link QuejaDetailDTO} - La entidad de Queja buscada
 	 */
@@ -87,8 +100,14 @@ public class QuejaResource {
         
         /**
 	 * <h1>PUT /api/Quejas/{id} : Actualizar una entidad de Queja con el id dado.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link QuejaDetailDTO}.</pre>
-	 *
+	 * <pre>Cuerpo de petición: JSON {@link QuejaDetailDTO}
+	 * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Actualiza la queja con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe una queja con el id dado.
+         * </code> 
+         * </pre>
 	 * Actualiza la entidad de Queja con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Queja que se desea actualizar. Este debe ser una cadena de dígitos.
 	 * @param detailDTO {@link QuejaDetailDTO} La entidad de Queja que se desea guardar.
@@ -105,8 +124,12 @@ public class QuejaResource {
         /**
 	 * <h1>DELETE /api/Quejas/{id} : Borrar una entidad de Queja por id.</h1>
 	 * <pre>Borra la entidad de Queja con el id asociado recibido en la URL.
+         * Códigos de respuesta:<br>
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Elimina la queja correspondiente al id dado.</code>
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe una queja con el id dado.</code>
 	 * </pre>
-	 *
 	 * @param id Identificador de la entidad de Queja que se desea borrar. Este debe ser una cadena de dígitos.
 	 */
 	@DELETE

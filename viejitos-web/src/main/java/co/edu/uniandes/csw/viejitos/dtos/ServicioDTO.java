@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.dtos;
 
 import java.util.Date;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 
 /**
  * ServicioDTO Objeto de transferencia de datos de Servicios. Los DTO contienen las
@@ -39,7 +40,6 @@ import java.util.Date;
  */
 
 public class ServicioDTO {
-
     
     private Integer tipo;
     
@@ -60,6 +60,40 @@ public class ServicioDTO {
     public ServicioDTO()
     {
         
+    }
+    
+    /**
+    * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+    * la entidad que viene de argumento.
+    * @param ServicioEntity: Es la entidad que se va a convertir a DTO
+     */
+    public ServicioDTO( ServicioEntity servicioEntity )
+    {
+        if(servicioEntity!=null)
+        {
+            this.id = servicioEntity.getId();
+            this.tipo = servicioEntity.getTipo();
+            this.descripcion = servicioEntity.getDescripcion();
+            this.fecha = servicioEntity.getFecha();
+            this.finalizado = servicioEntity.getFinalizado();
+            this.hora = servicioEntity.getHora();
+        }
+    }
+        
+    /**
+    * Convertir DTO a Entity
+    * @return Un Entity con los valores del DTO
+    */
+    public ServicioEntity toEntity( )
+    {
+        ServicioEntity entity = new ServicioEntity( );
+	entity.setId( this.id );
+	entity.setDescripcion(this.descripcion);
+        entity.setFecha(this.fecha);
+        entity.setFinalizado(this.finalizado);
+        entity.setHora(this.hora);
+        entity.setTipo(this.getTipo());
+        return entity;
     }
     
     /**

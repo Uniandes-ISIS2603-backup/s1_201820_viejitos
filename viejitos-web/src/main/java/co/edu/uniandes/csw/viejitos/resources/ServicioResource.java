@@ -46,8 +46,11 @@ public class ServicioResource
     /**
 	 * <h1>POST /api/Servicios : Crear una entidad de Servicio.</h1>
 	 * <p>
-	 * <pre>Cuerpo de petición: JSON {@link ServicioDetailDTO}.</pre>
-	 *
+	 * <pre>Cuerpo de petición: JSON {@link ServicioDetailDTO}.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Crea el servicio.</code> 
+         * </pre>
 	 * Crea una nueva entidad de Servicio con la informacion que se recibe en el cuerpo
 	 * de la petición.
 	 * @param dto {@link ServicioDetailDTO} - La entidad de Servicio que se desea guardar.
@@ -63,7 +66,11 @@ public class ServicioResource
         /**
 	 * <h1>GET /api/Servicios : Obtener todas las entidades de Servicio.</h1>
 	 * <p>
-	 * <pre>Busca y devuelve todas las entidades de Servicio que existen en la aplicacion.</pre>
+	 * <pre>Busca y devuelve todas las entidades de Servicio que existen en la aplicacion.
+         * * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve los servicios.</code>
+         * </pre>
 	 * @return JSONArray {@link ServicioDetailDTO} - Las entidades de Servicio encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
@@ -75,7 +82,13 @@ public class ServicioResource
         /**
 	 * <h1>GET /api/Servicios/{id} : Obtener una entidad de Servicio por id.</h1>
 	 * <p>
-	 * <pre>Busca la entidad de Servicio con el id asociado recibido en la URL y la devuelve.</pre>
+	 * <pre>Busca la entidad de Servicio con el id asociado recibido en la URL y la devuelve.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve el servicio.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe un servicio con el id dado.
+         * </code></pre>
 	 * @param id Identificador de la entidad de Servicio que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link ServicioDetailDTO} - La entidad de Servicio buscada
 	 */
@@ -88,8 +101,14 @@ public class ServicioResource
         
         /**
 	 * <h1>PUT /api/Servicios/{id} : Actualizar una entidad de Servicio con el id dado.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link ServicioDetailDTO}. </pre>
-	 *
+	 * <pre>Cuerpo de petición: JSON {@link ServicioDetailDTO}. 
+	 ** Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Actualiza el servicio con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe un servicio con el id dado.
+         * </code> 
+         * </pre>
 	 * Actualiza la entidad de Servicio con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Servicio que se desea actualizar. Este debe ser una cadena de dígitos.
 	 * @param detailDTO {@link ServicioDetailDTO} La entidad de Servicio que se desea guardar.
@@ -107,8 +126,12 @@ public class ServicioResource
 	 * <h1>DELETE /api/Servicios/{id} : Borrar una entidad de Servicio por id.</h1>
 	 * <p>
 	 * <pre>Borra la entidad de Servicio con el id asociado recibido en la URL.
+	 * Códigos de respuesta:<br>
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Elimina el servicio correspondiente al id dado.</code>
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe un servicio con el id dado.</code>
 	 * </pre>
-	 *
 	 * @param id Identificador de la entidad de Servicio que se desea borrar. Este debe ser una cadena de dígitos.
 	 */
 	@DELETE

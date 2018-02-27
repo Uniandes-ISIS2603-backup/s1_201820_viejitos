@@ -24,6 +24,7 @@ SOFTWARE.
 package co.edu.uniandes.csw.viejitos.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 
 /**
@@ -37,11 +38,16 @@ public class MedicoEntity extends BaseEntity implements Serializable{
     private Integer tipo;
     private String login;
     private String contrasena;
+    private List<CitaEntity> citas;
+   private List<HistoriaClinicaEntity> historiasClinicas;
+   private List<ClienteEntity> clientes; 
+   private CalendarioSemanalEntity calendario;
     
     public MedicoEntity()
     {
         
     }
+
     /**
      * @return the nombre
      */
@@ -96,6 +102,62 @@ public class MedicoEntity extends BaseEntity implements Serializable{
      */
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    /**
+     * @return the citas
+     */
+    public List<CitaEntity> getCitas() {
+        return citas;
+    }
+
+    /**
+     * @param citas the citas to set
+     */
+    public void setCitas(List<CitaEntity> citas) {
+        this.citas = citas;
+    }
+
+    /**
+     * @return the historiasClinicas
+     */
+    public List<HistoriaClinicaEntity> getHistoriasClinicas() {
+        return historiasClinicas;
+    }
+
+    /**
+     * @param historiasClinicas the historiasClinicas to set
+     */
+    public void setHistoriasClinicas(List<HistoriaClinicaEntity> historiasClinicas) {
+        this.historiasClinicas = historiasClinicas;
+    }
+
+    /**
+     * @return the clientes
+     */
+    public List<ClienteEntity> getClientes() {
+        return clientes;
+    }
+
+    /**
+     * @param clientes the clientes to set
+     */
+    public void setClientes(List<ClienteEntity> clientes) {
+        this.clientes = clientes;
+    }
+
+    /**
+     * @return the calendario
+     */
+    public CalendarioSemanalEntity getCalendario() {
+        return calendario;
+    }
+
+    /**
+     * @param calendario the calendario to set
+     */
+    public void setCalendario(CalendarioSemanalEntity calendario) {
+        this.calendario = calendario;
     }
    
 }

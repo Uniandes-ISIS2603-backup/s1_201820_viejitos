@@ -44,6 +44,9 @@ package co.edu.uniandes.csw.viejitos.dtos;
  * </pre>
  * @author l.pardo
  */
+
+import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
+import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import java.util.Date;
 
 /**
@@ -60,6 +63,33 @@ public class CitaDTO {
     {
         
     }
+        /**
+	 * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+	 * la entidad que viene de argumento.
+	 *
+	 * @param CitaEntity: Es la entidad que se va a convertir a DTO
+	 */
+    public CitaDTO( CitaEntity entity )
+    {
+        if(entity!=null)
+        {
+            this.fecha=entity.getFecha();
+            this.hora=entity.getHora();
+        }
+    }
+            /**
+	 * Convertir DTO a Entity
+	 *
+	 * @return Un Entity con los valores del DTO
+	 */
+	public CitaEntity toEntity( )
+	{
+            
+            CitaEntity entity = new CitaEntity();
+            entity.setFecha(this.fecha);
+            entity.setHora(this.hora);
+            return entity;
+        }
     public Date getFecha()
     {
         return fecha;

@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.viejitos.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -50,6 +51,12 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
      * nombre de la empresa
      */
     private String nombreEmpresa;
+    
+    /**
+     * asociacion al servicio
+     */
+    @OneToOne (mappedBy="factura") 
+    private ServicioEntity servicio;
 
     /**
      * @return the costoTotal

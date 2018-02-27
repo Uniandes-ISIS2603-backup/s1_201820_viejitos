@@ -19,6 +19,8 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
+
 /**
  * MedicoDTO Objeto de transferencia de datos de Medicos. Los DTO contienen las
  * represnetaciones de los JSON que se transfieren entre el cliente y el
@@ -63,6 +65,29 @@ public class MedicoDTO {
     public MedicoDTO()
     {
         
+    }
+    
+    public MedicoDTO(MedicoEntity entity)
+    {
+        if(entity!=null)
+        {
+            this.nombre=entity.getNombre();
+            this.contrasena=entity.getContrasena();
+            this.login=entity.getLogin();
+            this.tipo=entity.getTipo();
+            this.id= entity.getId();
+        }
+    }
+    
+    public MedicoEntity toEntity()
+    {
+        MedicoEntity entity = new MedicoEntity();
+        entity.setContrasena(this.contrasena);
+        entity.setId(this.id);
+        entity.setLogin(this.login);
+        entity.setNombre(this.nombre);
+        entity.setTipo(this.tipo);
+        return entity;
     }
     /**
      * @return the nombre

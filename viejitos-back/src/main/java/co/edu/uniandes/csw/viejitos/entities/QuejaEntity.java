@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.viejitos.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -14,10 +16,45 @@ import javax.persistence.Entity;
  */
 @Entity
 public class QuejaEntity extends BaseEntity implements Serializable{
-    
-    private String reclamo;
+
+         private String reclamo;
     
     private Boolean resuelto;
+    
+    @PodamExclude
+    @ManyToOne
+    private ServicioEntity servicio;
+    
+    @PodamExclude
+    @ManyToOne
+    private ClienteEntity cliente;
+    /**
+     * @return the cliente
+     */
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
+    
+    /**
+     * @return the servicio
+     */
+    public ServicioEntity getServicio() {
+        return servicio;
+    }
+
+    /**
+     * @param servicio the servicio to set
+     */
+    public void setServicio(ServicioEntity servicio) {
+        this.servicio = servicio;
+    }
     
     /**
      * @return the reclamo

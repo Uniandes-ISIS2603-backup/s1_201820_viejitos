@@ -45,6 +45,9 @@ public class PagoResource
     /**
 	 * <h1>POST /api/pagos : Crear una entidad de Pago.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link PagoDetailDTO}.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Crea el pago.</code>
 	 * </pre>
 	 * Crea una nueva entidad de Pago con la informacion que se recibe en el cuerpo
 	 * de la petición.
@@ -61,6 +64,9 @@ public class PagoResource
         /**
 	 * <h1>GET /api/pagos : Obtener todas las entidades de Pago.</h1>
 	 * <pre>Busca y devuelve todas las entidades de Pago que existen en la aplicacion.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve los pagos.</code>
          * </pre>
 	 * @return JSONArray {@link PagoDetailDTO} - Las entidades de Pago encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
@@ -73,7 +79,12 @@ public class PagoResource
         /**
 	 * <h1>GET /api/pagos/{id} : Obtener una entidad de Pago por id.</h1>
 	 * <pre>Busca la entidad de Pago con el id asociado recibido en la URL y la devuelve.
-         * </pre>
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve el pago.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe el pago con el id dado.
+         * </code></pre>
 	 * @param id Identificador de la entidad de Pago que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link PagoDetailDTO} - La entidad de Pago buscada
 	 */
@@ -87,6 +98,12 @@ public class PagoResource
         /**
 	 * <h1>PUT /api/pagos/{id} : Actualizar una entidad de Pago con el id dado.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link PagoDetailDTO}.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Actualiza el pago con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe un pago con el id dado.
+         * </code> 
 	 * </pre>
 	 * Actualiza la entidad de Pago con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Pago que se desea actualizar. Este debe ser una cadena de dígitos.
@@ -104,6 +121,11 @@ public class PagoResource
         /**
 	 * <h1>DELETE /api/pagos/{id} : Borrar una entidad de Pago por id.</h1>
 	 * <pre>Borra la entidad de Pago con el id asociado recibido en la URL.
+         * Códigos de respuesta:<br>
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Elimina el pago correspondiente al id dado.</code>
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe un pago con el id dado.</code>
 	 * </pre>
 	 *
 	 * @param id Identificador de la entidad de Pago que se desea borrar. Este debe ser una cadena de dígitos.
