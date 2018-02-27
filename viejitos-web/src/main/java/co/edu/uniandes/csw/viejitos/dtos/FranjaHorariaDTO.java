@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
+
 
  /**
  * FranjaHorariaDTO Objeto de transferencia de datos de franjaHOraria. Los DTO contienen las
@@ -48,10 +50,28 @@ public class FranjaHorariaDTO {
      /**
      * Constructor por defecto
      */
-    public FranjaHorariaDTO()
+    public FranjaHorariaDTO(FranjaHorariaEntity entity)
     {
+    if(entity!=null)
+    {
+    horaInicio=entity.getHoraInicio();
+    horaFin=entity.getHoraFin();
+    ocupado=entity.isOcupado();
+    diaSemana=entity.getDiaSemana();
+    id=entity.getId();
     }
-     
+    }
+    
+     public FranjaHorariaEntity toEntity()
+     {
+         FranjaHorariaEntity entity=new FranjaHorariaEntity();
+         entity.setDiaSemana(this.diaSemana);
+         entity.setHoraFin(this.horaFin);
+         entity.setHoraInicio(this.horaInicio);
+         entity.setId(this.id);
+         entity.setOcupado(this.ocupado);
+         return entity;
+     }
     
     
     /**
