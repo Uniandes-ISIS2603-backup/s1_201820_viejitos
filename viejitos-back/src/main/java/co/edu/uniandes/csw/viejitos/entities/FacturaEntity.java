@@ -156,5 +156,19 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
         this.nombreEmpresa = nombreEmpresa;
     }
     
+    /**
+     * @return the servicio
+     */
+    public ServicioEntity getServicio() {
+        return servicio;
+    }
+
+    /**
+     * @param servicio the servicio to set
+     */
+    public void setServicio(ServicioEntity servicio) {
+        this.servicio = servicio;
+    }
+    
     
 }

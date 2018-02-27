@@ -38,6 +38,9 @@ public class PagoEntity extends BaseEntity implements Serializable{
      */
     private Double valor;
     
+    /**
+     * Servicio asociado al pago
+     */
     @OneToOne 
     private ServicioEntity servicio;
 
@@ -95,6 +98,20 @@ public class PagoEntity extends BaseEntity implements Serializable{
      */
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+    
+    /**
+     * @return the servicio
+     */
+    public ServicioEntity getServicio() {
+        return servicio;
+    }
+
+    /**
+     * @param servicio the servicio to set
+     */
+    public void setServicio(ServicioEntity servicio) {
+        this.servicio = servicio;
     }
     
     

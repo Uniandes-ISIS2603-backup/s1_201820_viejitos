@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
+
 /**
  * FacturaDetailDTO Objeto de transferencia de datos de Facturas. Los DTO contienen las
  * representaciones de los JSON que se transfieren entre el cliente y el
@@ -55,6 +57,39 @@ public class FacturaDetailDTO extends FacturaDTO {
     private ServicioDTO servicio;
     
     /**
+     * COnstructor
+     */
+    public FacturaDetailDTO()
+    {
+        super();
+    }
+    
+    /**
+     * COnstructor
+     * @param entity
+     */
+    public FacturaDetailDTO( FacturaEntity entity)
+    {
+        super();
+        if(entity.getServicio() != null )
+        {
+            this.servicio = new ServicioDTO(entity.getServicio());
+        }
+    }
+    
+    public FacturaEntity toEntity()
+    {
+        FacturaEntity entity = super.toEntity();
+        
+        if(this.servicio != null)
+        {
+            entity.setServicio(this.servicio.toEntity());
+        }
+        
+        return entity;
+    }
+    
+    /**
      * @return servicio
      */
     public ServicioDTO getServicio() {
@@ -66,13 +101,5 @@ public class FacturaDetailDTO extends FacturaDTO {
      */
     public void setServicio(ServicioDTO servicio) {
         this.servicio = servicio;
-    }
-    
-    /**
-     * COnstructor
-     */
-    public FacturaDetailDTO()
-    {
-        super();
     }
 }
