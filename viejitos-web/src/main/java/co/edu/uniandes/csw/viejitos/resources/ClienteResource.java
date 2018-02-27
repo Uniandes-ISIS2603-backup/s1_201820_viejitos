@@ -37,8 +37,12 @@ public class ClienteResource
     private ClienteLogic cLogic;
     /**
 	 * <h1>POST /api/clientes : Crear una entidad de Cliente.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
-	 *</pre>
+	* <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
+	 *         
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Crea el cliente.</code> 
+         * </pre>
 	 * Crea una nueva entidad de Cliente con la informacion que se recibe en el cuerpo
 	 * de la petición.
 	 * @param dto {@link ClienteDetailDTO} - La entidad de Cliente que se desea guardar.
@@ -54,7 +58,10 @@ public class ClienteResource
         /**
 	 * <h1>GET /api/clientes : Obtener todas las entidades de Cliente.</h1>
 	 * <pre>Busca y devuelve todas las entidades de Cliente que existen en la aplicacion.
-         * </pre>
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve los clientes.</code>
+         * </pre> 
 	 * @return JSONArray {@link ClienteDetailDTO} - Las entidades de Cliente encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
@@ -66,6 +73,12 @@ public class ClienteResource
         /**
 	 * <h1>GET /api/clientes/{id} : Obtener una entidad de Cliente por id.</h1>
 	 * <pre>Busca la entidad de Cliente con el id asociado recibido en la URL y la devuelve.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Devuelve el Cliente.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe un Cliente con el id dado.
+         * </code>
          * </pre>
 	 * @param id Identificador de la entidad de Cliente que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link ClienteDetailDTO} - La entidad de Cliente buscada
@@ -80,6 +93,12 @@ public class ClienteResource
         /**
 	 * <h1>PUT /api/clientes/{id} : Actualizar una entidad de Cliente con el id dado.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
+         * Codigos de respuesta:
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Actualiza el cliente con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe un Cliente con el id dado.
+         * </code> 
 	 *</pre>
 	 * Actualiza la entidad de Cliente con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
 	 * @param id        Identificador de la entidad de Cliente que se desea actualizar. Este debe ser una cadena de dígitos.
@@ -97,6 +116,11 @@ public class ClienteResource
         /**
 	 * <h1>DELETE /api/clientes/{id} : Borrar una entidad de Cliente por id.</h1>
 	 * <pre>Borra la entidad de Cliente con el id asociado recibido en la URL.
+         * Códigos de respuesta:<br>
+         * <code style="color: mediumseagreen; background-color: #eaffe0;">
+         * 200 OK Elimina el cliente correspondiente al id dado.</code>
+         * <code style="color: #c7254e; background-color: #f9f2f4;">
+         * 404 Not Found. No existe un cliente con el id dado.</code>
 	 * </pre>
 	 *
 	 * @param id Identificador de la entidad de Cliente que se desea borrar. Este debe ser una cadena de dígitos.
