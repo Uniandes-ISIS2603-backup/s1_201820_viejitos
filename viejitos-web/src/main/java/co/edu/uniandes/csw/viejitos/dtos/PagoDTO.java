@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.PagoEntity;
 import java.util.Date;
 
 /**
@@ -39,7 +40,7 @@ import java.util.Date;
  */
 
 public class PagoDTO {
-
+    
     /**
      * id del pago
      */
@@ -64,6 +65,46 @@ public class PagoDTO {
      * valor monetario del pago
      */
     private Double valor;
+    
+    /**
+     * Constructor
+     */
+    public PagoDTO()
+    {
+        
+    }
+    
+    /**
+    * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+    * la entidad que viene de argumento.
+    * @param PagoEntity: Es la entidad que se va a convertir a DTO
+     */
+    public PagoDTO( PagoEntity pagoEntity )
+    {
+        if(pagoEntity!=null)
+        {
+            this.id = pagoEntity.getId();
+            this.medio = pagoEntity.getMedio();
+            this.pagado = pagoEntity.getPagado();
+            this.fechaLimite = pagoEntity.getFechaLimite();
+            this.valor = pagoEntity.getValor();
+        }
+    }
+        
+    /**
+    * Convertir DTO a Entity
+    * @return Un Entity con los valores del DTO
+    */
+    public PagoEntity toEntity( )
+    {
+        PagoEntity entity = new PagoEntity( );
+	entity.setId( this.id );
+	entity.setMedio( this.medio);
+        entity.setPagado(this.pagado);
+        entity.setFechaLimite(this.fechaLimite);
+        entity.setValor(this.valor);
+        return entity;
+    }
     
     /**
      * @return id
@@ -136,11 +177,5 @@ public class PagoDTO {
     }
     
     
-    /**
-     * Constructor
-     */
-    public PagoDTO()
-    {
-        
-    }
+    
 }

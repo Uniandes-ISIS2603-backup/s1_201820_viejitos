@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
 import java.util.Date;
 
 /**
@@ -84,6 +85,52 @@ public class FacturaDTO {
      * nombre de la empresa
      */
     private String nombreEmpresa;
+    
+    /**
+     * Constructor
+     */
+    public FacturaDTO()
+    {
+        
+    }
+    
+    /**
+    * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+    * la entidad que viene de argumento.
+    * @param FacturaEntity: Es la entidad que se va a convertir a DTO
+     */
+    public FacturaDTO( FacturaEntity facturaEntity )
+    {
+        if(facturaEntity!=null)
+        {
+            this.id = facturaEntity.getId();
+            this.costoTotal = facturaEntity.getCostoTotal();
+            this.fechaExpedicion = facturaEntity.getFechaExpedicion();
+            this.descripcion = facturaEntity.getDescripcion();
+            this.nombreCliente = facturaEntity.getNombreCliente();
+            this.ccCliente = facturaEntity.getCcCliente();
+            this.servicioPrestado = facturaEntity.getServicioPrestado();
+            this.nombreEmpresa = facturaEntity.getNombreEmpresa();
+        }
+    }
+        
+    /**
+    * Convertir DTO a Entity
+    * @return Un Entity con los valores del DTO
+    */
+    public FacturaEntity toEntity( )
+    {
+        FacturaEntity entity = new FacturaEntity( );
+	entity.setId(this.id);
+        entity.setCostoTotal(this.costoTotal);
+        entity.setFechaExpedicion(this.fechaExpedicion);
+        entity.setDescripcion(this.descripcion);
+        entity.setNombreCliente(this.nombreCliente);
+        entity.setCcCliente(this.ccCliente);
+        entity.setServicioPrestado(this.servicioPrestado);
+        entity.setNombreEmpresa(this.nombreEmpresa);
+        return entity;
+    }
     
     /**
      * @return id
@@ -197,12 +244,6 @@ public class FacturaDTO {
         this.nombreEmpresa = nombreEmpresa;
     }
     
-    /**
-     * Constructor
-     */
-    public FacturaDTO()
-    {
-        
-    }
+    
     
 }
