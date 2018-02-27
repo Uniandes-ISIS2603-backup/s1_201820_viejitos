@@ -5,9 +5,12 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import java.util.List;
 
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
+import java.util.ArrayList;
 
 /**
  * Objeto de transferencia de datos con relaciones para un enfermero.
@@ -49,6 +52,25 @@ public class EnfermeroDetailDTO extends EnfermeroDTO{
     
     public EnfermeroDetailDTO(){
     	super();
+    }
+    
+    public EnfermeroDetailDTO(EnfermeroEntity entidad){
+    	super(entidad);
+        List<CalificacionEntity> califs = entidad.getCalificaciones();
+        List<CalificacionDTO> calDTOS = new ArrayList<>();
+        for(CalificacionEntity cal: califs){
+            CalificacionDTO actual = new CalificacionDTO(cal);
+            calDTOS.add(actual);
+        }
+        this.calificaciones = calDTOS;
+        List<ServicioEntity> servs = entidad.getServicios();
+        List<ServicioDTO> srDTOS = new ArrayList<>();
+        for(ServicioEntity srv: servs){
+            ServicioDTO actual = new ServicioDTO(srv);
+            srDTOS.add(actual);
+        }
+        this.servicios = srDTOS;
+        
     }
 
     public List<CalificacionDTO> getCalificaciones() {
