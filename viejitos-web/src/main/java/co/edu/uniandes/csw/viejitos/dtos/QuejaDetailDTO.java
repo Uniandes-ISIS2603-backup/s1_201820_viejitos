@@ -51,8 +51,8 @@ public class QuejaDetailDTO extends QuejaDTO{
     /**
     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
     * la entidad que viene de argumento.
-    * @param QuejaEntity: Es la entidad que se va a convertir a DTO
-     */
+    * @param entity Es la entidad que se va a convertir a DTO
+    */
     public QuejaDetailDTO( QuejaEntity entity )
     {
         super(entity);
@@ -68,10 +68,12 @@ public class QuejaDetailDTO extends QuejaDTO{
     * Convertir DTO a Entity
     * @return Un Entity con los valores del DTO
     */
+    @Override
     public QuejaEntity toEntity( )
     {
-        QuejaEntity entity = new QuejaEntity( );
-	
+        QuejaEntity entity = super.toEntity();
+	entity.setCliente(this.cliente.toEntity());
+        entity.setServicio(this.servicio.toEntity());
         return entity;
     }
 
