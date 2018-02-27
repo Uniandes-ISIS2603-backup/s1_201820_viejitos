@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
+
 /**Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
@@ -50,6 +52,25 @@ public class HistoriaClinicaDetailDTO extends HistoriaClinicaDTO
     public HistoriaClinicaDetailDTO()
     {
         super();
+    }
+    
+    public HistoriaClinicaDetailDTO(HistoriaClinicaEntity entity)
+    {
+        super(entity);
+        if (entity.getCliente()!= null) {
+            this.cliente = new ClienteDTO(entity.getCliente());
+        } else {
+            entity.setCliente(null);
+        }
+    }
+    
+     @Override
+    public HistoriaClinicaEntity toEntity() {
+        HistoriaClinicaEntity historiaCE = super.toEntity();
+        if (this.getCliente()!= null) {
+            historiaCE.setCliente(this.getCliente().toEntity());
+        }
+        return historiaCE;
     }
 
     /**
