@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -25,6 +26,7 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
     /**
      * fecha de expedicion de la factura
      */
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaExpedicion;
     
     /**
