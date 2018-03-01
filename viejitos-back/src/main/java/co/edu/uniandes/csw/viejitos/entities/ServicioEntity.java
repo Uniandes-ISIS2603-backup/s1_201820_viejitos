@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
-import javax.persistence.Temporal
+import javax.persistence.Temporal;
 
 /**
  *
