@@ -71,6 +71,7 @@ public class PagoDetailDTO extends PagoDTO {
         }
     }
     
+    @Override
     public PagoEntity toEntity()
     {
         PagoEntity entity = super.toEntity();

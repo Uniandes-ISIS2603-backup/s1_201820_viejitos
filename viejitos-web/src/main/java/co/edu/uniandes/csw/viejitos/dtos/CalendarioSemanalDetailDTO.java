@@ -6,6 +6,9 @@
 package co.edu.uniandes.csw.viejitos.dtos;
 
 import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
+import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
+import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,28 +73,34 @@ public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
     public CalendarioSemanalDetailDTO(CalendarioSemanalEntity entity)
     {
         super(entity);
+        if(entity!=null)
+       {
+           this.franjasHorarias = new ArrayList<FranjaHorariaDTO>();
+           
+           
+            for (FranjaHorariaEntity entityFranja: entity.getFranjasHorarias() ) 
+            {
+                franjasHorarias.add(new FranjaHorariaDTO(entityFranja));
+            }
+    }
+     
     }
     
-    
-    
-/**
-     *
-     * @param pfranjas las frnajas nueva
-     * 
-     */
-    public void setFranjasHorarias(List<FranjaHorariaDTO> pfranjas) {
-        this.franjasHorarias = pfranjas;
-    }
-
-    /**
-     *
-     * @return las franjas
-     */
-    public List<FranjaHorariaDTO> getFranjasHorarias() {
-        return franjasHorarias;
-    }
-
+public CalendarioSemanalEntity toEntity()
+{
+CalendarioSemanalEntity entity=super.toEntity();
+   entity.setId(this.getId());
+       entity.setUltimaModficacion(this.getUltimaModificacion());
+       List<FranjaHorariaEntity> fs = new ArrayList<FranjaHorariaEntity>();
+       for (FranjaHorariaDTO franja : franjasHorarias) 
+       {
+                fs.add(franja.toEntity());
+       }
+  entity.setFranjas(fs);
+return entity;
+}
 
     
     
+
 }

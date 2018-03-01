@@ -60,7 +60,7 @@ public class CitaDetailDTO extends CitaDTO{
    
    public CitaEntity toEntity()
    {
-       CitaEntity c = new CitaEntity();
+       CitaEntity c = super.toEntity();
        c.setCliente(cliente.toEntity());
        c.setMedico(medico.toEntity());
        return c;

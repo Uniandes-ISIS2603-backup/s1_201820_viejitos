@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.viejitos.ejb;
 import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.FacturaPersistence;
+import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,11 +27,22 @@ public class FacturaLogic {
     @Inject
     private FacturaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
+    @Inject
+    private ServicioPersistence persistenceServicio;
     
     public FacturaEntity create( FacturaEntity entity ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Factura" );
-		// Invoca la persistencia para crear la entidad de Queja
+		// Invoca la persistencia para crear la entidad de Factura
+                // Verifica la regla de negocio que dice que no puede haber dos entidades de Factura con el mismo id
+		if( entity.getServicio() == null )
+		{
+			throw new BusinessLogicException( "La entidad de Factura debe tener un servicio asociado" );
+		}
+                if( persistenceServicio.find(entity.getServicio().getId()) == null )
+		{
+			throw new BusinessLogicException( "El Servicio de la Factura no es válido" );
+		}
 		persistence.create( entity );
 		LOGGER.info( "Termina proceso de creación de entidad de Factura" );
 		return entity;
@@ -39,7 +51,6 @@ public class FacturaLogic {
 	public List<FacturaEntity> getAll( )
 	{
 		LOGGER.info( "Inicia proceso de consultar todas las entidades de Factura" );
-		// Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
 		List<FacturaEntity> entities = persistence.findAll( );
 		LOGGER.info( "Termina proceso de consultar todas las entidades de Factura" );
 		return entities;

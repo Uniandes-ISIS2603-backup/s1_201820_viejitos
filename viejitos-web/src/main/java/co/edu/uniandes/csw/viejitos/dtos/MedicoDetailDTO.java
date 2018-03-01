@@ -113,12 +113,12 @@ public class MedicoDetailDTO extends MedicoDTO{
             {
                 historiasClinicas.add(new HistoriaClinicaDTO(entityHistorias));
             }
-            this.calendario= new CalendarioSemanalDTO(new CalendarioSemanalDTO(entity.getCalendario()));
+            this.calendario= new CalendarioSemanalDTO(entity.getCalendario());
        }
    }
    public MedicoEntity toEntity()
    {
-       MedicoEntity entity = new MedicoEntity();
+       MedicoEntity entity = super.toEntity();
        List<HistoriaClinicaEntity> historias = new ArrayList<HistoriaClinicaEntity>();
        List<CitaEntity> cs = new ArrayList<CitaEntity>();
        List<ClienteEntity> clients = new ArrayList<ClienteEntity>();
