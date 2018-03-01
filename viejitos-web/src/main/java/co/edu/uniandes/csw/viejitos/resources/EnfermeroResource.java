@@ -83,7 +83,11 @@ public class EnfermeroResource {
     @GET
     public List<EnfermeroDetailDTO> getEnfermeros (){
         List<EnfermeroEntity> entidades = logic.getAll();
-        return new ArrayList<>();
+        List<EnfermeroDetailDTO> dtos = new ArrayList<>();
+        for(EnfermeroEntity actual:entidades){
+           dtos.add(new EnfermeroDetailDTO(actual));
+        }
+        return dtos;
     }
     
     /**
@@ -104,7 +108,12 @@ public class EnfermeroResource {
     @GET
     @Path("{login:[a-zA-Z][a-zA-Z0-9]*}")
     public EnfermeroDetailDTO getEnfermero(@PathParam("login") String login){
-        return null;
+        EnfermeroEntity entidad = logic.getByLogin(login);
+        if(entidad==null){
+            return null;
+        }
+        EnfermeroDetailDTO edto = new EnfermeroDetailDTO(entidad);
+        return edto;
     }
     
     /**
@@ -148,5 +157,8 @@ public class EnfermeroResource {
     @DELETE
     @Path( "{login: \\d+}" )
     public void deleteEnfermero( @PathParam( "login" ) String login){
+        try{
+            logic.delete(logic.getByLogin(login));
+        }catch(Exception e){}
     }
 }

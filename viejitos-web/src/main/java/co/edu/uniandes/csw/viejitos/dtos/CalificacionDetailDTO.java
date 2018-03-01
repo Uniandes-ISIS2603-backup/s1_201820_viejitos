@@ -60,7 +60,9 @@ public class CalificacionDetailDTO extends CalificacionDTO{
     }
     
     public CalificacionEntity toEntity(){
-    	return super.toEntity();
+        CalificacionEntity entidad = super.toEntity();
+        entidad.setServicio(servicio.toEntity());
+    	return entidad;
     }
     
 }

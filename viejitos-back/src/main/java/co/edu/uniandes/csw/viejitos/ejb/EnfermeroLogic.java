@@ -46,13 +46,21 @@ public class EnfermeroLogic {
 	return entities;
     }
     
-   public EnfermeroEntity getById( Long id ){
+    public EnfermeroEntity getById( Long id ){
 	return persistencia.find( id );
+    }
+    
+    public EnfermeroEntity getByName(String name){
+        return persistencia.findByName(name);
+    }
+    
+    public EnfermeroEntity getByLogin( String login ){
+        return persistencia.findByLogin(login);
     }
 
     public EnfermeroEntity update( EnfermeroEntity entity ) throws BusinessLogicException{
-        if( persistencia.findByName( entity.getName( ) ) != null ){
-            throw new BusinessLogicException( "Ya existe una entidad de Enfermero con el nombre \"" + entity.getName( ) + "\"" );
+        if( persistencia.findByLogin( entity.getLogin( ) ) != null ){
+            throw new BusinessLogicException( "Ya existe una entidad de Enfermero con el login \"" + entity.getLogin( ) + "\"" );
 	}
 	return persistencia.update( entity );
     }

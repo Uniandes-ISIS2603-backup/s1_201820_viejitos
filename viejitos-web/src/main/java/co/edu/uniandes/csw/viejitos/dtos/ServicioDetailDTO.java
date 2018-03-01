@@ -5,7 +5,10 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
+import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -81,7 +84,7 @@ public class ServicioDetailDTO extends ServicioDTO{
     /**
     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
     * la entidad que viene de argumento.
-    * @param ServicioEntity: Es la entidad que se va a convertir a DTO
+    * @param entity: Es la entidad que se va a convertir a DTO
      */
     public ServicioDetailDTO( ServicioEntity entity )
     {
@@ -89,7 +92,18 @@ public class ServicioDetailDTO extends ServicioDTO{
         
         if(entity!=null)
         {
-        
+          this.calificacion=new CalificacionDTO(entity.getCalificacion());
+          this.cliente= new ClienteDTO(entity.getCliente());
+          this.pagoInicial=new PagoDTO(entity.getPagoInicial());
+          this.pagoFinal=new PagoDTO(entity.getPagoFinal());
+          this.factura=new FacturaDTO(entity.getFactura());
+          this.enfermero=new EnfermeroDTO(entity.getEnfermero());
+          this.quejas= new ArrayList<QuejaDTO>();
+          
+          for (QuejaEntity entityQuejas : entity.getQuejas()) 
+            {
+                quejas.add(new QuejaDTO(entityQuejas));
+            }
         }
     }
         
@@ -97,10 +111,22 @@ public class ServicioDetailDTO extends ServicioDTO{
     * Convertir DTO a Entity
     * @return Un Entity con los valores del DTO
     */
+    @Override
     public ServicioEntity toEntity( )
     {
-        ServicioEntity entity = new ServicioEntity( );
-	
+        ServicioEntity entity = super.toEntity();
+	entity.setCalificacion(this.calificacion.toEntity());
+        entity.setPagoInicial(this.pagoInicial.toEntity());
+        entity.setPagoFinal(this.pagoFinal.toEntity());
+        entity.setCliente(this.cliente.toEntity());
+        entity.setFactura(this.factura.toEntity());
+        List<QuejaEntity> quejasEntity=new ArrayList<QuejaEntity>();
+        for(QuejaDTO actual: quejas)
+        {
+            quejasEntity.add(actual.toEntity());
+        }
+        entity.setQuejas(quejasEntity);
+        entity.setEnfermero(this.enfermero.toEntity());
         return entity;
     }
     

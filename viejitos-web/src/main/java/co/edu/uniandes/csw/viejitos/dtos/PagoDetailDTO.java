@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+import co.edu.uniandes.csw.viejitos.entities.PagoEntity;
+
 /**
  *
  * @author f.escobar
@@ -49,6 +51,39 @@ public class PagoDetailDTO extends PagoDTO {
     private ServicioDTO servicio;
     
     /**
+     * COnstructor
+     */
+    public PagoDetailDTO()
+    {
+        super();
+    }
+    
+    /**
+     * COnstructor
+     * @param entity
+     */
+    public PagoDetailDTO(PagoEntity entity)
+    {
+        super();
+        if(entity.getServicio() != null)
+        {
+            this.servicio = new ServicioDTO(entity.getServicio());
+        }
+    }
+    
+    public PagoEntity toEntity()
+    {
+        PagoEntity entity = super.toEntity();
+        
+        if(this.servicio != null)
+        {
+            entity.setServicio(this.servicio.toEntity());
+        }
+        
+        return entity;
+    }
+    
+    /**
      * @return servicio
      */
     public ServicioDTO getServicio() {
@@ -62,11 +97,5 @@ public class PagoDetailDTO extends PagoDTO {
         this.servicio = servicio;
     }
     
-    /**
-     * COnstructor
-     */
-    public PagoDetailDTO()
-    {
-        super();
-    }
+    
 }

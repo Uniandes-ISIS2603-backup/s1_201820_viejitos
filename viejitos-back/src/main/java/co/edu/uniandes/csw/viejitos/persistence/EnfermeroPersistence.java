@@ -60,6 +60,33 @@ public class EnfermeroPersistence
 		}
 	}
 
+        /**
+	 * Busca si hay alguna entidad de enfermero con el login que se envía de argumento
+	 *
+	 * @param login: Nombre de usuario de la entidad de enfermero que se está buscando
+	 * @return null si no existe ninguna entidad enfermero con el nombre del argumento. Si
+	 * existe alguna devuelve la primera.
+	 */
+	public EnfermeroEntity findByLogin( String login )
+	{
+		LOGGER.log( Level.INFO, "Consultando entidades de enfermeros por login ", login );
+
+		// Se crea un query para buscar entidades de enfermero con el nombre que recibe el método como argumento. ":name" es un placeholder que debe ser remplazado
+		TypedQuery<EnfermeroEntity> query = em.createQuery( "Select e From EnfermeroEntity e where e.login = :login", EnfermeroEntity.class );
+		// Se remplaza el placeholder ":login" con el valor del argumento
+		query = query.setParameter( "login", login );
+		// Se invoca el query se obtiene la lista resultado
+		List<EnfermeroEntity> sameLogin = query.getResultList( );
+		if( sameLogin.isEmpty( ) )
+		{
+			return null;
+		}
+		else
+		{
+			return sameLogin.get( 0 );
+		}
+	}
+        
 	public List<EnfermeroEntity> findAll( )
 	{
 		LOGGER.info( "Consultando todas las entidades de enfermeros" );

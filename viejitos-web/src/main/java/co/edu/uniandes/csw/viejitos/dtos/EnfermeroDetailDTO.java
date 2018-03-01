@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.dtos;
 
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import java.util.List;
 
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
@@ -74,7 +75,14 @@ public class EnfermeroDetailDTO extends EnfermeroDTO{
             srDTOS.add(actual);
         }
         this.servicios = srDTOS;
-        
+        List<ClienteEntity> clients = entidad.getClientes();
+        List<ClienteDTO> clDTOS = new ArrayList<>();
+        for(ClienteEntity cl: clients){
+            ClienteDTO actual = new ClienteDTO(cl);
+            clDTOS.add(actual);
+        }
+        this.cliente = clDTOS;
+        this.calendar = new CalendarioSemanalDTO(entidad.getCalendario());
     }
 
     public List<CalificacionDTO> getCalificaciones() {
@@ -92,10 +100,42 @@ public class EnfermeroDetailDTO extends EnfermeroDTO{
     public void setServicios(List<ServicioDTO> servicios) {
         this.servicios = servicios;
     }
+
+    public List<ClienteDTO> getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(List<ClienteDTO> cliente) {
+        this.cliente = cliente;
+    }
+
+    public CalendarioSemanalDTO getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(CalendarioSemanalDTO calendar) {
+        this.calendar = calendar;
+    }
     
     @Override
     public EnfermeroEntity toEntity(){
     	EnfermeroEntity entidad = super.toEntity();
+        //entidad.setCalendario(this.calendar.toEntity());
+        List<CalificacionEntity> cals = new ArrayList<>();
+        for(CalificacionDTO actual: calificaciones){
+            cals.add(actual.toEntity());
+        }
+        entidad.setCalificaciones(cals);
+        List<ClienteEntity> cls = new ArrayList<>();
+        for(ClienteDTO actual: cliente){
+            cls.add(actual.toEntity());
+        }
+        entidad.setClientes(cls);
+        List<ServicioEntity> servs = new ArrayList<>();
+        for(ServicioDTO actual: servicios){
+            servs.add(actual.toEntity());
+        }
+        entidad.setServicios(servs);
     	return entidad;
     }
 }

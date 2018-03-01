@@ -93,9 +93,9 @@ public class MedicoResource
 	 * <pre>Cuerpo de petición: JSON {@link MedicoDetailDTO}.
          * Codigos de respuesta:
          * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Actualiza la cita con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+         * 200 OK Actualiza el medico con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
          * <code style="color: #c7254e; background-color: #f9f2f4;">
-         * 404 Not Found. No existe una cita con el id dado.
+         * 404 Not Found. No existe un medico con el id dado.
          * </code> 
          * </pre>
 	 *

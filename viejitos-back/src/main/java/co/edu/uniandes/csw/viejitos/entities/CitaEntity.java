@@ -26,6 +26,7 @@ package co.edu.uniandes.csw.viejitos.entities;
 import co.edu.uniandes.csw.viejitos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -52,7 +53,7 @@ public class CitaEntity extends BaseEntity implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, targetEntity = ClienteEntity.class)
     private ClienteEntity cliente;
     @PodamExclude
-    @OneToMany
+    @OneToMany(mappedBy="citas", orphanRemoval = true, cascade = CascadeType.ALL)
     private MedicoEntity medico;
     
     public CitaEntity()
