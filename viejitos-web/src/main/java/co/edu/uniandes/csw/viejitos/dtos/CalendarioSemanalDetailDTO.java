@@ -88,7 +88,7 @@ public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
     
 public CalendarioSemanalEntity toEntity()
 {
-CalendarioSemanalEntity entity=new CalendarioSemanalEntity();
+CalendarioSemanalEntity entity=super.toEntity();
    entity.setId(this.getId());
        entity.setUltimaModficacion(this.getUltimaModificacion());
        List<FranjaHorariaEntity> fs = new ArrayList<FranjaHorariaEntity>();
