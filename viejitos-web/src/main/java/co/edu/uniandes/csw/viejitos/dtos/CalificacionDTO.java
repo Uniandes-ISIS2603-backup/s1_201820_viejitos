@@ -132,8 +132,6 @@ public class CalificacionDTO {
 		entidad.setTipoCalificado(tipoCalificado);
 		entidad.setTipoCalificador(tipoCalificador);
 		return entidad;
-
-
 	}
 
 }

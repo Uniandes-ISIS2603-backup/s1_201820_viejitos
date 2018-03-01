@@ -63,6 +63,7 @@ public class CalificacionResource {
      */
     @POST
     public CalificacionDetailDTO createCalificacion( CalificacionDetailDTO dto ) throws BusinessLogicException{
+        logic.create(dto.toEntity());
         return dto;
     }
     
@@ -109,8 +110,10 @@ public class CalificacionResource {
     @GET
     @Path("{id:[0-9]*}")
     public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id){
-        logic.getById(id);
-        return null;
+        CalificacionEntity calif = logic.getById(id);
+        if(calif == null)
+            return null;
+        else return new CalificacionDetailDTO( calif );
     }
     
     /**

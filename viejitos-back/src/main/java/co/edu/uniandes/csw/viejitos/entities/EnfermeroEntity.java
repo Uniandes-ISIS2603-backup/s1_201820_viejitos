@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.viejitos.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -29,6 +30,9 @@ public class EnfermeroEntity extends BaseEntity implements Serializable{
     
     @OneToOne
     private CalendarioSemanalEntity calendario;
+    
+    @ManyToMany
+    private List<ClienteEntity> clientes;
 
 
     public void setCV(String cv){
@@ -86,5 +90,23 @@ public class EnfermeroEntity extends BaseEntity implements Serializable{
     public void setServicios(List<ServicioEntity> servicios) {
         this.servicios = servicios;
     }
+
+    public CalendarioSemanalEntity getCalendario() {
+        return calendario;
+    }
+
+    public void setCalendario(CalendarioSemanalEntity calendario) {
+        this.calendario = calendario;
+    }
+
+    public List<ClienteEntity> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<ClienteEntity> clientes) {
+        this.clientes = clientes;
+    }
+    
+    
 	
 }
