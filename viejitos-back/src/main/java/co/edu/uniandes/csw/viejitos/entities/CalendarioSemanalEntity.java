@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.entities;
 
+import co.edu.uniandes.csw.viejitos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -28,15 +30,16 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class CalendarioSemanalEntity extends BaseEntity implements Serializable
 {
    @Temporal(TemporalType.DATE)
+   @PodamStrategyValue(DateStrategy.class)
     private Date ultimaModficacion;
 
    @PodamExclude
    @OneToMany(cascade=CascadeType.ALL,orphanRemoval=true,mappedBy= "calendario", targetEntity= FranjaHorariaEntity.class )
   private List<FranjaHorariaEntity> franjas=new ArrayList<FranjaHorariaEntity>();
-   
+   @PodamExclude
    @OneToOne
    private EnfermeroEntity enfermero;
-   
+   @PodamExclude
    @OneToOne(mappedBy="calendario",targetEntity=MedicoEntity.class)
    private MedicoEntity medico;
 
