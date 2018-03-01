@@ -50,10 +50,11 @@ public class CitaEntity extends BaseEntity implements Serializable {
     @PodamStrategyValue(DateStrategy.class)
     private Date hora;
     @PodamExclude
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = ClienteEntity.class)
+    @OneToOne(fetch = FetchType.LAZY, targetEntity = ClienteEntity.class, cascade = CascadeType.PERSIST
+    )
     private ClienteEntity cliente;
     @PodamExclude
-    @OneToMany(mappedBy="citas", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="citas", cascade = CascadeType.PERSIST)
     private MedicoEntity medico;
     
     public CitaEntity()
