@@ -53,6 +53,52 @@ public class CalendarioSemanalEntity extends BaseEntity implements Serializable
     public void setUltimaModficacion(Date ultimaModficacion) {
         this.ultimaModficacion = ultimaModficacion;
     }
+
+    /**
+     * @return the franjas
+     */
+    public List<FranjaHorariaEntity> getFranjas() {
+        return franjas;
+    }
+
+    /**
+     * @param franjas the franjas to set
+     */
+    public void setFranjas(List<FranjaHorariaEntity> franjas) {
+        this.franjas = franjas;
+    }
+
+    /**
+     * @return the enfermero
+     */
+    public EnfermeroEntity getEnfermero() {
+        return enfermero;
+    }
+
+    /**
+     * @param enfermero the enfermero to set
+     */
+    public void setEnfermero(EnfermeroEntity enfermero) {
+        this.enfermero = enfermero;
+    }
+
+    /**
+     * @return the medico
+     */
+    public MedicoEntity getMedico() {
+        return medico;
+    }
+
+    /**
+     * @param medico the medico to set
+     */
+    public void setMedico(MedicoEntity medico) {
+        this.medico = medico;
+    }
+
+    public Iterable<FranjaHorariaEntity> getFranjasHorarias() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

@@ -85,6 +85,16 @@ public class CalendarioSemanalDTO {
         }
         
     }
+    
+    public CalendarioSemanalEntity toEntity()
+    {
+        CalendarioSemanalEntity entity=new CalendarioSemanalEntity();
+       entity.setId(this.getId());
+       entity.setUltimaModficacion(this.getUltimaModificacion());
+        
+        return entity;
+    
+    }
      
      
     

@@ -31,6 +31,8 @@ private CalendarioSemanalEntity calendario;
         return horaInicio;
     }
 
+   
+    
     /**
      * @param horaInicio the horaInicio to set
      */
@@ -55,14 +57,14 @@ private CalendarioSemanalEntity calendario;
     /**
      * @return the ocupado
      */
-    public Boolean getOcupado() {
+    public Boolean isOcupado() {
         return ocupado;
     }
 
     /**
      * @param ocupado the ocupado to set
      */
-    public void isOcupado(Boolean ocupado) {
+    public void setOcupado(Boolean ocupado) {
         this.ocupado = ocupado;
     }
 
@@ -78,6 +80,20 @@ private CalendarioSemanalEntity calendario;
      */
     public void setDiaSemana(String diaSemana) {
         this.diaSemana = diaSemana;
+    }
+
+    /**
+     * @return the calendario
+     */
+    public CalendarioSemanalEntity getCalendario() {
+        return calendario;
+    }
+
+    /**
+     * @param calendario the calendario to set
+     */
+    public void setCalendario(CalendarioSemanalEntity calendario) {
+        this.calendario = calendario;
     }
 
    
