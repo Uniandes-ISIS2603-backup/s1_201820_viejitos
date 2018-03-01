@@ -32,14 +32,6 @@ public class FacturaPersistence {
         return em.find(FacturaEntity.class, id);
     }
 
-    public FacturaEntity findByName(String name) {
-        LOGGER.log(Level.INFO, "Consultando factura con name= ", name);
-        TypedQuery<FacturaEntity> q
-                = em.createQuery("select u from FacturaEntity u where u.name = :name", FacturaEntity.class);
-        q = q.setParameter("name", name);
-        return q.getSingleResult();
-    }
-
     public List<FacturaEntity> findAll() {
         LOGGER.info("Consultando todos las facturas");
         Query q = em.createQuery("select u from FacturaEntity u");

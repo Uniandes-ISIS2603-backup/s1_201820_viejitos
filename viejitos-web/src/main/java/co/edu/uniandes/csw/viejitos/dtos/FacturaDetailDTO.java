@@ -77,6 +77,7 @@ public class FacturaDetailDTO extends FacturaDTO {
         }
     }
     
+    @Override
     public FacturaEntity toEntity()
     {
         FacturaEntity entity = super.toEntity();
