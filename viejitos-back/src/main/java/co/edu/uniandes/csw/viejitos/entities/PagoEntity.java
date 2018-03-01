@@ -31,6 +31,7 @@ public class PagoEntity extends BaseEntity implements Serializable{
     /**
      * fecha limite de pago
      */
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaLimite;
     
     /**
