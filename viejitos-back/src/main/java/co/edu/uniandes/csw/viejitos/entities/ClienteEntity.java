@@ -35,27 +35,27 @@ public class ClienteEntity extends BaseEntity implements Serializable
     
     private String contrasena;
     
-    @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @PodamExclude
     private List<ServicioEntity> servicios;
     
-    @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.LAZY)
     @PodamExclude
     private List<QuejaEntity> quejas;
     
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @PodamExclude
     private CalificacionEntity calificacion;
     
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @PodamExclude
     private List<CalificacionEntity> calificaciones;
     
-    @OneToOne(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @PodamExclude
     private CitaEntity cita;
     
-    @ManyToMany(mappedBy = "clientes", fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @PodamExclude
     private MedicoEntity medico;
     
@@ -63,7 +63,7 @@ public class ClienteEntity extends BaseEntity implements Serializable
     @PodamExclude
     private EnfermeroEntity enfermero;
     
-    @OneToOne(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
     @PodamExclude
     private HistoriaClinicaEntity historiaC;
 
