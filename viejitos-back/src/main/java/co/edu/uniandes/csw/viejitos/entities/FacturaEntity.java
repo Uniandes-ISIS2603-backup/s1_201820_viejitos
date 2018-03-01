@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import uk.co.jemos.podam.common.PodamExclude;
+import javax.persistence.CascadeType;
 
 /**
  *
@@ -57,7 +59,8 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
     /**
      * asociacion al servicio
      */
-    @OneToOne (mappedBy="factura") 
+    @PodamExclude
+    @OneToOne (mappedBy="factura", cascade = CascadeType.PERSIST) 
     private ServicioEntity servicio;
 
     /**
