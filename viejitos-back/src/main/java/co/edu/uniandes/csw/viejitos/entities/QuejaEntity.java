@@ -17,7 +17,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class QuejaEntity extends BaseEntity implements Serializable{
 
-         private String reclamo;
+    private String reclamo;
     
     private Boolean resuelto;
     

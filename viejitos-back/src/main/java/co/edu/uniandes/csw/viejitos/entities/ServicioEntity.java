@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -30,24 +31,27 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     private Boolean finalizado;
     
     @OneToMany (mappedBy="servicio") 
+    @PodamExclude
     private List<QuejaEntity> quejas;
     
-    @OneToOne (mappedBy="servicio", orphanRemoval = true) 
+    @OneToOne (mappedBy="servicio", orphanRemoval = true)
     private CalificacionEntity calificacion;
     
-    @ManyToOne  
+    @ManyToOne
+    @PodamExclude
     private EnfermeroEntity enfermero;
    
     @OneToOne 
     private FacturaEntity factura;
     
-    @ManyToOne 
+    @ManyToOne
+    @PodamExclude
     private ClienteEntity cliente;
     
-    @OneToOne 
+    @OneToOne
     private PagoEntity pagoInicial;
     
-    @OneToOne 
+    @OneToOne
     private PagoEntity pagoFinal;
     /**
      * @return the pagoInicial
