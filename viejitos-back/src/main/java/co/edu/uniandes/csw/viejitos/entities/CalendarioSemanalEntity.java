@@ -34,13 +34,13 @@ public class CalendarioSemanalEntity extends BaseEntity implements Serializable
     private Date ultimaModficacion;
 
    @PodamExclude
-   @OneToMany(cascade=CascadeType.ALL,orphanRemoval=true,mappedBy= "calendario", targetEntity= FranjaHorariaEntity.class )
+   @OneToMany(cascade=CascadeType.PERSIST,orphanRemoval=true,mappedBy= "calendario", targetEntity= FranjaHorariaEntity.class )
   private List<FranjaHorariaEntity> franjas=new ArrayList<FranjaHorariaEntity>();
    @PodamExclude
    @OneToOne
    private EnfermeroEntity enfermero;
    @PodamExclude
-   @OneToOne(mappedBy="calendario",targetEntity=MedicoEntity.class)
+   @OneToOne(mappedBy="calendario",cascade=CascadeType.PERSIST,targetEntity=MedicoEntity.class)
    private MedicoEntity medico;
 
     /**
