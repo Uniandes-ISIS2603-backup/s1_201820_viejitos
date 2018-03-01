@@ -7,12 +7,14 @@ package co.edu.uniandes.csw.viejitos.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import org.eclipse.persistence.jpa.config.Cascade;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -33,7 +35,7 @@ public class ClienteEntity extends BaseEntity implements Serializable
     
     private String contrasena;
     
-    @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @PodamExclude
     private List<ServicioEntity> servicios;
     

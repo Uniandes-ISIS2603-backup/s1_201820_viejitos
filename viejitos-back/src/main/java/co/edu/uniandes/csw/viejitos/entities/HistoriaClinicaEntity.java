@@ -23,7 +23,7 @@ public class HistoriaClinicaEntity extends BaseEntity implements Serializable
     
     private String cirugias;
     
-    @OneToOne(mappedBy = "historiaC", fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @PodamExclude
     private ClienteEntity cliente;
 
