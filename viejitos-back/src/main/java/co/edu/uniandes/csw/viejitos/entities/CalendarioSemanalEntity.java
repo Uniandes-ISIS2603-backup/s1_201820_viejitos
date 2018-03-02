@@ -29,6 +29,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class CalendarioSemanalEntity extends BaseEntity implements Serializable
 {
+    
    @Temporal(TemporalType.DATE)
    @PodamStrategyValue(DateStrategy.class)
     private Date ultimaModficacion;
@@ -40,7 +41,9 @@ public class CalendarioSemanalEntity extends BaseEntity implements Serializable
    @OneToOne
    private EnfermeroEntity enfermero;
    @PodamExclude
-   @OneToOne(mappedBy="calendario",cascade=CascadeType.PERSIST,targetEntity=MedicoEntity.class)
+  //   @OneToOne(mappedBy="calendario",cascade=CascadeType.PERSIST,targetEntity=MedicoEntity.class)
+
+   @OneToOne(mappedBy="calendario",targetEntity=MedicoEntity.class)
    private MedicoEntity medico;
 
     /**
