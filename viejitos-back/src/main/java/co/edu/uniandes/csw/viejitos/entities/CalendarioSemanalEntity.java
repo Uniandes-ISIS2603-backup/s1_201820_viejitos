@@ -29,6 +29,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class CalendarioSemanalEntity extends BaseEntity implements Serializable
 {
+    
    @Temporal(TemporalType.DATE)
    @PodamStrategyValue(DateStrategy.class)
     private Date ultimaModficacion;
@@ -36,12 +37,8 @@ public class CalendarioSemanalEntity extends BaseEntity implements Serializable
    @PodamExclude
    @OneToMany(cascade=CascadeType.PERSIST,orphanRemoval=true,mappedBy= "calendario", targetEntity= FranjaHorariaEntity.class )
   private List<FranjaHorariaEntity> franjas=new ArrayList<FranjaHorariaEntity>();
-   @PodamExclude
-   @OneToOne
-   private EnfermeroEntity enfermero;
-   @PodamExclude
-   @OneToOne(mappedBy="calendario",cascade=CascadeType.PERSIST,targetEntity=MedicoEntity.class)
-   private MedicoEntity medico;
+ 
+
 
     /**
      * @return the ultimaModficacion
@@ -71,33 +68,9 @@ public class CalendarioSemanalEntity extends BaseEntity implements Serializable
         this.franjas = franjas;
     }
 
-    /**
-     * @return the enfermero
-     */
-    public EnfermeroEntity getEnfermero() {
-        return enfermero;
-    }
+    
 
-    /**
-     * @param enfermero the enfermero to set
-     */
-    public void setEnfermero(EnfermeroEntity enfermero) {
-        this.enfermero = enfermero;
-    }
-
-    /**
-     * @return the medico
-     */
-    public MedicoEntity getMedico() {
-        return medico;
-    }
-
-    /**
-     * @param medico the medico to set
-     */
-    public void setMedico(MedicoEntity medico) {
-        this.medico = medico;
-    }
+    
 
     public Iterable<FranjaHorariaEntity> getFranjasHorarias() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
