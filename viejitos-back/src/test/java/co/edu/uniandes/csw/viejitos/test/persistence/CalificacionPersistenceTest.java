@@ -34,7 +34,7 @@ public class CalificacionPersistenceTest {
     private EntityManager em;
     
     @Deployment
-    public JavaArchive createDeployment(){
+    public static JavaArchive createDeployment(){
      return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(CalificacionEntity.class.getPackage())
                 .addPackage(CalificacionPersistence.class.getPackage())
