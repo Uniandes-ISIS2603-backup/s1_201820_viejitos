@@ -59,9 +59,9 @@ public class ClienteEntity extends BaseEntity implements Serializable
     @PodamExclude
     private MedicoEntity medico;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @PodamExclude
-    private EnfermeroEntity enfermero;
+    private List<EnfermeroEntity> enfermeros;
     
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
     @PodamExclude
@@ -72,6 +72,20 @@ public class ClienteEntity extends BaseEntity implements Serializable
      */
     public Integer getEstado() {
         return estado;
+    }
+
+    /**
+     * @return the enfermeros
+     */
+    public List<EnfermeroEntity> getEnfermeros() {
+        return enfermeros;
+    }
+
+    /**
+     * @param enfermeros the enfermeros to set
+     */
+    public void setEnfermeros(List<EnfermeroEntity> enfermeros) {
+        this.enfermeros = enfermeros;
     }
 
     /**
@@ -219,20 +233,6 @@ public class ClienteEntity extends BaseEntity implements Serializable
      */
     public void setMedico(MedicoEntity medico) {
         this.medico = medico;
-    }
-
-    /**
-     * @return the enfermero
-     */
-    public EnfermeroEntity getEnfermero() {
-        return enfermero;
-    }
-
-    /**
-     * @param enfermero the enfermero to set
-     */
-    public void setEnfermero(EnfermeroEntity enfermero) {
-        this.enfermero = enfermero;
     }
 
     /**

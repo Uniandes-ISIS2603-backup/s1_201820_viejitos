@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.dtos;
 
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
+import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import java.util.ArrayList;
@@ -136,7 +137,7 @@ public class ClienteDetailDTO extends ClienteDTO
     private List<CalificacionDTO> calificaciones;
     private CitaDTO cita;
     private MedicoDTO medico;
-    private EnfermeroDTO enfermero;
+    private List<EnfermeroDTO> enfermeros;
     private HistoriaClinicaDTO historiaC;
     
     public ClienteDetailDTO()
@@ -185,10 +186,11 @@ public class ClienteDetailDTO extends ClienteDTO
             entity.setMedico(null);
         }
         
-        if (entity.getEnfermero()!= null) {
-            this.enfermero = new EnfermeroDTO(entity.getEnfermero());
-        } else {
-            entity.setEnfermero(null);
+        if (entity.getEnfermeros()!= null) {
+            enfermeros = new ArrayList<>();
+            for (EnfermeroEntity entityEnfermero : entity.getEnfermeros()) {
+                enfermeros.add(new EnfermeroDTO(entityEnfermero));
+            }
         }
         
         if (entity.getHistoriaC()!= null) {
@@ -209,8 +211,12 @@ public class ClienteDetailDTO extends ClienteDTO
             clienteE.setCita(this.getCita().toEntity());
         }
         
-        if (this.getEnfermero()!= null) {
-            clienteE.setEnfermero(this.getEnfermero().toEntity());
+        if (getEnfermeros()!= null) {
+            List<EnfermeroEntity> enfermerosEntity = new ArrayList<>();
+            for (EnfermeroDTO dtoEnfermero : getEnfermeros()) {
+                enfermerosEntity.add(dtoEnfermero.toEntity());
+            }
+            clienteE.setEnfermeros(enfermerosEntity);
         }
         
         if (this.getHistoriaC()!= null) {
@@ -303,20 +309,6 @@ public class ClienteDetailDTO extends ClienteDTO
     }
 
     /**
-     * @return the enfermero
-     */
-    public EnfermeroDTO getEnfermero() {
-        return enfermero;
-    }
-
-    /**
-     * @param enfermero the enfermero to set
-     */
-    public void setEnfermero(EnfermeroDTO enfermero) {
-        this.enfermero = enfermero;
-    }
-
-    /**
      * @return the historiaC
      */
     public HistoriaClinicaDTO getHistoriaC() {
@@ -356,6 +348,20 @@ public class ClienteDetailDTO extends ClienteDTO
      */
     public void setMedico(MedicoDTO medico) {
         this.medico = medico;
+    }
+
+    /**
+     * @return the enfermeros
+     */
+    public List<EnfermeroDTO> getEnfermeros() {
+        return enfermeros;
+    }
+
+    /**
+     * @param enfermeros the enfermeros to set
+     */
+    public void setEnfermeros(List<EnfermeroDTO> enfermeros) {
+        this.enfermeros = enfermeros;
     }
     
     
