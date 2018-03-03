@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.viejitos.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -32,11 +33,12 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     
     private Boolean finalizado;
     
-    @OneToMany (mappedBy="servicio") 
+    @OneToMany (mappedBy="servicio", cascade=CascadeType.PERSIST) 
     @PodamExclude
     private List<QuejaEntity> quejas;
     
-    @OneToOne (mappedBy="servicio", orphanRemoval = true)
+    @OneToOne (mappedBy="servicio", cascade=CascadeType.PERSIST)
+    @PodamExclude
     private CalificacionEntity calificacion;
     
     @ManyToOne
@@ -44,16 +46,18 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     private EnfermeroEntity enfermero;
    
     @OneToOne 
+    @PodamExclude
     private FacturaEntity factura;
     
     @ManyToOne
     @PodamExclude
     private ClienteEntity cliente;
     
-    @OneToOne
+    @OneToOne (cascade=CascadeType.PERSIST)
+    @PodamExclude 
     private PagoEntity pagoInicial;
     
-    @OneToOne
+    @OneToOne (cascade=CascadeType.PERSIST)
     private PagoEntity pagoFinal;
     /**
      * @return the pagoInicial

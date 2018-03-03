@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.viejitos.entities;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable{
@@ -21,6 +22,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
         
         //Relacion de entidad On
         @OneToOne
+        @PodamExclude
         private ServicioEntity servicio;
 
 	public String getLoginCalificador(){

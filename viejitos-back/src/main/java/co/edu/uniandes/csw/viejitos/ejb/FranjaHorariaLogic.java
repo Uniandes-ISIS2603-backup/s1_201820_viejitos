@@ -10,12 +10,14 @@ import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.CalendarioSemanalPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.FranjaHorariaPersistence;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author lf.naranjo11
  */
+@Stateless
 public class FranjaHorariaLogic {
       private static final Logger LOGGER = Logger.getLogger( FranjaHorariaLogic.class.getName( ) );
 

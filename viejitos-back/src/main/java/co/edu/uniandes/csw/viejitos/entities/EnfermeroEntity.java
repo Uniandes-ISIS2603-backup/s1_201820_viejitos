@@ -7,6 +7,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @Entity
 @XmlRootElement
@@ -22,16 +23,20 @@ public class EnfermeroEntity extends BaseEntity implements Serializable{
 
     //Relacion de entidades OneToMany
     @OneToMany
+    @PodamExclude
     private List<CalificacionEntity> calificaciones;
 
     //Relacion de entidades OneToMany
     @OneToMany(mappedBy = "enfermero")
+    @PodamExclude
     private List<ServicioEntity> servicios;
     
     @OneToOne
+    @PodamExclude
     private CalendarioSemanalEntity calendario;
     
     @ManyToMany
+    @PodamExclude
     private List<ClienteEntity> clientes;
 
 
