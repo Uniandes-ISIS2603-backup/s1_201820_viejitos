@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.HistoriaClinicaDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.HistoriaClinicaLogic;
+import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "historia clinica".
@@ -34,7 +36,7 @@ import javax.ws.rs.Produces;
 public class HistoriaClinicaResource
 { 
     @Inject
-    private HistoriaClinicaLogic hcLogic;
+    HistoriaClinicaLogic hcLogic;
     /**
 	 * <h1>POST /api/historiasc : Crear una entidad de HistoriaClinica.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link HistoriaClinicaDetailDTO}.
@@ -48,9 +50,9 @@ public class HistoriaClinicaResource
 	 * @return JSON {@link HistoriaClinicaDetailDTO}  - La entidad de HistoriaClinica guardada.
 	 */
 	@POST
-	public HistoriaClinicaDetailDTO createHistoriaC( HistoriaClinicaDetailDTO dto ) 
+	public HistoriaClinicaDetailDTO createHistoriaC( HistoriaClinicaDetailDTO dto ) throws BusinessLogicException 
 	{
-		return dto;
+		return new HistoriaClinicaDetailDTO(hcLogic.create(dto.toEntity()));
 	}
         
         /**
@@ -65,7 +67,7 @@ public class HistoriaClinicaResource
 	@GET
 	public List<HistoriaClinicaDetailDTO> getHistoriasC( )
 	{
-		return new ArrayList<>();
+		return listHistoriaClinicaEntity2DetailDTO(hcLogic.getAll());
 	}
         
         /**
@@ -85,7 +87,12 @@ public class HistoriaClinicaResource
 	@Path( "{id: \\d+}" )
 	public HistoriaClinicaDetailDTO getHistoriaC( @PathParam( "id" ) Long id )
 	{
-		return null;
+            HistoriaClinicaEntity entity = hcLogic.getById(id);
+            if (entity == null)
+            {
+                throw new WebApplicationException("El recurso /historiasc/" + id + " no existe.", 404);
+            }
+            return new HistoriaClinicaDetailDTO(entity);
 	}
         
         /**
@@ -107,7 +114,13 @@ public class HistoriaClinicaResource
 	@Path( "{id: \\d+}" )
 	public HistoriaClinicaDetailDTO updateHistoriaC( @PathParam( "id" ) Long id, HistoriaClinicaDetailDTO detailDTO ) 
         {
-		return detailDTO;
+            detailDTO.setId(id);
+            HistoriaClinicaEntity entity = hcLogic.getById(id);
+            if (entity == null)
+            {
+                throw new WebApplicationException("El recurso /historiasc/" + id + " no existe.", 404);
+            }
+            return new HistoriaClinicaDetailDTO(hcLogic.update(detailDTO.toEntity()));
 	}
         
         /**
@@ -127,7 +140,22 @@ public class HistoriaClinicaResource
 	@Path( "{id: \\d+}" )
 	public void deleteHistoriaC( @PathParam( "id" ) Long id )
 	{
-		// Void
+            HistoriaClinicaEntity entity = hcLogic.getById(id);
+            if (entity == null)
+            {
+                throw new WebApplicationException("El recurso /historiasc/" + id + " no existe.", 404);
+            }
+            hcLogic.delete(entity);
 	}
+        
+        private List<HistoriaClinicaDetailDTO> listHistoriaClinicaEntity2DetailDTO(List<HistoriaClinicaEntity> entityList)
+        {
+            List<HistoriaClinicaDetailDTO> list = new ArrayList<>();
+            for (HistoriaClinicaEntity entity : entityList)
+            {
+                list.add(new HistoriaClinicaDetailDTO(entity));
+            }
+            return list;
+        }
 }
 
