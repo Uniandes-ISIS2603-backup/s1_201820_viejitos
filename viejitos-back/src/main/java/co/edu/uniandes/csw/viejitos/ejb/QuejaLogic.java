@@ -84,7 +84,7 @@ public class QuejaLogic {
 		return persistence.update( entity );
 	}
 
-	public void delete( QuejaEntity entity )
+	public void delete( QuejaEntity entity ) 
 	{
 		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Queja con id={0}", entity.getId( ) );
 		persistence.delete( entity.getId() );

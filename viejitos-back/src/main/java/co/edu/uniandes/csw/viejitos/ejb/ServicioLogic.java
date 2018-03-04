@@ -100,7 +100,7 @@ public class ServicioLogic {
 		return persistence.update( entity );
 	}
 
-	public void delete( ServicioEntity entity ) throws BusinessLogicException
+	public void delete( ServicioEntity entity )
 	{
 		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Servicio con id={0}", entity.getId( ) );
 		persistence.delete( entity.getId() );
