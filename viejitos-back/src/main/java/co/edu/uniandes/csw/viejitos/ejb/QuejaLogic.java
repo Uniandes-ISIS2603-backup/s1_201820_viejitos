@@ -8,6 +8,7 @@ import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.QuejaPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
+import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,9 @@ public class QuejaLogic {
         @Inject
         private ClientePersistence clientePersistence;
         
+        @Inject 
+        private ServicioPersistence servicioPersistence;
+        
 	public QuejaEntity create( QuejaEntity entity ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Queja" );
@@ -37,6 +41,11 @@ public class QuejaLogic {
 		if( clientePersistence.findByLogin(entity.getCliente().getLogin())==null )
 		{
 			throw new BusinessLogicException( "No existe un cliente con el login \"" + entity.getCliente().getLogin()+ "\"" );
+		}
+                // Verifica la regla de negocio que una queja debe tener un servicio existente asociado.
+		if( servicioPersistence.find(entity.getServicio().getId())==null )
+		{
+			throw new BusinessLogicException( "No existe un servicio con el id \"" + entity.getServicio().getId()+ "\"" );
 		}
 		// Invoca la persistencia para crear la entidad de Queja
 		persistence.create( entity );

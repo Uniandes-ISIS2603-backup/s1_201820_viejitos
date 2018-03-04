@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.ejb;
 
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
 import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,9 +28,17 @@ public class ServicioLogic {
 	@Inject
 	private ServicioPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
+        @Inject
+        private ClientePersistence clientePersistence;
+        
 	public ServicioEntity create( ServicioEntity entity ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Servicio" );
+                // Verifica la regla de negocio que un servicio debe tener un cliente existente asociado.
+		if( clientePersistence.findByLogin(entity.getCliente().getLogin())==null )
+		{
+			throw new BusinessLogicException( "No existe un cliente con el login \"" + entity.getCliente().getLogin()+ "\"" );
+		}
 		// Invoca la persistencia para crear la entidad de Queja
 		persistence.create( entity );
 		LOGGER.info( "Termina proceso de creación de entidad de Servicio" );
