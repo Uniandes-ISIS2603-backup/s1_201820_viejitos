@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
+import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "cliente".
@@ -34,7 +36,7 @@ import javax.ws.rs.Produces;
 public class ClienteResource
 {
     @Inject
-    private ClienteLogic cLogic;
+    ClienteLogic cLogic;
     /**
 	 * <h1>POST /api/clientes : Crear una entidad de Cliente.</h1>
 	* <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
@@ -50,9 +52,9 @@ public class ClienteResource
 	 *
 	 */
 	@POST
-	public ClienteDetailDTO createCliente( ClienteDetailDTO dto ) 
+	public ClienteDetailDTO createCliente( ClienteDetailDTO dto ) throws BusinessLogicException 
 	{
-		return dto;
+		return new ClienteDetailDTO(cLogic.create(dto.toEntity()));
 	}
         
         /**
@@ -67,7 +69,7 @@ public class ClienteResource
 	@GET
 	public List<ClienteDetailDTO> getClientes( )
 	{
-		return new ArrayList<>();
+		return listClienteEntity2DetailDTO(cLogic.getAll());
 	}
         
         /**
@@ -87,7 +89,12 @@ public class ClienteResource
 	@Path( "{id: \\d+}" )
 	public ClienteDetailDTO getCliente( @PathParam( "id" ) Long id )
 	{
-		return null;
+            ClienteEntity entity = cLogic.getById(id);
+            if (entity == null)
+            {
+                throw new WebApplicationException("El recurso /clientes/" + id + " no existe.", 404);
+            }
+            return new ClienteDetailDTO(entity);
 	}
         
         /**
@@ -108,9 +115,15 @@ public class ClienteResource
 	 */
 	@PUT
 	@Path( "{id: \\d+}" )
-	public ClienteDetailDTO updateCliente( @PathParam( "id" ) Long id, ClienteDetailDTO detailDTO ) 
+	public ClienteDetailDTO updateCliente( @PathParam( "id" ) Long id, ClienteDetailDTO detailDTO ) throws BusinessLogicException 
 	{
-		return detailDTO;
+            detailDTO.setId(id);
+            ClienteEntity entity = cLogic.getById(id);
+            if (entity == null)
+            {
+                throw new WebApplicationException("El recurso /clientes/" + id + " no existe.", 404);
+            }
+            return new ClienteDetailDTO(cLogic.update(detailDTO.toEntity()));
 	}
         
         /**
@@ -129,6 +142,21 @@ public class ClienteResource
 	@Path( "{id: \\d+}" )
 	public void deleteCliente( @PathParam( "id" ) Long id )
 	{
-		// Void
+            ClienteEntity entity = cLogic.getById(id);
+            if (entity == null)
+            {
+                throw new WebApplicationException("El recurso /clientes/" + id + " no existe.", 404);
+            }
+            cLogic.delete(entity);
 	}
+        
+        private List<ClienteDetailDTO> listClienteEntity2DetailDTO(List<ClienteEntity> entityList)
+        {
+            List<ClienteDetailDTO> list = new ArrayList<>();
+            for (ClienteEntity entity : entityList)
+            {
+                list.add(new ClienteDetailDTO(entity));
+            }
+            return list;
+        }
 }
