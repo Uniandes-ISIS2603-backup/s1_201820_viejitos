@@ -38,6 +38,14 @@ public class QuejaLogic {
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Queja" );
                 // Verifica la regla de negocio que una queja debe tener un cliente existente asociado.
+               if( entity.getCliente()==null )
+		{
+			throw new BusinessLogicException( "El cliente no puede ser nulo" );
+		}
+                if( clientePersistence.findByLogin(entity.getCliente().getLogin())==null )
+		{
+			throw new BusinessLogicException( "No existe un cliente con el login \"" + entity.getCliente().getLogin()+ "\"" );
+		}
 		if( clientePersistence.findByLogin(entity.getCliente().getLogin())==null )
 		{
 			throw new BusinessLogicException( "No existe un cliente con el login \"" + entity.getCliente().getLogin()+ "\"" );
@@ -76,7 +84,7 @@ public class QuejaLogic {
 		return persistence.update( entity );
 	}
 
-	public void delete( QuejaEntity entity ) throws BusinessLogicException
+	public void delete( QuejaEntity entity )
 	{
 		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Queja con id={0}", entity.getId( ) );
 		persistence.delete( entity.getId() );
