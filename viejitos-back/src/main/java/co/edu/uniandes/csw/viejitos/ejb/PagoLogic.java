@@ -103,7 +103,7 @@ public class PagoLogic {
 		return persistence.update( entity );
 	}
 
-	public void delete( PagoEntity entity ) throws BusinessLogicException
+	public void delete( PagoEntity entity )
 	{
 		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Pago con id={0}", entity.getId( ) );
 		persistence.delete( entity.getId() );

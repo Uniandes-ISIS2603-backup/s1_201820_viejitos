@@ -5,13 +5,16 @@
  */
 package co.edu.uniandes.csw.viejitos.entities;
 
+import co.edu.uniandes.csw.viejitos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.CascadeType;
+import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -33,7 +36,8 @@ public class PagoEntity extends BaseEntity implements Serializable{
     /**
      * fecha limite de pago
      */
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal (TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
     private Date fechaLimite;
     
     /**
