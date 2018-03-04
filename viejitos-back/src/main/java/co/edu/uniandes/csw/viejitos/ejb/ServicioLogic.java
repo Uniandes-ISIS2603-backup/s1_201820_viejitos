@@ -52,16 +52,6 @@ public class ServicioLogic {
 		{
 			throw new BusinessLogicException( "El cliente no esta aprovado por un medico." );
 		}
-                // Verifica la regla de negocio que un servicio debe tener un pago inicial existente asociado.
-		if(pagoPersistence.find(entity.getPagoInicial().getId())==null)
-		{
-			throw new BusinessLogicException( "No existe un pago con el id \"" + entity.getPagoInicial().getId()+ "\"" );
-		}
-                // Verifica la regla de negocio que un servicio debe tener un pago final existente asociado.
-		if(pagoPersistence.find(entity.getPagoFinal().getId())==null)
-		{
-			throw new BusinessLogicException( "No existe un pago con el id \"" + entity.getPagoFinal().getId()+ "\"" );
-		}
                 if(enfermeroPersistence.find(entity.getEnfermero().getId())==null)
 		{
 			throw new BusinessLogicException( "No existe un enfermero con el id \"" + entity.getEnfermero().getId()+ "\"" );
@@ -92,6 +82,21 @@ public class ServicioLogic {
 		{
 			throw new BusinessLogicException( "No existe una entidad de Servicio con el id \"" + entity.getId()+ "\"" );
 		}
+                if(entity.getFinalizado()==true)
+                {
+                    if(entity.getFactura()==null)
+                    {
+                        throw new BusinessLogicException( "El servicio debería tener una factura.");
+                    }
+                    if(!entity.getPagoInicial().getPagado())
+                    {
+                        throw new BusinessLogicException( "El pago inical debería estar pagado.");
+                    }
+                    if(entity.getPagoFinal()!=null)
+                    {
+                        throw new BusinessLogicException( "Debería existir un pago final.");
+                    }
+                }
 		return persistence.update( entity );
 	}
 
