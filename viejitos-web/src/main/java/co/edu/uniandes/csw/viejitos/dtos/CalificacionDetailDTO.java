@@ -48,7 +48,9 @@ public class CalificacionDetailDTO extends CalificacionDTO{
     
     public CalificacionDetailDTO(CalificacionEntity entidad){
         super(entidad);
-        this.servicio = new ServicioDTO(entidad.getServicio());
+        if(entidad!=null){
+            this.servicio = new ServicioDTO(entidad.getServicio());
+        }
     }
 
     public ServicioDTO getServicio() {

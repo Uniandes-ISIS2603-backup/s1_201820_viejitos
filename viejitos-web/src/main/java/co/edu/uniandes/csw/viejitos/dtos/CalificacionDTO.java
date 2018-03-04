@@ -57,15 +57,16 @@ public class CalificacionDTO {
 	}
         
         public CalificacionDTO(CalificacionEntity entidad){
-            this.comentario = entidad.getComentario();
-            this.idCalificacion = entidad.getId();
-            this.loginCalificado = entidad.getLoginCalificado();
-            this.loginCalificador = entidad.getLoginCalificador();
-            this.puntaje = entidad.getPuntaje();
-            this.tipoCalificado = entidad.getTipoCalificado();
-            this.tipoCalificador = entidad.getTipoCalificador();
+            if(entidad!=null){
+                this.comentario = entidad.getComentario();
+                this.idCalificacion = entidad.getId();
+                this.loginCalificado = entidad.getLoginCalificado();
+                this.loginCalificador = entidad.getLoginCalificador();
+                this.puntaje = entidad.getPuntaje();
+                this.tipoCalificado = entidad.getTipoCalificado();
+                this.tipoCalificador = entidad.getTipoCalificador();
+            }
         }
-
 	public Long getIdCalificacion() {
 		return idCalificacion;
 	}

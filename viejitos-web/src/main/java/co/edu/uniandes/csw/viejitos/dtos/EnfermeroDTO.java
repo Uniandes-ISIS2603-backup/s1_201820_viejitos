@@ -54,12 +54,14 @@ public class EnfermeroDTO {
     } 
     
     public EnfermeroDTO(EnfermeroEntity entidad){
-        this.contrasena = entidad.getContrasenia();
-        this.cv =entidad.getCV();
-        this.id = entidad.getId();
-        this.login = entidad.getLogin();
-        this.nombre = entidad.getName();
-        this.tipo = entidad.getTipo();
+        if(entidad!=null){
+            this.contrasena = entidad.getContrasenia();
+            this.cv =entidad.getCV();
+            this.id = entidad.getId();
+            this.login = entidad.getLogin();
+            this.nombre = entidad.getName();
+            this.tipo = entidad.getTipo();
+        }
     } 
     
     public String getLogin() {

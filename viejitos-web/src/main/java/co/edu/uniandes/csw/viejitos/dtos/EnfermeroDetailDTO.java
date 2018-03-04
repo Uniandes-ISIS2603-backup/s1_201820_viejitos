@@ -61,28 +61,30 @@ public class EnfermeroDetailDTO extends EnfermeroDTO{
     
     public EnfermeroDetailDTO(EnfermeroEntity entidad){
     	super(entidad);
-        List<CalificacionEntity> califs = entidad.getCalificaciones();
-        List<CalificacionDTO> calDTOS = new ArrayList<>();
-        for(CalificacionEntity cal: califs){
-            CalificacionDTO actual = new CalificacionDTO(cal);
-            calDTOS.add(actual);
+        if(entidad!=null){
+            List<CalificacionEntity> califs = entidad.getCalificaciones();
+            List<CalificacionDTO> calDTOS = new ArrayList<>();
+            for(CalificacionEntity cal: califs){
+                CalificacionDTO actual = new CalificacionDTO(cal);
+                calDTOS.add(actual);
+            }
+            this.calificaciones = calDTOS;
+            List<ServicioEntity> servs = entidad.getServicios();
+            List<ServicioDTO> srDTOS = new ArrayList<>();
+            for(ServicioEntity srv: servs){
+                ServicioDTO actual = new ServicioDTO(srv);
+                srDTOS.add(actual);
+            }
+            this.servicios = srDTOS;
+            List<ClienteEntity> clients = entidad.getClientes();
+            List<ClienteDTO> clDTOS = new ArrayList<>();
+            for(ClienteEntity cl: clients){
+                ClienteDTO actual = new ClienteDTO(cl);
+                clDTOS.add(actual);
+            }
+            this.cliente = clDTOS;
+            this.calendar = new CalendarioSemanalDTO(entidad.getCalendario());
         }
-        this.calificaciones = calDTOS;
-        List<ServicioEntity> servs = entidad.getServicios();
-        List<ServicioDTO> srDTOS = new ArrayList<>();
-        for(ServicioEntity srv: servs){
-            ServicioDTO actual = new ServicioDTO(srv);
-            srDTOS.add(actual);
-        }
-        this.servicios = srDTOS;
-        List<ClienteEntity> clients = entidad.getClientes();
-        List<ClienteDTO> clDTOS = new ArrayList<>();
-        for(ClienteEntity cl: clients){
-            ClienteDTO actual = new ClienteDTO(cl);
-            clDTOS.add(actual);
-        }
-        this.cliente = clDTOS;
-        this.calendar = new CalendarioSemanalDTO(entidad.getCalendario());
     }
 
     public List<CalificacionDTO> getCalificaciones() {
