@@ -69,6 +69,10 @@ public class QuejaLogic {
 
 	public QuejaEntity update( QuejaEntity entity ) throws BusinessLogicException
 	{
+                if( persistence.find(entity.getId()) == null )
+		{
+			throw new BusinessLogicException( "No existe una entidad de Queja con el id \"" + entity.getId()+ "\"" );
+		}
 		return persistence.update( entity );
 	}
 

@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.viejitos.ejb;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
+import co.edu.uniandes.csw.viejitos.persistence.EnfermeroPersistence;
+import co.edu.uniandes.csw.viejitos.persistence.PagoPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -31,6 +33,12 @@ public class ServicioLogic {
         @Inject
         private ClientePersistence clientePersistence;
         
+        @Inject 
+        private PagoPersistence pagoPersistence;
+        
+        @Inject
+        private EnfermeroPersistence enfermeroPersistence;
+        
 	public ServicioEntity create( ServicioEntity entity ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Servicio" );
@@ -38,6 +46,25 @@ public class ServicioLogic {
 		if( clientePersistence.findByLogin(entity.getCliente().getLogin())==null )
 		{
 			throw new BusinessLogicException( "No existe un cliente con el login \"" + entity.getCliente().getLogin()+ "\"" );
+		}
+                //Verifica la regla de negocio de que un cliente debe estar aprovado para solicitar un servicio.
+                if( clientePersistence.find(entity.getCliente().getId()).getEstado()==1 )
+		{
+			throw new BusinessLogicException( "El cliente no esta aprovado por un medico." );
+		}
+                // Verifica la regla de negocio que un servicio debe tener un pago inicial existente asociado.
+		if(pagoPersistence.find(entity.getPagoInicial().getId())==null)
+		{
+			throw new BusinessLogicException( "No existe un pago con el id \"" + entity.getPagoInicial().getId()+ "\"" );
+		}
+                // Verifica la regla de negocio que un servicio debe tener un pago final existente asociado.
+		if(pagoPersistence.find(entity.getPagoFinal().getId())==null)
+		{
+			throw new BusinessLogicException( "No existe un pago con el id \"" + entity.getPagoFinal().getId()+ "\"" );
+		}
+                if(enfermeroPersistence.find(entity.getEnfermero().getId())==null)
+		{
+			throw new BusinessLogicException( "No existe un enfermero con el id \"" + entity.getEnfermero().getId()+ "\"" );
 		}
 		// Invoca la persistencia para crear la entidad de Queja
 		persistence.create( entity );
@@ -61,6 +88,10 @@ public class ServicioLogic {
 
 	public ServicioEntity update( ServicioEntity entity ) throws BusinessLogicException
 	{
+                if( persistence.find(entity.getId()) == null )
+		{
+			throw new BusinessLogicException( "No existe una entidad de Servicio con el id \"" + entity.getId()+ "\"" );
+		}
 		return persistence.update( entity );
 	}
 
