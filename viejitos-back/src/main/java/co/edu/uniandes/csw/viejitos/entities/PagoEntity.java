@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.CascadeType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -43,6 +44,7 @@ public class PagoEntity extends BaseEntity implements Serializable{
     /**
      * Servicio asociado al pago
      */
+    @PodamExclude
     @OneToOne (cascade = CascadeType.PERSIST)
     private ServicioEntity servicio;
 

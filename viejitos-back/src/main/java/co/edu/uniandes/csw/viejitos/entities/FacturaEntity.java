@@ -47,7 +47,7 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
     private Integer ccCliente;
     
     /**
-     * servicio que se prestó
+     * tipo de servicio que se presto
      */
     private String servicioPrestado;
     
