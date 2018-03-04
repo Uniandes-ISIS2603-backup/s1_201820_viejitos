@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.entities;
 
+import co.edu.uniandes.csw.viejitos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -24,7 +27,8 @@ import javax.persistence.Temporal;
 @Entity
 public class ServicioEntity extends BaseEntity implements Serializable{
 
-    @Temporal (javax.persistence.TemporalType.DATE)
+    @Temporal (TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
     
     private String hora;
@@ -58,6 +62,7 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     private PagoEntity pagoInicial;
     
     @OneToOne (cascade=CascadeType.PERSIST)
+    @PodamExclude
     private PagoEntity pagoFinal;
     /**
      * @return the pagoInicial
