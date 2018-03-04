@@ -16,17 +16,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
  * @author js.espitia
  */
+@RunWith(Arquillian.class)
 public class CalificacionLogicTest {
      
     PodamFactoryImpl fact = new PodamFactoryImpl();
@@ -103,7 +106,10 @@ public class CalificacionLogicTest {
         Assert.assertNotNull(result);
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
         Assert.assertEquals(nueva.getId(), entity.getId());
-
+        Assert.assertEquals(nueva.getLoginCalificado(), entity.getLoginCalificado());
+        Assert.assertEquals(nueva.getLoginCalificador(), entity.getLoginCalificador());
+        Assert.assertEquals(nueva.getPuntaje(), entity.getPuntaje());
+        Assert.assertEquals(nueva.getComentario(), entity.getComentario());
     }
     
     /**
@@ -137,10 +143,7 @@ public class CalificacionLogicTest {
         Assert.assertEquals(entity.getPuntaje(), resultEntity.getPuntaje());
         Assert.assertEquals(entity.getComentario(), resultEntity.getComentario());
         Assert.assertEquals(entity.getLoginCalificado(), resultEntity.getLoginCalificado());
-        Assert.assertEquals(entity.getId(), resultEntity.getId());
-
-
-
+        Assert.assertEquals(entity.getLoginCalificador(), resultEntity.getLoginCalificador());
 
     }
     /*
@@ -158,6 +161,10 @@ public class CalificacionLogicTest {
         CalificacionEntity resp = em.find(CalificacionEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
+         Assert.assertEquals(resp.getLoginCalificado(), pojoEntity.getLoginCalificado());
+        Assert.assertEquals(resp.getLoginCalificador(), pojoEntity.getLoginCalificador());
+        Assert.assertEquals(resp.getPuntaje(), pojoEntity.getPuntaje());
+        Assert.assertEquals(resp.getComentario(), pojoEntity.getComentario());
     }
     
     /**

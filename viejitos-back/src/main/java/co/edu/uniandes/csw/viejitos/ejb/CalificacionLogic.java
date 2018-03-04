@@ -52,15 +52,15 @@ public class CalificacionLogic {
     }
 
     public CalificacionEntity update( CalificacionEntity entity ) throws BusinessLogicException{
-        if( persistencia.find( entity.getId( ) ) != null ){
-            throw new BusinessLogicException( "Ya existe una entidad de Calificacion con el ID \"" + entity.getId( ) + "\"" );
+        if( persistencia.find( entity.getId( ) ) == null ){
+            throw new BusinessLogicException( "No existe una entidad de Calificacion con el ID \"" + entity.getId( ) + "\"" );
 	}
 	return persistencia.update( entity );
     }
 
     public void delete( CalificacionEntity entity ) throws BusinessLogicException {
         LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Calificacion con id={0}", entity.getId() );
-        persistencia.delete( entity );
+        persistencia.delete( entity.getId() );
         LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Calificacion con id={0}", entity.getId() );
     }
 }
