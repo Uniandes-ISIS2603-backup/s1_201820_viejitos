@@ -111,7 +111,4 @@ public class EnfermeroEntity extends BaseEntity implements Serializable{
     public void setClientes(List<ClienteEntity> clientes) {
         this.clientes = clientes;
     }
-    
-    
-	
 }

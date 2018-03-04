@@ -108,4 +108,10 @@ public class EnfermeroPersistence
 	{
 		em.remove( entity );
 	}
+        
+        public void delete (Long id){
+               LOGGER.log(Level.INFO, "Borrando Enfermero con id={0}", id);
+                EnfermeroEntity entity = em.find(EnfermeroEntity.class, id);
+                em.remove(entity);
+        }
 }
