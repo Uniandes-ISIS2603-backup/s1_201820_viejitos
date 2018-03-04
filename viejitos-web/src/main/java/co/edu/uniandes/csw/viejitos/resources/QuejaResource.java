@@ -12,7 +12,6 @@ import co.edu.uniandes.csw.viejitos.ejb.QuejaLogic;
 import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -69,8 +68,6 @@ private QuejaLogic quejaLogic;
 	public QuejaDetailDTO createQueja(QuejaDetailDTO dto ) throws BusinessLogicException
 	{
             return new QuejaDetailDTO(quejaLogic.create(dto.toEntity()));
-	
-        
         }
         
         /**
