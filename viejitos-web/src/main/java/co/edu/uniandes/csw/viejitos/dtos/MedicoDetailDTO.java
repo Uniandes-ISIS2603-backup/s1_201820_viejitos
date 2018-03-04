@@ -134,7 +134,7 @@ public class MedicoDetailDTO extends MedicoDTO{
        {
                 historias.add(hist.toEntity());
        }
-       entity.setCalendario(calendario.toEntity());
+       entity.setCalendario(this.calendario.toEntity());
        entity.setCitas(cs);
        entity.setClientes(clients);
        entity.setHistoriasClinicas(historias);

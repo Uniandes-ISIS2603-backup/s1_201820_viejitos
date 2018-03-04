@@ -29,6 +29,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -50,11 +51,10 @@ public class CitaEntity extends BaseEntity implements Serializable {
     @PodamStrategyValue(DateStrategy.class)
     private Date hora;
     @PodamExclude
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = ClienteEntity.class, cascade = CascadeType.PERSIST
-    )
+    @OneToOne(fetch = FetchType.LAZY, targetEntity = ClienteEntity.class, cascade = CascadeType.PERSIST)
     private ClienteEntity cliente;
     @PodamExclude
-    @OneToMany(mappedBy="citas", cascade = CascadeType.PERSIST)
+    @ManyToOne( fetch = FetchType.LAZY)
     private MedicoEntity medico;
     
     public CitaEntity()
