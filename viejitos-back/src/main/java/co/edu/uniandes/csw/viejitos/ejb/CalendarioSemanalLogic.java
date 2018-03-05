@@ -148,6 +148,8 @@ public class CalendarioSemanalLogic {
         List<FranjaHorariaEntity> lista=ent.getFranjas();
         for(FranjaHorariaEntity franja:lista)
         {
+            if(franja.getDiaSemana().equals(entityF.getDiaSemana()))
+            {
         if(franja.getHoraInicio()<entityF.getHoraInicio() && entityF.getHoraInicio()<franja.getHoraInicio()
                 || entityF.getHoraInicio()<franja.getHoraInicio() && franja.getHoraInicio()<entityF.getHoraFin()
                 || entityF.getHoraInicio()<franja.getHoraFin()&& franja.getHoraFin()<entityF.getHoraFin()
@@ -155,7 +157,7 @@ public class CalendarioSemanalLogic {
              {
                 throw new BusinessLogicException("el horario de la franja ya esta ocupado");
              }
-         
+            }
         }
        List<CalendarioSemanalEntity> listaprueba= persistencia.findAll();
        for(CalendarioSemanalEntity calen:listaprueba)
