@@ -23,6 +23,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -102,6 +103,20 @@ public class HistoriaClinicaLogicTest
     @Test
     public void createHistoriaClinicaTest() throws BusinessLogicException{
         HistoriaClinicaEntity newEntity = factory.manufacturePojo(HistoriaClinicaEntity.class);
+        if(newEntity.getCliente()==null)
+        {
+            try
+            {
+                HistoriaClinicaEntity result = historiaCLogic.create(newEntity);
+                fail("Debería lanzar exception.");
+            }
+            catch(Exception e)
+            {
+                //Debería entrar acá.
+            }
+        }
+        else
+        {    
         HistoriaClinicaEntity result = historiaCLogic.create(newEntity);
         Assert.assertNotNull(result);
         HistoriaClinicaEntity entity = em.find(HistoriaClinicaEntity.class, result.getId());
@@ -109,6 +124,7 @@ public class HistoriaClinicaLogicTest
         Assert.assertEquals(newEntity.getCirugias(), entity.getCirugias());
         Assert.assertEquals(newEntity.getEnfermedades(), entity.getEnfermedades());
         Assert.assertEquals(newEntity.getMedicamentos(), entity.getMedicamentos());
+        }
     }
     
      /**
