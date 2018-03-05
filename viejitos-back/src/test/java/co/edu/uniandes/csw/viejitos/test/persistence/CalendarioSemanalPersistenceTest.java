@@ -173,6 +173,27 @@ public class CalendarioSemanalPersistenceTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }
+ 
+      /**
+     * Prueba para consultar la lista de calendarios semanales
+     *
+     * 
+     */
+    @Test
+    public void getCalendariosTest() {
+        List<CalendarioSemanalEntity> list = persistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (CalendarioSemanalEntity ent : list) {
+            boolean found = false;
+            for (CalendarioSemanalEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
     
     /**
      * Test of create method, of class CalendarioSemanalPersistence.
