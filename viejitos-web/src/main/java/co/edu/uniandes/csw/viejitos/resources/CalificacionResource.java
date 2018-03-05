@@ -10,9 +10,13 @@ import co.edu.uniandes.csw.viejitos.ejb.CalificacionLogic;
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
+import co.edu.uniandes.csw.viejitos.persistence.CalificacionPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -40,7 +44,10 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class CalificacionResource {
     
+    @Inject
     private CalificacionLogic logic;
+    
+     private static final Logger LOGGER = Logger.getLogger(CalificacionPersistence.class.getName());
     /**
      * <h1>POST /api/Calificaciones : Crear una entidad de Calificacion.</h1>
      * <p>
@@ -51,10 +58,10 @@ public class CalificacionResource {
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Creó la nueva entidad de Viejito.
+     * 200 OK Creó la nueva calificacion .
      * </code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 412 Precodition Failed: Ya existe la entidad de Viejito.
+     * 412 Precodition Failed: Ya existe la calificacion.
      * </code>
      * </pre>
      * @param dto La entidad a guardar
@@ -71,13 +78,10 @@ public class CalificacionResource {
      * <h1>GET /api/Calificaciones : Obtener todas las entidades de Calificacion.</h1>
      * <p>
      * <pre>Busca y devuelve todas las entidades de Calificacion que existen en la aplicacion. 
-     *  * Codigos de respuesta:
+     *  
+     * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Creó la nueva entidad de Viejito.
-     * </code>
-     * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 412 Precodition Failed: Ya existe la entidad de Viejito.
-     * </code>
+     * 200 OK Devuelve todas las calificaciones de la aplicacion.</code> 
      * </pre>
      * @return JSONArray con las entidades de Calificacion encontradas.
      */
@@ -98,21 +102,22 @@ public class CalificacionResource {
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Creó la nueva entidad de Calificacion.
-     * </code>
+     * 200 OK Devuelve la calificacion correspondiente al id.
+     * </code> 
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 412 Precodition Failed: Ya existe la entidad de Calificacion.
-     * </code>
+     * 404 Not Found No existe una calificacion con el id dado.
+     * </code> 
      * </pre>
      * @param id el identificador que se asigna a la calificacion 
      * @return JSON con la informacion de la entidad calificacion
+     * @throws BusinessLogicException si no existe
      */
     @GET
     @Path("{id:[0-9]*}")
-    public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id){
+    public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) throws BusinessLogicException{
         CalificacionEntity calif = logic.getById(id);
         if(calif == null)
-            return null;
+            throw new BusinessLogicException("No existe una calificacion con el id " + id);
         else return new CalificacionDetailDTO( calif );
     }
     
@@ -120,12 +125,12 @@ public class CalificacionResource {
      * <h1>PUT /api/Calificaciones/{id} : Actualizar una entidad de Calificacion con el id dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link CalificacionDetailDTO}.
      * Actualiza la entidad de Calificacion con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
-     *  * Codigos de respuesta:
+     *  
+     * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Creó la nueva entidad de Viejito.
-     * </code>
+     * 200 OK Actualiza la calificacion con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 412 Precodition Failed: Ya existe la entidad de Viejito.
+     * 404 Not Found. No existe una calificacion con el id dado.
      * </code>
      * </pre>
      * @param id identificador de la calificacion que se desea actualizar.Este debe ser una cadena de numeros
@@ -135,8 +140,10 @@ public class CalificacionResource {
      */
     @PUT
     @Path("{id:[0-9]*}")
-    public CalificacionDetailDTO updateEnfermero(@PathParam("id") Long id, CalificacionDetailDTO dto) throws BusinessLogicException{
-        logic.update(dto.toEntity());
+    public CalificacionDetailDTO updateCalificacion(@PathParam("id") Long id, CalificacionDetailDTO dto) throws BusinessLogicException{
+        CalificacionEntity entidad = dto.toEntity();
+        entidad.setId( id );
+        logic.update(entidad);
         return dto;
     }
     
@@ -144,21 +151,20 @@ public class CalificacionResource {
      * <h1>DELETE /api/Calificaciones/{id} : Borrar una entidad de Calificacion por id.</h1>
      * <p>
      * <pre>Borra la entidad de Calificacion con el id asociado recibido en la URL.
-     * Codigos de respuesta:
+      * Códigos de respuesta:<br>
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Creó la nueva entidad de Viejito.
-     * </code>
+     * 200 OK Elimina la calificacion correspondiente al id dado.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 412 Precodition Failed: Ya existe la entidad de Viejito.
+     * 404 Not Found. No existe una calificacion con el id dado.
      * </code>
      * </pre>
      * @param id identificador de la calificacion que se desea borrar. Este debe ser una cadena de numeros.
+     * @throws BusinessLogicException si se intenta eliminar una calificacion que no existe
      */
     @DELETE
     @Path( "{id: \\d+}" )
-    public void deleteEnfermero( @PathParam( "id" ) Long id){
-        try{
-           logic.delete(logic.getById(id));
-        }catch(Exception e){}
+    public void deleteCalificacion( @PathParam( "id" ) Long id) throws BusinessLogicException{
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar una calificacion con id {0}", id);
+        logic.delete(id);
     }
 }

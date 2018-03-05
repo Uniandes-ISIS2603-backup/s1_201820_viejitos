@@ -63,4 +63,9 @@ public class CalificacionLogic {
         persistencia.delete( entity.getId() );
         LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Calificacion con id={0}", entity.getId() );
     }
+    public void delete( Long id ) throws BusinessLogicException {
+        LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Calificacion con id={0}", id );
+        persistencia.delete( id );
+        LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Calificacion con id={0}", id );
+    }
 }
