@@ -97,7 +97,7 @@ public class FacturaDTO {
     /**
     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
     * la entidad que viene de argumento.
-    * @param FacturaEntity: Es la entidad que se va a convertir a DTO
+     * @param facturaEntity: Es la entidad que se va a convertir a DTO
      */
     public FacturaDTO( FacturaEntity facturaEntity )
     {
