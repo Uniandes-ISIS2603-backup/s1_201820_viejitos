@@ -46,7 +46,7 @@ public class FranjaHorariaPersistence {
       public List<FranjaHorariaEntity> findAll()
       {
           LOGGER.info("buscando todas las franjas horarias");
-         Query q=em.createQuery("select u from FranjaHorariaEntity u");
+         Query q=em.createQuery("select u from FranjaHorariaEntity u",FranjaHorariaEntity.class);
          return q.getResultList();
       }
       
@@ -57,7 +57,7 @@ public class FranjaHorariaPersistence {
           TypedQuery<FranjaHorariaEntity> q = em.createQuery("select u from FranjaHorariaEntity where u.getDiaSemana = :dia",FranjaHorariaEntity.class);
      // q = q.setParameter("diaSemana", dia);     
      return q.getResultList();
-          
+    
       }
     public FranjaHorariaEntity update(FranjaHorariaEntity entity)
     {
