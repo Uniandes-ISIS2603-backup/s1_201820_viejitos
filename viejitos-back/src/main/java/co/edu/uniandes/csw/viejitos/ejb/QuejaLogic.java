@@ -8,6 +8,7 @@ import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.QuejaPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
+import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,13 +31,29 @@ public class QuejaLogic {
         @Inject
         private ClientePersistence clientePersistence;
         
+        @Inject 
+        private ServicioPersistence servicioPersistence;
+        
 	public QuejaEntity create( QuejaEntity entity ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Queja" );
                 // Verifica la regla de negocio que una queja debe tener un cliente existente asociado.
+               if( entity.getCliente()==null )
+		{
+			throw new BusinessLogicException( "El cliente no puede ser nulo" );
+		}
+                if( clientePersistence.findByLogin(entity.getCliente().getLogin())==null )
+		{
+			throw new BusinessLogicException( "No existe un cliente con el login \"" + entity.getCliente().getLogin()+ "\"" );
+		}
 		if( clientePersistence.findByLogin(entity.getCliente().getLogin())==null )
 		{
 			throw new BusinessLogicException( "No existe un cliente con el login \"" + entity.getCliente().getLogin()+ "\"" );
+		}
+                // Verifica la regla de negocio que una queja debe tener un servicio existente asociado.
+		if( servicioPersistence.find(entity.getServicio().getId())==null )
+		{
+			throw new BusinessLogicException( "No existe un servicio con el id \"" + entity.getServicio().getId()+ "\"" );
 		}
 		// Invoca la persistencia para crear la entidad de Queja
 		persistence.create( entity );
@@ -60,10 +77,14 @@ public class QuejaLogic {
 
 	public QuejaEntity update( QuejaEntity entity ) throws BusinessLogicException
 	{
+                if( persistence.find(entity.getId()) == null )
+		{
+			throw new BusinessLogicException( "No existe una entidad de Queja con el id \"" + entity.getId()+ "\"" );
+		}
 		return persistence.update( entity );
 	}
 
-	public void delete( QuejaEntity entity ) throws BusinessLogicException
+	public void delete( QuejaEntity entity ) 
 	{
 		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Queja con id={0}", entity.getId( ) );
 		persistence.delete( entity.getId() );

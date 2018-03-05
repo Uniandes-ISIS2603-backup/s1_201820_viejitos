@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.entities;
 
+import co.edu.uniandes.csw.viejitos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.CascadeType;
+import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -28,7 +31,8 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
     /**
      * fecha de expedicion de la factura
      */
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal (TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)
     private Date fechaExpedicion;
     
     /**
@@ -47,7 +51,7 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
     private Integer ccCliente;
     
     /**
-     * servicio que se prestó
+     * tipo de servicio que se presto
      */
     private String servicioPrestado;
     

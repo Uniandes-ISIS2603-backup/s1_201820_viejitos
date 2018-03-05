@@ -34,8 +34,12 @@ public class FacturaLogic {
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Factura" );
 		// Invoca la persistencia para crear la entidad de Factura
-                // Verifica la regla de negocio que dice que no puede haber dos entidades de Factura con el mismo id
-		if( entity.getServicio() == null )
+                // Verifica las reglas de negocio
+		if( persistence.find( entity.getId()) != null )
+                {
+                        throw new BusinessLogicException( "Ya existe una entidad de Factura con el id \"" + entity.getId( ) + "\"" );
+                }
+                if( entity.getServicio() == null )
 		{
 			throw new BusinessLogicException( "La entidad de Factura debe tener un servicio asociado" );
 		}
@@ -43,6 +47,11 @@ public class FacturaLogic {
 		{
 			throw new BusinessLogicException( "El Servicio de la Factura no es válido" );
 		}
+                if( entity.getCostoTotal() < 0 )
+                {
+                        throw new BusinessLogicException( "La entidad de Factura no puede tener un costo total negativo" );
+                }
+                
 		persistence.create( entity );
 		LOGGER.info( "Termina proceso de creación de entidad de Factura" );
 		return entity;
@@ -63,10 +72,28 @@ public class FacturaLogic {
 
 	public FacturaEntity update( FacturaEntity entity ) throws BusinessLogicException
 	{
+            //Reglas de negocio
+                if( persistence.find( entity.getId()) == null )
+                {
+                        throw new BusinessLogicException( "Para actualizar, debe existir una entidad de Factura con el id \"" + entity.getId( ) + "\"" );
+                }
+                if( entity.getServicio() == null )
+		{
+			throw new BusinessLogicException( "La entidad de Factura debe tener un servicio asociado" );
+		}
+                if( persistenceServicio.find(entity.getServicio().getId()) == null )
+		{
+			throw new BusinessLogicException( "El Servicio de la Factura no es válido" );
+		}
+                if( entity.getCostoTotal() < 0 )
+                {
+                        throw new BusinessLogicException( "La entidad de Factura no puede tener un costo total negativo" );
+                }
+                
 		return persistence.update( entity );
 	}
 
-	public void delete( FacturaEntity entity ) throws BusinessLogicException
+	public void delete( FacturaEntity entity )
 	{
 		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Factura con id={0}", entity.getId( ) );
 		persistence.delete( entity.getId() );

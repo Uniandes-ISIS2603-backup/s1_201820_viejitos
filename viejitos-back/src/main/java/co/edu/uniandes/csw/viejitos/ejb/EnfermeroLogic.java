@@ -67,7 +67,9 @@ public class EnfermeroLogic {
 
     public void delete( EnfermeroEntity entity ) throws BusinessLogicException {
         LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Enfermero con id={0}", entity.getId( ) );
-        persistencia.delete( entity );
+        persistencia.delete( entity.getId() );
         LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Enfermero con id={0}", entity.getId( ) );
     }
+    
+    
 }
