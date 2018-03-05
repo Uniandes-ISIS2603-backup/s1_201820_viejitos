@@ -61,6 +61,7 @@ public class CalificacionDetailDTO extends CalificacionDTO{
         this.servicio = servicio;
     }
     
+    @Override
     public CalificacionEntity toEntity(){
         CalificacionEntity entidad = super.toEntity();
         entidad.setServicio(servicio.toEntity());
