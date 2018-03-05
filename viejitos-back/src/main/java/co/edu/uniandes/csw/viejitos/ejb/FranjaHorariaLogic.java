@@ -26,8 +26,7 @@ public class FranjaHorariaLogic {
     @Inject
     private FranjaHorariaPersistence persistencia;
     
-    @Inject
-    private CalendarioSemanalLogic calendariologic;
+  
    
      /**
      * Obtiene la lista de los registros de Franjas.

@@ -35,13 +35,10 @@ public class HistoriaClinicaLogic
 		LOGGER.info( "Inicia proceso de creación de una entidad de HistoriaClinica" );
 		// Invoca la persistencia para crear la entidad de HistoriaClinica
                 if(clientePersistence.findByLogin(entity.getCliente().getLogin()) == null)
-                        {
-                            throw new BusinessLogicException("El cliente asociado a la historia Clínica, no existe.");
-                        }
-                else
                 {
-                    persistence.create( entity );
+                    throw new BusinessLogicException("El cliente asociado a la historia Clínica, no existe.");
                 }
+                persistence.create( entity );
 		LOGGER.info( "Termina proceso de creación de entidad de HistoriaClinica" );
 		return entity;
 	}
