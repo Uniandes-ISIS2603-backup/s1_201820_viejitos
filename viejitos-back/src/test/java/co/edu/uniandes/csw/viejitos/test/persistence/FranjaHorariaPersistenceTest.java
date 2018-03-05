@@ -169,6 +169,28 @@ public class FranjaHorariaPersistenceTest
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }
+    
+    
+    
+        /**
+     * Prueba para consultar la lista de franjas
+     *
+     * 
+     */
+    @Test
+    public void getFranjasTest() {
+        List<FranjaHorariaEntity> list = franjaPersistence.findAll();
+        Assert.assertEquals(data.size(), list.size());
+        for (FranjaHorariaEntity ent : list) {
+            boolean found = false;
+            for (FranjaHorariaEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
        
     
 }
