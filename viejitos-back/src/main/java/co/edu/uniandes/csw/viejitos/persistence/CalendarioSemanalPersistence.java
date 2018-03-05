@@ -6,11 +6,13 @@
 package co.edu.uniandes.csw.viejitos.persistence;
 
 import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -49,6 +51,13 @@ public class CalendarioSemanalPersistence {
       {   
        LOGGER.log(Level.INFO, "Consultando calendario con id={0}", id);
         return em.find(CalendarioSemanalEntity.class, id);  
+       }
+      
+          public List<CalendarioSemanalEntity> findAll()
+      {   
+         LOGGER.info("buscando todas las franjas horarias");
+         Query q=em.createQuery("select u from CalendarioSemanalEntity u",CalendarioSemanalEntity.class);
+         return q.getResultList();
        }
     
 }
