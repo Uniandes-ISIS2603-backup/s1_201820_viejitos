@@ -17,10 +17,15 @@ package co.edu.uniandes.csw.viejitos.resources;
  * @author lf.naranjo11
  */
 import co.edu.uniandes.csw.viejitos.dtos.FranjaHorariaDTO;
+import co.edu.uniandes.csw.viejitos.dtos.QuejaDetailDTO;
+import co.edu.uniandes.csw.viejitos.ejb.FranjaHorariaLogic;
+import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
+import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -29,6 +34,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 /**
  * <pre>Clase que implementa el recurso "franjaHoraria".
  * URL: /api/franjashorarias
@@ -46,13 +52,14 @@ import javax.ws.rs.Produces;
  * @version 1.0
  */
 
-
-public class FranjaHorariaResource {
-    
-    @Path("franjashorarias")
+ @Path("franjashorarias")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
+public class FranjaHorariaResource {
+    
+   @Inject
+   private FranjaHorariaLogic franjaLogic;
     
      /**
 	 * <h1>POST /api/franjashorarias : Crear una entidad de FranjaHoraria.</h1>
@@ -62,10 +69,10 @@ public class FranjaHorariaResource {
 	 * de la petición.
          *  Codigos de respuesta:
          * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Creó la nueva ciudad .
+         * 200 OK Creó la nueva franja .
          * </code>
          * <code style="color: #c7254e; background-color: #f9f2f4;">
-         * 412 Precodition Failed: Ya existe la ciudad.
+         * 412 Precodition Failed: Ya existe la franja.
          * </code>
          * </pre>
 	 * @param dto {@link  FranjaHorariaDTO} - La entidad de franja  que se desea guardar.
@@ -75,7 +82,7 @@ public class FranjaHorariaResource {
 	@POST
 	public FranjaHorariaDTO createFranjaHoraria( FranjaHorariaDTO dto ) throws BusinessLogicException
 	{
-		return dto;
+		  return new FranjaHorariaDTO(franjaLogic.create(dto.toEntity()));
 	}
         
         /**
@@ -85,12 +92,17 @@ public class FranjaHorariaResource {
         * <code style="color: mediumseagreen; background-color: #eaffe0;">
         * 200 OK Devuelve todas las franjas horarias.</code> 
         * </pre>
-	 * @return JSONArray {@link FranjaHorariaDTO} - Las entidades de calendario semanal encontradas en la aplicación.
+	 * @return JSONArray {@link FranjaHorariaDTO} - Las entidades de franja horaria encontradas en la aplicación.
 	 */
 	@GET
 	public List<FranjaHorariaDTO> getFranjasHorarias( )
 	{
-		return new ArrayList<FranjaHorariaDTO>();
+		List<FranjaHorariaDTO> franjas= new ArrayList<FranjaHorariaDTO>();
+            for(FranjaHorariaEntity actual: franjaLogic.getFranjas())
+            {
+                franjas.add(new FranjaHorariaDTO(actual));
+            }
+            return franjas;
 	}
         
         
@@ -113,7 +125,12 @@ public class FranjaHorariaResource {
 	@Path( "{id: \\d+}" )
 	public FranjaHorariaDTO getFranja( @PathParam( "id" ) Long id )
 	{
-		return null;
+             FranjaHorariaEntity entity = franjaLogic.getFranja(id);
+        if (entity == null) {
+            throw new WebApplicationException("la franja no existe", 404);
+        }
+        return new FranjaHorariaDTO(entity);
+		
 	}
         
          /**
@@ -155,7 +172,14 @@ public class FranjaHorariaResource {
         @Path ("{id: \\d+}")
         public FranjaHorariaDTO updateFranja(@PathParam("id") Long id, FranjaHorariaDTO franja) throws BusinessLogicException
         {
-        return franja;
+           FranjaHorariaEntity newEntity= franja.toEntity();
+           newEntity.setId(id);
+           FranjaHorariaEntity entity = franjaLogic.getFranja(id);
+            if (entity == null) {
+                throw new WebApplicationException("El recurso /franjashorarias/" + id + " no existe.", 404);
+            }
+            return new FranjaHorariaDTO(franjaLogic.updateFranja(newEntity));
+        
         
         }
  
@@ -178,7 +202,13 @@ public class FranjaHorariaResource {
 	@Path( "{id: \\d+}" )
 	public void deleteFranjaHoraria( @PathParam( "id" ) Long id )
 	{
-		// Void
+       FranjaHorariaEntity entity = franjaLogic.getFranja(id);
+        if (entity == null) {
+            throw new WebApplicationException("la franja no existe", 404);
+        }
+        franjaLogic.deleteFranja(id);	
+            
+// Void
 	}
         
     
