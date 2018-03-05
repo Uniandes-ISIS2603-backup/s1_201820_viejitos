@@ -93,7 +93,7 @@ public class FacturaLogic {
 		return persistence.update( entity );
 	}
 
-	public void delete( FacturaEntity entity ) throws BusinessLogicException
+	public void delete( FacturaEntity entity )
 	{
 		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Factura con id={0}", entity.getId( ) );
 		persistence.delete( entity.getId() );

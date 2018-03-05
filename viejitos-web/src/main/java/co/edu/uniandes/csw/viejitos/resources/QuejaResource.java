@@ -8,11 +8,14 @@ package co.edu.uniandes.csw.viejitos.resources;
 import co.edu.uniandes.csw.viejitos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.viejitos.dtos.QuejaDetailDTO;
 import co.edu.uniandes.csw.viejitos.dtos.QuejaDTO;
+import co.edu.uniandes.csw.viejitos.ejb.QuejaLogic;
+import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,6 +24,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "quejas".
@@ -45,6 +49,9 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class QuejaResource {
     
+@Inject
+private QuejaLogic quejaLogic;
+    
      /**
 	 * <h1>POST /api/quejas : Crear una entidad de Queja.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
@@ -60,9 +67,8 @@ public class QuejaResource {
 	@POST
 	public QuejaDetailDTO createQueja(QuejaDetailDTO dto ) throws BusinessLogicException
 	{
-		return dto;
-	}
-        
+            return new QuejaDetailDTO(quejaLogic.create(dto.toEntity()));
+        }
         
         /**
 	 * <h1>GET /api/quejas : Obtener todas las entidades de Queja.</h1>
@@ -76,7 +82,12 @@ public class QuejaResource {
         @GET
 	public List<QuejaDetailDTO> getQuejas( )
 	{
-		return new ArrayList<>();
+            List<QuejaDetailDTO> quejas= new ArrayList<QuejaDetailDTO>();
+            for(QuejaEntity actual: quejaLogic.getAll())
+            {
+                quejas.add(new QuejaDetailDTO(actual));
+            }
+            return quejas;
 	}
     
         /**
@@ -95,7 +106,11 @@ public class QuejaResource {
 	@Path( "{id: \\d+}" )
 	public QuejaDetailDTO getQueja( @PathParam( "id" ) Long id )
 	{
-		return null;
+            QuejaEntity entity = quejaLogic.getById(id);
+            if (entity == null) {
+                throw new WebApplicationException("El recurso /quejas/" + id + " no existe.", 404);
+            }
+            return new QuejaDetailDTO(entity);
 	}
         
         /**
@@ -118,7 +133,12 @@ public class QuejaResource {
 	@Path( "{id: \\d+}" )
 	public QuejaDetailDTO updateQueja( @PathParam( "id" ) Long id, QuejaDetailDTO detailDTO ) throws BusinessLogicException
 	{
-		return detailDTO;
+            detailDTO.setId(id);
+            QuejaEntity entity = quejaLogic.getById(id);
+            if (entity == null) {
+                throw new WebApplicationException("El recurso /quejas/" + id + " no existe.", 404);
+            }
+            return new QuejaDetailDTO(quejaLogic.update(detailDTO.toEntity()));
 	}
         
         /**
@@ -136,8 +156,11 @@ public class QuejaResource {
 	@Path( "{id: \\d+}" )
 	public void deleteQueja( @PathParam( "id" ) Long id )
 	{
-		// Void
+            QuejaEntity entity = quejaLogic.getById(id);
+            if (entity == null) {
+                throw new WebApplicationException("El recurso /quejas/" + id + " no existe.", 404);
+            }
+            quejaLogic.delete(entity);
 	}
-
-    
+   
 }

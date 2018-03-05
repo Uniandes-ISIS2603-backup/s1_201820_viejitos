@@ -6,11 +6,14 @@
 package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.FacturaDetailDTO;
+import co.edu.uniandes.csw.viejitos.ejb.FacturaLogic;
+import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +22,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "facturas".
@@ -42,6 +46,9 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class FacturaResource
 {
+    @Inject
+    FacturaLogic facturaLogic;
+    
     /**
 	 * <h1>POST /api/facturas : Crear una entidad de Factura.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link FacturaDetailDTO}.
@@ -58,7 +65,7 @@ public class FacturaResource
 	@POST
 	public FacturaDetailDTO createFactura( FacturaDetailDTO dto ) throws BusinessLogicException
 	{
-		return dto;
+		return new FacturaDetailDTO(facturaLogic.create(dto.toEntity()));
 	}
         
         /**
@@ -73,7 +80,12 @@ public class FacturaResource
 	@GET
 	public List<FacturaDetailDTO> getFacturas( )
 	{
-		return new ArrayList<>();
+            List<FacturaDetailDTO> facturas= new ArrayList<FacturaDetailDTO>();
+            for(FacturaEntity actual: facturaLogic.getAll())
+            {
+                facturas.add(new FacturaDetailDTO(actual));
+            }
+            return facturas;
 	}
         
         /**
@@ -93,7 +105,11 @@ public class FacturaResource
 	@Path( "{id: \\d+}" )
 	public FacturaDetailDTO getFactura( @PathParam( "id" ) Long id )
 	{
-		return null;
+            FacturaEntity entity = facturaLogic.getById(id);
+            if (entity == null) {
+            throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
+            }
+            return new FacturaDetailDTO(entity);
 	}
         
         /**
@@ -117,7 +133,12 @@ public class FacturaResource
 	@Path( "{id: \\d+}" )
 	public FacturaDetailDTO updateFactura( @PathParam( "id" ) Long id, FacturaDetailDTO detailDTO ) throws BusinessLogicException
 	{
-		return detailDTO;
+            detailDTO.setId(id);
+            FacturaEntity entity = facturaLogic.getById(id);
+            if (entity == null) {
+            throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
+            }
+            return new FacturaDetailDTO(facturaLogic.update(detailDTO.toEntity()));
 	}
         
         /**
@@ -136,7 +157,11 @@ public class FacturaResource
 	@Path( "{id: \\d+}" )
 	public void deleteFactura( @PathParam( "id" ) Long id )
 	{
-		// Void
+            FacturaEntity entity = facturaLogic.getById(id);
+            if (entity == null) {
+                throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
+            }
+            facturaLogic.delete(entity);
 	}
 }
 
