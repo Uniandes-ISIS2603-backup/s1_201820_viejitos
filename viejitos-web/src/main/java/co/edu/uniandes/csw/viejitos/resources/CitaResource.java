@@ -7,11 +7,14 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 
 import co.edu.uniandes.csw.viejitos.dtos.CitaDetailDTO;
+import co.edu.uniandes.csw.viejitos.ejb.CitaLogic;
+import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -20,6 +23,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 /**
  * <pre>Clase que implementa el recurso "Cita".</pre>
  * URL: /api/Cita
@@ -31,6 +35,8 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class CitaResource
 {
+    @Inject
+    CitaLogic logic;
     /**
 	 * <h1>POST /api/citas : Crear una entidad de Cita.</h1>
 	 * <p>
@@ -49,7 +55,7 @@ public class CitaResource
 	@POST
 	public CitaDetailDTO createCita( CitaDetailDTO dto ) throws BusinessLogicException
 	{
-		return dto;
+		return  new CitaDetailDTO(logic.create(dto.toEntity()));
 	}
         
         /**
@@ -66,7 +72,12 @@ public class CitaResource
 	@GET
 	public List<CitaDetailDTO> getCitas( )
 	{
-		return new ArrayList<>();
+		List<CitaDetailDTO> list= new ArrayList<CitaDetailDTO>();
+            for(CitaEntity e :logic.getAll())
+            {
+               list.add(new CitaDetailDTO(e));
+            }
+            return list;
 	}
         
         /**
@@ -87,7 +98,7 @@ public class CitaResource
 	@Path( "{id: \\d+}" )
 	public CitaDetailDTO getCita( @PathParam( "id" ) Long id )
 	{
-		return null;
+		return new CitaDetailDTO(logic.getById(id));
 	}
         
         /**
@@ -111,7 +122,12 @@ public class CitaResource
 	@Path( "{id: \\d+}" )
 	public CitaDetailDTO updateCita( @PathParam( "id" ) Long id, CitaDetailDTO detailDTO ) throws BusinessLogicException
 	{
-		return detailDTO;
+            CitaEntity e = logic.getById(id);
+            if(e==null)
+            {
+                throw new WebApplicationException("El recurso /citas/" + id + " no existe.", 404);
+            }
+            return new CitaDetailDTO(logic.update(detailDTO.toEntity()));
 	}
         
         /**
@@ -131,7 +147,12 @@ public class CitaResource
 	@Path( "{id: \\d+}" )
 	public void deleteCita( @PathParam( "id" ) Long id )
 	{
-		// Void
+            CitaEntity e = logic.getById(id);
+            if(e==null)
+            {
+                throw new WebApplicationException("El recurso /citas/" + id + " no existe.", 404);
+            }
+            logic.delete(e);
 	}
 }
 
