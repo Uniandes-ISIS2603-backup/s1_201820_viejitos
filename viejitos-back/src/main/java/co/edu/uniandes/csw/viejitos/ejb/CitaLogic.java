@@ -7,7 +7,11 @@ package co.edu.uniandes.csw.viejitos.ejb;
 
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.persistence.CalendarioSemanalPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.CitaPersistence;
+import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
+import co.edu.uniandes.csw.viejitos.persistence.MedicoPersistence;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,10 +29,20 @@ public class CitaLogic {
     @Inject
     private CitaPersistence persistence;
     
+    @Inject
+    private MedicoPersistence medPersistence;
+    
+    @Inject 
+    private ClientePersistence cliPersistence;
+    
+    
+    
     public CitaEntity create( CitaEntity entity ) throws BusinessLogicException
 	{
                 //verificar
-		return null;
+             LOGGER.info( "Inicia proceso de creación de una entidad de Cita" );
+             persistence.create(entity);
+		return entity;
 	}
     
     public List<CitaEntity> getAll( )
@@ -48,7 +62,7 @@ public class CitaLogic {
 	{
 		if( persistence.find(entity.getId()) == null )
 		{
-			throw new BusinessLogicException( "Ya existe una entidad de Cita con el id \"" + entity.getId()+ "\"" );
+			throw new BusinessLogicException( "No existe una entidad de Cita con el id \"" + entity.getId()+ "\"" );
 		}
 		return persistence.update( entity );
 	}
