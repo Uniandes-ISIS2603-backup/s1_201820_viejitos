@@ -61,7 +61,10 @@ public class FranjaHorariaDTO {
     id=entity.getId();
     }
     }
+    public FranjaHorariaDTO()
+    {
     
+    }
      public FranjaHorariaEntity toEntity()
      {
          FranjaHorariaEntity entity=new FranjaHorariaEntity();
