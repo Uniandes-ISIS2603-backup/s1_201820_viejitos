@@ -5,11 +5,14 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 import co.edu.uniandes.csw.viejitos.dtos.MedicoDetailDTO;
+import co.edu.uniandes.csw.viejitos.ejb.MedicoLogic;
+import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,6 +21,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 /**
  * <pre>Clase que implementa el recurso "Medico".</pre>
  * URL: /api/Medico
@@ -29,6 +33,8 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class MedicoResource
 {
+    @Inject
+    MedicoLogic logic;
     /**
 	 * <h1>POST /api/medicos : Crear una entidad de Medico.</h1>
 	 * <p>
@@ -47,7 +53,7 @@ public class MedicoResource
 	@POST
 	public MedicoDetailDTO createMedico( MedicoDetailDTO dto ) throws BusinessLogicException
 	{
-		return dto;
+		return new MedicoDetailDTO(logic.create(dto.toEntity()));
 	}
         
         /**
@@ -64,7 +70,12 @@ public class MedicoResource
 	@GET
 	public List<MedicoDetailDTO> getMedicos( )
 	{
-		return new ArrayList<>();
+            List<MedicoDetailDTO> list= new ArrayList<MedicoDetailDTO>();
+            for(MedicoEntity e :logic.getAll())
+            {
+               list.add(new MedicoDetailDTO(e));
+            }
+            return list;
 	}
         
         /**
@@ -85,7 +96,7 @@ public class MedicoResource
 	@Path( "{id: \\d+}" )
 	public MedicoDetailDTO getMedico( @PathParam( "id" ) Long id )
 	{
-		return null;
+		return new MedicoDetailDTO(logic.getById(id));
 	}
         
         /**
@@ -109,7 +120,13 @@ public class MedicoResource
 	@Path( "{id: \\d+}" )
 	public MedicoDetailDTO updateMedico( @PathParam( "id" ) Long id, MedicoDetailDTO detailDTO ) throws BusinessLogicException
 	{
-		return detailDTO;
+            MedicoEntity e = logic.getById(id);
+            if(e==null)
+            {
+                throw new WebApplicationException("El recurso /medicos/" + id + " no existe.", 404);
+            }
+            return new MedicoDetailDTO(logic.update(detailDTO.toEntity()));
+            
 	}
         
         /**
@@ -129,6 +146,12 @@ public class MedicoResource
 	@Path( "{id: \\d+}" )
 	public void deleteMedico( @PathParam( "id" ) Long id )
 	{
-		// Void
+		
+            MedicoEntity e = logic.getById(id);
+            if(e==null)
+            {
+                throw new WebApplicationException("El recurso /medicos/" + id + " no existe.", 404);
+            }
+            logic.delete(e);
 	}
 }
