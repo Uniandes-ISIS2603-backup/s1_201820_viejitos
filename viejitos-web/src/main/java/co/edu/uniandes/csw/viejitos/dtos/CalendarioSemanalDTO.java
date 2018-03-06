@@ -85,6 +85,9 @@ public class CalendarioSemanalDTO {
         }
         
     }
+    public CalendarioSemanalDTO()
+    {
+    }
     
     public CalendarioSemanalEntity toEntity()
     {
