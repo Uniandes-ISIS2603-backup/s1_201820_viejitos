@@ -1,0 +1,231 @@
+{
+	"info": {
+		"name": "HistoriaClinica.Postman",
+		"_postman_id": "7617ad89-44d8-4f3b-a50f-84dde0c85a65",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtener las Historias Clinicas.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b9eebe3-3838-42a1-b901-d1e0ecff8317",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/historiasc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"historiasc"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una Historia Clinica por id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1bb36c5b-d524-4ea1-8754-c5b8fe1fa95a",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/historiasc/{{idprueba2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"historiasc",
+						"{{idprueba2}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una Historia Clinica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d5698219-e576-4520-a866-b9e1b465edf9",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"id\": 12345,\r\n       \"cirugias\": \"Reemplazo de cadera.\",\r\n       \"enfermedades\": \"Ninguna\",\r\n       \"medicamentos\": \"Ninguno\"\r\n    \r\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/historiasc/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"historiasc",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar una Historia Clinica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "64d8d349-5495-4e57-9b2b-b239bae6de3c",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 12345,\r\n    \"cirugias\": \"Ninguna\",\r\n    \"enfermedades\": \"Artritis.\",\r\n    \"medicamentos\": \"Ninguno\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/historiasc/{{idprueba2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"historiasc",
+						"{{idprueba2}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar una Historia Clinica",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/historiasc/{{idprueba2}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"historiasc",
+						"{{idprueba2}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
