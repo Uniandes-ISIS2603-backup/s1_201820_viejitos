@@ -26,9 +26,9 @@ import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
  * 
  *   {
  *      "reclamo": "El enfermero tenia una actitud muy grosera.",
- *      "resuelto": true
- *      "servicio":{}
- *      "cliente": {"id": 12345, "nombre: "John Doe", "login": "johndoe23", "contrasena": "jd124", "estado": 1, "tipo": 1}
+ *      "resuelto": true,
+ *      "servicio":{},
+ *      "cliente": {"id": 12345, "nombre": "John Doe", "login": "johndoe23", "contrasena": "jd124", "estado": 1, "tipo": 1}
  *    }
  * </pre>
  * 
