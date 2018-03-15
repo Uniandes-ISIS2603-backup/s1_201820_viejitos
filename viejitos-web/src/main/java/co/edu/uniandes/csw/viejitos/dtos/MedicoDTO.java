@@ -25,35 +25,33 @@ import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
  * MedicoDTO Objeto de transferencia de datos de Medicos. Los DTO contienen las
  * represnetaciones de los JSON que se transfieren entre el cliente y el
  * servidor.
- * 
+ *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
  *         "nombre":string,
- *          "tipo": String,
- *          "login":string
+ *          "tipo": integer,
+ *          "login":string,
  *          "contrasena":String,
  *          "id":number
  *   }
- * </pre>
- * Por ejemplo un medico se representa asi:<br>
- * 
+ * </pre> Por ejemplo un medico se representa asi:<br>
+ *
  * <pre>
- * 
+ *
  *   {
  *          "nombre":"Juan Perez",
- *          "tipo": "Medico",
+ *          "tipo": integer,
  *          "login":"j.perez",
  *          "contrasena":"megustanlosgatos2",
  *          "id":"1010233999"
  *   }
  *
  * </pre>
+ *
  * @author l.pardo
  */
 public class MedicoDTO {
-
-   
 
     //atributos
     private String nombre;
@@ -61,26 +59,22 @@ public class MedicoDTO {
     private String login;
     private String contrasena;
     private Long id;
-   
-    public MedicoDTO()
-    {
-        
+
+    public MedicoDTO() {
+
     }
-    
-    public MedicoDTO(MedicoEntity entity)
-    {
-        if(entity!=null)
-        {
-            this.nombre=entity.getNombre();
-            this.contrasena=entity.getContrasena();
-            this.login=entity.getLogin();
-            this.tipo=entity.getTipo();
-            this.id= entity.getId();
+
+    public MedicoDTO(MedicoEntity entity) {
+        if (entity != null) {
+            this.nombre = entity.getNombre();
+            this.contrasena = entity.getContrasena();
+            this.login = entity.getLogin();
+            this.tipo = entity.getTipo();
+            this.id = entity.getId();
         }
     }
-    
-    public MedicoEntity toEntity()
-    {
+
+    public MedicoEntity toEntity() {
         MedicoEntity entity = new MedicoEntity();
         entity.setContrasena(this.contrasena);
         entity.setId(this.id);
@@ -89,6 +83,7 @@ public class MedicoDTO {
         entity.setTipo(this.tipo);
         return entity;
     }
+
     /**
      * @return the nombre
      */
@@ -144,7 +139,8 @@ public class MedicoDTO {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
- /**
+
+    /**
      * @return the login
      */
     public String getLogin() {
@@ -157,5 +153,5 @@ public class MedicoDTO {
     public void setLogin(String login) {
         this.login = login;
     }
-    
+
 }
