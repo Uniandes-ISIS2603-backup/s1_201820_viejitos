@@ -103,20 +103,6 @@ public class HistoriaClinicaLogicTest
     @Test
     public void createHistoriaClinicaTest() throws BusinessLogicException{
         HistoriaClinicaEntity newEntity = factory.manufacturePojo(HistoriaClinicaEntity.class);
-        if(newEntity.getCliente()==null)
-        {
-            try
-            {
-                HistoriaClinicaEntity result = historiaCLogic.create(newEntity);
-                fail("Debería lanzar exception.");
-            }
-            catch(Exception e)
-            {
-                //Debería entrar acá.
-            }
-        }
-        else
-        {    
         HistoriaClinicaEntity result = historiaCLogic.create(newEntity);
         Assert.assertNotNull(result);
         HistoriaClinicaEntity entity = em.find(HistoriaClinicaEntity.class, result.getId());
@@ -125,7 +111,6 @@ public class HistoriaClinicaLogicTest
         Assert.assertEquals(newEntity.getEnfermedades(), entity.getEnfermedades());
         Assert.assertEquals(newEntity.getMedicamentos(), entity.getMedicamentos());
         }
-    }
     
      /**
      * Prueba para consultar la lista de HistoriasClinicas
