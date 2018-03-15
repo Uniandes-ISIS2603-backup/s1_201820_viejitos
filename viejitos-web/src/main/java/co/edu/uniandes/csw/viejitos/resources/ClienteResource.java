@@ -123,7 +123,7 @@ public class ClienteResource
 	 */
 	@PUT
 	@Path( "{id: \\d+}" )
-	public ClienteDetailDTO updateCliente( @PathParam( "id" ) Long id, ClienteDetailDTO detailDTO ) 
+	public ClienteDetailDTO updateCliente( @PathParam( "id" ) Long id, ClienteDetailDTO detailDTO ) throws BusinessLogicException 
 	{
             detailDTO.setId(id);
             ClienteEntity entity = cLogic.getById(id);
@@ -131,14 +131,8 @@ public class ClienteResource
             {
                 throw new WebApplicationException("El recurso /clientes/" + id + " no existe.", 404);
             }
-            try
-            {
                 return new ClienteDetailDTO(cLogic.update(detailDTO.toEntity()));
-            }
-            catch(BusinessLogicException e)
-            {
-                throw new WebApplicationException("Ya existe un cliente con el login deseado.", 404);
-            }
+            
 	}
         
         /**
