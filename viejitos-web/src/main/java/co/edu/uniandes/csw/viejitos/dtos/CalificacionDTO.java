@@ -53,7 +53,7 @@ public class CalificacionDTO {
 	private String tipoCalificador;
 
 	public CalificacionDTO(){
-
+            //Constructor
 	}
         
         public CalificacionDTO(CalificacionEntity entidad){

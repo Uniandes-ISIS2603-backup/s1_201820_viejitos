@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.persistence;
 
 import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,7 @@ public class MedicoPersistence {
         return q.getSingleResult();
     }
         public MedicoEntity findByLogin(String login) {
-        LOGGER.log(Level.INFO, "Consultando medico con name= ", login);
+        LOGGER.log(Level.INFO, "Consultando medico con login= ", login);
         TypedQuery<MedicoEntity> q
                 = em.createQuery("select u from MedicoEntity u where u.login = :login", MedicoEntity.class);
         q = q.setParameter("login", login);

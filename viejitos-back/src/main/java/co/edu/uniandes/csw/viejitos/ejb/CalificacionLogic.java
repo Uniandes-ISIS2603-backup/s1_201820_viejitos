@@ -11,7 +11,6 @@ import co.edu.uniandes.csw.viejitos.persistence.CalificacionPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ejb.Stateless;
 

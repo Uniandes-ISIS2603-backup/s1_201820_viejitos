@@ -28,23 +28,19 @@ public class MedicoLogic {
     public MedicoEntity create( MedicoEntity entity ) throws BusinessLogicException
 	{
                 //verificar
-                LOGGER.info( "Inicia proceso de creación de una entidad de Cliente" );
+                LOGGER.info( "Inicia proceso de creación de una entidad de Medico" );
 		// Verifica la regla de negocio que dice que no puede haber dos entidades de Cliente con el mismo login
-		if( persistence.findByLogin(entity.getLogin()) != null )
-		{
-			throw new BusinessLogicException( "Ya existe una entidad de Cliente con el login \"" + entity.getLogin()+ "\"" );
-		}
 		// Invoca la persistencia para crear la entidad de Cliente
 		persistence.create( entity );
-		LOGGER.info( "Termina proceso de creación de entidad de Cliente" );
+		LOGGER.info( "Termina proceso de creación de entidad de Medico" );
 		return entity;
 	}
     
     public List<MedicoEntity> getAll( )
 	{
-		LOGGER.info( "Inicia proceso de consultar todas las entidades de Cita" );
+		LOGGER.info( "Inicia proceso de consultar todas las entidades de Medico" );
 		List<MedicoEntity> entities = persistence.findAll( );
-		LOGGER.info( "Termina proceso de consultar todas las entidades de Cita" );
+		LOGGER.info( "Termina proceso de consultar todas las entidades de Medico" );
 		return entities;
 	}
     
@@ -57,15 +53,15 @@ public class MedicoLogic {
 	{
 		if( persistence.find(entity.getId()) == null )
 		{
-			throw new BusinessLogicException( "Ya existe una entidad de Cita con el id \"" + entity.getId()+ "\"" );
+			throw new BusinessLogicException( "No existe una entidad de Medico con el id \"" + entity.getId()+ "\"" );
 		}
 		return persistence.update( entity );
 	}
     
     public void delete( MedicoEntity entity ) 
 	{
-		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Cita con id={0}", entity.getId( ) );
+		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Medico con id={0}", entity.getId( ) );
 		persistence.delete( entity.getId() );
-		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Cita con id={0}", entity.getId( ) );
+		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Medico con id={0}", entity.getId( ) );
 	}
 }

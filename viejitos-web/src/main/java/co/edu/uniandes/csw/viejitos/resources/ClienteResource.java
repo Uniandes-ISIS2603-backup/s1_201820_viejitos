@@ -60,7 +60,7 @@ public class ClienteResource
             }
             catch(BusinessLogicException e)
             {
-                throw new WebApplicationException("Ya existe un cliente con el login deseado.", 404);
+                throw new WebApplicationException(e.getMessage(), 404);
             }
 		
 	}

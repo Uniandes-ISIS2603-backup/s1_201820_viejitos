@@ -50,7 +50,7 @@ public class EnfermeroDTO {
 
     
     public EnfermeroDTO(){
-    
+        //Constructor
     } 
     
     public EnfermeroDTO(EnfermeroEntity entidad){
