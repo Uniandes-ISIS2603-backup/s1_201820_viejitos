@@ -32,11 +32,11 @@ import co.edu.uniandes.csw.viejitos.entities.PagoEntity;
    {
       "id": 123456,
       "medio": "Efectivo",
-      "pagado": TRUE,
-      "fechaLimite": 12/04/18,
-      "valor": 150000
+      "pagado": "TRUE",
+      "fechaLimite": "12/04/18",
+      "valor": 150000,
       "servicio": {"tipo": 1,
- *      "fecha: "12/02/2018",
+ *      "fecha": "12/02/2018",
  *      "hora": "8:37",
  *      "descripción": "Acompañamiento a cita médica",
  *      "finalizado": true}
