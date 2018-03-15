@@ -5,22 +5,10 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 
-/**
- **<pre>Clase que implementa el recurso "FranjaHoraria".
- * URL: /api/FranjasHorarias </pre>
- * <h2>Anotaciones </h2>
- * <pre>
- * Path: indica la dirección después de "api" para acceder al recurso
- * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
- * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio).
- * </pre>
- * @author lf.naranjo11
- */
+
 import co.edu.uniandes.csw.viejitos.dtos.FranjaHorariaDTO;
-import co.edu.uniandes.csw.viejitos.dtos.QuejaDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.FranjaHorariaLogic;
 import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
-import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +23,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 /**
  * <pre>Clase que implementa el recurso "franjaHoraria".
  * URL: /api/franjashorarias
@@ -48,13 +37,13 @@ import javax.ws.rs.WebApplicationException;
  * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
  * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
  * </pre>
- * @author ISIS2603  
+ * @author lf.naranjo11  
  * @version 1.0
  */
 
- @Path("franjashorarias")
-@Produces("application/json")
-@Consumes("application/json")
+ @Path("/franjashorarias")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class FranjaHorariaResource {
     
@@ -120,7 +109,8 @@ public class FranjaHorariaResource {
        * </pre>
          * @param id Identificador de la entidad de franja horaria que se esta buscando. Este debe ser una cadena de dígitos.
 	 * @return JSON {@link FranjaHorariaDTO} - La entidad de franja buscada
-	 */
+	 * @throws WebApplicationException {@link WebApplicationExceptionMapper} - Error de lógica que se genera cuando no se encuentra el autor.
+         */
 	@GET
 	@Path( "{id: \\d+}" )
 	public FranjaHorariaDTO getFranja( @PathParam( "id" ) Long id )

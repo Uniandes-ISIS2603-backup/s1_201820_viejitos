@@ -1,0 +1,121 @@
+{
+   "variables": [],
+	"info": {
+		"name": "franjaHorariaJSON",
+		"_postman_id": "aa4dad27-77ac-e0d0-f61a-3aa49384d925",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear franja",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"new_id\",data.id);\r",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/franjashorarias",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"diaSemana\": \"lunes\",\n        \"horaInicio\": \"0700\",\n    \"horaFin\": \"0900\",\n     \"ocupado\": \"true\"\n             }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+                
+                {
+			"name": "Obtener todas los franjas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"franjas count\"] = data.length >= 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/franjashorarias",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+                {
+			"name": "Obtener una franja",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/franjashorarias/{{new_id}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			}
+                },
+                
+                {
+			"name": "Borrar un author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/franjashorarias/{{new_id}}",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+                
+        
+                ]
+   
+   
+}
+ 
