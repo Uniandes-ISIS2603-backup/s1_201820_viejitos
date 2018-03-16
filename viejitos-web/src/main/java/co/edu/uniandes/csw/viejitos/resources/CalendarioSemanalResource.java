@@ -23,10 +23,8 @@ package co.edu.uniandes.csw.viejitos.resources;
  */
 
 import co.edu.uniandes.csw.viejitos.dtos.CalendarioSemanalDetailDTO;
-import co.edu.uniandes.csw.viejitos.dtos.FranjaHorariaDTO;
 import co.edu.uniandes.csw.viejitos.ejb.CalendarioSemanalLogic;
 import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
-import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
@@ -114,10 +112,14 @@ public class CalendarioSemanalResource {
 	 * @return JSONArray {@link CalendarioSemanalDetailDTO} - Las entidades de calendario semanal encontradas en la aplicación.
 	 */
 	@GET
-	public List<CalendarioSemanalDetailDTO> getFranjasHorarias( )
+	public List<CalendarioSemanalDetailDTO> getCalendariosSemanles( )
 	{
-		List<CalendarioSemanalDetailDTO> calendarios= new ArrayList<CalendarioSemanalDetailDTO>();
-            for(CalendarioSemanalEntity actual: calendarioLogic.getCalendarios())
+            
+            
+            List<CalendarioSemanalEntity> calendarioEntitys=calendarioLogic.getCalendarios();
+            
+		List<CalendarioSemanalDetailDTO> calendarios= new ArrayList<>();
+            for(CalendarioSemanalEntity actual: calendarioEntitys)
             {
                 calendarios.add(new CalendarioSemanalDetailDTO(actual));
             }
