@@ -42,20 +42,6 @@ public class ServicioLogic {
 	public ServicioEntity create( ServicioEntity entity ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Servicio" );
-                // Verifica la regla de negocio que un servicio debe tener un cliente existente asociado.
-		if( clientePersistence.findByLogin(entity.getCliente().getLogin())==null )
-		{
-			throw new BusinessLogicException( "No existe un cliente con el login \"" + entity.getCliente().getLogin()+ "\"" );
-		}
-                //Verifica la regla de negocio de que un cliente debe estar aprobado para solicitar un servicio.
-                if( clientePersistence.find(entity.getCliente().getId()).getEstado()==1 )
-		{
-			throw new BusinessLogicException( "El cliente no esta aprobado por un medico." );
-		}
-                if(enfermeroPersistence.find(entity.getEnfermero().getId())==null)
-		{
-			throw new BusinessLogicException( "No existe un enfermero con el id \"" + entity.getEnfermero().getId()+ "\"" );
-		}
 		// Invoca la persistencia para crear la entidad de Queja
 		persistence.create( entity );
 		LOGGER.info( "Termina proceso de creación de entidad de Servicio" );
