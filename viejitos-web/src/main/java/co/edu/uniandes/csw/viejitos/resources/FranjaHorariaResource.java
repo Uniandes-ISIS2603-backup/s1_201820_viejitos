@@ -86,8 +86,9 @@ public class FranjaHorariaResource {
 	@GET
 	public List<FranjaHorariaDTO> getFranjasHorarias( )
 	{
-		List<FranjaHorariaDTO> franjas= new ArrayList<FranjaHorariaDTO>();
-            for(FranjaHorariaEntity actual: franjaLogic.getFranjas())
+          List<FranjaHorariaEntity> franjasE =franjaLogic.getFranjas();
+		List<FranjaHorariaDTO> franjas= new ArrayList<>();
+            for(FranjaHorariaEntity actual: franjasE)
             {
                 franjas.add(new FranjaHorariaDTO(actual));
             }
@@ -140,14 +141,13 @@ public class FranjaHorariaResource {
      * @param id Identificador de la ciudad que se desea actualizar.Este debe ser una cadena de dígitos.
      * @param franja {@link FranjaHorariaDTO} La franja que se desea guardar.
      * @return JSON {@link FranjaHorariaDTO} - La franja guardada.
-     * @throws BusinessLogicException {@link co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la franaja porque ya existe una con ese nombre.
+     * @throws WebAplicationException {@link co.edu.uniandes.csw.viejitos.mappers.WebApplicationExceptionMapper} - Error de lógica que se genera al no poder actualizar la franaja porque ya existe una con ese nombre.
      */
         @PUT
         @Path ("{id: \\d+}")
-        public FranjaHorariaDTO updateFranja(@PathParam("id") Long id, FranjaHorariaDTO franja) throws BusinessLogicException
+        public FranjaHorariaDTO updateFranja(@PathParam("id") Long id, FranjaHorariaDTO franja) throws WebApplicationException
         {
            FranjaHorariaEntity newEntity= franja.toEntity();
-           newEntity.setId(id);
            FranjaHorariaEntity entity = franjaLogic.getFranja(id);
             if (entity == null) {
                 throw new WebApplicationException("El recurso /franjashorarias/" + id + " no existe.", 404);
@@ -180,7 +180,7 @@ public class FranjaHorariaResource {
         if (entity == null) {
             throw new WebApplicationException("la franja no existe", 404);
         }
-        franjaLogic.deleteFranja(id);	
+        franjaLogic.deleteFranja(entity);	
             
 // Void
 	}
