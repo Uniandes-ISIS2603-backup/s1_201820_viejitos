@@ -22,6 +22,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 /**
  *<pre>Clase que implementa el recurso "Enfermero".
@@ -66,13 +68,16 @@ public class EnfermeroResource {
      * 412 Precodition Failed: Ya existe el enfermero.
      * </code>
      * </pre>
-     * @param enfermero La entidad a guardar
-     * @return JSON La entidad enfermero guardada con su id correspondiente
-     * @throws BusinessLogicException Si ya existe una entidad de enfermero igual
+     * @param enfermero  {@link EnfermeroDetailDTO}  La entidad a guardar
+     * @return JSON  {@link EnfermeroDetailDTO}  La entidad enfermero guardada con su id correspondiente
      */
     @POST
-    public EnfermeroDetailDTO createEnfermero( EnfermeroDetailDTO enfermero ) throws BusinessLogicException{
-        logic.create(enfermero.toEntity());
+    public EnfermeroDetailDTO createEnfermero( EnfermeroDetailDTO enfermero ) {
+        try{
+            logic.create(enfermero.toEntity());
+        }catch(BusinessLogicException e){
+            throw new WebApplicationException(e.getMessage(),412);
+        }
         return enfermero;
     }
     
@@ -111,15 +116,14 @@ public class EnfermeroResource {
      * </code> 
      * </pre>
      * @param login el identificador que usa el enfermero 
-     * @return JSON con la informacion de la entidad enfermero
-     * @throws BusinessLogicException si no existe un enfermero con ese login
+     * @return JSON  {@link EnfermeroDetailDTO}  con la informacion de la entidad enfermero
      */
     @GET
     @Path("{login:[a-zA-Z][a-zA-Z0-9]*}")
-    public EnfermeroDetailDTO getEnfermero(@PathParam("login") String login) throws BusinessLogicException{
+    public EnfermeroDetailDTO getEnfermero(@PathParam("login") String login) {
         EnfermeroEntity entidad = logic.getByLogin(login);
         if(entidad==null){
-            throw new BusinessLogicException("No existe un enfermero identificado como " + login);
+            throw new WebApplicationException("No existe un enfermero identificado como " + login, 404);
         }
         EnfermeroDetailDTO edto = new EnfermeroDetailDTO(entidad);
         return edto;
@@ -140,14 +144,17 @@ public class EnfermeroResource {
      * @param login nombre de usuario del enfermero que se desea actualizar.Este debe ser una cadena alfanumérica
      * @param dto {@link EnfermeroDetailDTO} La entidad de Enfermero que se desea guardar.
      * @return JSON {@link EnfermeroDetailDTO} - La entidad de Enfermero guardada.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la entidad de Enfermero porque ya existe una con ese nombre.
      */
     @PUT
     @Path("{id:[a-zA-Z][a-zA-Z0-9]*}")
-    public EnfermeroDetailDTO updateEnfermero(@PathParam("login") String login, EnfermeroDetailDTO dto) throws BusinessLogicException{
+    public EnfermeroDetailDTO updateEnfermero(@PathParam("login") String login, EnfermeroDetailDTO dto) {
         EnfermeroEntity entity = dto.toEntity();
         entity.setLogin(login);
-        logic.update(entity);
+        try{
+            logic.update(entity);
+        }catch(BusinessLogicException e){
+            throw new WebApplicationException(e.getMessage(), Response.Status.NOT_FOUND);
+        }
         return dto;
     }
     
@@ -164,7 +171,7 @@ public class EnfermeroResource {
      * </code>
      * </pre>
      * @param login nombre de usuario del enfermero que se desea borrar. Este debe ser una cadena alfanumerica.
-     * @throws BusinessLogicException si no existe un enfermero con ese login
+     * @throws BusinessLogicException  {@link BusinessLogicException}  si no existe un enfermero con ese login
      */
     @DELETE
     @Path( "{login: \\d+}" )
