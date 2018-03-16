@@ -93,10 +93,11 @@ public class FranjaHorariaLogic {
      *
      * @param id Identificador de la instancia a eliminar.
      */
-      public void deleteFranja(Long id ) 
+      public void deleteFranja(FranjaHorariaEntity entity ) 
 	{
+            Long id=entity.getId();
 		LOGGER.log(Level.INFO, "Inicia proceso de borrar franja con id={0}", id);
-		persistencia.delete( id );
+		persistencia.delete( entity.getId() );
 	        LOGGER.log(Level.INFO, "Termina proceso de borrar franja con id={0}", id);
 	}
     
