@@ -152,7 +152,7 @@ public class MedicoResource {
      * pre>Borra la entidad de Medico con el id asociado recibido en la URL.
      * Códigos de respuesta:<br>
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Elimina el medico correspondiente al id dado.</code>
+     * 204 OK Elimina el medico correspondiente al id dado.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found. No existe un medico con el id dado.</code>
      * </pre>

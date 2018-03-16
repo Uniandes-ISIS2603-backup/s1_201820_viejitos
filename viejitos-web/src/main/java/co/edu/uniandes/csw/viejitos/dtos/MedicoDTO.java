@@ -41,7 +41,7 @@ import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
  *
  *   {
  *          "nombre":"Juan Perez",
- *          "tipo": integer,
+ *          "tipo": 1,
  *          "login":"j.perez",
  *          "contrasena":"megustanlosgatos2",
  *          "id":"1010233999"
