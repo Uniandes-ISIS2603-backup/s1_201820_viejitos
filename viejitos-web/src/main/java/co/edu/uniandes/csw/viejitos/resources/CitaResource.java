@@ -71,12 +71,12 @@ public class CitaResource
 	 * @return JSONArray {@link CitaDetailDTO} - Las entidades de Cita encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
 	 */
 	@GET
-	public List<CitaDetailDTO> getCitas( )
+	public List<CitaDTO> getCitas( )
 	{
-		List<CitaDetailDTO> list= new ArrayList<CitaDetailDTO>();
+		List<CitaDTO> list= new ArrayList<CitaDTO>();
             for(CitaEntity e :logic.getAll())
             {
-               list.add(new CitaDetailDTO(e));
+               list.add(new CitaDTO(e));
             }
             return list;
 	}
@@ -97,9 +97,9 @@ public class CitaResource
 	 */
 	@GET
 	@Path( "{id: \\d+}" )
-	public CitaDetailDTO getCita( @PathParam( "id" ) Long id )
+	public CitaDTO getCita( @PathParam( "id" ) Long id )
 	{
-		return new CitaDetailDTO(logic.getById(id));
+		return new CitaDTO(logic.getById(id));
 	}
         
         /**
@@ -121,14 +121,14 @@ public class CitaResource
 	 */
 	@PUT
 	@Path( "{id: \\d+}" )
-	public CitaDetailDTO updateCita( @PathParam( "id" ) Long id, CitaDetailDTO detailDTO ) throws BusinessLogicException
+	public CitaDTO updateCita( @PathParam( "id" ) Long id, CitaDetailDTO detailDTO ) throws BusinessLogicException
 	{
             CitaEntity e = logic.getById(id);
             if(e==null)
             {
                 throw new WebApplicationException("El recurso /citas/" + id + " no existe.", 404);
             }
-            return new CitaDetailDTO(logic.update(detailDTO.toEntity()));
+            return new CitaDTO(logic.update(detailDTO.toEntity()));
 	}
         
         /**

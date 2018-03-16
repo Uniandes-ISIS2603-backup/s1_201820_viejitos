@@ -24,53 +24,40 @@ import javax.inject.Inject;
  */
 @Stateless
 public class CitaLogic {
-     private static final Logger LOGGER = Logger.getLogger( CitaLogic.class.getName( ) );
-    
+    private static final Logger LOGGER = Logger.getLogger(CitaLogic.class.getName());
+
     @Inject
     private CitaPersistence persistence;
-    
-    @Inject
-    private MedicoPersistence medPersistence;
-    
-    @Inject 
-    private ClientePersistence cliPersistence;
-    
-    
-    
-    public CitaEntity create( CitaEntity entity ) throws BusinessLogicException
-	{
-                //verificar
-             LOGGER.info( "Inicia proceso de creación de una entidad de Cita" );
-             persistence.create(entity);
-		return entity;
-	}
-    
-    public List<CitaEntity> getAll( )
-	{
-		LOGGER.info( "Inicia proceso de consultar todas las entidades de Cita" );
-		List<CitaEntity> entities = persistence.findAll( );
-		LOGGER.info( "Termina proceso de consultar todas las entidades de Cita" );
-		return entities;
-	}
-    
-    public CitaEntity getById( Long id )
-	{
-		return persistence.find( id );
-	}
-    
-    public CitaEntity update( CitaEntity entity ) throws BusinessLogicException
-	{
-		if( persistence.find(entity.getId()) == null )
-		{
-			throw new BusinessLogicException( "No existe una entidad de Cita con el id \"" + entity.getId()+ "\"" );
-		}
-		return persistence.update( entity );
-	}
-    
-    public void delete( CitaEntity entity ) 
-	{
-		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Cita con id={0}", entity.getId( ) );
-		persistence.delete( entity.getId() );
-		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Cita con id={0}", entity.getId( ) );
-	}
+
+    public CitaEntity create(CitaEntity entity) throws BusinessLogicException {
+        //verificar
+        LOGGER.info("Inicia proceso de creación de una entidad de Cita");
+        persistence.create(entity);
+        return entity;
+    }
+
+    public List<CitaEntity> getAll() {
+        LOGGER.info("Inicia proceso de consultar todas las entidades de Cita");
+        List<CitaEntity> entities = persistence.findAll();
+        LOGGER.info("Termina proceso de consultar todas las entidades de Cita");
+        return entities;
+    }
+
+    public CitaEntity getById(Long id) {
+         LOGGER.info("Inicia proceso de consultar todas las entidades de Cita con id"+id);
+        return persistence.find(id);
+    }
+
+    public CitaEntity update(CitaEntity entity) throws BusinessLogicException {
+        if (persistence.find(entity.getId()) == null) {
+            throw new BusinessLogicException("No existe una entidad de Cita con el id \"" + entity.getId() + "\"");
+        }
+        return persistence.update(entity);
+    }
+
+    public void delete(CitaEntity entity) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Cita con id={0}", entity.getId());
+        persistence.delete(entity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Cita con id={0}", entity.getId());
+    }
 }

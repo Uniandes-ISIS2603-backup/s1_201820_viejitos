@@ -1,0 +1,191 @@
+{
+	"info": {
+		"name": "Cita.Postman",
+		"_postman_id": "ed334645-86c4-44a8-a3a8-5440bd449d1a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/viejitos-web/api/citas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a5d7ccd-decb-4926-aa4e-7c6dc93914da",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"fecha\":\"1997-07-16T19:20:30.45+01:00\",\r\n       \"hora\": \"1997-08-16T19:20:30.45+01:00\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/citas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"citas"
+					]
+				},
+				"description": "Crear una nueva cita"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/citas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1596179-b32a-46e2-ad08-e42b9808f354",
+						"type": "text/javascript",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"medicos count\"] = data.length >= 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"fecha\":\"1997-07-16T19:20:30.45+01:00\",\r\n       \"hora\": \"1997-08-16T19:20:30.45+01:00\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/citas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"citas"
+					]
+				},
+				"description": "Obtiene todas las citas"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/citas/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "82eb7ba6-9202-40fe-8bac-1a5814181833",
+						"type": "text/javascript",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"fecha\":\"1997-07-16T19:20:30.45+01:00\",\r\n       \"hora\": \"1997-08-16T19:20:30.45+01:00\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/citas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"citas",
+						"1"
+					]
+				},
+				"description": "Obtiene la cita 1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/citas/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "82c02bbc-8db0-4a44-a180-60464c7c5852",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/citas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"citas",
+						"1"
+					]
+				},
+				"description": "Borra la cita 1"
+			},
+			"response": []
+		}
+	]
+}

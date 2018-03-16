@@ -39,10 +39,12 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class CitaPersistence {
-     private static final Logger LOGGER = Logger.getLogger(CitaPersistence.class.getName());
-         @PersistenceContext(unitName = "ViejitosPU")
+
+    private static final Logger LOGGER = Logger.getLogger(CitaPersistence.class.getName());
+    @PersistenceContext(unitName = "ViejitosPU")
     protected EntityManager em;
-             public CitaEntity find(Long id) {
+
+    public CitaEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando cita con id={0}", id);
         return em.find(CitaEntity.class, id);
     }
