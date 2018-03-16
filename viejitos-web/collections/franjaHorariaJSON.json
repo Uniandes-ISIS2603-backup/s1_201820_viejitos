@@ -1,15 +1,62 @@
 {
-   "variables": [],
-	"info": {
-		"name": "franjaHorariaJSON",
-		"_postman_id": "aa4dad27-77ac-e0d0-f61a-3aa49384d925",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
+	"id": "6a2e2f5f-b15d-4ff6-54c6-5a40c81e0982",
+	"name": "franjaHorariaJSON",
+	"description": "",
+	"order": [
+		"3b6113c3-71c3-221a-ff58-0516a5d9348a",
+		"92076d6c-90ab-f3f6-fae9-d2366647cd75",
+		"46511663-6ec5-0de7-e90a-0df0b145e6b4",
+		"12f4436a-f25c-911b-3480-6e42f3e6d9da"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 0,
+	"owner": "3730883",
+	"public": false,
+	"requests": [
 		{
+			"folder": null,
+			"id": "12f4436a-f25c-911b-3480-6e42f3e6d9da",
+			"name": "borrar una franja",
+			"dataMode": null,
+			"data": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+						]
+					}
+				}
+			],
+			"rawModeData": "",
+			"descriptionFormat": null,
+			"description": null,
+			"variables": null,
+			"headers": "",
+			"method": "DELETE",
+			"pathVariables": null,
+			"url": "http://localhost:8080/viejitos-web/api/franjashorarias/{{new_id}}",
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 204\"] = responseCode.code === 204;",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [],
+			"pathVariableData": [],
+			"collectionId": "6a2e2f5f-b15d-4ff6-54c6-5a40c81e0982"
+		},
+		{
+			"folder": null,
+			"id": "3b6113c3-71c3-221a-ff58-0516a5d9348a",
 			"name": "Crear franja",
-			"event": [
+			"dataMode": "raw",
+			"data": [],
+			"auth": null,
+			"events": [
 				{
 					"listen": "test",
 					"script": {
@@ -23,52 +70,36 @@
 					}
 				}
 			],
-			"request": {
-				"url": "http://localhost:8080/viejitos-web/api/franjashorarias",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"diaSemana\": \"lunes\",\n        \"horaInicio\": \"0700\",\n    \"horaFin\": \"0900\",\n     \"ocupado\": \"true\"\n             }"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-                
-                {
-			"name": "Obtener todas los franjas",
-			"event": [
+			"descriptionFormat": null,
+			"description": null,
+			"variables": null,
+			"headers": "Content-Type: application/json",
+			"method": "POST",
+			"pathVariables": null,
+			"url": "http://localhost:8080/viejitos-web/api/franjashorarias",
+			"preRequestScript": null,
+			"tests": "var data = JSON.parse(responseBody);\r\npostman.setGlobalVariable(\"new_id\",data.id);\r\ntests[\"Status code is 200\"] = responseCode.code === 200;\r\nconsole.log(data.id);",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [
 				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"var data= JSON.parse(responseBody);",
-							"tests[\"Status code is 200\"] = responseCode.code === 200;",
-							"tests[\"franjas count\"] = data.length >= 0;"
-						]
-					}
+					"key": "Content-Type",
+					"value": "application/json"
 				}
 			],
-			"request": {
-				"url": "http://localhost:8080/viejitos-web/api/franjashorarias",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
+			"pathVariableData": [],
+			"collectionId": "6a2e2f5f-b15d-4ff6-54c6-5a40c81e0982",
+			"rawModeData": "    {\n        \"diaSemana\": \"lunes\",\n        \"horaInicio\": \"0700\",\n    \"horaFin\": \"0900\",\n     \"ocupado\": \"true\"\n             }"
 		},
-                {
+		{
+			"folder": null,
+			"id": "46511663-6ec5-0de7-e90a-0df0b145e6b4",
 			"name": "Obtener una franja",
-			"event": [
+			"dataMode": null,
+			"data": [],
+			"auth": null,
+			"events": [
 				{
 					"listen": "test",
 					"script": {
@@ -81,41 +112,59 @@
 					}
 				}
 			],
-			"request": {
-				"url": "http://localhost:8080/viejitos-web/api/franjashorarias/{{new_id}}",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			}
-                },
-                
-                {
-			"name": "Borrar un author",
-			"event": [
+			"rawModeData": "",
+			"descriptionFormat": null,
+			"description": null,
+			"variables": null,
+			"headers": "",
+			"method": "GET",
+			"pathVariables": null,
+			"url": "http://localhost:8080/viejitos-web/api/franjashorarias/{{new_id}}",
+			"preRequestScript": null,
+			"tests": "console.log(responseBody);\nvar data = JSON.parse(responseBody);\ntests[\"Status code is 200\"] = responseCode.code === 200;",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [],
+			"pathVariableData": [],
+			"collectionId": "6a2e2f5f-b15d-4ff6-54c6-5a40c81e0982"
+		},
+		{
+			"folder": null,
+			"id": "92076d6c-90ab-f3f6-fae9-d2366647cd75",
+			"name": "Obtener todas los franjas",
+			"dataMode": null,
+			"data": [],
+			"auth": null,
+			"events": [
 				{
 					"listen": "test",
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"tests[\"Status code is 204\"] = responseCode.code === 204;"
+							"var data= JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"franjas count\"] = data.length >= 0;"
 						]
 					}
 				}
 			],
-			"request": {
-				"url": "http://localhost:8080/viejitos-web/api/franjashorarias/{{new_id}}",
-				"method": "DELETE",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
+			"rawModeData": "",
+			"descriptionFormat": null,
+			"description": null,
+			"variables": null,
+			"headers": "",
+			"method": "GET",
+			"pathVariables": null,
+			"url": "http://localhost:8080/viejitos-web/api/franjashorarias",
+			"preRequestScript": null,
+			"tests": "var data= JSON.parse(responseBody);\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"franjas count\"] = data.length >= 0;",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [],
+			"pathVariableData": [],
+			"collectionId": "6a2e2f5f-b15d-4ff6-54c6-5a40c81e0982"
 		}
-                
-        
-                ]
-   
-   
+	]
 }
- 
