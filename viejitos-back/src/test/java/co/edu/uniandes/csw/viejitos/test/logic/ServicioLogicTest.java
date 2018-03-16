@@ -104,20 +104,6 @@ public class ServicioLogicTest {
     @Test
     public void createServicioTest() throws BusinessLogicException {
         ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-        if(newEntity.getCliente()==null)
-        {
-            try
-            {
-                ServicioEntity result = servicioLogic.create(newEntity);
-                fail("Debería lanzar exception.");
-            }
-            catch(Exception e)
-            {
-                //Debería entrar acá.
-            }
-        }
-        else
-        {
             ServicioEntity result = servicioLogic.create(newEntity);
             Assert.assertNotNull(result);
             ServicioEntity entity = em.find(ServicioEntity.class, result.getId());
@@ -133,7 +119,6 @@ public class ServicioLogicTest {
             Assert.assertEquals(newEntity.getPagoInicial(), entity.getPagoInicial());
             Assert.assertEquals(newEntity.getPagoFinal(), entity.getPagoFinal());
             Assert.assertEquals(newEntity.getFactura(), entity.getFactura());
-        }
     }
     
      /**
@@ -196,22 +181,7 @@ public class ServicioLogicTest {
         ServicioEntity pojoEntity = factory.manufacturePojo(ServicioEntity.class);
 
         pojoEntity.setId(entity.getId());
-
-        if(pojoEntity.getFactura()==null)
-        {
-          try
-          {
-              servicioLogic.update(pojoEntity);
-              fail("Debería lanzar exception");
-          }
-          catch(Exception e)
-          {
-              //Debería entrar acá.
-          }
-        }
-        else
-        {
-            servicioLogic.update(pojoEntity);
+        servicioLogic.update(pojoEntity);
 
         ServicioEntity resp = em.find(ServicioEntity.class, entity.getId());
 
@@ -228,7 +198,6 @@ public class ServicioLogicTest {
         Assert.assertEquals(pojoEntity.getPagoInicial(), resp.getPagoInicial());
         Assert.assertEquals(pojoEntity.getPagoFinal(), resp.getPagoFinal());
         Assert.assertEquals(pojoEntity.getFactura(), resp.getFactura());
-        }
         
     }
     

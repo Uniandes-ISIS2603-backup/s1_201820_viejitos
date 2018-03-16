@@ -37,24 +37,6 @@ public class QuejaLogic {
 	public QuejaEntity create( QuejaEntity entity ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Queja" );
-                // Verifica la regla de negocio que una queja debe tener un cliente existente asociado.
-               if( entity.getCliente()==null )
-		{
-			throw new BusinessLogicException( "El cliente no puede ser nulo" );
-		}
-                if( clientePersistence.findByLogin(entity.getCliente().getLogin())==null )
-		{
-			throw new BusinessLogicException( "No existe un cliente con el login \"" + entity.getCliente().getLogin()+ "\"" );
-		}
-		if( clientePersistence.findByLogin(entity.getCliente().getLogin())==null )
-		{
-			throw new BusinessLogicException( "No existe un cliente con el login \"" + entity.getCliente().getLogin()+ "\"" );
-		}
-                // Verifica la regla de negocio que una queja debe tener un servicio existente asociado.
-		if( servicioPersistence.find(entity.getServicio().getId())==null )
-		{
-			throw new BusinessLogicException( "No existe un servicio con el id \"" + entity.getServicio().getId()+ "\"" );
-		}
 		// Invoca la persistencia para crear la entidad de Queja
 		persistence.create( entity );
 		LOGGER.info( "Termina proceso de creación de entidad de Queja" );

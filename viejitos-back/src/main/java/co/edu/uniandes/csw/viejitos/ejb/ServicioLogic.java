@@ -68,21 +68,6 @@ public class ServicioLogic {
 		{
 			throw new BusinessLogicException( "No existe una entidad de Servicio con el id \"" + entity.getId()+ "\"" );
 		}
-                if(entity.getFinalizado()==true)
-                {
-                    if(entity.getFactura()==null)
-                    {
-                        throw new BusinessLogicException( "El servicio debería tener una factura.");
-                    }
-                    if(!entity.getPagoInicial().getPagado())
-                    {
-                        throw new BusinessLogicException( "El pago inical debería estar pagado.");
-                    }
-                    if(entity.getPagoFinal()!=null)
-                    {
-                        throw new BusinessLogicException( "Debería existir un pago final.");
-                    }
-                }
 		return persistence.update( entity );
 	}
 

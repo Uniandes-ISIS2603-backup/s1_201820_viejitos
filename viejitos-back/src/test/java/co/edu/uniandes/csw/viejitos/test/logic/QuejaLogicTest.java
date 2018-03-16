@@ -103,20 +103,6 @@ public class QuejaLogicTest {
     @Test
     public void createQuejaTest() throws BusinessLogicException {
         QuejaEntity newEntity = factory.manufacturePojo(QuejaEntity.class);
-        if(newEntity.getCliente()==null)
-        {
-            try
-            {
-                QuejaEntity result = quejaLogic.create(newEntity);
-                fail("Debería lanzar exception.");
-            }
-            catch(Exception e)
-            {
-                //Debería entrar acá.
-            }
-        }
-        else
-        {
             QuejaEntity result = quejaLogic.create(newEntity);
             Assert.assertNotNull(result);
             QuejaEntity entity = em.find(QuejaEntity.class, result.getId());
@@ -124,7 +110,6 @@ public class QuejaLogicTest {
             Assert.assertEquals(newEntity.getReclamo(), entity.getReclamo());
             Assert.assertEquals(newEntity.getResuelto(), entity.getResuelto());
             Assert.assertEquals(newEntity.getServicio(), entity.getServicio());
-        }
     }
     
          /**
