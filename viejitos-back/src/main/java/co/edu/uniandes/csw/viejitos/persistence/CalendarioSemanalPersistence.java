@@ -41,11 +41,7 @@ public class CalendarioSemanalPersistence {
         return em.merge(entity);
     }
 
-    public void delete(Long id) {
-        LOGGER.log(Level.INFO, "Borrando calendario Semanal con id={0}", id);
-        CalendarioSemanalEntity entity = em.find(CalendarioSemanalEntity.class, id);
-        em.remove(entity);
-    }
+  
       
        public CalendarioSemanalEntity find(Long id)
       {   
@@ -59,5 +55,11 @@ public class CalendarioSemanalPersistence {
          Query q=em.createQuery("select u from CalendarioSemanalEntity u",CalendarioSemanalEntity.class);
          return q.getResultList();
        }
+          
+            public void delete(Long id) {
+        LOGGER.log(Level.INFO, "Borrando calendario Semanal con id={0}", id);
+        CalendarioSemanalEntity entity = em.find(CalendarioSemanalEntity.class, id);
+        em.remove(entity);
+    }
     
 }

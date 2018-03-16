@@ -24,10 +24,8 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.CalendarioSemanalDTO;
 import co.edu.uniandes.csw.viejitos.dtos.CalendarioSemanalDetailDTO;
-import co.edu.uniandes.csw.viejitos.dtos.FranjaHorariaDTO;
 import co.edu.uniandes.csw.viejitos.ejb.CalendarioSemanalLogic;
 import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
-import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
@@ -95,13 +93,14 @@ public class CalendarioSemanalResource {
 	 */
 	@GET
 	@Path( "{id: \\d+}" )
-	public CalendarioSemanalDetailDTO getCalendario( @PathParam( "id" ) Long id )
+	public CalendarioSemanalDetailDTO getCalendario( @PathParam( "id" ) Long id ) throws BusinessLogicException
 	{
 	    CalendarioSemanalEntity entity = calendarioLogic.getCalendario(id);
         if (entity == null) {
-            throw new WebApplicationException("la franja no existe", 404);
+            throw new BusinessLogicException("la franja no existe con id"+id);
         }
-        return new CalendarioSemanalDetailDTO(entity);
+        CalendarioSemanalDetailDTO dto=new CalendarioSemanalDetailDTO(entity);
+        return dto;
 	}
         
         
@@ -115,10 +114,14 @@ public class CalendarioSemanalResource {
 	 * @return JSONArray {@link CalendarioSemanalDetailDTO} - Las entidades de calendario semanal encontradas en la aplicación.
 	 */
 	@GET
-	public List<CalendarioSemanalDetailDTO> getFranjasHorarias( )
+	public List<CalendarioSemanalDetailDTO> getCalendariosSemanles( )
 	{
-		List<CalendarioSemanalDetailDTO> calendarios= new ArrayList<CalendarioSemanalDetailDTO>();
-            for(CalendarioSemanalEntity actual: calendarioLogic.getCalendarios())
+            
+            
+            List<CalendarioSemanalEntity> calendarioEntitys=calendarioLogic.getCalendarios();
+            
+		List<CalendarioSemanalDetailDTO> calendarios= new ArrayList<>();
+            for(CalendarioSemanalEntity actual: calendarioEntitys)
             {
                 calendarios.add(new CalendarioSemanalDetailDTO(actual));
             }
@@ -172,7 +175,7 @@ public class CalendarioSemanalResource {
         if (entity == null) {
             throw new WebApplicationException("la franja no existe", 404);
         }
-        calendarioLogic.deleteCalendario(id);
+        calendarioLogic.deleteCalendario(entity);
 	}
     
     

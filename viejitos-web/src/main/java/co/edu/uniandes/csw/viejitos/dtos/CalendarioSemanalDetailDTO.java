@@ -67,7 +67,14 @@ import java.util.List;
 public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
     
     private List<FranjaHorariaDTO> franjasHorarias;
-     /**
+     
+    
+    public CalendarioSemanalDetailDTO()
+    {
+    super();
+    }
+    
+    /**
      * Constructor por defecto
      */
     public CalendarioSemanalDetailDTO(CalendarioSemanalEntity entity)
@@ -75,30 +82,49 @@ public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
         super(entity);
         if(entity!=null)
        {
-           this.franjasHorarias = new ArrayList<FranjaHorariaDTO>();
+           List<FranjaHorariaEntity> frjsEnt= entity.getFranjas();
+        List<FranjaHorariaDTO> frjsDTO= new ArrayList<>();
            
            
-            for (FranjaHorariaEntity entityFranja: entity.getFranjasHorarias() ) 
+            for (FranjaHorariaEntity entityFranja:frjsEnt) 
             {
-                franjasHorarias.add(new FranjaHorariaDTO(entityFranja));
+                FranjaHorariaDTO actual=new FranjaHorariaDTO(entityFranja);
+                frjsDTO.add(actual);
             }
-    }
+     this.franjasHorarias =frjsDTO;
+       
+       }
      
     }
     
+   @Override
 public CalendarioSemanalEntity toEntity()
 {
 CalendarioSemanalEntity entity=super.toEntity();
-   entity.setId(this.getId());
-       entity.setUltimaModficacion(this.getUltimaModificacion());
+     
        List<FranjaHorariaEntity> fs = new ArrayList<FranjaHorariaEntity>();
-       for (FranjaHorariaDTO franja : franjasHorarias) 
+       
+       for (FranjaHorariaDTO actual : franjasHorarias) 
        {
-                fs.add(franja.toEntity());
+                fs.add(actual.toEntity());
        }
   entity.setFranjas(fs);
 return entity;
 }
+
+    /**
+     * @return the franjasHorarias
+     */
+    public List<FranjaHorariaDTO> getFranjasHorarias() {
+        return franjasHorarias;
+    }
+
+    /**
+     * @param franjasHorarias the franjasHorarias to set
+     */
+    public void setFranjasHorarias(List<FranjaHorariaDTO> franjasHorarias) {
+        this.franjasHorarias = franjasHorarias;
+    }
 
     
     

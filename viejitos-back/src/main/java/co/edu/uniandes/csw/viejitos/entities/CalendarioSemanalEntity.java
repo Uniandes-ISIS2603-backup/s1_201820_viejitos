@@ -72,10 +72,6 @@ public class CalendarioSemanalEntity extends BaseEntity implements Serializable
 
     
 
-    public Iterable<FranjaHorariaEntity> getFranjasHorarias() {
-        return franjas;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     
 }

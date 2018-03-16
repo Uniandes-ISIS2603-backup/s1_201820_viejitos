@@ -29,8 +29,8 @@ public class EnfermeroLogic {
     public EnfermeroEntity create(EnfermeroEntity entity) throws BusinessLogicException{
         LOGGER.info( "Inicia proceso de creación de una entidad de Enfermero" );
 	// Verifica la regla de negocio que dice que no puede haber dos entidades de Viejitos con el mismo nombre
-	if( persistencia.findByName( entity.getName( ) ) != null ){
-            throw new BusinessLogicException( "Ya existe una entidad de Enfermero con el nombre \"" + entity.getName( ) + "\"" );
+	if( persistencia.findByLogin(entity.getLogin()) != null ){
+            throw new BusinessLogicException( "Ya existe una entidad de Enfermero con el login \"" + entity.getLogin( ) + "\"" );
 	}
 	// Invoca la persistencia para crear la entidad de Viejito
 	persistencia.create( entity );

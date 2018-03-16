@@ -29,7 +29,7 @@ import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
  * 
  *   {
  * "id": 001101,
- *      "diaSemana": lunes,
+ *      "diaSemana": "lunes",
  *        "horaInicio": 0800,
  *       "horaFin": 0900,
  *       "ocupado": true     
@@ -50,28 +50,33 @@ public class FranjaHorariaDTO {
      /**
      * Constructor por defecto
      */
+     public FranjaHorariaDTO()
+    {
+    
+    }
+    
+    
+    
     public FranjaHorariaDTO(FranjaHorariaEntity entity)
     {
     if(entity!=null)
     {
-    horaInicio=entity.getHoraInicio();
-    horaFin=entity.getHoraFin();
-    ocupado=entity.isOcupado();
-    diaSemana=entity.getDiaSemana();
-    id=entity.getId();
+    this.id=entity.getId();
+    this.horaInicio=entity.getHoraInicio();
+    this.horaFin=entity.getHoraFin();
+    this.ocupado=entity.isOcupado();
+    this.diaSemana=entity.getDiaSemana();
+   
     }
     }
-    public FranjaHorariaDTO()
-    {
-    
-    }
+   
      public FranjaHorariaEntity toEntity()
      {
          FranjaHorariaEntity entity=new FranjaHorariaEntity();
+         entity.setId(this.id);
          entity.setDiaSemana(this.diaSemana);
          entity.setHoraFin(this.horaFin);
          entity.setHoraInicio(this.horaInicio);
-         entity.setId(this.id);
          entity.setOcupado(this.ocupado);
          return entity;
      }
@@ -119,28 +124,14 @@ public class FranjaHorariaDTO {
      /**
      * @param pId la nueva hora de finalizacion de la franja
      */
-    public void setid(Long pId)
+    public void setId(Long pId)
             {
                 id=pId;
             }
     
     
     
-    /**
-     * @return el estado de la franja horaria
-     */
-    public Boolean getOcupado()
-            {
-                return ocupado;
-            }
-    /**
-     * @param pOcupado el nuevo estado de la franja horaria
-     */
-    public void setOcupado(Boolean pOcupado)
-            {
-                ocupado=pOcupado;
-            }
-    
+  
     /**
      * @return dia de la semana de la franja
      */
@@ -155,5 +146,21 @@ public class FranjaHorariaDTO {
             {
                 horaInicio=pDiaSemana;
             }
+      /**
+     * @return el estado de la franja horaria
+     */
+    public Boolean isOcupado()
+            {
+                return ocupado;
+            }
+    /**
+     * @param pOcupado el nuevo estado de la franja horaria
+     */
+    public void setOcupado(Boolean pOcupado)
+            {
+                ocupado=pOcupado;
+            }
+    
+    
     
 }

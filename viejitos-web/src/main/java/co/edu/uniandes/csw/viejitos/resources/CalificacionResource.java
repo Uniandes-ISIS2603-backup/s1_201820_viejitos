@@ -26,6 +26,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *<pre>Clase que implementa el recurso "Calificacion".
@@ -65,13 +66,13 @@ public class CalificacionResource {
      * 412 Precodition Failed: Ya existe la calificacion.
      * </code>
      * </pre>
-     * @param dto La entidad a guardar
-     * @return JSON La entidad calificacion guardada con su id correspondiente
-     * @throws BusinessLogicException Si ya existe una entidad de calificacion igual
+     * @param dto  {@link CalificacionDetailDTO}  La entidad a guardar
+     * @return JSON {@link CalificacionDetailDTO} La entidad calificacion guardada con su id correspondiente
      */
     @POST
     public CalificacionDTO createCalificacion( CalificacionDTO dto ) throws BusinessLogicException{
         logic.create(dto.toEntity());
+
         return dto;
     }
     
@@ -92,7 +93,7 @@ public class CalificacionResource {
         List<CalificacionDetailDTO> resp = new ArrayList<>();
         for(CalificacionEntity actual:califs){
            resp.add( new CalificacionDetailDTO(actual));
-        }
+        } 
         return resp;
     }
     
@@ -110,16 +111,20 @@ public class CalificacionResource {
      * </code> 
      * </pre>
      * @param id el identificador que se asigna a la calificacion 
-     * @return JSON con la informacion de la entidad calificacion
-     * @throws BusinessLogicException si no existe
+     * @return JSON {@link CalificacionDetailDTO} con la informacion de la entidad calificacion
+     * @throws BusinessLogicException  {@link BusinessLogicException}  si no existe
      */
     @GET
     @Path("{id:[0-9]*}")
     public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) throws BusinessLogicException{
         CalificacionEntity calif = logic.getById(id);
-        if(calif == null)
-            throw new BusinessLogicException("No existe una calificacion con el id " + id);
-        else return new CalificacionDetailDTO( calif );
+        try{
+            if(calif != null)
+                 return new CalificacionDetailDTO( calif );
+        }catch(Exception e){
+            throw new WebApplicationException(e.getMessage(),404);
+        }
+        return null;
     }
     
     /**
@@ -137,7 +142,7 @@ public class CalificacionResource {
      * @param id identificador de la calificacion que se desea actualizar.Este debe ser una cadena de numeros
      * @param dto {@link CalificacionDetailDTO} La entidad de Calificacion que se desea guardar.
      * @return JSON {@link CalificacionDetailDTO} - La entidad de Calificacion guardada.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la entidad de Enfermero porque ya existe una con ese nombre.
+     * @throws BusinessLogicException {@link BusinessLogicException} - Error de lógica que se genera al no poder actualizar la entidad de Enfermero porque ya existe una con ese nombre.
      */
     @PUT
     @Path("{id:[0-9]*}")

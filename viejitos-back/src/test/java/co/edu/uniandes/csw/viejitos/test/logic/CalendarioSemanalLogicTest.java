@@ -238,7 +238,7 @@ public class CalendarioSemanalLogicTest {
     public void testDeleteCalendario() throws Exception {
         
          CalendarioSemanalEntity entity = data.get(0);
-        calendarioLogic.deleteCalendario(entity.getId());
+        calendarioLogic.deleteCalendario(entity);
         CalendarioSemanalEntity deleted = em.find(CalendarioSemanalEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
