@@ -79,8 +79,8 @@ public class CalendarioSemanalDTO {
     public CalendarioSemanalDTO(CalendarioSemanalEntity entity)
     { if(entity!=null)
        {
-        ultimaModficacion=entity.getUltimaModficacion();
-        id=entity.getId();
+        this.ultimaModficacion=entity.getUltimaModficacion();
+       this.id=entity.getId();
     
         }
         
@@ -88,6 +88,7 @@ public class CalendarioSemanalDTO {
     public CalendarioSemanalDTO()
     {
     }
+    
     
     public CalendarioSemanalEntity toEntity()
     {
