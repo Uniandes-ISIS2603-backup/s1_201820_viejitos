@@ -1,25 +1,13 @@
 {
 	"info": {
 		"name": "Cliente.Postman",
-		"_postman_id": "b7642ae6-7d46-4f01-b606-373c4d6d238a",
-		"description": "Pruebas de Cliente.",
+		"_postman_id": "f3fa4155-a7e9-4a9c-8495-55b74e57d7c7",
+		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Crear un Cliente.",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "fecb90b5-ff52-4198-8aef-59fb05e370ec",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
+			"name": "Crear un Cliente",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -34,7 +22,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "\t{\r\n       \"id\": 12345,\r\n       \"nombre\": \"John Doe\",\r\n       \"login\": \"johndoe19\",\r\n       \"contrasena\": \"jd124\",\r\n       \"estado\": 1,\r\n       \"tipo\": 1\r\n    }"
+					"raw": "{\r\n       \"nombre\": \"Thatcher\",\r\n       \"login\": \"angryman\",\r\n       \"contrasena\": \"fls\",\r\n       \"estado\": 1,\r\n       \"tipo\": 1\r\n    }"
 				},
 				"url": {
 					"raw": "http://localhost:8080/viejitos-web/api/clientes",
@@ -54,54 +42,7 @@
 			"response": []
 		},
 		{
-			"name": "Crear Cliente (Fail)",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "\t{\r\n       \"id\": 12346,\r\n       \"nombre\": \"Andres Lopez\",\r\n       \"login\": \"johndoe23\",\r\n       \"contrasena\": \"al124\",\r\n       \"estado\": 1,\r\n       \"tipo\": 1\r\n    }"
-				},
-				"url": {
-					"raw": "http://localhost:8080/viejitos-web/api/clientes",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"viejitos-web",
-						"api",
-						"clientes"
-					]
-				},
-				"description": "Se intenta crear un cliente con un login ya registrado."
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener todos los clientes",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "5a90ec56-546c-4c08-9255-df9b745d1999",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
+			"name": "Obtener todos los Clientes",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -114,10 +55,7 @@
 						"value": "application/json"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "\t{\r\n       \"id\": 12346,\r\n       \"nombre\": \"Andres Lopez\",\r\n       \"login\": \"johndoe23\",\r\n       \"contrasena\": \"al124\",\r\n       \"estado\": 1,\r\n       \"tipo\": 1\r\n    }"
-				},
+				"body": {},
 				"url": {
 					"raw": "http://localhost:8080/viejitos-web/api/clientes",
 					"protocol": "http",
@@ -136,12 +74,12 @@
 			"response": []
 		},
 		{
-			"name": "Obtener un Cliente por id",
+			"name": "Obtener un Cliente por ID",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "ee7d19dc-6ea0-4408-896b-e8f7a96f27bf",
+						"id": "4c9e724b-528c-470d-a89b-e97afd986851",
 						"type": "text/javascript",
 						"exec": [
 							"tests[\"Status code is 200\"] = responseCode.code === 200;"
@@ -161,9 +99,54 @@
 						"value": "application/json"
 					}
 				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/clientes/{{idprueba}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"clientes",
+						"{{idprueba}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar un Cliente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e02b6dcd-e7ea-4c73-9919-0cde51accda4",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "\t{\r\n       \"id\": 12346,\r\n       \"nombre\": \"Andres Lopez\",\r\n       \"login\": \"johndoe23\",\r\n       \"contrasena\": \"al124\",\r\n       \"estado\": 1,\r\n       \"tipo\": 1\r\n    }"
+					"raw": "{\r\n\t\"nombre\": \"Thermite\",\r\n       \"login\": \"bigfhole\",\r\n       \"contrasena\": \"breacher\",\r\n       \"estado\": 1,\r\n       \"tipo\": 1\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/viejitos-web/api/clientes/{{idprueba}}",
@@ -185,18 +168,6 @@
 		},
 		{
 			"name": "Borrar un Cliente",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "75b5835e-6622-44b2-a3a1-edce3c2f1b42",
-						"type": "text/javascript",
-						"exec": [
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -209,46 +180,7 @@
 						"value": "application/json"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8080/viejitos-web/api/clientes/{{idprueba}}",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"viejitos-web",
-						"api",
-						"clientes",
-						"{{idprueba}}"
-					]
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Actualizar un Cliente",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "\t{\r\n       \"id\": 12346,\r\n       \"nombre\": \"Andres Lopez\",\r\n       \"login\": \"johndoe23\",\r\n       \"contrasena\": \"al124\",\r\n       \"estado\": 1,\r\n       \"tipo\": 1\r\n    }"
-				},
+				"body": {},
 				"url": {
 					"raw": "http://localhost:8080/viejitos-web/api/clientes/{{idprueba}}",
 					"protocol": "http",

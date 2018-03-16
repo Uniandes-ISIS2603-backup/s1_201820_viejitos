@@ -11,7 +11,7 @@ import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
  * <pre>
  *   {
  *      "id": number,
- *      "nombre: string,
+ *      "nombre": string,
  *      "login": string,
  *      "contrasena": string,
  *      "estado": number,
@@ -24,7 +24,7 @@ import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
  *
  *   {
  *      "id": 12345,
- *      "nombre: "John Doe",
+ *      "nombre": "John Doe",
  *      "login": "johndoe23",
  *      "contrasena": "jd124",
  *      "estado": 1,

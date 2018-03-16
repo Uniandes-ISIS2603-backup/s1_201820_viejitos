@@ -17,7 +17,7 @@ import java.util.List;
  * <pre>
  *   {
  *      "id": number,
- *      "nombre: string,
+ *      "nombre": string,
  *      "login": string,
  *      "contrasena": string,
  *      "estado": number,
@@ -73,7 +73,7 @@ import java.util.List;
  *
  *   {
  *      "id": 1234,
- *      "nombre: "John Doe",
+ *      "nombre": "John Doe",
  *      "login": "johndoe23",
  *      "contrasena": "jd124",
  *      "estado": 1,
@@ -101,7 +101,7 @@ import java.util.List;
  *          "nombre": "Jack Black",
  *          "id": "1113",
  *          "contrasena": "jb125",
- *          "cv": string,
+ *          "cv": "a",
  *          "tipo": 2 },
  *      "historiaC": {
  *          "id": 1114,
