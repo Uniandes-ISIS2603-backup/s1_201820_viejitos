@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 
+import co.edu.uniandes.csw.viejitos.dtos.EnfermeroDTO;
 import co.edu.uniandes.csw.viejitos.dtos.EnfermeroDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.EnfermeroLogic;
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
@@ -71,7 +72,7 @@ public class EnfermeroResource {
      * @throws BusinessLogicException Si ya existe una entidad de enfermero igual
      */
     @POST
-    public EnfermeroDetailDTO createEnfermero( EnfermeroDetailDTO enfermero ) throws BusinessLogicException{
+    public EnfermeroDTO createEnfermero( EnfermeroDTO enfermero ) throws BusinessLogicException{
         logic.create(enfermero.toEntity());
         return enfermero;
     }

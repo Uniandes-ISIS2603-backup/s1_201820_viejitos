@@ -32,8 +32,8 @@ import java.util.Date;
    {
       "id": 123456,
       "medio": "Efectivo",
-      "pagado": TRUE,
-      "fechaLimite": 12/04/18,
+      "pagado": true,
+      "fechaLimite": "12/04/18",
       "valor": 150000
    }
    </pre>

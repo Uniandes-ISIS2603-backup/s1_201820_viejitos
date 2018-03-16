@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 
+import co.edu.uniandes.csw.viejitos.dtos.HistoriaClinicaDTO;
 import co.edu.uniandes.csw.viejitos.dtos.HistoriaClinicaDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.HistoriaClinicaLogic;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
@@ -50,9 +51,9 @@ public class HistoriaClinicaResource
 	 * @return JSON {@link HistoriaClinicaDetailDTO}  - La entidad de HistoriaClinica guardada.
 	 */
 	@POST
-	public HistoriaClinicaDetailDTO createHistoriaC( HistoriaClinicaDetailDTO dto ) throws BusinessLogicException 
+	public HistoriaClinicaDTO createHistoriaC( HistoriaClinicaDTO dto ) throws BusinessLogicException 
 	{
-		return new HistoriaClinicaDetailDTO(hcLogic.create(dto.toEntity()));
+		return new HistoriaClinicaDTO(hcLogic.create(dto.toEntity()));
 	}
         
         /**

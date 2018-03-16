@@ -22,6 +22,7 @@ package co.edu.uniandes.csw.viejitos.resources;
  * @author lf.naranjo11
  */
 
+import co.edu.uniandes.csw.viejitos.dtos.CalendarioSemanalDTO;
 import co.edu.uniandes.csw.viejitos.dtos.CalendarioSemanalDetailDTO;
 import co.edu.uniandes.csw.viejitos.dtos.FranjaHorariaDTO;
 import co.edu.uniandes.csw.viejitos.ejb.CalendarioSemanalLogic;
@@ -73,9 +74,9 @@ public class CalendarioSemanalResource {
 	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de calnedario semanal.
 	 */
 	@POST
-	public CalendarioSemanalDetailDTO createCalendario( CalendarioSemanalDetailDTO dto ) throws BusinessLogicException
+	public CalendarioSemanalDTO createCalendario( CalendarioSemanalDTO dto ) throws BusinessLogicException
 	{
-		return new CalendarioSemanalDetailDTO(calendarioLogic.createCalendario(dto.toEntity()));
+		return new CalendarioSemanalDTO(calendarioLogic.createCalendario(dto.toEntity()));
 	}
         
        

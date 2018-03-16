@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 
+import co.edu.uniandes.csw.viejitos.dtos.MedicoDTO;
 import co.edu.uniandes.csw.viejitos.dtos.MedicoDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.MedicoLogic;
 import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
@@ -57,8 +58,8 @@ public class MedicoResource {
      * Error de lógica que se genera cuando ya existe la entidad de Servicio.
      */
     @POST
-    public MedicoDetailDTO createMedico(MedicoDetailDTO dto) throws BusinessLogicException {
-        return new MedicoDetailDTO(logic.create(dto.toEntity()));
+    public MedicoDTO createMedico(MedicoDTO dto) throws BusinessLogicException {
+        return new MedicoDTO(logic.create(dto.toEntity()));
     }
 
     /**

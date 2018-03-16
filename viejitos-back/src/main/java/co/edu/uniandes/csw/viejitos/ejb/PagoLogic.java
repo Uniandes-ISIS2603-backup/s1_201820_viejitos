@@ -34,10 +34,6 @@ public class PagoLogic {
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Pago" );
                 // Verifica las reglas de negocio
-		if( persistence.find( entity.getId()) != null )
-                {
-                        throw new BusinessLogicException( "Ya existe una entidad de Pago con el id \"" + entity.getId( ) + "\"" );
-                }
                 if( entity.getServicio() == null )
 		{
 			throw new BusinessLogicException( "La entidad de Pago debe tener un servicio asociado" );
@@ -46,10 +42,10 @@ public class PagoLogic {
 		{
 			throw new BusinessLogicException( "El Servicio del Pago no es válido" );
 		}
-                if( persistenceServicio.find(entity.getId()).getFactura() == null )
+                /**if( persistenceServicio.find(entity.getId()).getFactura() == null )
 		{
 			throw new BusinessLogicException( "El servicio asociado debe tener una factura válida asociada." );
-		}
+		}*/
                 if( entity.getValor() < 0 )
                 {
                         throw new BusinessLogicException( "La entidad de Pago no puede tener un valor negativo" );

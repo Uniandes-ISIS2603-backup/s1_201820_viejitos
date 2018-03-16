@@ -28,10 +28,7 @@ public class CalificacionLogic {
     
     public CalificacionEntity create(CalificacionEntity entity) throws BusinessLogicException{
         LOGGER.info( "Inicia proceso de creación de una entidad de Calificacion" );
-	// Verifica la regla de negocio que dice que no puede haber dos entidades de Viejitos con el mismo nombre
-	if( persistencia.find( entity.getId()) != null ){
-            throw new BusinessLogicException( "Ya existe una entidad de Calificacion con el id \"" + entity.getId( ) + "\"" );
-	}
+	
 	// Invoca la persistencia para crear la entidad de Viejito
 	persistencia.create( entity );
 	LOGGER.info( "Termina proceso de creación de entidad de Calificacion" );

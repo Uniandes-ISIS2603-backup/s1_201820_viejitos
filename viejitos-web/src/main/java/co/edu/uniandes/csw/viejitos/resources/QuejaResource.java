@@ -65,9 +65,9 @@ private QuejaLogic quejaLogic;
 	 * @return JSON {@link QuejaDTO}  - La entidad de queja guardada.
 	 */
 	@POST
-	public QuejaDetailDTO createQueja(QuejaDetailDTO dto ) throws BusinessLogicException
+	public QuejaDTO createQueja(QuejaDTO dto ) throws BusinessLogicException
 	{
-            return new QuejaDetailDTO(quejaLogic.create(dto.toEntity()));
+            return new QuejaDTO(quejaLogic.create(dto.toEntity()));
         }
         
         /**

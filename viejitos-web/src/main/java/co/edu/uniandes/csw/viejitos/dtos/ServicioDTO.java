@@ -113,14 +113,14 @@ public class ServicioDTO {
     /**
      * @return el tipo del servicio
      */
-    public int getTipo() {
+    public Integer getTipo() {
         return tipo;
     }
 
     /**
      * @param tipo el nuevo tipo del servicio
      */
-    public void setTipo(int tipo) {
+    public void setTipo(Integer tipo) {
         this.tipo = tipo;
     }
 

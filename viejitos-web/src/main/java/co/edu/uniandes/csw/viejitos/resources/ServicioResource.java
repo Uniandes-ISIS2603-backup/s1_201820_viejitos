@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 
+import co.edu.uniandes.csw.viejitos.dtos.ServicioDTO;
 import co.edu.uniandes.csw.viejitos.dtos.ServicioDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.ServicioLogic;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
@@ -69,8 +70,8 @@ public class ServicioResource {
      * Error de lógica que se genera cuando ya existe la entidad de Servicio.
      */
     @POST
-    public ServicioDetailDTO createServicio(ServicioDetailDTO dto) throws BusinessLogicException {
-        return new ServicioDetailDTO(servicioLogic.create(dto.toEntity()));
+    public ServicioDTO createServicio(ServicioDTO dto) throws BusinessLogicException {
+        return new ServicioDTO(servicioLogic.create(dto.toEntity()));
     }
 
     /**

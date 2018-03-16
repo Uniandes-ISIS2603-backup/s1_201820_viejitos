@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 
+import co.edu.uniandes.csw.viejitos.dtos.PagoDTO;
 import co.edu.uniandes.csw.viejitos.dtos.PagoDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.PagoLogic;
 import co.edu.uniandes.csw.viejitos.entities.PagoEntity;
@@ -63,9 +64,9 @@ public class PagoResource
 	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de Pago.
 	 */
 	@POST
-	public PagoDetailDTO createPago( PagoDetailDTO dto ) throws BusinessLogicException
+	public PagoDTO createPago( PagoDTO dto ) throws BusinessLogicException
 	{
-		return new PagoDetailDTO(pagoLogic.create(dto.toEntity()));
+		return new PagoDTO(pagoLogic.create(dto.toEntity()));
 	}
         
         /**

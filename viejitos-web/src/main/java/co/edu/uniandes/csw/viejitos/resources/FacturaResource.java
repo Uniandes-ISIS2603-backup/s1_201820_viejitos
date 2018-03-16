@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 
+import co.edu.uniandes.csw.viejitos.dtos.FacturaDTO;
 import co.edu.uniandes.csw.viejitos.dtos.FacturaDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.FacturaLogic;
 import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
@@ -63,9 +64,9 @@ public class FacturaResource
 	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de Factura.
 	 */
 	@POST
-	public FacturaDetailDTO createFactura( FacturaDetailDTO dto ) throws BusinessLogicException
+	public FacturaDTO createFactura( FacturaDTO dto ) throws BusinessLogicException
 	{
-		return new FacturaDetailDTO(facturaLogic.create(dto.toEntity()));
+		return new FacturaDTO(facturaLogic.create(dto.toEntity()));
 	}
         
         /**

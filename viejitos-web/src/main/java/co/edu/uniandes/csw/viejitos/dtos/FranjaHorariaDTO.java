@@ -80,7 +80,7 @@ public class FranjaHorariaDTO {
     /**
      * @return  la  hora de inicio de la cita
      */
-    public int getHoraInicio()
+    public Integer getHoraInicio()
             {
                 return horaInicio;
             }
@@ -96,7 +96,7 @@ public class FranjaHorariaDTO {
     /**
      * @return la  hora de finalizacion de la franja
      */
-    public int getHoraFin ()
+    public Integer getHoraFin ()
             {
                 return horaFin;
             }

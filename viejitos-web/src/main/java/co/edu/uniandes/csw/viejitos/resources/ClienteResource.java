@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 
+import co.edu.uniandes.csw.viejitos.dtos.ClienteDTO;
 import co.edu.uniandes.csw.viejitos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
@@ -52,11 +53,11 @@ public class ClienteResource
 	 *
 	 */
 	@POST
-	public ClienteDetailDTO createCliente( ClienteDetailDTO dto )
+	public ClienteDTO createCliente( ClienteDTO dto )
 	{
             try
             {
-                return new ClienteDetailDTO(cLogic.create(dto.toEntity()));
+                return new ClienteDTO(cLogic.create(dto.toEntity()));
             }
             catch(BusinessLogicException e)
             {

@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 
+import co.edu.uniandes.csw.viejitos.dtos.CalificacionDTO;
 import co.edu.uniandes.csw.viejitos.dtos.CalificacionDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.CalificacionLogic;
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
@@ -69,7 +70,7 @@ public class CalificacionResource {
      * @throws BusinessLogicException Si ya existe una entidad de calificacion igual
      */
     @POST
-    public CalificacionDetailDTO createCalificacion( CalificacionDetailDTO dto ) throws BusinessLogicException{
+    public CalificacionDTO createCalificacion( CalificacionDTO dto ) throws BusinessLogicException{
         logic.create(dto.toEntity());
         return dto;
     }
