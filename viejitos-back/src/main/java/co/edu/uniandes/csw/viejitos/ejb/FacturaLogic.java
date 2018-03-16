@@ -36,11 +36,11 @@ public class FacturaLogic {
 		// Invoca la persistencia para crear la entidad de Factura
                 // Verifica las reglas de negocio
 		
-                if( entity.getServicio() == null )
+                /**if( entity.getServicio() == null )
 		{
 			throw new BusinessLogicException( "La entidad de Factura debe tener un servicio asociado" );
 		}
-                /**if( persistenceServicio.find(entity.getServicio().getId()) == null )
+                if( persistenceServicio.find(entity.getServicio().getId()) == null )
 		{
 			throw new BusinessLogicException( "El Servicio de la Factura no es válido" );
 		}*/
@@ -74,14 +74,14 @@ public class FacturaLogic {
                 {
                         throw new BusinessLogicException( "Para actualizar, debe existir una entidad de Factura con el id \"" + entity.getId( ) + "\"" );
                 }
-                if( entity.getServicio() == null )
+                /**if( entity.getServicio() == null )
 		{
 			throw new BusinessLogicException( "La entidad de Factura debe tener un servicio asociado" );
 		}
                 if( persistenceServicio.find(entity.getServicio().getId()) == null )
 		{
 			throw new BusinessLogicException( "El Servicio de la Factura no es válido" );
-		}
+		}*/
                 if( entity.getCostoTotal() < 0 )
                 {
                         throw new BusinessLogicException( "La entidad de Factura no puede tener un costo total negativo" );

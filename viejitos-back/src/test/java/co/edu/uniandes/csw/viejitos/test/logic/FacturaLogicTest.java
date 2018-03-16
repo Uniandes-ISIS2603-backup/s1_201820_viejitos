@@ -105,7 +105,7 @@ public class FacturaLogicTest {
     @Test
     public void createFacturaTest() throws BusinessLogicException {
         FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
-        if( newEntity.getServicio() == null)
+        /**if( newEntity.getServicio() == null)
         {
             try{
                 FacturaEntity result = facturaLogic.create(newEntity);
@@ -116,7 +116,7 @@ public class FacturaLogicTest {
                 //Debería entrar acá
             }
         }
-        else
+        else*/
         {
             FacturaEntity result = facturaLogic.create(newEntity);
             Assert.assertNotNull(result);
@@ -174,7 +174,7 @@ public class FacturaLogicTest {
      * Prueba para eliminar una Factura
      */
     @Test
-    public void deletFacturaTest() {
+    public void deleteFacturaTest() {
         FacturaEntity entity = data.get(0);
         facturaLogic.delete(entity);
         FacturaEntity deleted = em.find(FacturaEntity.class, entity.getId());
@@ -191,7 +191,7 @@ public class FacturaLogicTest {
 
         pojoEntity.setId(entity.getId());
 
-        if( pojoEntity.getServicio() == null)
+        /**if( pojoEntity.getServicio() == null)
         {
             try{
                 facturaLogic.update(pojoEntity);
@@ -202,7 +202,7 @@ public class FacturaLogicTest {
                 //Debería entrar acá
             }
         }
-        else
+        else*/
         {
             facturaLogic.update(pojoEntity);
 

@@ -105,7 +105,7 @@ public class PagoLogicTest {
     @Test
     public void createPagoTest() throws BusinessLogicException {
         PagoEntity newEntity = factory.manufacturePojo(PagoEntity.class);
-        if( newEntity.getServicio() == null)
+        /**if( newEntity.getServicio() == null)
         {
             try{
                 PagoEntity result = pagoLogic.create(newEntity);
@@ -116,7 +116,7 @@ public class PagoLogicTest {
                 //Debería entrar acá
             }
         }
-        else
+        else*/
         {
             PagoEntity result = pagoLogic.create(newEntity);
             Assert.assertNotNull(result);
@@ -185,7 +185,7 @@ public class PagoLogicTest {
 
         pojoEntity.setId(entity.getId());
 
-        if( pojoEntity.getServicio() == null)
+        /**if( pojoEntity.getServicio() == null)
         {
             try{
                 pagoLogic.update(pojoEntity);
@@ -196,7 +196,7 @@ public class PagoLogicTest {
                 //Debería entrar acá
             }
         }
-        else
+        else*/
         {
             pagoLogic.update(pojoEntity);
 
