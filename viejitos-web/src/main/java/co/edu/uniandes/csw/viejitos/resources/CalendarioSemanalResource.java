@@ -92,13 +92,14 @@ public class CalendarioSemanalResource {
 	 */
 	@GET
 	@Path( "{id: \\d+}" )
-	public CalendarioSemanalDetailDTO getCalendario( @PathParam( "id" ) Long id )
+	public CalendarioSemanalDetailDTO getCalendario( @PathParam( "id" ) Long id ) throws BusinessLogicException
 	{
 	    CalendarioSemanalEntity entity = calendarioLogic.getCalendario(id);
         if (entity == null) {
-            throw new WebApplicationException("la franja no existe", 404);
+            throw new BusinessLogicException("la franja no existe con id"+id);
         }
-        return new CalendarioSemanalDetailDTO(entity);
+        CalendarioSemanalDetailDTO dto=new CalendarioSemanalDetailDTO(entity);
+        return dto;
 	}
         
         
@@ -173,7 +174,7 @@ public class CalendarioSemanalResource {
         if (entity == null) {
             throw new WebApplicationException("la franja no existe", 404);
         }
-        calendarioLogic.deleteCalendario(id);
+        calendarioLogic.deleteCalendario(entity);
 	}
     
     
