@@ -25,7 +25,7 @@ import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
  * 
  *   {
  *      "reclamo": "El enfermero tenia una actitud muy grosera.",
- *      "resuelto: true
+ *      "resuelto": true
  *   }
  *
  * </pre>

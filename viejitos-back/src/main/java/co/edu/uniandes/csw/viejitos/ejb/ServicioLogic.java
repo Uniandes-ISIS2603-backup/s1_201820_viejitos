@@ -47,10 +47,10 @@ public class ServicioLogic {
 		{
 			throw new BusinessLogicException( "No existe un cliente con el login \"" + entity.getCliente().getLogin()+ "\"" );
 		}
-                //Verifica la regla de negocio de que un cliente debe estar aprovado para solicitar un servicio.
+                //Verifica la regla de negocio de que un cliente debe estar aprobado para solicitar un servicio.
                 if( clientePersistence.find(entity.getCliente().getId()).getEstado()==1 )
 		{
-			throw new BusinessLogicException( "El cliente no esta aprovado por un medico." );
+			throw new BusinessLogicException( "El cliente no esta aprobado por un medico." );
 		}
                 if(enfermeroPersistence.find(entity.getEnfermero().getId())==null)
 		{
