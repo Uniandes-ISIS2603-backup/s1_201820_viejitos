@@ -192,7 +192,7 @@ public class CalendarioSemanalLogic {
             lista.remove(index);
             ent.setFranjas(lista);
             persistencia.update(ent);
-                franjaLogic.deleteFranja(franjaId);
+                franjaLogic.deleteFranja(franjaEntity);
 
         }
            
@@ -203,11 +203,11 @@ public class CalendarioSemanalLogic {
      *
      * @param id Identificador de la instancia a eliminar.
      */
-        public void deleteCalendario( Long id ) 
+        public void deleteCalendario( CalendarioSemanalEntity entity ) 
 	{
-		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de calendario con id={0}", id );
-		persistencia.delete( id );
-		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de calendario con id={0}",id );
+		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de calendario con id={0}", entity.getId() );
+		persistencia.delete( entity.getId() );
+		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de calendario con id={0}",entity.getId() );
 	}
      
 }
