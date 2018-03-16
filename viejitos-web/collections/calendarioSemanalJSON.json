@@ -15,47 +15,33 @@
 	"public": false,
 	"requests": [
 		{
-			"folder": null,
 			"id": "1f453d19-d78c-a7eb-c122-375c34e40904",
-			"name": "Crear calendario",
-			"dataMode": "raw",
-			"data": [],
-			"auth": null,
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"new_id\",data.id);\r",
-							"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
-							"console.log(data.id);"
-						]
-					}
-				}
-			],
-			"descriptionFormat": null,
-			"description": null,
-			"variables": null,
-			"headers": "Content-Type: application/json",
-			"method": "POST",
-			"pathVariables": null,
-			"url": "http://localhost:8080/viejitos-web/api/calendariossemanales",
-			"preRequestScript": null,
-			"tests": "var data = JSON.parse(responseBody);\r\npostman.setGlobalVariable(\"new_id\",data.id);\r\ntests[\"Status code is 200\"] = responseCode.code === 200;\r\nconsole.log(data.id);",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"queryParams": [],
+			"headers": "Content-Type: application/json\n",
 			"headerData": [
 				{
 					"key": "Content-Type",
-					"value": "application/json"
+					"value": "application/json",
+					"description": "",
+					"enabled": true
 				}
 			],
+			"url": "http://localhost:8080/viejitos-web/api/calendariossemanales",
+			"folder": null,
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
 			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "var data = JSON.parse(responseBody);\r\npostman.setGlobalVariable(\"new_id\",data.id);\r\ntests[\"Status code is 200\"] = responseCode.code === 200;\r\nconsole.log(data.id);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1521202637257,
+			"name": "Crear calendario",
+			"description": null,
 			"collectionId": "db2a1321-282c-2977-5a9d-9d4ec459a1b7",
-			"rawModeData": "    {\n        \"ultimaModificacion\": \"1927-03-03T00:00:00-05:00\", \n       \"franjasHorarias\": [] \n               }"
+			"rawModeData": "    {\n        \"ultimaModificacion\": \"1999-12-05T00:00:00-05:00\", \n       \"franjasHorarias\": [] \n               }"
 		},
 		{
 			"id": "51563de5-7adf-65bb-88a1-65055165b6e3",
@@ -118,7 +104,7 @@
 		{
 			"folder": null,
 			"id": "d1967d49-3f88-0c71-f981-7ee488e91683",
-			"name": "Borrar un author",
+			"name": "Borrar un calendario",
 			"dataMode": null,
 			"data": [],
 			"auth": null,
