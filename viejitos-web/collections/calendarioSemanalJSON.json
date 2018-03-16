@@ -1,15 +1,27 @@
 {
-   "variables": [],
-	"info": {
-		"name": "calendarioSemanalJSON",
-		"_postman_id": "aa4dad27-77ac-e0d0-f61a-3aa49384d925",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
+	"id": "db2a1321-282c-2977-5a9d-9d4ec459a1b7",
+	"name": "calendarioSemanalJSON",
+	"description": "",
+	"order": [
+		"1f453d19-d78c-a7eb-c122-375c34e40904",
+		"6ce25831-22aa-e5d9-277c-3d7098e86956",
+		"51563de5-7adf-65bb-88a1-65055165b6e3",
+		"d1967d49-3f88-0c71-f981-7ee488e91683"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 0,
+	"owner": "3730883",
+	"public": false,
+	"requests": [
 		{
+			"folder": null,
+			"id": "1f453d19-d78c-a7eb-c122-375c34e40904",
 			"name": "Crear calendario",
-			"event": [
+			"dataMode": "raw",
+			"data": [],
+			"auth": null,
+			"events": [
 				{
 					"listen": "test",
 					"script": {
@@ -23,28 +35,57 @@
 					}
 				}
 			],
-			"request": {
-				"url": "http://localhost:8080/viejitos-web/api/calendariossemanales",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"ultimaModificacion\": \"1927-03-03T00:00:00-05:00\", \n       \"franjasHorarias\": [] \n               }"
-				},
-				"description": ""
-			},
-			"response": []
+			"descriptionFormat": null,
+			"description": null,
+			"variables": null,
+			"headers": "Content-Type: application/json",
+			"method": "POST",
+			"pathVariables": null,
+			"url": "http://localhost:8080/viejitos-web/api/calendariossemanales",
+			"preRequestScript": null,
+			"tests": "var data = JSON.parse(responseBody);\r\npostman.setGlobalVariable(\"new_id\",data.id);\r\ntests[\"Status code is 200\"] = responseCode.code === 200;\r\nconsole.log(data.id);",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"pathVariableData": [],
+			"collectionId": "db2a1321-282c-2977-5a9d-9d4ec459a1b7",
+			"rawModeData": "    {\n        \"ultimaModificacion\": \"1927-03-03T00:00:00-05:00\", \n       \"franjasHorarias\": [] \n               }"
 		},
-                
-                {
+		{
+			"id": "51563de5-7adf-65bb-88a1-65055165b6e3",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8080/viejitos-web/api/calendariossemanales/1",
+			"folder": null,
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": null,
+			"tests": "console.log(responseBody);\nvar data = JSON.parse(responseBody);\ntests[\"Status code is 200\"] = responseCode.code === 200;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1521200406417,
+			"name": "Obtener un calendario",
+			"description": null,
+			"collectionId": "db2a1321-282c-2977-5a9d-9d4ec459a1b7"
+		},
+		{
+			"folder": null,
+			"id": "6ce25831-22aa-e5d9-277c-3d7098e86956",
 			"name": "Obtener todas los calendarios",
-			"event": [
+			"dataMode": null,
+			"data": [],
+			"auth": null,
+			"events": [
 				{
 					"listen": "test",
 					"script": {
@@ -57,42 +98,31 @@
 					}
 				}
 			],
-			"request": {
-				"url": "http://localhost:8080/viejitos-web/api/calendariossemanales",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
+			"rawModeData": "",
+			"descriptionFormat": null,
+			"description": null,
+			"variables": null,
+			"headers": "",
+			"method": "GET",
+			"pathVariables": null,
+			"url": "http://localhost:8080/viejitos-web/api/calendariossemanales",
+			"preRequestScript": null,
+			"tests": "var data= JSON.parse(responseBody);\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"calendariso count\"] = data.length >= 0;",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [],
+			"pathVariableData": [],
+			"collectionId": "db2a1321-282c-2977-5a9d-9d4ec459a1b7"
 		},
-                {
-			"name": "Obtener un calendario",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"console.log(responseBody);",
-							"var data = JSON.parse(responseBody);",
-							"tests[\"Status code is 200\"] = responseCode.code === 200;"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "http://localhost:8080/viejitos-web/api/calnedariossemanales/{{new_id}}",
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
-			}
-                },
-                
-                {
+		{
+			"folder": null,
+			"id": "d1967d49-3f88-0c71-f981-7ee488e91683",
 			"name": "Borrar un author",
-			"event": [
+			"dataMode": null,
+			"data": [],
+			"auth": null,
+			"events": [
 				{
 					"listen": "test",
 					"script": {
@@ -103,18 +133,22 @@
 					}
 				}
 			],
-			"request": {
-				"url": "http://localhost:8080/viejitos-web/api/calendariossemanales/{{new_id}}",
-				"method": "DELETE",
-				"header": [],
-				"body": {},
-				"description": ""
-			},
-			"response": []
+			"rawModeData": "",
+			"descriptionFormat": null,
+			"description": null,
+			"variables": null,
+			"headers": "",
+			"method": "DELETE",
+			"pathVariables": null,
+			"url": "http://localhost:8080/viejitos-web/api/calendariossemanales/{{new_id}}",
+			"preRequestScript": null,
+			"tests": "tests[\"Status code is 204\"] = responseCode.code === 204;",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [],
+			"pathVariableData": [],
+			"collectionId": "db2a1321-282c-2977-5a9d-9d4ec459a1b7"
 		}
-                
-        
-                ]
-   
-   
+	]
 }
