@@ -18,11 +18,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package co.edu.uniandes.csw.viejitos.dtos;
+
 /**
  * CitaDTO Objeto de transferencia de datos de Cita. Los DTO contienen las
  * represnetaciones de los JSON que se transfieren entre el cliente y el
  * servidor.
- * 
+ *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
@@ -30,11 +31,10 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *          "hora": date,
  *          "id":number
  *   }
- * </pre>
- * Por ejemplo una cita se representa asi:<br>
- * 
+ * </pre> Por ejemplo una cita se representa asi:<br>
+ *
  * <pre>
- * 
+ *
  *   {
  *          "fecha":"08-06-2018",
  *          "hora": "2:00 PM",
@@ -42,10 +42,12 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *   }
  *
  * </pre>
+ *
  * @author l.pardo
  */
 
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
+//TODO: Borrar lo que no se usa
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import java.util.Date;
 
@@ -55,58 +57,57 @@ import java.util.Date;
  */
 public class CitaDTO {
 
-   
     private Date fecha;
     private Date hora;
     private Long id;
-    public CitaDTO()
-    {
-        
+
+    public CitaDTO() {
+
     }
-        /**
-	 * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
-	 * la entidad que viene de argumento.
-	 *
-	 * @param CitaEntity: Es la entidad que se va a convertir a DTO
-	 */
-    public CitaDTO( CitaEntity entity )
-    {
-        if(entity!=null)
-        {
-            this.fecha=entity.getFecha();
-            this.hora=entity.getHora();
+
+    /**
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param CitaEntity: Es la entidad que se va a convertir a DTO
+     */
+    public CitaDTO(CitaEntity entity) {
+        if (entity != null) {
+            this.fecha = entity.getFecha();
+            this.hora = entity.getHora();
         }
     }
-            /**
-	 * Convertir DTO a Entity
-	 *
-	 * @return Un Entity con los valores del DTO
-	 */
-	public CitaEntity toEntity( )
-	{
-            
-            CitaEntity entity = new CitaEntity();
-            entity.setFecha(this.fecha);
-            entity.setHora(this.hora);
-            return entity;
-        }
-    public Date getFecha()
-    {
+
+    /**
+     * Convertir DTO a Entity
+     *
+     * @return Un Entity con los valores del DTO
+     */
+    public CitaEntity toEntity() {
+
+        CitaEntity entity = new CitaEntity();
+        entity.setFecha(this.fecha);
+        entity.setHora(this.hora);
+        return entity;
+    }
+
+    public Date getFecha() {
         return fecha;
     }
-    public Date getHora()
-    {
+
+    public Date getHora() {
         return hora;
     }
-    public void setFecha(Date pFecha)
-    {
-        fecha=pFecha;
+
+    public void setFecha(Date pFecha) {
+        fecha = pFecha;
     }
-    public void setHora(Date pHora)
-    {
-        hora= pHora;
+
+    public void setHora(Date pHora) {
+        hora = pHora;
     }
-     /**
+
+    /**
      * @return the id
      */
     public Long getId() {

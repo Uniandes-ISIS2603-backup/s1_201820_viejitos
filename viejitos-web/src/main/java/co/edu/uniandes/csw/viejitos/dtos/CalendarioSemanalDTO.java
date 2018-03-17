@@ -9,98 +9,88 @@ import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
 import java.util.Date;
 
 /**
- * CalendarioSemanalDTO Objeto de transferencia de datos de calendarioSemanal. Los DTO contienen las
- * represnetaciones de los JSON que se transfieren entre el cliente y el
- * servidor.
- * 
+ * CalendarioSemanalDTO Objeto de transferencia de datos de calendarioSemanal.
+ * Los DTO contienen las represnetaciones de los JSON que se transfieren entre
+ * el cliente y el servidor.
+ *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
  *      "id": number,
  *      "ultimaModificacion": Date
  *   }
- * </pre>
- * Por ejemplo un calendario semanal se representa asi:<br>
- * 
+ * </pre> Por ejemplo un calendario semanal se representa asi:<br>
+ *
  * <pre>
- * 
+ *
  *   {
  *     "id": 001101,
  *      "ultimaModificacion": 01/07/2018 08:11:13pm
- *           
- * 
+ *
+ *
  *   }
  *
  * </pre>
-
-  @author lf.naranjo11
+ *
+ * @author lf.naranjo11
  */
+
+//TODO: Completar y Revisar la documentación proque es un copy/paste de franja
 public class CalendarioSemanalDTO {
+
     private Long id;
     private Date ultimaModficacion;
-    
-    
-/**
+
+    /**
      * @return la fecha de ultima modificacion
      */
-    public Date getUltimaModificacion()
-            {
-                return ultimaModficacion;
-            }
+    public Date getUltimaModificacion() {
+        return ultimaModficacion;
+    }
+
     /**
      * @param pUltimaModificacion la nueva fecha de modifcacion
      */
-    public void setUltimaModificacion(Date pUltimaModificacion)
-    {
-                ultimaModficacion=pUltimaModificacion;
-           }
-    
-     /**
-     * @return la  id de franja horaria
+    public void setUltimaModificacion(Date pUltimaModificacion) {
+        ultimaModficacion = pUltimaModificacion;
+    }
+
+    /**
+     * @return la id de franja horaria
      */
-    public Long getId()
-            {
-                return id;
-            }
-    
-    
-     /**
+    public Long getId() {
+        return id;
+    }
+
+    /**
      * @param pId la nueva hora de finalizacion de la franja
      */
-    public void setid(Long pId)
-            {
-                id=pId;
-            }
-    
-    
-     /**
+    public void setid(Long pId) {
+        id = pId;
+    }
+
+    /**
      * Constructor por defecto
      */
-    public CalendarioSemanalDTO(CalendarioSemanalEntity entity)
-    { if(entity!=null)
-       {
-       this.id=entity.getId();
-           this.ultimaModficacion=entity.getUltimaModficacion();
-      
-    
+    public CalendarioSemanalDTO(CalendarioSemanalEntity entity) {
+        if (entity != null) {
+            this.id = entity.getId();
+            this.ultimaModficacion = entity.getUltimaModficacion();
+
         }
-        
+
     }
-    public CalendarioSemanalDTO()
-    {
+
+    public CalendarioSemanalDTO() {
     }
-    
-    
-    public CalendarioSemanalEntity toEntity()
-    {
-        CalendarioSemanalEntity entity=new CalendarioSemanalEntity();
-       entity.setId(this.getId());
-       entity.setUltimaModficacion(this.getUltimaModificacion());
-        
+
+    public CalendarioSemanalEntity toEntity() {
+        CalendarioSemanalEntity entity = new CalendarioSemanalEntity();
+        entity.setId(this.getId());
+        entity.setUltimaModficacion(this.getUltimaModificacion());
+
         return entity;
-    
+
     }
-     
-     
-    
+
 }

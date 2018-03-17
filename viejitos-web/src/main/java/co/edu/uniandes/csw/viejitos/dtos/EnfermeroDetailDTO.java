@@ -14,8 +14,8 @@ import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import java.util.ArrayList;
 
 /**
- * Objeto de transferencia de datos con relaciones para un enfermero.
- * Al serializarse como DTO se genera un JSON de la siguiente manera
+ * Objeto de transferencia de datos con relaciones para un enfermero. Al
+ * serializarse como DTO se genera un JSON de la siguiente manera
  * <pre>
  *  {
  *      "id":number,
@@ -28,7 +28,7 @@ import java.util.ArrayList;
  *      "servicios":[servicios]
  *  }
  * </pre>
- * 
+ *
  * Por ejemplo, un enfermero se representa asi:
  * <pre>
  *  {
@@ -39,46 +39,47 @@ import java.util.ArrayList;
  *      "contrasenia":"a89ess0909",
  *      "tipo":"Enfermero",
  *      "calificaciones":[{"id":209873, "puntaje":4.5,"comentario":"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado","tipoCalificador":"cliente",
-"loginCalificador":"af.ramirez","tipoCalificado":"enfermero","loginCalificado":"ma.marulanda"}]
+ * "loginCalificador":"af.ramirez","tipoCalificado":"enfermero","loginCalificado":"ma.marulanda"}]
  *      "servicios":[{ "tipo": 2,"fecha": 03/05/2017,"hora": "9:30","descripción": "Acompañamiento a cita","finalizado": true}]
  *  }
  * </pre>
+ *
  * @author js.espitia
  */
-public class EnfermeroDetailDTO extends EnfermeroDTO{
-  
+public class EnfermeroDetailDTO extends EnfermeroDTO {
+
     private List<CalificacionDTO> calificaciones;
-    
+
     private List<ServicioDTO> servicios;
-    
+
     private List<ClienteDTO> cliente;
-    
+
     private CalendarioSemanalDTO calendar;
-    
-    public EnfermeroDetailDTO(){
-    	super();
+
+    public EnfermeroDetailDTO() {
+        super();
     }
-    
-    public EnfermeroDetailDTO(EnfermeroEntity entidad){
-    	super(entidad);
-        if(entidad!=null){
+
+    public EnfermeroDetailDTO(EnfermeroEntity entidad) {
+        super(entidad);
+        if (entidad != null) {
             List<CalificacionEntity> califs = entidad.getCalificaciones();
             List<CalificacionDTO> calDTOS = new ArrayList<>();
-            for(CalificacionEntity cal: califs){
+            for (CalificacionEntity cal : califs) {
                 CalificacionDTO actual = new CalificacionDTO(cal);
                 calDTOS.add(actual);
             }
             this.calificaciones = calDTOS;
             List<ServicioEntity> servs = entidad.getServicios();
             List<ServicioDTO> srDTOS = new ArrayList<>();
-            for(ServicioEntity srv: servs){
+            for (ServicioEntity srv : servs) {
                 ServicioDTO actual = new ServicioDTO(srv);
                 srDTOS.add(actual);
             }
             this.servicios = srDTOS;
             List<ClienteEntity> clients = entidad.getClientes();
             List<ClienteDTO> clDTOS = new ArrayList<>();
-            for(ClienteEntity cl: clients){
+            for (ClienteEntity cl : clients) {
                 ClienteDTO actual = new ClienteDTO(cl);
                 clDTOS.add(actual);
             }
@@ -118,26 +119,27 @@ public class EnfermeroDetailDTO extends EnfermeroDTO{
     public void setCalendar(CalendarioSemanalDTO calendar) {
         this.calendar = calendar;
     }
-    
+
     @Override
-    public EnfermeroEntity toEntity(){
-    	EnfermeroEntity entidad = super.toEntity();
+    public EnfermeroEntity toEntity() {
+        EnfermeroEntity entidad = super.toEntity();
+        //TODO: this.calendar puede ser null
         entidad.setCalendario(this.calendar.toEntity());
         List<CalificacionEntity> cals = new ArrayList<>();
-        for(CalificacionDTO actual: calificaciones){
+        for (CalificacionDTO actual : calificaciones) {
             cals.add(actual.toEntity());
         }
         entidad.setCalificaciones(cals);
         List<ClienteEntity> cls = new ArrayList<>();
-        for(ClienteDTO actual: cliente){
+        for (ClienteDTO actual : cliente) {
             cls.add(actual.toEntity());
         }
         entidad.setClientes(cls);
         List<ServicioEntity> servs = new ArrayList<>();
-        for(ServicioDTO actual: servicios){
+        for (ServicioDTO actual : servicios) {
             servs.add(actual.toEntity());
         }
         entidad.setServicios(servs);
-    	return entidad;
+        return entidad;
     }
 }

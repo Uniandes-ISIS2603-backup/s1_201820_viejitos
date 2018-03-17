@@ -30,6 +30,7 @@ import javax.ws.rs.WebApplicationException;
  * </pre>
  * @author jj.silva
  */
+//TODO: Revisar el path para llegar a este recurso
 @Path( "historiasc" )
 @Produces( "application/json" )
 @Consumes( "application/json" )

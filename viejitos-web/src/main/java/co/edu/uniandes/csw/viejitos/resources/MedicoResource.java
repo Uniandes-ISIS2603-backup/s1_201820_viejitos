@@ -78,7 +78,7 @@ public class MedicoResource {
      */
     @GET
     public List<MedicoDetailDTO> getMedicos() {
-        List<MedicoDetailDTO> list = new ArrayList<MedicoDetailDTO>();
+        List<MedicoDetailDTO> list = new ArrayList<>();
         for (MedicoEntity e : logic.getAll()) {
             list.add(new MedicoDetailDTO(e));
         }

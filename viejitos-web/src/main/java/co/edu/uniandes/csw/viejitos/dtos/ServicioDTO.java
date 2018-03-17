@@ -9,10 +9,10 @@ import java.util.Date;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 
 /**
- * ServicioDTO Objeto de transferencia de datos de Servicios. Los DTO contienen las
- * represnetaciones de los JSON que se transfieren entre el cliente y el
+ * ServicioDTO Objeto de transferencia de datos de Servicios. Los DTO contienen
+ * las represnetaciones de los JSON que se transfieren entre el cliente y el
  * servidor.
- * 
+ *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
@@ -22,11 +22,10 @@ import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
  *      "descripción": string,
  *      "finalizado": boolean
  *   }
- * </pre>
- * Por ejemplo un servicio se representa asi:<br>
- * 
+ * </pre> Por ejemplo un servicio se representa asi:<br>
+ *
  * <pre>
- * 
+ *
  *   {
  *      "tipo": 1,
  *      "fecha": "12/02/2018",
@@ -36,41 +35,38 @@ import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
  *   }
  *
  * </pre>
+ *
  * @author c.gomezs
  */
-
 public class ServicioDTO {
-    
+
     private Integer tipo;
-    
+
     private Date fecha;
-    
+
     private String hora;
-    
+
     private String descripcion;
-    
+
     private Boolean finalizado;
-    
+
     private Long id;
-    
-    
-     /**
+
+    /**
      * Constructor por defecto
      */
-    public ServicioDTO()
-    {
-        
+    public ServicioDTO() {
+
     }
-    
+
     /**
-    * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
-    * la entidad que viene de argumento.
-    * @param ServicioEntity: Es la entidad que se va a convertir a DTO
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param ServicioEntity: Es la entidad que se va a convertir a DTO
      */
-    public ServicioDTO( ServicioEntity servicioEntity )
-    {
-        if(servicioEntity!=null)
-        {
+    public ServicioDTO(ServicioEntity servicioEntity) {
+        if (servicioEntity != null) {
             this.id = servicioEntity.getId();
             this.tipo = servicioEntity.getTipo();
             this.descripcion = servicioEntity.getDescripcion();
@@ -79,23 +75,23 @@ public class ServicioDTO {
             this.hora = servicioEntity.getHora();
         }
     }
-        
+
     /**
-    * Convertir DTO a Entity
-    * @return Un Entity con los valores del DTO
-    */
-    public ServicioEntity toEntity( )
-    {
-        ServicioEntity entity = new ServicioEntity( );
-	entity.setId( this.id );
-	entity.setDescripcion(this.descripcion);
+     * Convertir DTO a Entity
+     *
+     * @return Un Entity con los valores del DTO
+     */
+    public ServicioEntity toEntity() {
+        ServicioEntity entity = new ServicioEntity();
+        entity.setId(this.id);
+        entity.setDescripcion(this.descripcion);
         entity.setFecha(this.fecha);
         entity.setFinalizado(this.finalizado);
         entity.setHora(this.hora);
         entity.setTipo(this.getTipo());
         return entity;
     }
-    
+
     /**
      * @return el id del servicio
      */
@@ -179,6 +175,5 @@ public class ServicioDTO {
     public void setFinalizado(boolean finalizado) {
         this.finalizado = finalizado;
     }
-   
-    
+
 }

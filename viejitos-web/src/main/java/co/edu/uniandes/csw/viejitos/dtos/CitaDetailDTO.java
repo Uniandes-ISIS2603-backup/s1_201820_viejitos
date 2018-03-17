@@ -52,8 +52,7 @@ public class CitaDetailDTO extends CitaDTO {
 
     public CitaDetailDTO(CitaEntity entity) {
         super(entity);
-        if (entity != null) 
-        {
+        if (entity != null) {
             this.cliente = new ClienteDTO(entity.getCliente());
             this.medico = new MedicoDTO(entity.getMedico());
         }

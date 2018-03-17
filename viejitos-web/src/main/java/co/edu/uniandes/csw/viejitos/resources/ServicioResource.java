@@ -42,6 +42,7 @@ import javax.ws.rs.WebApplicationException;
  * @author c.gomezs
  * @version 1.0
  */
+//TODO: Revisar el path para llegar a este recurso
 @Path("servicios")
 @Produces("application/json")
 @Consumes("application/json")
@@ -56,8 +57,8 @@ public class ServicioResource {
      * <h1>POST /api/Servicios : Crear una entidad de Servicio.</h1>
      * <p>
      * <
-     * pre>Cuerpo de petición: JSON {@link ServicioDetailDTO}.
-     * Codigos de respuesta:
+     * pre>Cuerpo de petición: JSON {@link ServicioDetailDTO}. Codigos de
+     * respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Crea el servicio.</code>
      * </pre> Crea una nueva entidad de Servicio con la informacion que se
@@ -78,8 +79,8 @@ public class ServicioResource {
      * <h1>GET /api/Servicios : Obtener todas las entidades de Servicio.</h1>
      * <p>
      * <
-     * pre>Busca y devuelve todas las entidades de Servicio que existen en la aplicacion.
-     * * Codigos de respuesta:
+     * pre>Busca y devuelve todas las entidades de Servicio que existen en la
+     * aplicacion. * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve los servicios.</code>
      * </pre>
@@ -89,7 +90,7 @@ public class ServicioResource {
      */
     @GET
     public List<ServicioDetailDTO> getServicios() {
-        List<ServicioDetailDTO> servicios = new ArrayList<ServicioDetailDTO>();
+        List<ServicioDetailDTO> servicios = new ArrayList<>();
         for (ServicioEntity actual : servicioLogic.getAll()) {
             servicios.add(new ServicioDetailDTO(actual));
         }
@@ -101,8 +102,8 @@ public class ServicioResource {
      * id.</h1>
      * <p>
      * <
-     * pre>Busca la entidad de Servicio con el id asociado recibido en la URL y la devuelve.
-     * Codigos de respuesta:
+     * pre>Busca la entidad de Servicio con el id asociado recibido en la URL y
+     * la devuelve. Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve el servicio.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">

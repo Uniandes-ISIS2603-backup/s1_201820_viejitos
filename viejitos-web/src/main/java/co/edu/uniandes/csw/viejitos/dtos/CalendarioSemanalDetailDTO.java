@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
+//TODO: Borrar lo que no se usa
 import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
@@ -12,18 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- 
- * Clase que extiende de {@link CalendarioSemanalDTO} para manejar la transformacion entre
- * los objetos JSON y las Entidades de la base de datos. Para conocer el
- * contenido de la ciudad vaya a la documentacion de {@link CalendarioSemanalDTO}
- * 
- *  Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ *
+ * Clase que extiende de {@link CalendarioSemanalDTO} para manejar la
+ * transformacion entre los objetos JSON y las Entidades de la base de datos.
+ * Para conocer el contenido de la ciudad vaya a la documentacion de
+ * {@link CalendarioSemanalDTO}
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
  *      "id": number,
  *      "ultimaModificacion": Date,
  * "franjasHorarias": [ {
- * 
+ *
  * "id": number,
  *      "diaSemana": string,
  *        "horaInicio": number,
@@ -31,16 +33,15 @@ import java.util.List;
  *       "ocupado": boolean
  *         }]
  *   }
- * </pre>
- * Por ejemplo un calendario semanal se representa asi:<br>
- * 
+ * </pre> Por ejemplo un calendario semanal se representa asi:<br>
+ *
  * <pre>
- * 
+ *
  *   {
  *     "id": 001101,
  *      "ultimaModificacion": 01/07/2018 08:11:13pm,
  * "franjasHorarias": [ {
- * 
+ *
  * "id": 1,
  *      "diaSemana": 1,
  *        "horaInicio": 0700,
@@ -48,7 +49,7 @@ import java.util.List;
  *       "ocupado": si
  *         },
  * {
- * 
+ *
  * "id": 2,
  *      "diaSemana": 1,
  *        "horaInicio": 0900,
@@ -56,61 +57,53 @@ import java.util.List;
  *       "ocupado": no
  *         }
  * ]
- *           
- * 
+ *
+ *
  *   }
  *
- * 
- * 
+ *
+ *
  * @author lf.naranjo11
  */
-public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO{
-    
+public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO {
+
     private List<FranjaHorariaDTO> franjasHorarias;
-     
-    
-    public CalendarioSemanalDetailDTO()
-    {
-    super();
-    }
-    
+
     /**
-     * Constructor por defecto
+     * Constructor sin parámetros
      */
-    public CalendarioSemanalDetailDTO(CalendarioSemanalEntity entity)
-    {
+    public CalendarioSemanalDetailDTO() {
+        super();
+    }
+
+    public CalendarioSemanalDetailDTO(CalendarioSemanalEntity entity) {
         super(entity);
-        if(entity!=null)
-       {
-           List<FranjaHorariaEntity> frjsEnt= entity.getFranjas();
-        List<FranjaHorariaDTO> frjsDTO= new ArrayList<>();
-           
-           
-            for (FranjaHorariaEntity entityFranja:frjsEnt) 
-            {
-                FranjaHorariaDTO actual=new FranjaHorariaDTO(entityFranja);
+        if (entity != null) {
+            List<FranjaHorariaEntity> frjsEnt = entity.getFranjas();
+            List<FranjaHorariaDTO> frjsDTO = new ArrayList<>();
+
+            for (FranjaHorariaEntity entityFranja : frjsEnt) {
+                FranjaHorariaDTO actual = new FranjaHorariaDTO(entityFranja);
                 frjsDTO.add(actual);
             }
-     this.franjasHorarias =frjsDTO;
-       
-       }
-     
+            this.franjasHorarias = frjsDTO;
+
+        }
+
     }
-    
-   @Override
-public CalendarioSemanalEntity toEntity()
-{
-CalendarioSemanalEntity entity=super.toEntity();
-     
-       List<FranjaHorariaEntity> fs = new ArrayList<FranjaHorariaEntity>();
-       
-       for (FranjaHorariaDTO actual : franjasHorarias) 
-       {
-                fs.add(actual.toEntity());
-       }
-  entity.setFranjas(fs);
-return entity;
-}
+
+    @Override
+    public CalendarioSemanalEntity toEntity() {
+        CalendarioSemanalEntity entity = super.toEntity();
+
+        List<FranjaHorariaEntity> fs = new ArrayList<>();
+
+        for (FranjaHorariaDTO actual : franjasHorarias) {
+            fs.add(actual.toEntity());
+        }
+        entity.setFranjas(fs);
+        return entity;
+    }
 
     /**
      * @return the franjasHorarias
@@ -125,8 +118,5 @@ return entity;
     public void setFranjasHorarias(List<FranjaHorariaDTO> franjasHorarias) {
         this.franjasHorarias = franjasHorarias;
     }
-
-    
-    
 
 }

@@ -67,6 +67,7 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *
  * @author l.pardo
  */
+//TODO: Borrar loq ue no se necesita
 import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
@@ -126,8 +127,9 @@ public class MedicoDetailDTO extends MedicoDTO {
         for (HistoriaClinicaDTO hist : historiasClinicas) {
             historias.add(hist.toEntity());
         }
-        if(calendario!=null)
-        entity.setCalendario(this.calendario.toEntity());
+        if (calendario != null) {
+            entity.setCalendario(this.calendario.toEntity());
+        }
         entity.setCitas(cs);
         entity.setClientes(clients);
         entity.setHistoriasClinicas(historias);

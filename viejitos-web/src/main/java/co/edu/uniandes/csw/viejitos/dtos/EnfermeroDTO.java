@@ -7,9 +7,9 @@ package co.edu.uniandes.csw.viejitos.dtos;
 
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 
-/** 
- * Objeto de transferencia de datos para un enfermero.
- * Al serializarse como DTO se genera un JSON de la siguiente manera
+/**
+ * Objeto de transferencia de datos para un enfermero. Al serializarse como DTO
+ * se genera un JSON de la siguiente manera
  * <pre>
  *  {
  *      "id":number,
@@ -20,7 +20,7 @@ import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
  *      "tipo":string,
  *  }
  * </pre>
- * 
+ *
  * Por ejemplo, un enfermero se representa asi:
  * <pre>
  *  {
@@ -32,49 +32,49 @@ import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
  *      "tipo":"Enfermero",
  *  }
  * </pre>
+ *
  * @author js.espitia
  */
 public class EnfermeroDTO {
-    
+
     private String nombre;
-    
+
     private Long id;
-    
+
     private String contrasena;
-    
+
     private String cv;
-    
+
     private Integer tipo;
 
     private String login;
 
-    
-    public EnfermeroDTO(){
+    public EnfermeroDTO() {
         //Constructor
-    } 
-    
-    public EnfermeroDTO(EnfermeroEntity entidad){
-        if(entidad!=null){
+    }
+
+    public EnfermeroDTO(EnfermeroEntity entidad) {
+        if (entidad != null) {
             this.contrasena = entidad.getContrasenia();
-            this.cv =entidad.getCV();
+            this.cv = entidad.getCV();
             this.id = entidad.getId();
             this.login = entidad.getLogin();
             this.nombre = entidad.getName();
             this.tipo = entidad.getTipo();
         }
-    } 
-    
+    }
+
     public String getLogin() {
-	return login;
+        return login;
     }
 
     public void setLogin(String login) {
-	this.login = login;
+        this.login = login;
     }
 
     public void setId(Long id) {
-	this.id = id;
-    } 
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -107,16 +107,16 @@ public class EnfermeroDTO {
     public void setTipo(Integer tipo) {
         this.tipo = tipo;
     }
-    
-    public EnfermeroEntity toEntity(){
-    	EnfermeroEntity entidad = new EnfermeroEntity();
-    	entidad.setContrasenia(this.contrasena);
-    	entidad.setCV(this.cv);
-    	entidad.setId(this.id);
-    	entidad.setLogin(this.login);
-    	entidad.setName(nombre);
-    	entidad.setTipo(tipo);  
-    	return entidad;
+
+    public EnfermeroEntity toEntity() {
+        EnfermeroEntity entidad = new EnfermeroEntity();
+        entidad.setContrasenia(this.contrasena);
+        entidad.setCV(this.cv);
+        entidad.setId(this.id);
+        entidad.setLogin(this.login);
+        entidad.setName(nombre);
+        entidad.setTipo(tipo);
+        return entidad;
     }
-    
+
 }

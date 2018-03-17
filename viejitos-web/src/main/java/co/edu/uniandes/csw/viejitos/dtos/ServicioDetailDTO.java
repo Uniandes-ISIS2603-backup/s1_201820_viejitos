@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase que extiende de {@link ServicioDTO} para manejar la transformacion entre
- * los objetos JSON y las Entidades de la base de datos. Para conocer el
+ * Clase que extiende de {@link ServicioDTO} para manejar la transformacion
+ * entre los objetos JSON y las Entidades de la base de datos. Para conocer el
  * contenido del servicio vaya a la documentacion de {@link ServicioDTO}
- * 
+ *
  * <pre>
  *   {
  *      "tipo": number,
@@ -32,11 +32,11 @@ import java.util.List;
  *      "enfermero": enfermeroDTO
  *   }
  * </pre>
- * 
+ *
  * Por ejemplo un servicio se representa asi:<br>
- * 
+ *
  * <pre>
- * 
+ *
  *   {
  *      "tipo": 1,
  *      "fecha: "12/02/2018",
@@ -54,82 +54,81 @@ import java.util.List;
  *   }
  *
  * </pre>
- * 
+ *
  * @author c.gomezs
  */
-public class ServicioDetailDTO extends ServicioDTO{
-    
+public class ServicioDetailDTO extends ServicioDTO {
+
     private List<QuejaDTO> quejas;
-    
+
     private PagoDTO pagoInicial;
-    
+
     private PagoDTO pagoFinal;
-    
+
     private FacturaDTO factura;
-    
+
     private ClienteDTO cliente;
-    
+
     private CalificacionDTO calificacion;
-    
+
     private EnfermeroDTO enfermero;
 
     /**
      * Constructor por defecto
      */
-    public ServicioDetailDTO()
-    {
+    public ServicioDetailDTO() {
         super();
     }
-    
+
     /**
-    * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
-    * la entidad que viene de argumento.
-    * @param entity: Es la entidad que se va a convertir a DTO
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param entity: Es la entidad que se va a convertir a DTO
      */
-    public ServicioDetailDTO( ServicioEntity entity )
-    {
+    public ServicioDetailDTO(ServicioEntity entity) {
         super(entity);
-        
-        if(entity!=null)
-        {
-          this.calificacion=new CalificacionDTO(entity.getCalificacion());
-          this.cliente= new ClienteDTO(entity.getCliente());
-          this.pagoInicial=new PagoDTO(entity.getPagoInicial());
-          this.pagoFinal=new PagoDTO(entity.getPagoFinal());
-          this.factura=new FacturaDTO(entity.getFactura());
-          this.enfermero=new EnfermeroDTO(entity.getEnfermero());
-          this.quejas= new ArrayList<QuejaDTO>();
-          
-          for (QuejaEntity entityQuejas : entity.getQuejas()) 
-            {
+
+        if (entity != null) {
+            this.calificacion = new CalificacionDTO(entity.getCalificacion());
+            this.cliente = new ClienteDTO(entity.getCliente());
+            this.pagoInicial = new PagoDTO(entity.getPagoInicial());
+            this.pagoFinal = new PagoDTO(entity.getPagoFinal());
+            this.factura = new FacturaDTO(entity.getFactura());
+            this.enfermero = new EnfermeroDTO(entity.getEnfermero());
+            this.quejas = new ArrayList<>();
+
+            for (QuejaEntity entityQuejas : entity.getQuejas()) {
                 quejas.add(new QuejaDTO(entityQuejas));
             }
         }
     }
-        
+
     /**
-    * Convertir DTO a Entity
-    * @return Un Entity con los valores del DTO
-    */
+     * Convertir DTO a Entity
+     *
+     * @return Un Entity con los valores del DTO
+     */
     @Override
-    public ServicioEntity toEntity( )
-    {
+    public ServicioEntity toEntity() {
         ServicioEntity entity = super.toEntity();
-	entity.setCalificacion(this.calificacion.toEntity());
+        //TODO: cada uno de estps campos puede ser null
+        entity.setCalificacion(this.calificacion.toEntity());
         entity.setPagoInicial(this.pagoInicial.toEntity());
         entity.setPagoFinal(this.pagoFinal.toEntity());
         entity.setCliente(this.cliente.toEntity());
         entity.setFactura(this.factura.toEntity());
-        List<QuejaEntity> quejasEntity=new ArrayList<QuejaEntity>();
-        for(QuejaDTO actual: quejas)
-        {
+        entity.setEnfermero(this.enfermero.toEntity());
+
+        List<QuejaEntity> quejasEntity = new ArrayList<>();
+        for (QuejaDTO actual : quejas) {
             quejasEntity.add(actual.toEntity());
         }
         entity.setQuejas(quejasEntity);
-        entity.setEnfermero(this.enfermero.toEntity());
+
         return entity;
     }
-    
+
     /**
      * @return lista de quejas
      */
@@ -227,5 +226,5 @@ public class ServicioDetailDTO extends ServicioDTO{
     public void setEnfermero(EnfermeroDTO enfermero) {
         this.enfermero = enfermero;
     }
-    
+
 }

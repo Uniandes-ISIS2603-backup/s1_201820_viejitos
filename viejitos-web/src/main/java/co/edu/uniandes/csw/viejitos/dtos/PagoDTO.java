@@ -10,79 +10,74 @@ import java.util.Date;
 
 /**
  *
- * @author f.escobar
- * PagoDTO Objeto de transferencia de datos de Pagos. Los DTO contienen las
- represnetaciones de los JSON que se transfieren entre el cliente y el
- servidor.
- 
- Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * @author f.escobar PagoDTO Objeto de transferencia de datos de Pagos. Los DTO
+ * contienen las represnetaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
+ *
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * <pre>
+ * {
+ * "id": Long,
+ * "medio": String,
+ * "pagado": Boolean,
+ * "fechaLimite": Date,
+ * "valor": Double
+ * }
+ * </pre> Por ejemplo una ciudad se representa asi:<br>
+ *
  <pre>
-   {
-      "id": Long,
-      "medio": String,
-      "pagado": Boolean,
-      "fechaLimite": Date,
-      "valor": Double
-   }
- </pre>
- Por ejemplo una ciudad se representa asi:<br>
- 
- <pre>
- 
-   {
-      "id": 123456,
-      "medio": "Efectivo",
-      "pagado": true,
-      "fechaLimite": "12/04/18",
-      "valor": 150000
-   }
-   </pre>
+ *
+ * {
+ * "id": 123456,
+ * "medio": "Efectivo",
+ * "pagado": true,
+ * "fechaLimite": "12/04/18",
+ * "valor": 150000
+ * }
+ * </pre>
  */
-
 public class PagoDTO {
-    
+
     /**
      * id del pago
      */
     private Long id;
-    
+
     /**
      * medio de pago
      */
     private String medio;
-    
+
     /**
      * estado de pago booleano
      */
     private Boolean pagado;
-    
+
     /**
      * fecha limite de pago
      */
     private Date fechaLimite;
-    
+
     /**
      * valor monetario del pago
      */
     private Double valor;
-    
+
     /**
      * Constructor
      */
-    public PagoDTO()
-    {
-        
+    public PagoDTO() {
+
     }
-    
+
     /**
-    * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
-    * la entidad que viene de argumento.
-    * @param PagoEntity: Es la entidad que se va a convertir a DTO
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param PagoEntity: Es la entidad que se va a convertir a DTO
      */
-    public PagoDTO( PagoEntity pagoEntity )
-    {
-        if(pagoEntity!=null)
-        {
+    public PagoDTO(PagoEntity pagoEntity) {
+        if (pagoEntity != null) {
             this.id = pagoEntity.getId();
             this.medio = pagoEntity.getMedio();
             this.pagado = pagoEntity.getPagado();
@@ -90,22 +85,22 @@ public class PagoDTO {
             this.valor = pagoEntity.getValor();
         }
     }
-        
+
     /**
-    * Convertir DTO a Entity
-    * @return Un Entity con los valores del DTO
-    */
-    public PagoEntity toEntity( )
-    {
-        PagoEntity entity = new PagoEntity( );
-	entity.setId( this.id );
-	entity.setMedio( this.medio);
+     * Convertir DTO a Entity
+     *
+     * @return Un Entity con los valores del DTO
+     */
+    public PagoEntity toEntity() {
+        PagoEntity entity = new PagoEntity();
+        entity.setId(this.id);
+        entity.setMedio(this.medio);
         entity.setPagado(this.pagado);
         entity.setFechaLimite(this.fechaLimite);
         entity.setValor(this.valor);
         return entity;
     }
-    
+
     /**
      * @return id
      */
@@ -119,7 +114,7 @@ public class PagoDTO {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     /**
      * @return medio
      */
@@ -175,7 +170,5 @@ public class PagoDTO {
     public void setValor(Double valor) {
         this.valor = valor;
     }
-    
-    
-    
+
 }

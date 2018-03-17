@@ -7,12 +7,11 @@ package co.edu.uniandes.csw.viejitos.dtos;
 
 import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
 
-
- /**
- * FranjaHorariaDTO Objeto de transferencia de datos de franjaHOraria. Los DTO contienen las
- * represnetaciones de los JSON que se transfieren entre el cliente y el
- * servidor.
- * 
+/**
+ * FranjaHorariaDTO Objeto de transferencia de datos de franjaHOraria. Los DTO
+ * contienen las represnetaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
+ *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
@@ -22,145 +21,127 @@ import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
  *       "horaFin": number,
  *       "ocupado": boolean
  *   }
- * </pre>
- * Por ejemplo una franja se representa asi:<br>
- * 
+ * </pre> Por ejemplo una franja se representa asi:<br>
+ *
  * <pre>
- * 
+ *
  *   {
  * "id": 001101,
  *      "diaSemana": "lunes",
  *        "horaInicio": 0800,
  *       "horaFin": 0900,
- *       "ocupado": true     
- * 
+ *       "ocupado": true
+ *
  *   }
  *
  * </pre>
-
-  @author lf.naranjo11
+ *
+ * @author lf.naranjo11
  */
-
 public class FranjaHorariaDTO {
+
     private Integer horaInicio;
     private Integer horaFin;
     private Boolean ocupado;
     private String diaSemana;
     private Long id;
-     /**
+
+    /**
      * Constructor por defecto
      */
-     public FranjaHorariaDTO()
-    {
-    
+    public FranjaHorariaDTO() {
+
     }
-    
-    
-    
-    public FranjaHorariaDTO(FranjaHorariaEntity entity)
-    {
-    if(entity!=null)
-    {
-    this.id=entity.getId();
-    this.horaInicio=entity.getHoraInicio();
-    this.horaFin=entity.getHoraFin();
-    this.ocupado=entity.isOcupado();
-    this.diaSemana=entity.getDiaSemana();
-   
+
+    public FranjaHorariaDTO(FranjaHorariaEntity entity) {
+        if (entity != null) {
+            this.id = entity.getId();
+            this.horaInicio = entity.getHoraInicio();
+            this.horaFin = entity.getHoraFin();
+            this.ocupado = entity.isOcupado();
+            this.diaSemana = entity.getDiaSemana();
+
+        }
     }
+
+    public FranjaHorariaEntity toEntity() {
+        FranjaHorariaEntity entity = new FranjaHorariaEntity();
+        entity.setId(this.id);
+        entity.setDiaSemana(this.diaSemana);
+        entity.setHoraFin(this.horaFin);
+        entity.setHoraInicio(this.horaInicio);
+        entity.setOcupado(this.ocupado);
+        return entity;
     }
-   
-     public FranjaHorariaEntity toEntity()
-     {
-         FranjaHorariaEntity entity=new FranjaHorariaEntity();
-         entity.setId(this.id);
-         entity.setDiaSemana(this.diaSemana);
-         entity.setHoraFin(this.horaFin);
-         entity.setHoraInicio(this.horaInicio);
-         entity.setOcupado(this.ocupado);
-         return entity;
-     }
-    
-    
+
     /**
-     * @return  la  hora de inicio de la cita
+     * @return la hora de inicio de la cita
      */
-    public Integer getHoraInicio()
-            {
-                return horaInicio;
-            }
-    
+    public Integer getHoraInicio() {
+        return horaInicio;
+    }
+
     /**
      * @param pHoraInicio la nueva hora de inicio de la franja
      */
-    public void setHoraInicio(Integer pHoraInicio)
-            {
-                horaInicio=pHoraInicio;
-            }
-    
+    public void setHoraInicio(Integer pHoraInicio) {
+        horaInicio = pHoraInicio;
+    }
+
     /**
-     * @return la  hora de finalizacion de la franja
+     * @return la hora de finalizacion de la franja
      */
-    public Integer getHoraFin ()
-            {
-                return horaFin;
-            }
+    public Integer getHoraFin() {
+        return horaFin;
+    }
+
     /**
      * @param pHoraFin la nueva hora de finalizacion de la franja
      */
-    public void setHoraFin(Integer pHoraFin)
-            {
-                horaFin=pHoraFin;
-            }
+    public void setHoraFin(Integer pHoraFin) {
+        horaFin = pHoraFin;
+    }
+
     /**
-     * @return la  id de franja horaria
+     * @return la id de franja horaria
      */
-    public Long getId()
-            {
-                return id;
-            }
-    
-    
-     /**
+    public Long getId() {
+        return id;
+    }
+
+    /**
      * @param pId la nueva hora de finalizacion de la franja
      */
-    public void setId(Long pId)
-            {
-                id=pId;
-            }
-    
-    
-    
-  
+    public void setId(Long pId) {
+        id = pId;
+    }
+
     /**
      * @return dia de la semana de la franja
      */
-    public String getDiaSemana()
-            {
-                return diaSemana;
-            }
+    public String getDiaSemana() {
+        return diaSemana;
+    }
+
     /**
      * @param pDiaSemana el nuevo dia de la semana de la franja
      */
-    public void setDiaSemana(Integer pDiaSemana)
-            {
-                horaInicio=pDiaSemana;
-            }
-      /**
+    public void setDiaSemana(Integer pDiaSemana) {
+        horaInicio = pDiaSemana;
+    }
+
+    /**
      * @return el estado de la franja horaria
      */
-    public Boolean isOcupado()
-            {
-                return ocupado;
-            }
+    public Boolean isOcupado() {
+        return ocupado;
+    }
+
     /**
      * @param pOcupado el nuevo estado de la franja horaria
      */
-    public void setOcupado(Boolean pOcupado)
-            {
-                ocupado=pOcupado;
-            }
-    
-    
-    
+    public void setOcupado(Boolean pOcupado) {
+        ocupado = pOcupado;
+    }
+
 }

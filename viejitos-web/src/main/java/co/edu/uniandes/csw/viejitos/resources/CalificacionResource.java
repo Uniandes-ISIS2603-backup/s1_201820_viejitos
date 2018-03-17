@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.viejitos.dtos.CalificacionDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.CalificacionLogic;
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+//TODO: Borrar lo que no se usa
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.viejitos.persistence.CalificacionPersistence;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 
 /**
- *<pre>Clase que implementa el recurso "Calificacion".
+ * <pre>Clase que implementa el recurso "Calificacion".
  * URL: /api/Calificaciones </pre>
  * <p>
  * <h2>Anotaciones </h2>
@@ -38,26 +39,31 @@ import javax.ws.rs.WebApplicationException;
  * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
  * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio).
  * </pre>
+ *
  * @author js.espitia
  */
+//TODO: Revisar el path para llegar a Calificaciones. 
+//TODO Deberia ser todo en minúscula: calificaciones
 @Path("Calificaciones")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 public class CalificacionResource {
-    
+
     @Inject
     private CalificacionLogic logic;
-    
-     private static final Logger LOGGER = Logger.getLogger(CalificacionPersistence.class.getName());
+
+    private static final Logger LOGGER = Logger.getLogger(CalificacionPersistence.class.getName());
+
     /**
      * <h1>POST /api/Calificaciones : Crear una entidad de Calificacion.</h1>
      * <p>
-     * <pre>Cuerpo de petición: JSON {@link CalificacionDetailDTO}. 
+     * <
+     * pre>Cuerpo de petición: JSON {@link CalificacionDetailDTO}.
      * Crea una nueva entidad de Calificacion con la informacion que se recibe en el cuerpo
      * de la petición y se regresa un objeto identico con un id auto-generado
      * por la base de datos.
-     * 
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Creó la nueva calificacion .
@@ -66,111 +72,138 @@ public class CalificacionResource {
      * 412 Precodition Failed: Ya existe la calificacion.
      * </code>
      * </pre>
-     * @param dto  {@link CalificacionDetailDTO}  La entidad a guardar
-     * @return JSON {@link CalificacionDetailDTO} La entidad calificacion guardada con su id correspondiente
+     *
+     * @param dto {@link CalificacionDetailDTO} La entidad a guardar
+     * @return JSON {@link CalificacionDetailDTO} La entidad calificacion
+     * guardada con su id correspondiente
      */
     @POST
-    public CalificacionDTO createCalificacion( CalificacionDTO dto ) throws BusinessLogicException{
+    public CalificacionDTO createCalificacion(CalificacionDTO dto) throws BusinessLogicException {
         logic.create(dto.toEntity());
 
         return dto;
     }
-    
+
     /**
-     * <h1>GET /api/Calificaciones : Obtener todas las entidades de Calificacion.</h1>
+     * <h1>GET /api/Calificaciones : Obtener todas las entidades de
+     * Calificacion.</h1>
      * <p>
-     * <pre>Busca y devuelve todas las entidades de Calificacion que existen en la aplicacion. 
-     *  
+     * <
+     * pre>Busca y devuelve todas las entidades de Calificacion que existen en la aplicacion.
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve todas las calificaciones de la aplicacion.</code> 
+     * 200 OK Devuelve todas las calificaciones de la aplicacion.</code>
      * </pre>
+     *
      * @return JSONArray con las entidades de Calificacion encontradas.
      */
     @GET
-    public List<CalificacionDetailDTO> getCalificaciones (){
+    public List<CalificacionDetailDTO> getCalificaciones() {
         List<CalificacionEntity> califs = logic.getAll();
         List<CalificacionDetailDTO> resp = new ArrayList<>();
-        for(CalificacionEntity actual:califs){
-           resp.add( new CalificacionDetailDTO(actual));
-        } 
+        for (CalificacionEntity actual : califs) {
+            resp.add(new CalificacionDetailDTO(actual));
+        }
         return resp;
     }
-    
+
     /**
-     * <h1>GET /api/Calificaciones/{id} : Obtener una entidad de Calificacion por id.</h1>
+     * <h1>GET /api/Calificaciones/{id} : Obtener una entidad de Calificacion
+     * por id.</h1>
      * <p>
-     * <pre>Busca la entidad de Calificacion con el id asociado recibido en la URL y la devuelve.
-     * 
+     * <
+     * pre>Busca la entidad de Calificacion con el id asociado recibido en la URL y la devuelve.
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve la calificacion correspondiente al id.
-     * </code> 
+     * </code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found No existe una calificacion con el id dado.
-     * </code> 
+     * </code>
      * </pre>
-     * @param id el identificador que se asigna a la calificacion 
-     * @return JSON {@link CalificacionDetailDTO} con la informacion de la entidad calificacion
-     * @throws BusinessLogicException  {@link BusinessLogicException}  si no existe
+     *
+     * @param id el identificador que se asigna a la calificacion
+     * @return JSON {@link CalificacionDetailDTO} con la informacion de la
+     * entidad calificacion
+     * @throws BusinessLogicException {@link BusinessLogicException} si no
+     * existe
      */
     @GET
     @Path("{id:[0-9]*}")
-    public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) throws BusinessLogicException{
+    public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) throws BusinessLogicException {
         CalificacionEntity calif = logic.getById(id);
-        try{
-            if(calif != null)
-                 return new CalificacionDetailDTO( calif );
-        }catch(Exception e){
-            throw new WebApplicationException(e.getMessage(),404);
+        //TODO: Este código está errado. A menos que haya un error de lógica en el constyructor, nunca se dsiaparará una exception.
+        // Se debe validar si existe y si no existe disparar WebApplicationException 
+        try {
+            if (calif != null) {
+                return new CalificacionDetailDTO(calif);
+            }
+        } catch (Exception e) {
+            throw new WebApplicationException(e.getMessage(), 404);
         }
         return null;
     }
-    
+
     /**
-     * <h1>PUT /api/Calificaciones/{id} : Actualizar una entidad de Calificacion con el id dado.</h1>
+     * <h1>PUT /api/Calificaciones/{id} : Actualizar una entidad de Calificacion
+     * con el id dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link CalificacionDetailDTO}.
      * Actualiza la entidad de Calificacion con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
-     *  
+     *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Actualiza la calificacion con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
+     * 200 OK Actualiza la calificacion con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found. No existe una calificacion con el id dado.
      * </code>
      * </pre>
-     * @param id identificador de la calificacion que se desea actualizar.Este debe ser una cadena de numeros
-     * @param dto {@link CalificacionDetailDTO} La entidad de Calificacion que se desea guardar.
-     * @return JSON {@link CalificacionDetailDTO} - La entidad de Calificacion guardada.
-     * @throws BusinessLogicException {@link BusinessLogicException} - Error de lógica que se genera al no poder actualizar la entidad de Enfermero porque ya existe una con ese nombre.
+     *
+     * @param id identificador de la calificacion que se desea actualizar.Este
+     * debe ser una cadena de numeros
+     * @param dto {@link CalificacionDetailDTO} La entidad de Calificacion que
+     * se desea guardar.
+     * @return JSON {@link CalificacionDetailDTO} - La entidad de Calificacion
+     * guardada.
+     * @throws BusinessLogicException {@link BusinessLogicException} - Error de
+     * lógica que se genera al no poder actualizar la entidad de Enfermero
+     * porque ya existe una con ese nombre.
      */
     @PUT
     @Path("{id:[0-9]*}")
-    public CalificacionDetailDTO updateCalificacion(@PathParam("id") Long id, CalificacionDetailDTO dto) throws BusinessLogicException{
+    public CalificacionDetailDTO updateCalificacion(@PathParam("id") Long id, CalificacionDetailDTO dto) throws BusinessLogicException {
+        //TODO: primero hay que validar que es una calificación válida
         CalificacionEntity entidad = dto.toEntity();
-        entidad.setId( id );
+        entidad.setId(id);
         logic.update(entidad);
         return dto;
     }
-    
+
     /**
-     * <h1>DELETE /api/Calificaciones/{id} : Borrar una entidad de Calificacion por id.</h1>
+     * <h1>DELETE /api/Calificaciones/{id} : Borrar una entidad de Calificacion
+     * por id.</h1>
      * <p>
-     * <pre>Borra la entidad de Calificacion con el id asociado recibido en la URL.
-      * Códigos de respuesta:<br>
+     * <
+     * pre>Borra la entidad de Calificacion con el id asociado recibido en la URL.
+     * Códigos de respuesta:<br>
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Elimina la calificacion correspondiente al id dado.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found. No existe una calificacion con el id dado.
      * </code>
      * </pre>
-     * @param id identificador de la calificacion que se desea borrar. Este debe ser una cadena de numeros.
-     * @throws BusinessLogicException si se intenta eliminar una calificacion que no existe
+     *
+     * @param id identificador de la calificacion que se desea borrar. Este debe
+     * ser una cadena de numeros.
+     * @throws BusinessLogicException si se intenta eliminar una calificacion
+     * que no existe
      */
     @DELETE
-    @Path( "{id: \\d+}" )
-    public void deleteCalificacion( @PathParam( "id" ) Long id) throws BusinessLogicException{
+    @Path("{id: \\d+}")
+    public void deleteCalificacion(@PathParam("id") Long id) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar una calificacion con id {0}", id);
+        //TODO: primero hay que validar que es una calificaicón válida
         logic.delete(id);
     }
 }

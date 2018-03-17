@@ -11,70 +11,68 @@ import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
  * QuejaDTO Objeto de transferencia de datos de Quejas. Los DTO contienen las
  * represnetaciones de los JSON que se transfieren entre el cliente y el
  * servidor.
- * 
+ *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
  *      "reclamo": string,
  *      "resuelto": boolean
  *   }
- * </pre>
- * Por ejemplo una queja se representa asi:<br>
- * 
+ * </pre> Por ejemplo una queja se representa asi:<br>
+ *
  * <pre>
- * 
+ *
  *   {
  *      "reclamo": "El enfermero tenia una actitud muy grosera.",
  *      "resuelto": true
  *   }
  *
  * </pre>
+ *
  * @author c.gomezs
  */
 public class QuejaDTO {
-    
+
     private String reclamo;
-    
+
     private Boolean resuelto;
-    
+
     private Long id;
-    
+
     /**
      * Constructor por defecto
      */
-    public QuejaDTO()
-    {
-        
+    public QuejaDTO() {
+
     }
-    
+
     /**
-    * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
-    * la entidad que viene de argumento.
-    * @param QuejaEntity: Es la entidad que se va a convertir a DTO
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param quejaEntity: Es la entidad que se va a convertir a DTO
      */
-    public QuejaDTO( QuejaEntity quejaEntity )
-    {
-        if(quejaEntity!=null)
-        {
+    public QuejaDTO(QuejaEntity quejaEntity) {
+        if (quejaEntity != null) {
             this.id = quejaEntity.getId();
             this.reclamo = quejaEntity.getReclamo();
             this.resuelto = quejaEntity.getResuelto();
         }
     }
-        
+
     /**
-    * Convertir DTO a Entity
-    * @return Un Entity con los valores del DTO
-    */
-    public QuejaEntity toEntity( )
-    {
-        QuejaEntity entity = new QuejaEntity( );
-	entity.setId( this.id );
-	entity.setReclamo(this.reclamo);
+     * Convertir DTO a Entity
+     *
+     * @return Un Entity con los valores del DTO
+     */
+    public QuejaEntity toEntity() {
+        QuejaEntity entity = new QuejaEntity();
+        entity.setId(this.id);
+        entity.setReclamo(this.reclamo);
         entity.setResuelto(this.resuelto);
         return entity;
     }
-    
+
     /**
      * @return el id
      */
@@ -115,5 +113,5 @@ public class QuejaDTO {
      */
     public void setResuelto(boolean resuelto) {
         this.resuelto = resuelto;
-    }  
+    }
 }

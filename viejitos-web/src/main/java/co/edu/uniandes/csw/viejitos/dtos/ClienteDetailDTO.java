@@ -13,7 +13,8 @@ import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+/**
+ * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
  *      "id": number,
@@ -67,8 +68,7 @@ import java.util.List;
  *          "descripcion": string,
  *          "finalizado": boolean } ]
  *   }
- * </pre>
- * Por ejemplo una entidad de Cliente se representa asi:<br>
+ * </pre> Por ejemplo una entidad de Cliente se representa asi:<br>
  * <pre>
  *
  *   {
@@ -125,12 +125,11 @@ import java.util.List;
  *   }
  *
  * </pre>
+ *
  * @author jj.silva
  */
-public class ClienteDetailDTO extends ClienteDTO
-{
+public class ClienteDetailDTO extends ClienteDTO {
 
-    
     private List<ServicioDTO> servicios;
     private List<QuejaDTO> quejas;
     private CalificacionDTO calificacion;
@@ -139,110 +138,108 @@ public class ClienteDetailDTO extends ClienteDTO
     private MedicoDTO medico;
     private List<EnfermeroDTO> enfermeros;
     private HistoriaClinicaDTO historiaC;
-    
-    public ClienteDetailDTO()
-    {
+
+    public ClienteDetailDTO() {
         super();
     }
-    
-    public ClienteDetailDTO(ClienteEntity entity)
-    {
+
+    public ClienteDetailDTO(ClienteEntity entity) {
         super(entity);
-        if (entity.getCalificacion()!= null) {
+        if (entity.getCalificacion() != null) {
             this.calificacion = new CalificacionDTO(entity.getCalificacion());
         } else {
             entity.setCalificacion(null);
         }
-        if (entity.getServicios()!= null) {
+        if (entity.getServicios() != null) {
             servicios = new ArrayList<>();
             for (ServicioEntity entityServicio : entity.getServicios()) {
                 servicios.add(new ServicioDTO(entityServicio));
             }
         }
-        
-        if (entity.getQuejas()!= null) {
+
+        if (entity.getQuejas() != null) {
             quejas = new ArrayList<>();
             for (QuejaEntity entityQueja : entity.getQuejas()) {
                 quejas.add(new QuejaDTO(entityQueja));
             }
         }
-        
-        if (entity.getCalificaciones()!= null) {
+
+        if (entity.getCalificaciones() != null) {
             calificaciones = new ArrayList<>();
             for (CalificacionEntity entityCalificacion : entity.getCalificaciones()) {
                 calificaciones.add(new CalificacionDTO(entityCalificacion));
             }
         }
-        
-        if (entity.getCita()!= null) {
+
+        if (entity.getCita() != null) {
             this.cita = new CitaDTO(entity.getCita());
         } else {
             entity.setCita(null);
         }
-        
-        if (entity.getMedico()!= null) {
+
+        if (entity.getMedico() != null) {
             this.medico = new MedicoDTO(entity.getMedico());
         } else {
             entity.setMedico(null);
         }
-        
-        if (entity.getEnfermeros()!= null) {
+
+        if (entity.getEnfermeros() != null) {
             enfermeros = new ArrayList<>();
             for (EnfermeroEntity entityEnfermero : entity.getEnfermeros()) {
                 enfermeros.add(new EnfermeroDTO(entityEnfermero));
             }
         }
-        
-        if (entity.getHistoriaC()!= null) {
+
+        if (entity.getHistoriaC() != null) {
             this.historiaC = new HistoriaClinicaDTO(entity.getHistoriaC());
         } else {
             entity.setHistoriaC(null);
         }
     }
-    
+
     @Override
     public ClienteEntity toEntity() {
         ClienteEntity clienteE = super.toEntity();
         if (this.getCalificacion() != null) {
             clienteE.setCalificacion(this.getCalificacion().toEntity());
         }
-        
-        if (this.getCita()!= null) {
+
+        if (this.getCita() != null) {
             clienteE.setCita(this.getCita().toEntity());
         }
-        
-        if (getEnfermeros()!= null) {
+
+        if (getEnfermeros() != null) {
             List<EnfermeroEntity> enfermerosEntity = new ArrayList<>();
             for (EnfermeroDTO dtoEnfermero : getEnfermeros()) {
                 enfermerosEntity.add(dtoEnfermero.toEntity());
             }
             clienteE.setEnfermeros(enfermerosEntity);
         }
-        
-        if (this.getHistoriaC()!= null) {
+
+        if (this.getHistoriaC() != null) {
             clienteE.setHistoriaC(this.getHistoriaC().toEntity());
         }
-        
+
         if (this.getMedico() != null) {
             clienteE.setMedico(this.getMedico().toEntity());
         }
-        
-        if (getCalificaciones()!= null) {
+
+        if (getCalificaciones() != null) {
             List<CalificacionEntity> calificacionesEntity = new ArrayList<>();
             for (CalificacionDTO dtoCalificacion : getCalificaciones()) {
                 calificacionesEntity.add(dtoCalificacion.toEntity());
             }
             clienteE.setCalificaciones(calificacionesEntity);
         }
-         if (getQuejas()!= null) {
+        if (getQuejas() != null) {
             List<QuejaEntity> quejasEntity = new ArrayList<>();
             for (QuejaDTO dtoQueja : getQuejas()) {
                 quejasEntity.add(dtoQueja.toEntity());
             }
             clienteE.setQuejas(quejasEntity);
         }
-         
-          if (getServicios()!= null) {
+
+        if (getServicios() != null) {
             List<ServicioEntity> serviciosEntity = new ArrayList<>();
             for (ServicioDTO dtoServicio : getServicios()) {
                 serviciosEntity.add(dtoServicio.toEntity());
@@ -279,7 +276,7 @@ public class ClienteDetailDTO extends ClienteDTO
     public void setQuejas(List<QuejaDTO> quejas) {
         this.quejas = quejas;
     }
-    
+
     /**
      * @return the calificacion
      */
@@ -363,8 +360,5 @@ public class ClienteDetailDTO extends ClienteDTO
     public void setEnfermeros(List<EnfermeroDTO> enfermeros) {
         this.enfermeros = enfermeros;
     }
-    
-    
-    
-    
+
 }

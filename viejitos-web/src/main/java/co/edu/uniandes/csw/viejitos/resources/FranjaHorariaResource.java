@@ -40,7 +40,7 @@ import javax.ws.rs.core.MediaType;
  * @author lf.naranjo11  
  * @version 1.0
  */
-
+//TODO: Revisar el path para llegar a este recurso
  @Path("/franjashorarias")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)

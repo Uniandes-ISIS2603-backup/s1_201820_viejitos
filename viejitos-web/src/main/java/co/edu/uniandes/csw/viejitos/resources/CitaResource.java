@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 
-
 import co.edu.uniandes.csw.viejitos.dtos.CitaDTO;
 import co.edu.uniandes.csw.viejitos.dtos.CitaDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.CitaLogic;
@@ -25,135 +24,148 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+
 /**
- * <pre>Clase que implementa el recurso "Cita".</pre>
- * URL: /api/Cita
+ * <pre>Clase que implementa el recurso "Cita".</pre> URL: /api/Cita
+ *
  * @author l.pardo
  */
-@Path( "citas" )
-@Produces( "application/json" )
-@Consumes( "application/json" )
+
+//TODO: Revisar el path para llegar a este recurso
+@Path("citas")
+@Produces("application/json")
+@Consumes("application/json")
 @RequestScoped
-public class CitaResource
-{
+public class CitaResource {
+
     @Inject
     CitaLogic logic;
-    /**
-	 * <h1>POST /api/citas : Crear una entidad de Cita.</h1>
-	 * <p>
-	 * <pre>Cuerpo de petición: JSON {@link CitaDetailDTO}.
-	 *
-         * Codigos de respuesta:
-         * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Crea la cita.</code> 
-         * </pre>
-	 * Crea una nueva entidad de Cita con la informacion que se recibe en el cuerpo
-	 * de la petición.
-	 * @param dto {@link CitaDetailDTO} - La entidad de Cita que se desea guardar.
-	 * @return JSON {@link CitaDetailDTO}  - La entidad de Cita guardada.
-	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de Servicio.
-	 */
-	@POST
-	public CitaDTO createCita( CitaDTO dto ) throws BusinessLogicException
-	{
-		return  new CitaDTO(logic.create(dto.toEntity()));
-	}
-        
-        /**
-	 * <h1>GET /api/citas : Obtener todas las entidades de Cita.</h1>
-	 * <p>
-	 * <pre>Busca y devuelve todas las entidades de Cita que existen en la aplicacion.
-         *      
-         * Codigos de respuesta:
-         * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Devuelve las citas.</code> 
-         * </pre>
-	 * @return JSONArray {@link CitaDetailDTO} - Las entidades de Cita encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
-	 */
-	@GET
-	public List<CitaDTO> getCitas( )
-	{
-		List<CitaDTO> list= new ArrayList<CitaDTO>();
-            for(CitaEntity e :logic.getAll())
-            {
-               list.add(new CitaDTO(e));
-            }
-            return list;
-	}
-        
-        /**
-	 * <h1>GET /api/Cita/{id} : Obtener una entidad de Cita por id.</h1>
-	 * <p>
-	 * <pre>Busca la entidad de Cita con el id asociado recibido en la URL y la devuelve.
-         *     
-         * Codigos de respuesta:
-         * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Devuelve la cita.</code> 
-         * <code style="color: #c7254e; background-color: #f9f2f4;">
-         * 404 Not Found. No existe una cita con el id dado.
-         * </code></pre>
-	 * @param id Identificador de la entidad de Cita que se esta buscando. Este debe ser una cadena de dígitos.
-	 * @return JSON {@link CitaDetailDTO} - La entidad de Cita buscada
-	 */
-	@GET
-	@Path( "{id: \\d+}" )
-	public CitaDTO getCita( @PathParam( "id" ) Long id )
-	{
-		return new CitaDTO(logic.getById(id));
-	}
-        
-        /**
-	 * <h1>PUT /api/Citas/{id} : Actualizar una entidad de Cita con el id dado.</h1>
-	 * <pre> 
-         * Actualiza la entidad de Medico con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
-         * Cuerpo de petición: JSON {@link CitaDetailDTO}.
-         * Codigos de respuesta:
-         * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Actualiza la cita con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
-         * <code style="color: #c7254e; background-color: #f9f2f4;">
-         * 404 Not Found. No existe una cita con el id dado.
-         * </code> 
-         * </pre>
-	 * @param id        Identificador de la entidad de Cita que se desea actualizar. Este debe ser una cadena de dígitos.
-	 * @param detailDTO {@link CitaDetailDTO} La entidad de Cita que se desea guardar.
-	 * @return JSON {@link CitaDetailDTO} - La entidad de Cita guardada.
-	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera al no poder actualizar la entidad de Servicio porque ya existe una con ese nombre.
-	 */
-	@PUT
-	@Path( "{id: \\d+}" )
-	public CitaDTO updateCita( @PathParam( "id" ) Long id, CitaDetailDTO detailDTO ) throws BusinessLogicException
-	{
-            CitaEntity e = logic.getById(id);
-            if(e==null)
-            {
-                throw new WebApplicationException("El recurso /citas/" + id + " no existe.", 404);
-            }
-            return new CitaDTO(logic.update(detailDTO.toEntity()));
-	}
-        
-        /**
-	 * <h1>DELETE /api/Citas/{id} : Borrar una entidad de Cita por id.</h1>
-	 * <p>
-	 * <pre>Borra la entidad de Cita con el id asociado recibido en la URL.
-         *
-         * Códigos de respuesta:<br>
-         * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Elimina la cita correspondiente al id dado.</code>
-         * <code style="color: #c7254e; background-color: #f9f2f4;">
-         * 404 Not Found. No existe una cita con el id dado.</code>
-         * </pre>
-	 * @param id Identificador de la entidad de Cita que se desea borrar. Este debe ser una cadena de dígitos.
-	 */
-	@DELETE
-	@Path( "{id: \\d+}" )
-	public void deleteCita( @PathParam( "id" ) Long id )
-	{
-            CitaEntity e = logic.getById(id);
-            if(e==null)
-            {
-                throw new WebApplicationException("El recurso /citas/" + id + " no existe.", 404);
-            }
-            logic.delete(e);
-	}
-}
 
+    /**
+     * <h1>POST /api/citas : Crear una entidad de Cita.</h1>
+     * <p>
+     * <
+     * pre>Cuerpo de petición: JSON {@link CitaDetailDTO}.
+     *
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Crea la cita.</code>
+     * </pre> Crea una nueva entidad de Cita con la informacion que se recibe en
+     * el cuerpo de la petición.
+     *
+     * @param dto {@link CitaDetailDTO} - La entidad de Cita que se desea
+     * guardar.
+     * @return JSON {@link CitaDetailDTO} - La entidad de Cita guardada.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando ya existe la entidad de Servicio.
+     */
+    @POST
+    public CitaDTO createCita(CitaDTO dto) throws BusinessLogicException {
+        return new CitaDTO(logic.create(dto.toEntity()));
+    }
+
+    /**
+     * <h1>GET /api/citas : Obtener todas las entidades de Cita.</h1>
+     * <p>
+     * <
+     * pre>Busca y devuelve todas las entidades de Cita que existen en la aplicacion.
+     *
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve las citas.</code>
+     * </pre>
+     *
+     * @return JSONArray {@link CitaDetailDTO} - Las entidades de Cita
+     * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+     */
+    @GET
+    public List<CitaDTO> getCitas() {
+        List<CitaDTO> list = new ArrayList<>();
+        for (CitaEntity e : logic.getAll()) {
+            list.add(new CitaDTO(e));
+        }
+        return list;
+    }
+
+    /**
+     * <h1>GET /api/Cita/{id} : Obtener una entidad de Cita por id.</h1>
+     * <p>
+     * <
+     * pre>Busca la entidad de Cita con el id asociado recibido en la URL y la devuelve.
+     *
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve la cita.</code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe una cita con el id dado.
+     * </code></pre>
+     *
+     * @param id Identificador de la entidad de Cita que se esta buscando. Este
+     * debe ser una cadena de dígitos.
+     * @return JSON {@link CitaDetailDTO} - La entidad de Cita buscada
+     */
+    @GET
+    @Path("{id: \\d+}")
+    public CitaDTO getCita(@PathParam("id") Long id) {
+        return new CitaDTO(logic.getById(id));
+    }
+
+    /**
+     * <h1>PUT /api/Citas/{id} : Actualizar una entidad de Cita con el id
+     * dado.</h1>
+     * <pre>
+     * Actualiza la entidad de Medico con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
+     * Cuerpo de petición: JSON {@link CitaDetailDTO}.
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Actualiza la cita con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe una cita con el id dado.
+     * </code>
+     * </pre>
+     *
+     * @param id Identificador de la entidad de Cita que se desea actualizar.
+     * Este debe ser una cadena de dígitos.
+     * @param detailDTO {@link CitaDetailDTO} La entidad de Cita que se desea
+     * guardar.
+     * @return JSON {@link CitaDetailDTO} - La entidad de Cita guardada.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera al no poder actualizar la entidad de
+     * Servicio porque ya existe una con ese nombre.
+     */
+    @PUT
+    @Path("{id: \\d+}")
+    public CitaDTO updateCita(@PathParam("id") Long id, CitaDetailDTO detailDTO) throws BusinessLogicException {
+        CitaEntity e = logic.getById(id);
+        if (e == null) {
+            throw new WebApplicationException("El recurso /citas/" + id + " no existe.", 404);
+        }
+        return new CitaDTO(logic.update(detailDTO.toEntity()));
+    }
+
+    /**
+     * <h1>DELETE /api/Citas/{id} : Borrar una entidad de Cita por id.</h1>
+     * <p>
+     * <
+     * pre>Borra la entidad de Cita con el id asociado recibido en la URL.
+     *
+     * Códigos de respuesta:<br>
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Elimina la cita correspondiente al id dado.</code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe una cita con el id dado.</code>
+     * </pre>
+     *
+     * @param id Identificador de la entidad de Cita que se desea borrar. Este
+     * debe ser una cadena de dígitos.
+     */
+    @DELETE
+    @Path("{id: \\d+}")
+    public void deleteCita(@PathParam("id") Long id) {
+        CitaEntity e = logic.getById(id);
+        if (e == null) {
+            throw new WebApplicationException("El recurso /citas/" + id + " no existe.", 404);
+        }
+        logic.delete(e);
+    }
+}

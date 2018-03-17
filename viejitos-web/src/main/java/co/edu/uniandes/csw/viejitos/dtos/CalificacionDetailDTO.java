@@ -8,8 +8,8 @@ package co.edu.uniandes.csw.viejitos.dtos;
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 
 /**
- * Objeto de transferencia de datos para una calificacion con sus relaciones.
- * Al serializarse como DTO se genera un JSON de la siguiente manera
+ * Objeto de transferencia de datos para una calificacion con sus relaciones. Al
+ * serializarse como DTO se genera un JSON de la siguiente manera
  * <pre>
  *  {
  *      "id":number,
@@ -22,7 +22,7 @@ import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
  *      "servicio":id
  *  }
  * </pre>
- * 
+ *
  * Por ejemplo, una calificacion se representa asi:
  * <pre>
  *  {
@@ -36,19 +36,20 @@ import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
  *      "servicio":3222221
  *  }
  * </pre>
+ *
  * @author js.espitia
  */
-public class CalificacionDetailDTO extends CalificacionDTO{
-    
+public class CalificacionDetailDTO extends CalificacionDTO {
+
     private ServicioDTO servicio;
-    
-    public CalificacionDetailDTO(){
-    	super();
+
+    public CalificacionDetailDTO() {
+        super();
     }
-    
-    public CalificacionDetailDTO(CalificacionEntity entidad){
+
+    public CalificacionDetailDTO(CalificacionEntity entidad) {
         super(entidad);
-        if(entidad!=null){
+        if (entidad != null) {
             this.servicio = new ServicioDTO(entidad.getServicio());
         }
     }
@@ -60,14 +61,15 @@ public class CalificacionDetailDTO extends CalificacionDTO{
     public void setServicio(ServicioDTO servicio) {
         this.servicio = servicio;
     }
-    
+
     @Override
-    public CalificacionEntity toEntity(){
+    public CalificacionEntity toEntity() {
         CalificacionEntity entidad = super.toEntity();
-        if(entidad!=null){
+        if (entidad != null) { // TODO: No puede ser null porque la acaba de crear
+            //TODO: Hay que preguntar si this.servicio != null
             entidad.setServicio(servicio.toEntity());
         }
-    	return entidad;
+        return entidad;
     }
-    
+
 }

@@ -8,10 +8,10 @@ package co.edu.uniandes.csw.viejitos.dtos;
 import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
 
 /**
- * FacturaDetailDTO Objeto de transferencia de datos de Facturas. Los DTO contienen las
- * representaciones de los JSON que se transfieren entre el cliente y el
- * servidor.
- * 
+ * FacturaDetailDTO Objeto de transferencia de datos de Facturas. Los DTO
+ * contienen las representaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
+ *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
@@ -25,11 +25,10 @@ import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
  *      "nombreEmpresa": String,
  *      "servicio": ServicioDTO
  *   }
- * </pre>
- * Por ejemplo una ciudad se representa asi:<br>
- * 
+ * </pre> Por ejemplo una ciudad se representa asi:<br>
+ *
  * <pre>
- * 
+ *
  *   {
  *      "id": 123,
  *      "costoTotal": 120100,
@@ -47,6 +46,7 @@ import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
  *   }
  *
  * </pre>
+ *
  * @author f.escobar
  */
 public class FacturaDetailDTO extends FacturaDTO {
@@ -55,41 +55,38 @@ public class FacturaDetailDTO extends FacturaDTO {
      * Servicio al que pertenece la factura
      */
     private ServicioDTO servicio;
-    
+
     /**
      * COnstructor
      */
-    public FacturaDetailDTO()
-    {
+    public FacturaDetailDTO() {
         super();
     }
-    
+
     /**
      * COnstructor
+     *
      * @param entity
      */
-    public FacturaDetailDTO( FacturaEntity entity)
-    {
-        super();
-        if(entity.getServicio() != null )
-        {
+    public FacturaDetailDTO(FacturaEntity entity) {
+        super(); //TODO: hay que enviarle el entity
+        //TODO: primero preguntar si entity!= null
+        if (entity.getServicio() != null) {
             this.servicio = new ServicioDTO(entity.getServicio());
         }
     }
-    
+
     @Override
-    public FacturaEntity toEntity()
-    {
+    public FacturaEntity toEntity() {
         FacturaEntity entity = super.toEntity();
-        
-        if(this.servicio != null)
-        {
+
+        if (this.servicio != null) {
             entity.setServicio(this.servicio.toEntity());
         }
-        
+
         return entity;
     }
-    
+
     /**
      * @return servicio
      */
