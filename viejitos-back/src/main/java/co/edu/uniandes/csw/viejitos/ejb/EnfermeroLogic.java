@@ -66,6 +66,7 @@ public class EnfermeroLogic {
     }
 
     public void delete( EnfermeroEntity entity ) throws BusinessLogicException {
+        //TODO: este método debe recibir un id y hay que validar que existe un EnfermeroEntity con ese id
         LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Enfermero con id={0}", entity.getId( ) );
         persistencia.delete( entity.getId() );
         LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Enfermero con id={0}", entity.getId( ) );

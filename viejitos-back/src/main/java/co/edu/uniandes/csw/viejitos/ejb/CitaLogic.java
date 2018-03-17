@@ -32,6 +32,7 @@ public class CitaLogic {
     public CitaEntity create(CitaEntity entity) throws BusinessLogicException {
         //verificar
         LOGGER.info("Inicia proceso de creación de una entidad de Cita");
+        //TODO: No hay ninguna regla de negocio? 
         persistence.create(entity);
         return entity;
     }
@@ -49,13 +50,16 @@ public class CitaLogic {
     }
 
     public CitaEntity update(CitaEntity entity) throws BusinessLogicException {
+        
         if (persistence.find(entity.getId()) == null) {
             throw new BusinessLogicException("No existe una entidad de Cita con el id \"" + entity.getId() + "\"");
         }
+        //TODO: No hay ninguna regla de negocio? 
         return persistence.update(entity);
     }
 
     public void delete(CitaEntity entity) {
+        //TODO: este método debe recibir un id y hay que validar que existe un CitaEntity con ese id
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Cita con id={0}", entity.getId());
         persistence.delete(entity.getId());
         LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Cita con id={0}", entity.getId());

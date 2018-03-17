@@ -19,53 +19,47 @@ import javax.inject.Inject;
  * @author jj.silva
  */
 @Stateless
-public class ClienteLogic
-{
-    private static final Logger LOGGER = Logger.getLogger( ClienteLogic.class.getName( ) );
-    
+public class ClienteLogic {
+
+    private static final Logger LOGGER = Logger.getLogger(ClienteLogic.class.getName());
+
     @Inject
     private ClientePersistence persistence;
-    
-    public ClienteEntity create( ClienteEntity entity ) throws BusinessLogicException
-	{
-		LOGGER.info( "Inicia proceso de creación de una entidad de Cliente" );
-		// Verifica la regla de negocio que dice que no puede haber dos entidades de Cliente con el mismo login
-		if( persistence.findByLogin(entity.getLogin()) != null )
-		{
-			throw new BusinessLogicException( "Ya existe una entidad de Cliente con el login \"" + entity.getLogin()+ "\"" );
-		}
-		// Invoca la persistencia para crear la entidad de Cliente
-		persistence.create( entity );
-		LOGGER.info( "Termina proceso de creación de entidad de Cliente" );
-		return entity;
-	}
-    
-    public List<ClienteEntity> getAll( )
-	{
-		LOGGER.info( "Inicia proceso de consultar todas las entidades de Cliente" );
-		List<ClienteEntity> entities = persistence.findAll( );
-		LOGGER.info( "Termina proceso de consultar todas las entidades de Cliente" );
-		return entities;
-	}
-    
-    public ClienteEntity getById( Long id )
-	{
-		return persistence.find( id );
-	}
-    
-    public ClienteEntity update( ClienteEntity entity ) throws BusinessLogicException
-	{
-		if( persistence.findByLogin(entity.getLogin()) != null )
-		{
-			throw new BusinessLogicException( "Ya existe una entidad de Cliente con el login \"" + entity.getLogin()+ "\"" );
-		}
-		return persistence.update( entity );
-	}
-    
-    public void delete( ClienteEntity entity ) 
-	{
-		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Cliente con id={0}", entity.getId( ) );
-		persistence.delete( entity.getId() );
-		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Cliente con id={0}", entity.getId( ) );
-	}
+
+    public ClienteEntity create(ClienteEntity entity) throws BusinessLogicException {
+        LOGGER.info("Inicia proceso de creación de una entidad de Cliente");
+        // Verifica la regla de negocio que dice que no puede haber dos entidades de Cliente con el mismo login
+        if (persistence.findByLogin(entity.getLogin()) != null) {
+            throw new BusinessLogicException("Ya existe una entidad de Cliente con el login \"" + entity.getLogin() + "\"");
+        }
+        // Invoca la persistencia para crear la entidad de Cliente
+        persistence.create(entity);
+        LOGGER.info("Termina proceso de creación de entidad de Cliente");
+        return entity;
+    }
+
+    public List<ClienteEntity> getAll() {
+        LOGGER.info("Inicia proceso de consultar todas las entidades de Cliente");
+        List<ClienteEntity> entities = persistence.findAll();
+        LOGGER.info("Termina proceso de consultar todas las entidades de Cliente");
+        return entities;
+    }
+
+    public ClienteEntity getById(Long id) {
+        return persistence.find(id);
+    }
+
+    public ClienteEntity update(ClienteEntity entity) throws BusinessLogicException {
+        if (persistence.findByLogin(entity.getLogin()) != null) {
+            throw new BusinessLogicException("Ya existe una entidad de Cliente con el login \"" + entity.getLogin() + "\"");
+        }
+        return persistence.update(entity);
+    }
+
+    public void delete(ClienteEntity entity) {
+        //TODO: este método debe recibir un id y hay que validar que existe un ClienteEntity con ese id
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Cliente con id={0}", entity.getId());
+        persistence.delete(entity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Cliente con id={0}", entity.getId());
+    }
 }

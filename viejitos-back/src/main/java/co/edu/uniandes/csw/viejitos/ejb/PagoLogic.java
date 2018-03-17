@@ -27,6 +27,7 @@ public class PagoLogic {
     @Inject
     private PagoPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
+    //TODO: Esta variable nunca se usa
     @Inject
     private ServicioPersistence persistenceServicio;
     
@@ -102,6 +103,8 @@ public class PagoLogic {
 	public void delete( PagoEntity entity )
 	{
 		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Pago con id={0}", entity.getId( ) );
+        //TODO: este método debe recibir un id y hay que validar que existe un PagoEntity con ese id
+ 
 		persistence.delete( entity.getId() );
 		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Pago con id={0}", entity.getId( ) );
 	}

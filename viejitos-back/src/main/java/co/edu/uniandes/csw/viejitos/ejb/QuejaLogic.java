@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.viejitos.ejb;
+
 import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.QuejaPersistence;
@@ -19,58 +20,56 @@ import javax.inject.Inject;
  *
  * @author c.gomezs
  */
-
 @Stateless
 public class QuejaLogic {
-    
-    private static final Logger LOGGER = Logger.getLogger( QuejaLogic.class.getName( ) );
 
-	@Inject
-	private QuejaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
+    private static final Logger LOGGER = Logger.getLogger(QuejaLogic.class.getName());
 
-        @Inject
-        private ClientePersistence clientePersistence;
-        
-        @Inject 
-        private ServicioPersistence servicioPersistence;
-        
-	public QuejaEntity create( QuejaEntity entity ) throws BusinessLogicException
-	{
-		LOGGER.info( "Inicia proceso de creación de una entidad de Queja" );
-		// Invoca la persistencia para crear la entidad de Queja
-		persistence.create( entity );
-		LOGGER.info( "Termina proceso de creación de entidad de Queja" );
-		return entity;
-	}
+    @Inject
+    private QuejaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
-	public List<QuejaEntity> getAll( )
-	{
-		LOGGER.info( "Inicia proceso de consultar todas las entidades de Queja" );
-		// Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
-		List<QuejaEntity> entities = persistence.findAll( );
-		LOGGER.info( "Termina proceso de consultar todas las entidades de Queja" );
-		return entities;
-	}
+    //TODO: esta variable no se usa
+    @Inject
+    private ClientePersistence clientePersistence;
+    //TODO: esta variable no se usa
+    @Inject
+    private ServicioPersistence servicioPersistence;
 
-	public QuejaEntity getById( Long id )
-	{
-		return persistence.find( id );
-	}
+    public QuejaEntity create(QuejaEntity entity) throws BusinessLogicException {
+        LOGGER.info("Inicia proceso de creación de una entidad de Queja");
+        // Invoca la persistencia para crear la entidad de Queja
+        //TODO: No hay ninguna regla de negocio?  
+        persistence.create(entity);
+        LOGGER.info("Termina proceso de creación de entidad de Queja");
+        return entity;
+    }
 
-	public QuejaEntity update( QuejaEntity entity ) throws BusinessLogicException
-	{
-                if( persistence.find(entity.getId()) == null )
-		{
-			throw new BusinessLogicException( "No existe una entidad de Queja con el id \"" + entity.getId()+ "\"" );
-		}
-		return persistence.update( entity );
-	}
+    public List<QuejaEntity> getAll() {
+        LOGGER.info("Inicia proceso de consultar todas las entidades de Queja");
+        // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
+        List<QuejaEntity> entities = persistence.findAll();
+        LOGGER.info("Termina proceso de consultar todas las entidades de Queja");
+        return entities;
+    }
 
-	public void delete( QuejaEntity entity ) 
-	{
-		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Queja con id={0}", entity.getId( ) );
-		persistence.delete( entity.getId() );
-		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Queja con id={0}", entity.getId( ) );
-	}
-    
+    public QuejaEntity getById(Long id) {
+        return persistence.find(id);
+    }
+
+    public QuejaEntity update(QuejaEntity entity) throws BusinessLogicException {
+        if (persistence.find(entity.getId()) == null) {
+            throw new BusinessLogicException("No existe una entidad de Queja con el id \"" + entity.getId() + "\"");
+        }
+        //TODO: No hay ninguna regla de negocio? 
+        return persistence.update(entity);
+    }
+
+    public void delete(QuejaEntity entity) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Queja con id={0}", entity.getId());
+        //TODO: este método debe recibir un id y hay que validar que existe un QuejaEntity con ese id
+
+        persistence.delete(entity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Queja con id={0}", entity.getId());
+    }
+
 }

@@ -27,6 +27,7 @@ public class FacturaLogic {
     @Inject
     private FacturaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
+    //TODO: Esta variable no se usa
     @Inject
     private ServicioPersistence persistenceServicio;
     
@@ -92,7 +93,9 @@ public class FacturaLogic {
 
 	public void delete( FacturaEntity entity )
 	{
-		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Factura con id={0}", entity.getId( ) );
+	//TODO: este método debe recibir un id y hay que validar que existe un FacturaEntity con ese id
+            LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Factura con id={0}", entity.getId( ) );
+                
 		persistence.delete( entity.getId() );
 		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Factura con id={0}", entity.getId( ) );
 	}

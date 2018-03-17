@@ -21,61 +21,58 @@ import javax.inject.Inject;
  *
  * @author c.gomezs
  */
-
 @Stateless
 public class ServicioLogic {
-    
-    private static final Logger LOGGER = Logger.getLogger( QuejaLogic.class.getName( ) );
 
-	@Inject
-	private ServicioPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
+    private static final Logger LOGGER = Logger.getLogger(QuejaLogic.class.getName());
 
-        @Inject
-        private ClientePersistence clientePersistence;
-        
-        @Inject 
-        private PagoPersistence pagoPersistence;
-        
-        @Inject
-        private EnfermeroPersistence enfermeroPersistence;
-        
-	public ServicioEntity create( ServicioEntity entity ) throws BusinessLogicException
-	{
-		LOGGER.info( "Inicia proceso de creación de una entidad de Servicio" );
-		// Invoca la persistencia para crear la entidad de Queja
-		persistence.create( entity );
-		LOGGER.info( "Termina proceso de creación de entidad de Servicio" );
-		return entity;
-	}
+    @Inject
+    private ServicioPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
+    //TODO: esta variable no se usa
+    @Inject
+    private ClientePersistence clientePersistence;
+    //TODO: esta variable no se usa
+    @Inject
+    private PagoPersistence pagoPersistence;
 
-	public List<ServicioEntity> getAll( )
-	{
-		LOGGER.info( "Inicia proceso de consultar todas las entidades de Servicio" );
-		// Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
-		List<ServicioEntity> entities = persistence.findAll( );
-		LOGGER.info( "Termina proceso de consultar todas las entidades de Servicio" );
-		return entities;
-	}
+    @Inject
+    private EnfermeroPersistence enfermeroPersistence;
 
-	public ServicioEntity getById( Long id )
-	{
-		return persistence.find( id );
-	}
+    public ServicioEntity create(ServicioEntity entity) throws BusinessLogicException {
+        LOGGER.info("Inicia proceso de creación de una entidad de Servicio");
+        // Invoca la persistencia para crear la entidad de Queja
+        //TODO: No hay ninguna regla de negocio? 
+        persistence.create(entity);
+        LOGGER.info("Termina proceso de creación de entidad de Servicio");
+        return entity;
+    }
 
-	public ServicioEntity update( ServicioEntity entity ) throws BusinessLogicException
-	{
-                if( persistence.find(entity.getId()) == null )
-		{
-			throw new BusinessLogicException( "No existe una entidad de Servicio con el id \"" + entity.getId()+ "\"" );
-		}
-		return persistence.update( entity );
-	}
+    public List<ServicioEntity> getAll() {
+        LOGGER.info("Inicia proceso de consultar todas las entidades de Servicio");
+        // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
+        List<ServicioEntity> entities = persistence.findAll();
+        LOGGER.info("Termina proceso de consultar todas las entidades de Servicio");
+        return entities;
+    }
 
-	public void delete( ServicioEntity entity )
-	{
-		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Servicio con id={0}", entity.getId( ) );
-		persistence.delete( entity.getId() );
-		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Servicio con id={0}", entity.getId( ) );
-	}
-    
+    public ServicioEntity getById(Long id) {
+        return persistence.find(id);
+    }
+
+    public ServicioEntity update(ServicioEntity entity) throws BusinessLogicException {
+        if (persistence.find(entity.getId()) == null) {
+            throw new BusinessLogicException("No existe una entidad de Servicio con el id \"" + entity.getId() + "\"");
+        }
+        //TODO: No hay ninguna regla de negocio? 
+        return persistence.update(entity);
+    }
+
+    public void delete(ServicioEntity entity) {
+        //TODO: este método debe recibir un id y hay que validar que existe un ServicioEntity con ese id
+
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Servicio con id={0}", entity.getId());
+        persistence.delete(entity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Servicio con id={0}", entity.getId());
+    }
+
 }

@@ -30,6 +30,7 @@ public class CalificacionLogic {
         LOGGER.info( "Inicia proceso de creación de una entidad de Calificacion" );
 	
 	// Invoca la persistencia para crear la entidad de Viejito
+        //TODO: No hay ninguna regla de negocio? 
 	persistencia.create( entity );
 	LOGGER.info( "Termina proceso de creación de entidad de Calificacion" );
 	return entity;
@@ -51,9 +52,10 @@ public class CalificacionLogic {
         if( persistencia.find( entity.getId( ) ) == null ){
             throw new BusinessLogicException( "No existe una entidad de Calificacion con el ID \"" + entity.getId( ) + "\"" );
 	}
+        //TODO: No hay ninguna regla de negocio? 
 	return persistencia.update( entity );
     }
-
+//TODO: sobra
     public void delete( CalificacionEntity entity ) throws BusinessLogicException {
         LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Calificacion con id={0}", entity.getId() );
         persistencia.delete( entity.getId() );
@@ -61,6 +63,7 @@ public class CalificacionLogic {
     }
     public void delete( Long id ) throws BusinessLogicException {
         LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Calificacion con id={0}", id );
+        // TODO: Hay que validar que existe CalificacionEntity con ese id
         persistencia.delete( id );
         LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Calificacion con id={0}", id );
     }

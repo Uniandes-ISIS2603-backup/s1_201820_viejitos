@@ -31,6 +31,7 @@ public class MedicoLogic {
         LOGGER.info("Inicia proceso de creación de una entidad de Medico");
         // Verifica la regla de negocio que dice que no puede haber dos entidades de Cliente con el mismo login
         // Invoca la persistencia para crear la entidad de Cliente
+        //TODO: No hay ninguna regla de negocio? 
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de entidad de Medico");
         return entity;
@@ -51,11 +52,13 @@ public class MedicoLogic {
         if (persistence.find(entity.getId()) == null) {
             throw new BusinessLogicException("No existe una entidad de Medico con el id \"" + entity.getId() + "\"");
         }
+        //TODO: No hay ninguna regla de negocio? 
         return persistence.update(entity);
     }
 
     public void delete(MedicoEntity entity) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Medico con id={0}", entity.getId());
+        //TODO: este método debe recibir un id y hay que validar que existe un MedicoEntity con ese id
         persistence.delete(entity.getId());
         LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Medico con id={0}", entity.getId());
     }
