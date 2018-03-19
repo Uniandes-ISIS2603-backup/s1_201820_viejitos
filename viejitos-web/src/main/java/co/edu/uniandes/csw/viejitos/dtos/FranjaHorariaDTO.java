@@ -126,8 +126,8 @@ public class FranjaHorariaDTO {
     /**
      * @param pDiaSemana el nuevo dia de la semana de la franja
      */
-    public void setDiaSemana(Integer pDiaSemana) {
-        horaInicio = pDiaSemana;
+    public void setDiaSemana(String pDiaSemana) {
+        diaSemana = pDiaSemana;
     }
 
     /**
