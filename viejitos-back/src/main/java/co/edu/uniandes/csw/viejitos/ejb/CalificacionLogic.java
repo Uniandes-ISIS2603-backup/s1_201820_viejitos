@@ -27,13 +27,18 @@ public class CalificacionLogic {
     private CalificacionPersistence persistencia;
     
     public CalificacionEntity create(CalificacionEntity entity) throws BusinessLogicException{
-        LOGGER.info( "Inicia proceso de creación de una entidad de Calificacion" );
-	
-	// Invoca la persistencia para crear la entidad de Viejito
-        //TODO: No hay ninguna regla de negocio? 
-	persistencia.create( entity );
-	LOGGER.info( "Termina proceso de creación de entidad de Calificacion" );
-	return entity;
+        if(entity!=null){
+            LOGGER.info( "Inicia proceso de creación de una entidad de Calificacion" );
+
+            // Invoca la persistencia para crear la entidad de Calificacion
+            //TODO: No hay ninguna regla de negocio? 
+            if(entity.getLoginCalificado().equals(entity.getLoginCalificador())||entity.getTipoCalificado().equals(entity.getTipoCalificador()))
+                throw new BusinessLogicException("El calificador debe ser diferente al calificado");
+            persistencia.create( entity );
+
+            LOGGER.info( "Termina proceso de creación de entidad de Calificacion" );
+        }
+        return entity;
     }
     
     public List<CalificacionEntity> getAll(){
@@ -49,22 +54,23 @@ public class CalificacionLogic {
     }
 
     public CalificacionEntity update( CalificacionEntity entity ) throws BusinessLogicException{
-        if( persistencia.find( entity.getId( ) ) == null ){
-            throw new BusinessLogicException( "No existe una entidad de Calificacion con el ID \"" + entity.getId( ) + "\"" );
-	}
+        
         //TODO: No hay ninguna regla de negocio? 
+        if(entity.getLoginCalificado().equals(entity.getLoginCalificador())||entity.getTipoCalificado().equals(entity.getTipoCalificador()))
+            throw new BusinessLogicException("El calificador debe ser diferente al calificado");
+        
 	return persistencia.update( entity );
     }
-//TODO: sobra
-    public void delete( CalificacionEntity entity ) throws BusinessLogicException {
-        LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Calificacion con id={0}", entity.getId() );
-        persistencia.delete( entity.getId() );
-        LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Calificacion con id={0}", entity.getId() );
+
+    public void delete( Long id ) {
+        if(persistencia.find(id)!=null){
+            LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Calificacion con id={0}", id );
+        
+            // TODO: Hay que validar que existe CalificacionEntity con ese id
+
+            persistencia.delete( id );
+            LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Calificacion con id={0}", id );
+        }
     }
-    public void delete( Long id ) throws BusinessLogicException {
-        LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Calificacion con id={0}", id );
-        // TODO: Hay que validar que existe CalificacionEntity con ese id
-        persistencia.delete( id );
-        LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Calificacion con id={0}", id );
-    }
+    
 }

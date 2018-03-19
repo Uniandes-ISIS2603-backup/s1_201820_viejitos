@@ -10,8 +10,6 @@ import co.edu.uniandes.csw.viejitos.dtos.EnfermeroDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.EnfermeroLogic;
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
-//TODO: borrrar lo q ue no se usa
-import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -29,7 +27,7 @@ import javax.ws.rs.core.Response;
 
 /**
  * <pre>Clase que implementa el recurso "Enfermero".
- * URL: /api/Enfermeros </pre>
+ * URL: /api/enfermeros </pre>
  * <p>
  * <h2>Anotaciones </h2>
  * <pre>
@@ -41,13 +39,13 @@ import javax.ws.rs.core.Response;
  * 200 OK Creó la nueva entidad de Viejito.
  * </code>
  * <code style="color: #c7254e; background-color: #f9f2f4;">
- * 412 Precodition Failed: Ya existe la entidad de Viejito.
+ * 412 Precodition Failed: Ya existe la entidad de Enfermero.
  * </code>
  * </pre>
  *
  * @author js.espitia
  */
-@Path("Enfermeros")
+@Path("enfermeros")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -57,10 +55,9 @@ public class EnfermeroResource {
     private EnfermeroLogic logic;
 
     /**
-     * <h1>POST /api/Enfermeros : Crear una entidad de Enfermero.</h1>
+     * <h1>POST /api/enfermeros : Crear una entidad de Enfermero.</h1>
      * <p>
-     * <
-     * pre>Cuerpo de petición: JSON {@link EnfermeroDetailDTO}.
+     * < pre>Cuerpo de petición: JSON {@link EnfermeroDTO}.
      * Crea una nueva entidad de Enfermero con la informacion que se recibe en el cuerpo
      * de la petición y se regresa un objeto identico con un id auto-generado
      * por la base de datos.
@@ -84,10 +81,9 @@ public class EnfermeroResource {
     }
 
     /**
-     * <h1>GET /api/Enfermeros : Obtener todas las entidadese de Enfermero.</h1>
+     * <h1>GET /api/enfermeros : Obtener todas las entidadese de Enfermero.</h1>
      * <p>
-     * <
-     * pre>Busca y devuelve todas las entidades de Enfermero que existen en la aplicacion.
+     * <pre>Busca y devuelve todas las entidades de Enfermero que existen en la aplicacion.
      *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
@@ -107,11 +103,10 @@ public class EnfermeroResource {
     }
 
     /**
-     * <h1>GET /api/Enfermeros/{id} : Obtener una entidad de Enfermeros por
+     * <h1>GET /api/enfermeros/{id} : Obtener una entidad de Enfermeros por
      * id.</h1>
      * <p>
-     * <
-     * pre>Busca la entidad de Enfermero con el login asociado recibido en la URL y la devuelve.
+     * <pre>Busca la entidad de Enfermero con el id asociado recibido en la URL y la devuelve.
      *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
@@ -122,26 +117,26 @@ public class EnfermeroResource {
      * </code>
      * </pre>
      *
-     * @param login el identificador que usa el enfermero
+     * @param id el identificador que usa el enfermero
      * @return JSON {@link EnfermeroDetailDTO} con la informacion de la entidad
      * enfermero
      */
     @GET
-    @Path("{login:[a-zA-Z][a-zA-Z0-9]*}")
-    public EnfermeroDetailDTO getEnfermero(@PathParam("login") String login) {
-        EnfermeroEntity entidad = logic.getByLogin(login);
+    @Path("{id:[0-9]*}")
+    public EnfermeroDetailDTO getEnfermero(@PathParam("id") Long id) {
+        EnfermeroEntity entidad = logic.getById(id);
         if (entidad == null) {
-            throw new WebApplicationException("No existe un enfermero identificado como " + login, 404);
+            throw new WebApplicationException("No existe un enfermero con id " + id, 404);
         }
         EnfermeroDetailDTO edto = new EnfermeroDetailDTO(entidad);
         return edto;
     }
 
     /**
-     * <h1>PUT /api/Enfermeros/{id} : Actualizar una entidad de Enfermero con el
+     * <h1>PUT /api/enfermeros/{id} : Actualizar una entidad de Enfermero con el
      * login dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link EnfermeroDetailDTO}.
-     * Actualiza la entidad de Enfermero con el login recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
+     * Actualiza la entidad de Enfermero con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
      *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
@@ -151,7 +146,7 @@ public class EnfermeroResource {
      * </code>
      * </pre>
      *
-     * @param login nombre de usuario del enfermero que se desea actualizar.Este
+     * @param id identificador del enfermero que se desea actualizar.Este
      * debe ser una cadena alfanumérica
      * @param dto {@link EnfermeroDetailDTO} La entidad de Enfermero que se
      * desea guardar.
@@ -159,27 +154,27 @@ public class EnfermeroResource {
      * guardada.
      */
     @PUT
-    @Path("{id:[a-zA-Z][a-zA-Z0-9]*}")
-    public EnfermeroDetailDTO updateEnfermero(@PathParam("login") String login, EnfermeroDetailDTO dto) {
-        EnfermeroEntity entity = dto.toEntity();
-        entity.setLogin(login);
-          //TODO: Este código está errado. A menos que haya un error de lógica en el constyructor, nunca se dsiaparará una exception.
-        // Se debe validar si existe y si no existe disparar WebApplicationException 
-      
-        try {
-            logic.update(entity);
-        } catch (BusinessLogicException e) {
-            throw new WebApplicationException(e.getMessage(), Response.Status.NOT_FOUND);
+    @Path("{id:[0-9]*}")
+    public EnfermeroDetailDTO updateEnfermero(@PathParam("id") Long id, EnfermeroDetailDTO dto) {
+        if(dto!=null){
+            EnfermeroEntity entity = dto.toEntity();
+            entity.setId(id);
+            //TODO: Este código está errado. A menos que haya un error de lógica en el constyructor, nunca se dsiaparará una exception.
+            // Se debe validar si existe y si no existe disparar WebApplicationException 
+            if(logic.getById(id) == null){
+                throw new WebApplicationException("No existe una entidad de Enfermero con el id\"" + id + "\"" ,404);
+            }
+           logic.update(entity);
+           
         }
         return dto;
     }
 
     /**
-     * <h1>DELETE /api/Enfermeros/{id} : Borrar una entidad de Enfermero por
+     * <h1>DELETE /api/enfermeros/{id} : Borrar una entidad de Enfermero por
      * login.</h1>
      * <p>
-     * <
-     * pre>Borra la entidad de Enfermero con el login asociado recibido en la URL.
+     * <pre>Borra la entidad de Enfermero con el id asociado recibido en la URL.
      *
      * Códigos de respuesta:<br>
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
@@ -189,14 +184,16 @@ public class EnfermeroResource {
      * </code>
      * </pre>
      *
-     * @param login nombre de usuario del enfermero que se desea borrar. Este
+     * @param id de usuario del enfermero que se desea borrar. Este
      * debe ser una cadena alfanumerica.
      * @throws BusinessLogicException {@link BusinessLogicException} si no
      * existe un enfermero con ese login
      */
     @DELETE
-    @Path("{login: \\d+}")
-    public void deleteEnfermero(@PathParam("login") String login) throws BusinessLogicException {
-        logic.delete(logic.getByLogin(login));
+    @Path("{id: \\d+}")
+    public void deleteEnfermero(@PathParam("id") Long id) throws BusinessLogicException {
+        if(logic.getById(id)==null)
+            throw new BusinessLogicException("No existe un enfermero con el id " + id);
+        logic.delete(id);
     }
 }

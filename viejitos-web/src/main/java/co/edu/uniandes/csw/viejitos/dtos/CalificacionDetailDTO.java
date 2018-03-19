@@ -65,8 +65,7 @@ public class CalificacionDetailDTO extends CalificacionDTO {
     @Override
     public CalificacionEntity toEntity() {
         CalificacionEntity entidad = super.toEntity();
-        if (entidad != null) { // TODO: No puede ser null porque la acaba de crear
-            //TODO: Hay que preguntar si this.servicio != null
+        if (servicio != null) {
             entidad.setServicio(servicio.toEntity());
         }
         return entidad;

@@ -58,18 +58,15 @@ public class EnfermeroLogic {
         return persistencia.findByLogin(login);
     }
 
-    public EnfermeroEntity update( EnfermeroEntity entity ) throws BusinessLogicException{
-        if( persistencia.findByLogin( entity.getLogin( ) ) != null ){
-            throw new BusinessLogicException( "Ya existe una entidad de Enfermero con el login \"" + entity.getLogin( ) + "\"" );
-	}
-	return persistencia.update( entity );
+    public EnfermeroEntity update( EnfermeroEntity entity ){
+        return persistencia.update( entity );
     }
 
-    public void delete( EnfermeroEntity entity ) throws BusinessLogicException {
-        //TODO: este método debe recibir un id y hay que validar que existe un EnfermeroEntity con ese id
-        LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Enfermero con id={0}", entity.getId( ) );
-        persistencia.delete( entity.getId() );
-        LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Enfermero con id={0}", entity.getId( ) );
+    public void delete( long id) throws BusinessLogicException {
+        LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Enfermero con id={0}", id );
+        
+        persistencia.delete( id );
+        LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Enfermero con id={0}", id );
     }
     
     

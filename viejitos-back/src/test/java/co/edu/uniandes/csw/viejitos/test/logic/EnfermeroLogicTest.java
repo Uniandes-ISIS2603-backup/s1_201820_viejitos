@@ -170,7 +170,7 @@ public class EnfermeroLogicTest {
     @Test
     public void deleteEnfermeroTest() throws BusinessLogicException{
         EnfermeroEntity entity = data.get(0);
-        logic.delete(entity);
+        logic.delete(entity.getId());
         EnfermeroEntity deleted = em.find(EnfermeroEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
