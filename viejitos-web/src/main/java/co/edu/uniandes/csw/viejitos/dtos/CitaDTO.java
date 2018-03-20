@@ -47,8 +47,6 @@ package co.edu.uniandes.csw.viejitos.dtos;
  */
 
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
-//TODO: Borrar lo que no se usa
-import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import java.util.Date;
 
 /**

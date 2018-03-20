@@ -67,15 +67,12 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *
  * @author l.pardo
  */
-//TODO: Borrar loq ue no se necesita
-import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
+
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 /**
