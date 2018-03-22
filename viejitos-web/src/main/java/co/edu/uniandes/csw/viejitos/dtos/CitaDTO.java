@@ -45,7 +45,7 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *
  * @author l.pardo
  */
-
+//TODO:DONE
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import java.util.Date;
 

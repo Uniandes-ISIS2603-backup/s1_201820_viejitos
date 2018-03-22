@@ -152,7 +152,20 @@ public class CitaLogicTest {
     @Test
     public void deleteCitaTest() {
         CitaEntity entity = data.get(0);
-        citaLogic.delete(entity);
+        if (citaLogic.getById(entity.getId()) != null) {
+            try {
+                citaLogic.delete(entity);
+            } catch (Exception e) {
+                Assert.fail("No deberia lanzar excepcion");
+            }
+        } else {
+            try {
+                citaLogic.delete(entity);
+                Assert.fail("Deberia lanzar excepcion");
+            } catch (Exception e) {
+
+            }
+        }
         CitaEntity deleted = em.find( CitaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }

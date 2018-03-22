@@ -14,6 +14,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -32,7 +33,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class MedicoLogicTest {
-     private PodamFactory factory = new PodamFactoryImpl();
+
+    private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private MedicoLogic medicoLogic;
@@ -54,7 +56,7 @@ public class MedicoLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     /**
      * Configuración inicial de la prueba.
      */
@@ -74,45 +76,59 @@ public class MedicoLogicTest {
             }
         }
     }
-    
-     /**
+
+    /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
         em.createQuery("delete from MedicoEntity").executeUpdate();
     }
-    
+
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
      */
     private void insertData() {
-        for (int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++) {
             MedicoEntity entity = factory.manufacturePojo(MedicoEntity.class);
             em.persist(entity);
             data.add(entity);
         }
     }
-    
+
     /**
      * Prueba para crear un Servicio
      */
-    @Test 
+    @Test
     public void createMedicoTest() throws BusinessLogicException {
-               PodamFactory factory = new PodamFactoryImpl();
+        PodamFactory factory = new PodamFactoryImpl();
         MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
-        MedicoEntity result = medicoLogic.create(newEntity);
+        MedicoEntity result = null;
+                result = medicoLogic.create(newEntity);
+                Assert.assertNotNull(result);
+        if (medicoLogic.getByLogin(newEntity.getLogin()) == null) {
+            try {
+                result = medicoLogic.create(newEntity);
+                Assert.assertNotNull(result);
+            } catch (Exception e) {
+                Assert.fail("No deberia lanzar excepcion");
+            }
+        } else {
+            try {
+                result = medicoLogic.create(newEntity);
+                Assert.fail("Deberia lanzar excepcion");
+            } catch (Exception e) {
 
-        Assert.assertNotNull(result);
+            }
+        }
 
         MedicoEntity entity = em.find(MedicoEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
-        
+
     }
-    
-     /**
+
+    /**
      * Prueba para consultar la lista de Servicios
      */
     @Test
@@ -129,7 +145,7 @@ public class MedicoLogicTest {
             Assert.assertTrue(found);
         }
     }
-    
+
     /**
      * Prueba para consultar un Servicio
      */
@@ -140,19 +156,54 @@ public class MedicoLogicTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }
-    
+
+    /**
+     * Prueba para consultar un Servicio
+     */
+    @Test
+    public void getMedicoByLoginTest() {
+        MedicoEntity entity = data.get(0);
+        MedicoEntity newEntity = medicoLogic.getByLogin(entity.getLogin());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+
+    /**
+     * Prueba para consultar un Servicio
+     */
+    @Test
+    public void getMedicoByNameTest() {
+        MedicoEntity entity = data.get(0);
+        MedicoEntity newEntity = medicoLogic.getByName(entity.getName());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+
     /**
      * Prueba para eliminar un Servicio
      */
     @Test
     public void deleteMedicoTest() {
         MedicoEntity entity = data.get(0);
-        medicoLogic.delete(entity);
-        MedicoEntity deleted = em.find( MedicoEntity.class, entity.getId());
+        if (em.find(MedicoEntity.class, entity.getId()) != null) {
+            try {
+                medicoLogic.delete(entity);
+            } catch (Exception e) {
+                Assert.fail("No deberia lanzar excepcion");
+            }
+        } else {
+            try {
+                medicoLogic.delete(entity);
+                Assert.fail("Deberia lanzar excepcion");
+            } catch (Exception e) {
+
+            }
+        }
+        MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
-     /**
+
+    /**
      * Prueba para actualizar un Servicio
      */
     @Test
@@ -163,34 +214,23 @@ public class MedicoLogicTest {
         MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
 
         newEntity.setId(entity.getId());
-        if(em.find(MedicoEntity.class, entity.getId())==null)
-        {
-            try
-            {
+        if (em.find(MedicoEntity.class, entity.getId()) == null) {
+            try {
                 medicoLogic.update(newEntity);
                 Assert.fail("Deberia lanzar excepcion");
+            } catch (Exception e) {
+
             }
-            catch(Exception e)
-            {
-                
-            }
-        }
-        else
-        {
-            try
-            {
+        } else {
+            try {
                 medicoLogic.update(newEntity);
-            }
-            catch(Exception e)
-            {
+            } catch (Exception e) {
                 Assert.fail("No deberia lanzar excepcion");
             }
             MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
-         
+
             Assert.assertEquals(newEntity.getId(), resp.getId());
         }
-    }   
-    
-
+    }
 
 }

@@ -32,6 +32,10 @@ public class MedicoLogic {
         // Verifica la regla de negocio que dice que no puede haber dos entidades de Cliente con el mismo login
         // Invoca la persistencia para crear la entidad de Cliente
         //TODO: No hay ninguna regla de negocio? 
+
+        if (persistence.findByLogin(entity.getLogin()) != null) {
+            throw new BusinessLogicException("Ya existe un médico con el login " + entity.getLogin());
+        }
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de entidad de Medico");
         return entity;
@@ -48,6 +52,14 @@ public class MedicoLogic {
         return persistence.find(id);
     }
 
+    public MedicoEntity getByLogin(String login) {
+        return persistence.findByLogin(login);
+    }
+
+    public MedicoEntity getByName(String name) {
+        return persistence.findByName(name);
+    }
+
     public MedicoEntity update(MedicoEntity entity) throws BusinessLogicException {
         if (persistence.find(entity.getId()) == null) {
             throw new BusinessLogicException("No existe una entidad de Medico con el id \"" + entity.getId() + "\"");
@@ -56,9 +68,12 @@ public class MedicoLogic {
         return persistence.update(entity);
     }
 
-    public void delete(MedicoEntity entity) {
+    public void delete(MedicoEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Medico con id={0}", entity.getId());
         //TODO: este método debe recibir un id y hay que validar que existe un MedicoEntity con ese id
+        if (persistence.find(entity.getId()) == null) {
+            throw new BusinessLogicException("No existe una entidad de Medico con el id \"" + entity.getId() + "\"");
+        }
         persistence.delete(entity.getId());
         LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Medico con id={0}", entity.getId());
     }

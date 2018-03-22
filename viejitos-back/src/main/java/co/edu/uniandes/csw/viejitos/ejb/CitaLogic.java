@@ -58,9 +58,13 @@ public class CitaLogic {
         return persistence.update(entity);
     }
 
-    public void delete(CitaEntity entity) {
+    public void delete(CitaEntity entity) throws BusinessLogicException {
         //TODO: este método debe recibir un id y hay que validar que existe un CitaEntity con ese id
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Cita con id={0}", entity.getId());
+        if(persistence.find(entity.getId())==null)
+        {
+             throw new BusinessLogicException("No existe una entidad de Medico con el id \"" + entity.getId() + "\"");
+        }
         persistence.delete(entity.getId());
         LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Cita con id={0}", entity.getId());
     }
