@@ -101,14 +101,10 @@ public class EnfermeroPersistence
 
 	public EnfermeroEntity update( EnfermeroEntity entity )
 	{
+                LOGGER.log(Level.INFO, "Actualizando Enfermero con id={0}", entity.getId());
 		return em.merge( entity );
 	}
-
-	public void delete( EnfermeroEntity entity )
-	{
-		em.remove( entity );
-	}
-        
+//        
         public void delete (Long id){
                LOGGER.log(Level.INFO, "Borrando Enfermero con id={0}", id);
                 EnfermeroEntity entity = em.find(EnfermeroEntity.class, id);

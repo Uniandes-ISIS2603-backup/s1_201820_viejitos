@@ -10,8 +10,6 @@ import co.edu.uniandes.csw.viejitos.dtos.CalificacionDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.CalificacionLogic;
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
-//TODO: Borrar lo que no se usa
-import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.viejitos.persistence.CalificacionPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,9 +74,9 @@ public class CalificacionResource {
      * @throws WebApplicationException {@link WebApplicationException} si falla alguna regla de negocio
      */
     @POST
-    public CalificacionDTO createCalificacion(CalificacionDTO dto) throws BusinessLogicException {
+    public CalificacionDTO createCalificacion(CalificacionDTO dto){
         try {
-        logic.create(dto.toEntity());
+            logic.create(dto.toEntity());
         } catch (BusinessLogicException ex) {
             throw new WebApplicationException(ex.getMessage(), 412);
         }
@@ -130,10 +128,8 @@ public class CalificacionResource {
      * existe
      */
     @GET
-    @Path("{id:[0-9]*}")
+    @Path("{id: \\d+}")
     public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) throws WebApplicationException {
-        //TODO: Este código está errado. A menos que haya un error de lógica en el constyructor, nunca se dsiaparará una exception.
-        // Se debe validar si existe y si no existe disparar WebApplicationException 
         CalificacionEntity calif = logic.getById(id);
         if (calif != null) {
             return new CalificacionDetailDTO(calif);
@@ -172,8 +168,8 @@ public class CalificacionResource {
      * porque ya existe una con ese nombre.
      */
     @PUT
-    @Path("{id:[0-9]*}")
-    public CalificacionDetailDTO updateCalificacion(@PathParam("id") Long id, CalificacionDetailDTO dto) throws WebApplicationException {
+    @Path("{id: \\d+}")
+    public CalificacionDetailDTO updateCalificacion(@PathParam("id") Long id, CalificacionDetailDTO dto) {
         if(logic.getById(id) == null){
                 throw new WebApplicationException("No existe una entidad de Calificacion con el ID \"" + id + "\"" ,404);
         }
@@ -216,7 +212,6 @@ public class CalificacionResource {
         //TODO: primero hay que validar que es una calificaicón válida
         if(logic.getById(id)==null)
             throw new WebApplicationException("No existe una calificacion con el id = " + id, 404);
-        else
-            logic.delete(id);
+        logic.delete(id);
     }
 }

@@ -58,11 +58,14 @@ public class EnfermeroLogic {
         return persistencia.findByLogin(login);
     }
 
-    public EnfermeroEntity update( EnfermeroEntity entity ){
+    public EnfermeroEntity update( EnfermeroEntity entity ) throws BusinessLogicException{
+        if (persistencia.findByLogin(entity.getLogin()) != null) {
+            throw new BusinessLogicException("No existe una entidad de Enfermero con el login \"" + entity.getLogin() + "\"");
+        }
         return persistencia.update( entity );
     }
 
-    public void delete( long id) throws BusinessLogicException {
+    public void delete( long id) {
         LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Enfermero con id={0}", id );
         
         persistencia.delete( id );

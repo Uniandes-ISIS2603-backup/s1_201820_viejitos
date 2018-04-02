@@ -124,7 +124,8 @@ public class EnfermeroDetailDTO extends EnfermeroDTO {
     public EnfermeroEntity toEntity() {
         EnfermeroEntity entidad = super.toEntity();
         //TODO: this.calendar puede ser null
-        entidad.setCalendario(this.calendar.toEntity());
+        if(this.calendar!=null)
+            entidad.setCalendario(this.calendar.toEntity());
         List<CalificacionEntity> cals = new ArrayList<>();
         for (CalificacionDTO actual : calificaciones) {
             cals.add(actual.toEntity());

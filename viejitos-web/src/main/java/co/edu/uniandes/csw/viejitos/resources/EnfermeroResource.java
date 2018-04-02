@@ -23,7 +23,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 
 /**
  * <pre>Clase que implementa el recurso "Enfermero".
@@ -57,7 +56,7 @@ public class EnfermeroResource {
     /**
      * <h1>POST /api/enfermeros : Crear una entidad de Enfermero.</h1>
      * <p>
-     * < pre>Cuerpo de petición: JSON {@link EnfermeroDTO}.
+     * <pre>Cuerpo de petición: JSON {@link EnfermeroDTO}.
      * Crea una nueva entidad de Enfermero con la informacion que se recibe en el cuerpo
      * de la petición y se regresa un objeto identico con un id auto-generado
      * por la base de datos.
@@ -75,9 +74,14 @@ public class EnfermeroResource {
      * su id correspondiente
      */
     @POST
-    public EnfermeroDTO createEnfermero(EnfermeroDTO enfermero) throws BusinessLogicException {
-        logic.create(enfermero.toEntity());
-        return enfermero;
+    public EnfermeroDTO createEnfermero(EnfermeroDTO enfermero)  {
+        
+        try {
+            logic.create(enfermero.toEntity());
+            return enfermero;
+        } catch (BusinessLogicException ex) {
+            throw new WebApplicationException(ex.getMessage(), 412);
+        }
     }
 
     /**
@@ -122,7 +126,7 @@ public class EnfermeroResource {
      * enfermero
      */
     @GET
-    @Path("{id:[0-9]*}")
+    @Path("{id: \\d+}")
     public EnfermeroDetailDTO getEnfermero(@PathParam("id") Long id) {
         EnfermeroEntity entidad = logic.getById(id);
         if (entidad == null) {
@@ -154,7 +158,7 @@ public class EnfermeroResource {
      * guardada.
      */
     @PUT
-    @Path("{id:[0-9]*}")
+    @Path("{id: \\d+}")
     public EnfermeroDetailDTO updateEnfermero(@PathParam("id") Long id, EnfermeroDetailDTO dto) {
         if(dto!=null){
             EnfermeroEntity entity = dto.toEntity();
@@ -164,8 +168,11 @@ public class EnfermeroResource {
             if(logic.getById(id) == null){
                 throw new WebApplicationException("No existe una entidad de Enfermero con el id\"" + id + "\"" ,404);
             }
-           logic.update(entity);
-           
+            try {
+                logic.update(entity);
+            } catch (BusinessLogicException ex) {
+                throw new WebApplicationException(ex.getMessage(), 404);
+            }
         }
         return dto;
     }
@@ -186,14 +193,12 @@ public class EnfermeroResource {
      *
      * @param id de usuario del enfermero que se desea borrar. Este
      * debe ser una cadena alfanumerica.
-     * @throws BusinessLogicException {@link BusinessLogicException} si no
-     * existe un enfermero con ese login
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteEnfermero(@PathParam("id") Long id) throws BusinessLogicException {
+    public void deleteEnfermero(@PathParam("id") Long id) {
         if(logic.getById(id)==null)
-            throw new BusinessLogicException("No existe un enfermero con el id " + id);
+            throw new WebApplicationException("No existe un enfermero con el id " + id, 404);
         logic.delete(id);
     }
 }
