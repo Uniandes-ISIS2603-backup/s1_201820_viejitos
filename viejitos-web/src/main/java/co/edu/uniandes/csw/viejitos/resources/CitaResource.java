@@ -161,7 +161,7 @@ public class CitaResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteCita(@PathParam("id") Long id) {
+    public void deleteCita(@PathParam("id") Long id) throws BusinessLogicException {
         CitaEntity e = logic.getById(id);
         if (e == null) {
             throw new WebApplicationException("El recurso /citas/" + id + " no existe.", 404);

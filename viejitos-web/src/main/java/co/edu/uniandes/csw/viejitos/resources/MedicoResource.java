@@ -163,12 +163,14 @@ public class MedicoResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteMedico(@PathParam("id") Long id) {
+    public void deleteMedico(@PathParam("id") Long id) throws BusinessLogicException {
 
         MedicoEntity e = logic.getById(id);
         if (e == null) {
             throw new WebApplicationException("El recurso /medicos/" + id + " no existe.", 404);
         }
-        logic.delete(e);
+        
+         logic.delete(e);
+        
     }
 }
