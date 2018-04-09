@@ -39,7 +39,23 @@ public class FranjaHorariaLogic {
         return franjas;
 
     }
+    
+     /**
+     * Obtiene la franja cuya id es la dada y cuyo calendario es el que tiene la otra id dada.
+     *@param  id
+     * @param idCalendario 
+     * @return  Instancia de FranjaHorariaEntity con los datos de la franja consultada
+     */
+    public FranjaHorariaEntity getFranjaByCalendario(Long id,Long idCalendario) {
+        String msg="Inicia proceso de consultar franja con id=" +id +"y cuyo calendario es el que tiene id="+idCalendario;
+LOGGER.log(Level.INFO, msg);
+FranjaHorariaEntity franja = persistencia.findByCalendario(id,idCalendario);
+        LOGGER.info("Termina proceso de consultar todas los franjas");
+        return franja;
 
+    }
+
+    
     /**
      * Obtiene los datos de una instancia de FranjaHoraria a partir de su ID.
      *
@@ -64,12 +80,21 @@ public class FranjaHorariaLogic {
      *
      * @param entity Objeto de FranjaHorariaEntity con los datos nuevos
      * @return Objeto de FranjaHorariaEntity con los datos nuevos y su ID.
+     * @ throws BusinessLogicException si la id ya existe.
      */
-    public FranjaHorariaEntity create(FranjaHorariaEntity entity) {
+    public FranjaHorariaEntity create(FranjaHorariaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de una entidad de franja");
-        // Verifica la regla de negocio que dice que no puede haber dos franjas Horarias 
 
-//TODO: No hay ninguna regla de negocio? 
+//TODO:DONE. No hay ninguna regla de negocio? .revisar que no existe la id y ya, PORQUE las reglas se revisan cuando 
+//se intenta añadir una franja a un calendairo
+        if(entity!=null&&this.getFranja(entity.getId())!=null)
+        {
+        throw new BusinessLogicException("Ya existe la franja a crear o por lo menos su id ya esta en uso");
+        }
+        if(entity==null)
+        {
+          throw new BusinessLogicException("la entidad proporcionada no sirve");
+         }
         persistencia.create(entity);
         LOGGER.info("Termina proceso de creación de entidad franja horaria");
         return entity;
@@ -80,11 +105,22 @@ public class FranjaHorariaLogic {
      *
      * @param entity Instancia de FranjaHorariaEntity con los nuevos datos.
      * @return Instancia de FranjaHorariaEntity con los datos actualizados.
+     * throws BusinessLogicException si la franja todavia no se ha creado.
      */
-    public FranjaHorariaEntity updateFranja(FranjaHorariaEntity entity) {
+    public FranjaHorariaEntity updateFranja(FranjaHorariaEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar una franja ");
 
-//TODO: No hay ninguna regla de negocio? 
+//TODO:DONE No hay ninguna regla de negocio? (solo la mas basica)
+         if(entity!=null&&this.getFranja(entity.getId())==null)
+        {
+        throw new BusinessLogicException("NO existe la franja a modificar");
+        }
+        if(entity==null)
+        {
+          throw new BusinessLogicException("la entidad proporcionada no sirve");
+         }
+
+
         return persistencia.update(entity);
     }
 
@@ -93,13 +129,19 @@ public class FranjaHorariaLogic {
      *
      * @param id Identificador de la instancia a eliminar.
      */
-    public void deleteFranja(FranjaHorariaEntity entity) {
-        Long id = entity.getId(); //TODO: para qué sirve está línea?
-        //TODO: este método debe recibir un id y hay que validar que existe un FranjaHorariaEntity con ese id
-
+    public void deleteFranja(Long id) 
+    {
+      //TODO DONE(BORRADO LA OBTENCION DE LA ID): para qué sirve está línea?
+        //TODO:DONE este método debe recibir un id y hay que validar que existe un FranjaHorariaEntity con ese id
+      
+        if(id!=null&&getFranja(id)!=null )
+    {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar franja con id={0}", id);
-        persistencia.delete(entity.getId());
+     
+        persistencia.delete(id);
         LOGGER.log(Level.INFO, "Termina proceso de borrar franja con id={0}", id);
+    }
+    
     }
 
 }
