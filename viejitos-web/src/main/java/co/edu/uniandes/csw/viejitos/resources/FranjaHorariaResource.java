@@ -26,7 +26,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 /**
  * <pre>Clase que implementa el recurso "franjaHoraria".
- * URL: /api/franjashorarias
+ * URL: calendariossemanalaes/{idCalendario}/api/franjashorarias
  * </pre>
  * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
  * este recurso tiene la ruta "franjashorarias".</i>
@@ -40,8 +40,9 @@ import javax.ws.rs.core.MediaType;
  * @author lf.naranjo11  
  * @version 1.0
  */
-//TODO: Revisar el path para llegar a este recurso
- @Path("/franjashorarias")
+//TODO:done Revisar el path para llegar a este recurso
+
+ @Path("calendarios/{idCalendario: \\d+}/franjashorarias")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
@@ -51,7 +52,7 @@ public class FranjaHorariaResource {
    private FranjaHorariaLogic franjaLogic;
     
      /**
-	 * <h1>POST /api/franjashorarias : Crear una entidad de FranjaHoraria.</h1>
+	 * <h1>POST /api/calendariossemanales/{idCalendario}/franjashorarias : Crear una entidad de FranjaHoraria.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link FranjaHorariaDTO}.
 	 *
 	 * Crea una nueva entidad de franjaHoraria con la informacion que se recibe en el cuerpo
@@ -69,13 +70,13 @@ public class FranjaHorariaResource {
 	 * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la entidad de franja.
 	 */
 	@POST
-	public FranjaHorariaDTO createFranjaHoraria( FranjaHorariaDTO dto ) throws BusinessLogicException
+	public FranjaHorariaDTO createFranjaHoraria( FranjaHorariaDTO dto,@PathParam("idCalendario")Long idCalendario ) throws BusinessLogicException
 	{
 		  return new FranjaHorariaDTO(franjaLogic.create(dto.toEntity()));
 	}
         
         /**
-	 * <h1>GET /api/franjashorarias : Obtener todas las entidades de franja horaria correspondientes a un calendario semanal.</h1>
+	 * <h1>GET /api/calendariossemanales/{idCalendario}/franjashorarias : Obtener todas las entidades de franja horaria correspondientes a un calendario semanal.</h1>
 	 * <pre>Busca y devuelve todas las entidades de franja que se relacion a un calendariosemanal.
           * Codigos de respuesta:
         * <code style="color: mediumseagreen; background-color: #eaffe0;">
@@ -84,7 +85,7 @@ public class FranjaHorariaResource {
 	 * @return JSONArray {@link FranjaHorariaDTO} - Las entidades de franja horaria encontradas en la aplicación.
 	 */
 	@GET
-	public List<FranjaHorariaDTO> getFranjasHorarias( )
+	public List<FranjaHorariaDTO> getFranjasHorarias(@PathParam("idCalendario")Long idCalendario )
 	{
           List<FranjaHorariaEntity> franjasE =franjaLogic.getFranjas();
 		List<FranjaHorariaDTO> franjas= new ArrayList<>();
@@ -98,7 +99,7 @@ public class FranjaHorariaResource {
         
         
         /**
-            * <h1>GET /api/franjashorarias/{id} : Obtener una entidad de franja Horaria por id.</h1>
+            * <h1>GET /api/calendariossemanales/{idCalendario}/franjashorarias/{id} : Obtener una entidad de franja Horaria por id.</h1>
 	 * <pre>Busca la entidad de franja horaria con el id asociado recibido en la URL y la devuelve.
 	 * Codigos de respuesta:
         * <code style="color: mediumseagreen; background-color: #eaffe0;">
@@ -114,7 +115,7 @@ public class FranjaHorariaResource {
          */
 	@GET
 	@Path( "{id: \\d+}" )
-	public FranjaHorariaDTO getFranja( @PathParam( "id" ) Long id )
+	public FranjaHorariaDTO getFranja( @PathParam( "id" ) Long id,@PathParam("idCalendario")Long idCalendario )
 	{
              FranjaHorariaEntity entity = franjaLogic.getFranja(id);
         if (entity == null) {
@@ -126,7 +127,7 @@ public class FranjaHorariaResource {
         
       
       /**
-       * <h1> PUT api/franjashorarias/{id}: actualizar la franja con el id dado</h1>
+       * <h1> PUT /api/calendariossemanales/{idCalendario}/franjashorarias/{id}: actualizar la franja con el id dado</h1>
      * <pre>Cuerpo de peticion: JSON {@link FranjaHorariaDTO}.
      * 
      * Actualiza la franja con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
@@ -142,10 +143,11 @@ public class FranjaHorariaResource {
      * @param franja {@link FranjaHorariaDTO} La franja que se desea guardar.
      * @return JSON {@link FranjaHorariaDTO} - La franja guardada.
      * @throws WebAplicationException {@link co.edu.uniandes.csw.viejitos.mappers.WebApplicationExceptionMapper} - Error de lógica que se genera al no poder actualizar la franaja porque ya existe una con ese nombre.
-     */
+    *@throws BusinessLogicException-error en la logica.
+    */
         @PUT
         @Path ("{id: \\d+}")
-        public FranjaHorariaDTO updateFranja(@PathParam("id") Long id, FranjaHorariaDTO franja) throws WebApplicationException
+        public FranjaHorariaDTO updateFranja(@PathParam("id") Long id, FranjaHorariaDTO franja, @PathParam("idCalendario")Long idCalendario) throws WebApplicationException, BusinessLogicException
         {
            FranjaHorariaEntity newEntity= franja.toEntity();
            FranjaHorariaEntity entity = franjaLogic.getFranja(id);
@@ -158,7 +160,7 @@ public class FranjaHorariaResource {
         }
  
                 /**
-	 * <h1>DELETE /api/franjashorarias/{id} : Borrar una entidad de franja por id.</h1>
+	 * <h1>DELETE /api/calendariossemanales/{idCalendario}/franjashorarias/{id} : Borrar una entidad de franja por id.</h1>
 	 
 	 * <pre>Borra la entidad de franja con el id asociado recibido en la URL.
          * * Códigos de respuesta:<br>
@@ -174,13 +176,13 @@ public class FranjaHorariaResource {
 	 */
 	@DELETE
 	@Path( "{id: \\d+}" )
-	public void deleteFranjaHoraria( @PathParam( "id" ) Long id )
+	public void deleteFranjaHoraria( @PathParam( "id" ) Long id,@PathParam("idCalendario")Long idCalendario )
 	{
        FranjaHorariaEntity entity = franjaLogic.getFranja(id);
         if (entity == null) {
             throw new WebApplicationException("la franja no existe", 404);
         }
-        franjaLogic.deleteFranja(entity);	
+        franjaLogic.deleteFranja(id);	
             
 // Void
 	}
