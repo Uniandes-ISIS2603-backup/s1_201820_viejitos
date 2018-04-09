@@ -213,7 +213,7 @@ public class FranjaHorariaLogicTest {
     public void testDeleteFranja() throws Exception {
         
           FranjaHorariaEntity entity = data.get(0);
-        franjaHorariaLogic.deleteFranja(entity);
+        franjaHorariaLogic.deleteFranja(entity.getId());
         FranjaHorariaEntity deleted = em.find(FranjaHorariaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
