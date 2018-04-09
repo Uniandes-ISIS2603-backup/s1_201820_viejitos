@@ -66,6 +66,16 @@ public class FranjaHorariaPersistence {
   
     }
     
+    public FranjaHorariaEntity findByCalendario(Long id,Long idCalendario)
+        {
+            
+
+          String msg="buscando franja  con id="+id+"y que se supone en el calendario con id"+idCalendario;
+          LOGGER.log(Level.INFO,msg);
+          TypedQuery<FranjaHorariaEntity> q = em.createQuery("select u from FranjaHorariaEntity where (u.id= :id) and (u.calendario.id= :idCalendario)",FranjaHorariaEntity.class);
+                return q.getSingleResult();
+        }
+    
     public void delete(Long id)
     {
         LOGGER.log(Level.INFO,"Borrando franja con id={0}",id);
