@@ -5,9 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.dtos;
 
-//TODO: Borrar lo que no se usa
+//TODO:DONE Borrar lo que no se usa
 import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
-import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
 import java.util.ArrayList;
 import java.util.List;
