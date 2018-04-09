@@ -69,10 +69,13 @@ public class FacturaDetailDTO extends FacturaDTO {
      * @param entity
      */
     public FacturaDetailDTO(FacturaEntity entity) {
-        super(); //TODO: hay que enviarle el entity
-        //TODO: primero preguntar si entity!= null
-        if (entity.getServicio() != null) {
-            this.servicio = new ServicioDTO(entity.getServicio());
+        super(entity); //TODO: DONE hay que enviarle el entity
+        //TODO: DONE primero preguntar si entity!= null
+        if(entity != null)
+        {
+            if (entity.getServicio() != null) {
+                this.servicio = new ServicioDTO(entity.getServicio());
+            }
         }
     }
 
