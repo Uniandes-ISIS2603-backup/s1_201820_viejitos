@@ -35,7 +35,7 @@ import java.util.Date;
  * @author lf.naranjo11
  */
 
-//TODO: Completar y Revisar la documentación proque es un copy/paste de franja
+//TODO:DONE Completar y Revisar la documentación proque es un copy/paste de franja
 public class CalendarioSemanalDTO {
 
     private Long id;
@@ -56,14 +56,14 @@ public class CalendarioSemanalDTO {
     }
 
     /**
-     * @return la id de franja horaria
+     * @return la id del calendario semanal.
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param pId la nueva hora de finalizacion de la franja
+     * @param pId la nueva id del calendario semanal.
      */
     public void setid(Long pId) {
         id = pId;
@@ -81,9 +81,17 @@ public class CalendarioSemanalDTO {
 
     }
 
-    public CalendarioSemanalDTO() {
+    /**
+     * constructor vacio
+    */
+    public CalendarioSemanalDTO()
+    {
     }
 
+    /**
+     * transforma el objeto de calendariosemanaldto en entidad
+     * @return la entidad de calendario semanal que equivale al DTO actual
+     */
     public CalendarioSemanalEntity toEntity() {
         CalendarioSemanalEntity entity = new CalendarioSemanalEntity();
         entity.setId(this.getId());
