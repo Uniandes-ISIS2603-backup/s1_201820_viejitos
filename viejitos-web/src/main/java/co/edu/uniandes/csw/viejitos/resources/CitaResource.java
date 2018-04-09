@@ -31,7 +31,7 @@ import javax.ws.rs.WebApplicationException;
  * @author l.pardo
  */
 
-//TODO: Revisar el path para llegar a este recurso
+//TODO: DONE (se creo MedicosCitasResource)
 @Path("citas")
 @Produces("application/json")
 @Consumes("application/json")
