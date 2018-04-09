@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.ejb;
 
+import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.MedicoPersistence;
@@ -80,5 +81,86 @@ public class MedicoLogic {
         }
         persistence.delete(entity.getId());
         LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Medico con id={0}", entity.getId());
+    }
+    
+        /**
+     * Obtiene una colección de instancias de CitaEntity asociadas a una
+     * instancia de Medico
+     *
+     * @param medicoId Identificador de la instancia de Medico
+     * @return Colección de instancias de CitaEntity asociadas a la instancia
+     * de Medico
+     * 
+     */
+    public List<CitaEntity> listCitas(Long medicoId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los autores del libro con id = {0}", medicoId);
+        return getById(medicoId).getCitas();
+    }
+
+    /**
+     * Obtiene una instancia de CitaEntity asociada a una instancia de Medico
+     *
+     * @param medicoId Identificador de la instancia de Medico
+     * @param citaId Identificador de la instancia de Cita
+     * @return La entidad del Cita asociada al medico
+     */
+    public CitaEntity getCita(Long medicoId, Long citaId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar una cita del medico con id = {0}", medicoId);
+        List<CitaEntity> list = getById(medicoId).getCitas();
+        CitaEntity citaEntity = new CitaEntity();
+        citaEntity.setId(citaId);
+        int index = list.indexOf(citaEntity);
+        if (index >= 0) {
+            return list.get(index);
+        }
+        return null;
+    }
+
+    /**
+     * Asocia una Cita existente a un Medico
+     *
+     * @param medicoId Identificador de la instancia de Book
+     * @param citaId Identificador de la instancia de Author
+     * @return Instancia de AuthorEntity que fue asociada a Book
+     * 
+     */
+    public CitaEntity addCita(Long medicoId, Long citaId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de asociar una cita al medico con id = {0}", medicoId);
+        MedicoEntity medicoEntity = getById(medicoId);
+        CitaEntity citaEntity = new CitaEntity();
+        citaEntity.setId(citaId);
+        medicoEntity.getCitas().add(citaEntity);
+        return getCita( medicoId,  citaId);
+    }
+
+    /**
+     * Remplaza las instancias de Citas asociadas a una instancia de Medico
+     *
+     * @param medicoId Identificador de la instancia de Book
+     * @param list Colección de instancias de CitaEntity a asociar a instancia
+     * de Medico
+     * @return Nueva colección de CitaEntity asociada a la instancia de Book
+     * 
+     */
+    public List<CitaEntity> replaceCitas(Long medicoId, List<CitaEntity> list) {
+        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar un autor del libro con id = {0}", medicoId);
+        MedicoEntity medicoEntity = getById(medicoId);
+        medicoEntity.setCitas(list);
+        return medicoEntity.getCitas();
+    }
+
+    /**
+     * Desasocia un Author existente de un Book existente
+     *
+     * @param bookId Identificador de la instancia de Book
+     * @param authorsId Identificador de la instancia de Author
+     * 
+     */
+    public void removeCita(Long medicoId, Long citaId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar un autor del libro con id = {0}", medicoId);
+        MedicoEntity entity = getById(medicoId);
+        CitaEntity citaEntity = new CitaEntity();
+        citaEntity.setId(citaId);
+        entity.getCitas().remove(citaEntity);
     }
 }
