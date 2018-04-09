@@ -61,5 +61,5 @@ public class CalendarioSemanalPersistence {
         CalendarioSemanalEntity entity = em.find(CalendarioSemanalEntity.class, id);
         em.remove(entity);
     }
-    
+                
 }
