@@ -5,12 +5,11 @@
  */
 package co.edu.uniandes.csw.viejitos.ejb;
 
-//TODO: Borrar lo que no se utilice
+//TODO:DONE Borrar lo que no se utilice
 import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
 import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.CalendarioSemanalPersistence;
-import co.edu.uniandes.csw.viejitos.persistence.FranjaHorariaPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,14 +65,28 @@ public class CalendarioSemanalLogic {
 
     /**
      * Se encarga de crear un calendario en la base de datos.
-     *
+     *Se debe verificar que no existe un calendario con el id
      * @param entity Objeto de calendarioEntity con los datos nuevos
      * @return Objeto de CalendarioSemanalEntity con los datos nuevos y su ID.
+     * @throws  BusinessLogicException si ya existe el calendario
      */
-    public CalendarioSemanalEntity createCalendario(CalendarioSemanalEntity entity) {
+    public CalendarioSemanalEntity createCalendario(CalendarioSemanalEntity entity) throws BusinessLogicException {
 
-        //TODO: validar regla de negocio.
-        return persistencia.create(entity);
+          CalendarioSemanalEntity ent=null;
+        //TODO :DONE validar regla de negocio.
+        if(entity!=null&&persistencia.find(entity.getId())!=null)
+       {
+            throw new  BusinessLogicException("el id no es valido"); 
+        }  
+        else if(entity==null)
+        {
+        throw new  BusinessLogicException("la entidad es nula"); 
+        }
+        else
+        {
+      ent=persistencia.create(entity);
+        }
+         return ent;
     }
 
     /**
@@ -81,11 +94,27 @@ public class CalendarioSemanalLogic {
      *
      * @param entity Instancia de CalendarioSemanalEntity con los nuevos datos.
      * @return Instancia de CalendarioSemanalEntity con los datos actualizados.
+     * @throws BussinesLogicException si el calendario no existe en la base de dato
      */
-    public CalendarioSemanalEntity updateCalendario(CalendarioSemanalEntity entity) {
+    public CalendarioSemanalEntity updateCalendario(CalendarioSemanalEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar un calendario ");
-        //TODO: validar regla de negocio.
-        return persistencia.update(entity);
+        //TODO:DONE validar regla de negocio.
+           CalendarioSemanalEntity ent=null;
+        //TODO :DONE validar regla de negocio.
+        if(entity!=null&&persistencia.find(entity.getId())==null)
+       {
+            throw new  BusinessLogicException("el id no es valido. no se puede modificar porque no existe aun"); 
+        }  
+        else if(entity==null)
+        {
+        throw new  BusinessLogicException("la entidad es nula"); 
+        }
+        else
+        {
+      ent= persistencia.update(entity);
+        }
+         return ent;
+    
 
     }
 
@@ -96,11 +125,21 @@ public class CalendarioSemanalLogic {
      * @param calendarioId Identificador de la instancia de calendario
      * @return Colección de instancias de FranjaHorariaEntity asociadas a la
      * instancia de CalendarioSemanal
+     @throws BusinessLogicException Si la franja ya existe en otro calendario
+     * o si la franja no cabe en el calendario actual
      */
-    public List<FranjaHorariaEntity> listFranjas(Long calendarioId) {
+    public List<FranjaHorariaEntity> listFranjas(Long calendarioId)  throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos las franjas  del calendario con id = {0}", calendarioId);
-        //TODO: QUé pasa si calendarioId no existe? Arrojaría un NullPointerException
+        //TODO DONE: QUé pasa si calendarioId no existe? Arrojaría un NullPointerException
+      if(calendarioId!=null)
+          {
         return getCalendario(calendarioId).getFranjas();
+    
+          }
+      else
+          {
+          throw new BusinessLogicException("se necesita prporcionar una id");
+          }
     }
 
     /**
@@ -113,19 +152,26 @@ public class CalendarioSemanalLogic {
      */
     public FranjaHorariaEntity getFranja(Long franjaId, Long calendarioId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar una franja con id = {0}", franjaId);
-        //TODO: Esto hay que remplazarlo por un query en la BD
+        //TODO:DONE(duda en la sentencia) Esto hay que remplazarlo por un query en la BD
+  
+      franjaLogic.getFranjaByCalendario(franjaId,calendarioId );
+      
+      
         List<FranjaHorariaEntity> list = getCalendario(calendarioId).getFranjas();
         FranjaHorariaEntity franjaEntity = new FranjaHorariaEntity();
         franjaEntity.setId(franjaId);
         int index = list.indexOf(franjaEntity);
-        if (index >= 0) {
+        if (index >= 0)
+        {
             return list.get(index);
         }
         return null;
+        
     }
 
     /**
-     * sirve para reasignar a otro calendario una franja.
+     * sirve para reasignar a otro calendario una franja.revisa la regla de negocio 
+     * que dice que no se pueden sobrelapar horarios en el mismo calendario.
      * <pre>la franja ya fue creada, el calendario ya fue creado
      * </pre>
      *
@@ -137,7 +183,7 @@ public class CalendarioSemanalLogic {
      *
      */
     
-    //TODO: Darle una doble revisada a este código complicado
+    //TODO:DONE Darle una doble revisada a este código complicado
     public FranjaHorariaEntity addFranja(Long franjaId, Long calendarioId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de agregar una franja con id = {0}", calendarioId);
         FranjaHorariaEntity entityF = franjaLogic.getFranja(franjaId);
@@ -184,7 +230,7 @@ public class CalendarioSemanalLogic {
             lista.remove(index);
             ent.setFranjas(lista);
             persistencia.update(ent);
-            franjaLogic.deleteFranja(franjaEntity);
+            franjaLogic.deleteFranja(franjaEntity.getId());
 
         }
 
@@ -194,12 +240,19 @@ public class CalendarioSemanalLogic {
      * Elimina una instancia de CalendarioSemanal de la base de datos.
      *
      * @param id Identificador de la instancia a eliminar.
+     * @throws BusinessLogicException cuando noe existe el calendario a eliminar
      */
-    public void deleteCalendario(CalendarioSemanalEntity entity) {
-        // TODO: Hay que validar que existe CalendarioSemanalEntity con ese id
+    public void deleteCalendario(CalendarioSemanalEntity entity) throws BusinessLogicException {
+        // TODO:DONE Hay que validar que existe CalendarioSemanalEntity con ese id
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de calendario con id={0}", entity.getId());
-        
+        if(entity!=null &&getCalendario(entity.getId())!=null)
+        {   
         persistencia.delete(entity.getId());
+       }
+        else
+            {
+            throw new BusinessLogicException("no se puede borrar un calendario que no existe en la base de datos");
+            }
         LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de calendario con id={0}", entity.getId());
     }
 
