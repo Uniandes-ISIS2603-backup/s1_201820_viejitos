@@ -64,8 +64,11 @@ public class MedicoLogic {
         if (persistence.find(entity.getId()) == null) {
             throw new BusinessLogicException("No existe una entidad de Medico con el id \"" + entity.getId() + "\"");
         }
-        
-        //TODO: No hay ninguna regla de negocio? 
+        if(persistence.findByLogin(entity.getLogin())==null)
+        {
+             throw new BusinessLogicException("El login no puede ser cambiado");
+        }
+        //TODO: DONE 
         return persistence.update(entity);
     }
 
