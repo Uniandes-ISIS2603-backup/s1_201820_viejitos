@@ -57,11 +57,14 @@ public class HistoriaClinicaDetailDTO extends HistoriaClinicaDTO
     public HistoriaClinicaDetailDTO(HistoriaClinicaEntity entity)
     {
         super(entity);
-        //TODO  entity puede ser null
-        if (entity.getCliente()!= null) {
-            this.cliente = new ClienteDTO(entity.getCliente());
-        } else {
-            entity.setCliente(null);
+        //TODO  DONE
+        if(entity != null)
+        {
+            if (entity.getCliente()!= null) {
+                this.cliente = new ClienteDTO(entity.getCliente());
+            } else {
+                entity.setCliente(null);
+            }
         }
     }
     

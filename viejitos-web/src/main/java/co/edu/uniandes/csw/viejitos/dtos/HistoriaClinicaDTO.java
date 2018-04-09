@@ -51,11 +51,14 @@ public class HistoriaClinicaDTO {
      * @param HistoriaClinicaEntity: Es la entidad que se va a convertir a DTO
      */
     public HistoriaClinicaDTO(HistoriaClinicaEntity historiaCEntity) {
-        //TODO:historiaCEntity puede ser null
-        this.id = historiaCEntity.getId();
-        this.enfermedades = historiaCEntity.getEnfermedades();
-        this.medicamentos = historiaCEntity.getMedicamentos();
-        this.cirugias = historiaCEntity.getCirugias();
+        //TODO: DONE
+        if(historiaCEntity != null)
+        {
+            this.id = historiaCEntity.getId();
+            this.enfermedades = historiaCEntity.getEnfermedades();
+            this.medicamentos = historiaCEntity.getMedicamentos();
+            this.cirugias = historiaCEntity.getCirugias();
+        }
     }
 
     /**

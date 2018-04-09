@@ -153,7 +153,7 @@ public class ClienteResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteCliente(@PathParam("id") Long id) {
+    public void deleteCliente(@PathParam("id") Long id) throws BusinessLogicException {
         ClienteEntity entity = cLogic.getById(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /clientes/" + id + " no existe.", 404);

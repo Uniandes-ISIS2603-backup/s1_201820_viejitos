@@ -56,10 +56,17 @@ public class ClienteLogic {
         return persistence.update(entity);
     }
 
-    public void delete(ClienteEntity entity) {
-        //TODO: este método debe recibir un id y hay que validar que existe un ClienteEntity con ese id
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Cliente con id={0}", entity.getId());
-        persistence.delete(entity.getId());
-        LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Cliente con id={0}", entity.getId());
+    public void delete(ClienteEntity entity) throws BusinessLogicException {
+        //TODO: DONE
+        if(persistence.find(entity.getId()) == null)
+        {
+           throw new BusinessLogicException("No existe una entidad de Cliente con el id \"" + entity.getId() + "\""); 
+        }
+        else
+        {
+            LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Cliente con id={0}", entity.getId());
+            persistence.delete(entity.getId());
+            LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Cliente con id={0}", entity.getId());
+        }
     }
 }

@@ -27,9 +27,7 @@ public class HistoriaClinicaLogic {
     @Inject
     private HistoriaClinicaPersistence persistence;
 
-    //TODO: Está variable no se usa
-    @Inject
-    private ClientePersistence clientePersistence;
+    //TODO: DONE
 
     public HistoriaClinicaEntity create(HistoriaClinicaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de una entidad de HistoriaClinica");
@@ -57,10 +55,18 @@ public class HistoriaClinicaLogic {
         return persistence.update(entity);
     }
 
-    public void delete(HistoriaClinicaEntity entity) {
-        //TODO: este método debe recibir un id y hay que validar que existe un HistoriaClinicaEntity con ese id
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de HistoriaClinica con id={0}", entity.getId());
-        persistence.delete(entity.getId());
-        LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de HistoriaClinica con id={0}", entity.getId());
+    public void delete(HistoriaClinicaEntity entity) throws BusinessLogicException
+    {
+        //TODO: DONE
+        if(persistence.find(entity.getId()) == null)
+        {
+            throw new BusinessLogicException("No existe una entidad de HistoriaClinica con el id \"" + entity.getId() + "\"");
+        }
+        else
+        {
+            LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de HistoriaClinica con id={0}", entity.getId());
+            persistence.delete(entity.getId());
+            LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de HistoriaClinica con id={0}", entity.getId());
+        }
     }
 }
