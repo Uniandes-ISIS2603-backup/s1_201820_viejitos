@@ -174,7 +174,7 @@ public class CalificacionResource {
                 throw new WebApplicationException("No existe una entidad de Calificacion con el ID \"" + id + "\"" ,404);
         }
         try {
-            //TODO: primero hay que validar que es una calificación válida
+            //TODO: DONE primero hay que validar que es una calificación válida
             if(dto!=null){
                 CalificacionEntity entidad = dto.toEntity();
                 entidad.setId(id);
@@ -209,7 +209,7 @@ public class CalificacionResource {
     @Path("{id: \\d+}")
     public void deleteCalificacion(@PathParam("id") Long id) throws WebApplicationException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar una calificacion con id {0}", id);
-        //TODO: primero hay que validar que es una calificaicón válida
+        //TODO: DONE primero hay que validar que es una calificaicón válida
         if(logic.getById(id)==null)
             throw new WebApplicationException("No existe una calificacion con el id = " + id, 404);
         logic.delete(id);

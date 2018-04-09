@@ -140,7 +140,7 @@ public class HistoriaClinicaResource
 	 */
 	@DELETE
 	@Path( "{id: \\d+}" )
-	public void deleteHistoriaC( @PathParam( "id" ) Long id )
+	public void deleteHistoriaC( @PathParam( "id" ) Long id ) throws BusinessLogicException
 	{
             HistoriaClinicaEntity entity = hcLogic.getById(id);
             if (entity == null)

@@ -163,7 +163,7 @@ public class EnfermeroResource {
         if(dto!=null){
             EnfermeroEntity entity = dto.toEntity();
             entity.setId(id);
-            //TODO: Este código está errado. A menos que haya un error de lógica en el constyructor, nunca se dsiaparará una exception.
+            //TODO: DONE Este código está errado. A menos que haya un error de lógica en el constyructor, nunca se dsiaparará una exception.
             // Se debe validar si existe y si no existe disparar WebApplicationException 
             if(logic.getById(id) == null){
                 throw new WebApplicationException("No existe una entidad de Enfermero con el id\"" + id + "\"" ,404);

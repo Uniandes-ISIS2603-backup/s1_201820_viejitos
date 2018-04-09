@@ -66,7 +66,7 @@ public class CalificacionLogic {
         if(persistencia.find(id)!=null){
             LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Calificacion con id={0}", id );
         
-            // TODO: Hay que validar que existe CalificacionEntity con ese id
+            // TODO:DONE Hay que validar que existe CalificacionEntity con ese id
 
             persistencia.delete( id );
             LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Calificacion con id={0}", id );
