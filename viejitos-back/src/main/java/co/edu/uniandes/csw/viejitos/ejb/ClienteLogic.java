@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.ejb;
 
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
+import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
 import java.util.List;
@@ -68,5 +69,53 @@ public class ClienteLogic {
             persistence.delete(entity.getId());
             LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Cliente con id={0}", entity.getId());
         }
+    }
+    
+     /**
+     * Obtiene una instancia de HistoriaClinicaEntity asociada a una
+     * instancia de Cliente
+     *
+     * @param clienteId Identificador de la instancia de Cliente
+     * @return Instancia de HistoriaClinicaEntity asociada a la instancia
+     * de Cliente
+     */
+    public HistoriaClinicaEntity getHistoriaC(Long clienteId)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la historia clinica del cliente con id = {0}", clienteId);
+        return getById(clienteId).getHistoriaC();
+    }
+    
+    /**
+     * Asocia una HistoriaClinica existente a un Cliente
+     *
+     * @param clienteId Identificador de la instancia de Cliente
+     * @param historiacId Identificador de la instancia de HistoriaClinica
+     * @return Instancia de HistoriaClinicaEntity que fue asociada a Cliente
+     * 
+     */
+    public HistoriaClinicaEntity addHistoriaC(Long clienteId, Long historiacId)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de asociar una historia clinica al cliente con id = {0}", clienteId);
+        ClienteEntity clienteEntity = getById(clienteId);
+        HistoriaClinicaEntity historiacEntity = new HistoriaClinicaEntity();
+        historiacEntity.setId(historiacId);
+        clienteEntity.setHistoriaC(historiacEntity);
+        return getHistoriaC(clienteId);
+    }
+    
+    /**
+     * Remplaza la instancia de HistoriaClinica asociada a una instancia de Cliente
+     * @param clienteId Identificador de la instancia de Cliente
+     * @param historiac Instancia de HistoriaClinicaEntity a asociar a instancia
+     * de Cliente
+     * @return HistoriaClinicaEntity asociada a la instancia de Cliente
+     * 
+     */
+    public HistoriaClinicaEntity replaceHistoriaC(Long clienteId, HistoriaClinicaEntity historiac)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar la historia clinica del cliente con id = {0}", clienteId);
+        ClienteEntity clienteEntity = getById(clienteId);
+        clienteEntity.setHistoriaC(historiac);
+        return clienteEntity.getHistoriaC();
     }
 }

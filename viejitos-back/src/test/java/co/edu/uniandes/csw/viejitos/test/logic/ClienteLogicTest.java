@@ -153,7 +153,7 @@ public class ClienteLogicTest
      * Prueba para eliminar un Cliente
      */
     @Test
-    public void deleteClienteTest() {
+    public void deleteClienteTest() throws BusinessLogicException {
         ClienteEntity entity = data.get(0);
         clienteLogic.delete(entity);
         ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
