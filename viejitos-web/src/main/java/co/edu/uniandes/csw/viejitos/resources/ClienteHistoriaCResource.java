@@ -5,11 +5,8 @@
  */
 package co.edu.uniandes.csw.viejitos.resources;
 
-import co.edu.uniandes.csw.viejitos.dtos.CitaDetailDTO;
 import co.edu.uniandes.csw.viejitos.dtos.HistoriaClinicaDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
-import co.edu.uniandes.csw.viejitos.ejb.MedicoLogic;
-import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -87,8 +85,16 @@ public class ClienteHistoriaCResource
      * @return JSONArray {@link HistoriaClinicaDetailDTO} - La historia clinica encontrada del cliente.
      */
     @GET
-    public HistoriaClinicaDetailDTO getHistoriaC(@PathParam("clienteId") Long clienteId) {
-        return historiaClinicaEntity2DetailDTO(clienteLogic.getHistoriaC(clienteId));
+    public HistoriaClinicaDetailDTO getHistoriaC(@PathParam("clienteId") Long clienteId)
+    {
+        if(clienteLogic.getById(clienteId) == null)
+        {
+             throw new WebApplicationException("No existe un cliente con ese id", 404);
+        }
+        else
+        {
+            return historiaClinicaEntity2DetailDTO(clienteLogic.getHistoriaC(clienteId));
+        }
     }
 
     /**
@@ -110,8 +116,16 @@ public class ClienteHistoriaCResource
      */
     @POST
     @Path("{historiacId: \\d+}")
-    public HistoriaClinicaDetailDTO addHistoriaC(@PathParam("clienteId") Long clienteId, @PathParam("historiacId") Long historiacId) {
-        return new HistoriaClinicaDetailDTO(clienteLogic.addHistoriaC(clienteId, historiacId));
+    public HistoriaClinicaDetailDTO addHistoriaC(@PathParam("clienteId") Long clienteId, @PathParam("historiacId") Long historiacId)
+    {
+        if(clienteLogic.getById(clienteId) == null)
+        {
+             throw new WebApplicationException("No existe un cliente con ese id", 404);
+        }
+        else
+        {
+            return new HistoriaClinicaDetailDTO(clienteLogic.addHistoriaC(clienteId, historiacId));
+        } 
     }
 
     /**
@@ -137,6 +151,13 @@ public class ClienteHistoriaCResource
     @PUT
     public HistoriaClinicaDetailDTO replaceHistoriaC(@PathParam("clienteId") Long clienteId, HistoriaClinicaDetailDTO historiac)
     {
-        return historiac;
+        if(clienteLogic.getById(clienteId) == null)
+        {
+             throw new WebApplicationException("No existe un cliente con ese id", 404);
+        }
+        else
+        {
+          return historiac;  
+        }
     }
 }

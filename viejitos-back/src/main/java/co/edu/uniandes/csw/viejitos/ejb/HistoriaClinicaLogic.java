@@ -33,7 +33,7 @@ public class HistoriaClinicaLogic {
         LOGGER.info("Inicia proceso de creación de una entidad de HistoriaClinica");
         // Invoca la persistencia para crear la entidad de HistoriaClinica
 
-//TODO: No hay ninguna regla de negocio?   
+//TODO: DONE. No hay ninguna regla de negocio   
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de entidad de HistoriaClinica");
         return entity;
@@ -51,7 +51,7 @@ public class HistoriaClinicaLogic {
     }
 
     public HistoriaClinicaEntity update(HistoriaClinicaEntity entity) {
-//TODO: No hay ninguna regla de negocio? 
+//TODO: DONE. No hay ninguna regla de negocio 
         return persistence.update(entity);
     }
 
