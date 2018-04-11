@@ -148,7 +148,7 @@ public class HistoriaClinicaLogicTest
      * Prueba para eliminar una HistoriaClinica
      */
     @Test
-    public void deleteHistoriaClinicaTest() {
+    public void deleteHistoriaClinicaTest() throws BusinessLogicException {
         HistoriaClinicaEntity entity = data.get(0);
         historiaCLogic.delete(entity);
         HistoriaClinicaEntity deleted = em.find(HistoriaClinicaEntity.class, entity.getId());
