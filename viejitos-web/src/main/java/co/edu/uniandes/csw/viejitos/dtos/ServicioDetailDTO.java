@@ -112,14 +112,32 @@ public class ServicioDetailDTO extends ServicioDTO {
     @Override
     public ServicioEntity toEntity() {
         ServicioEntity entity = super.toEntity();
-        //TODO: cada uno de estps campos puede ser null
-        entity.setCalificacion(this.calificacion.toEntity());
-        entity.setPagoInicial(this.pagoInicial.toEntity());
-        entity.setPagoFinal(this.pagoFinal.toEntity());
-        entity.setCliente(this.cliente.toEntity());
-        entity.setFactura(this.factura.toEntity());
-        entity.setEnfermero(this.enfermero.toEntity());
-
+        //TODO: DONE cada uno de estps campos puede ser null
+        if(this.calificacion!=null)
+        {
+            entity.setCalificacion(this.calificacion.toEntity());
+        }
+        if(this.pagoInicial!=null)
+        {
+            entity.setPagoInicial(this.pagoInicial.toEntity());
+        }
+        if(this.pagoFinal!=null)
+        {
+            entity.setPagoFinal(this.pagoFinal.toEntity());
+        }
+        if(this.cliente!=null)
+        {
+            entity.setCliente(this.cliente.toEntity());
+        }
+        if(this.factura!=null)
+        {
+            entity.setFactura(this.factura.toEntity());
+        }
+        if(this.enfermero!=null)
+        {
+            entity.setEnfermero(this.enfermero.toEntity());
+        }
+            
         List<QuejaEntity> quejasEntity = new ArrayList<>();
         for (QuejaDTO actual : quejas) {
             quejasEntity.add(actual.toEntity());

@@ -28,12 +28,9 @@ public class QuejaLogic {
     @Inject
     private QuejaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
-    //TODO: esta variable no se usa
-    @Inject
-    private ClientePersistence clientePersistence;
-    //TODO: esta variable no se usa
-    @Inject
-    private ServicioPersistence servicioPersistence;
+    //TODO: DONE esta variable no se usa
+
+    //TODO: DONE esta variable no se usa
 
     public QuejaEntity create(QuejaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de una entidad de Queja");
@@ -64,10 +61,13 @@ public class QuejaLogic {
         return persistence.update(entity);
     }
 
-    public void delete(QuejaEntity entity) {
+    public void delete(QuejaEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Queja con id={0}", entity.getId());
-        //TODO: este método debe recibir un id y hay que validar que existe un QuejaEntity con ese id
-
+        //TODO: DONE este método debe recibir un id y hay que validar que existe un QuejaEntity con ese id
+        if(persistence.find(entity.getId()) == null)
+        {
+           throw new BusinessLogicException("No existe una entidad de Queja con el id \"" + entity.getId() + "\""); 
+        }
         persistence.delete(entity.getId());
         LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Queja con id={0}", entity.getId());
     }

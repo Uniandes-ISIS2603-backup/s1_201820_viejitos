@@ -28,12 +28,8 @@ public class ServicioLogic {
 
     @Inject
     private ServicioPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
-    //TODO: esta variable no se usa
-    @Inject
-    private ClientePersistence clientePersistence;
-    //TODO: esta variable no se usa
-    @Inject
-    private PagoPersistence pagoPersistence;
+    //TODO: DONE esta variable no se usa
+    //TODO: DONE esta variable no se usa
 
     @Inject
     private EnfermeroPersistence enfermeroPersistence;
@@ -67,10 +63,13 @@ public class ServicioLogic {
         return persistence.update(entity);
     }
 
-    public void delete(ServicioEntity entity) {
-        //TODO: este método debe recibir un id y hay que validar que existe un ServicioEntity con ese id
-
+    public void delete(ServicioEntity entity) throws BusinessLogicException {
+        //TODO: DONE este método debe recibir un id y hay que validar que existe un ServicioEntity con ese id
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Servicio con id={0}", entity.getId());
+        if(persistence.find(entity.getId()) == null)
+        {
+           throw new BusinessLogicException("No existe una entidad de Servicio con el id \"" + entity.getId() + "\""); 
+        }
         persistence.delete(entity.getId());
         LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Servicio con id={0}", entity.getId());
     }

@@ -56,6 +56,7 @@ public class QuejaDetailDTO extends QuejaDTO {
         super(entity);
 
         if (entity != null) {
+            
             this.cliente = new ClienteDTO(entity.getCliente());
             this.servicio = new ServicioDTO(entity.getServicio());
         }
@@ -69,10 +70,16 @@ public class QuejaDetailDTO extends QuejaDTO {
     @Override
     public QuejaEntity toEntity() {
         QuejaEntity entity = super.toEntity();
-         //TODO  this.cliente puede ser null
-        entity.setCliente(this.cliente.toEntity());
-        //TODO  this.servicio puede ser null
-        entity.setServicio(this.servicio.toEntity());
+         //TODO  DONE this.cliente puede ser null
+         if(this.cliente!=null)
+         {
+            entity.setCliente(this.cliente.toEntity());
+         }
+        //TODO  DONE this.servicio puede ser null
+        if(this.servicio!=null)
+        {
+            entity.setServicio(this.servicio.toEntity());
+        }
         return entity;
     }
 
