@@ -178,7 +178,7 @@ public class ServicioResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteServicio(@PathParam("id") Long id) {
+    public void deleteServicio(@PathParam("id") Long id) throws BusinessLogicException {
         ServicioEntity entity = servicioLogic.getById(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /servicios/" + id + " no existe.", 404);

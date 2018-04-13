@@ -44,8 +44,14 @@ public class QuejaLogic {
      */
     public QuejaEntity create(Long serviceid, QuejaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de una Queja");
-        // Invoca la persistencia para crear la entidad de Queja
-        //TODO: No hay ninguna regla de negocio?  
+        //TODO: DONE No hay ninguna regla de negocio?  
+        
+        //El estado de resuelto debe empezar en falso al crear la queja.
+        if(entity.getResuelto())
+        {
+            throw new BusinessLogicException("La queja no debe estar resuelta.");
+        }
+        
         ServicioEntity servicio=servicioLogic.getById(serviceid);
         entity.setServicio(servicio);
         LOGGER.info("Termina proceso de creación de entidad de Queja");
@@ -98,7 +104,11 @@ public class QuejaLogic {
         if (persistence.find(servicioid, entity.getId()) == null) {
             throw new BusinessLogicException("No existe una entidad de Queja con el id \"" + entity.getId() + "\"");
         }
-        //TODO: No hay ninguna regla de negocio? 
+        if(persistence.find(servicioid, entity.getId()).getResuelto())
+        {
+            throw new BusinessLogicException ("La queja ya esta resuelta, esta no puede actualizarse");
+        }
+        //TODO: DONE No hay ninguna regla de negocio? 
         return persistence.update(entity);
     }
 

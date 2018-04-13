@@ -37,7 +37,11 @@ public class ServicioLogic {
     public ServicioEntity create(ServicioEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de una entidad de Servicio");
         // Invoca la persistencia para crear la entidad de Queja
-        //TODO: No hay ninguna regla de negocio? 
+        //TODO: DONE No hay ninguna regla de negocio? 
+        if(entity.getFinalizado())
+        {
+            throw new BusinessLogicException("No se puede crear un servicio que ya está finalizado.");
+        }
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de entidad de Servicio");
         return entity;
@@ -59,7 +63,12 @@ public class ServicioLogic {
         if (persistence.find(entity.getId()) == null) {
             throw new BusinessLogicException("No existe una entidad de Servicio con el id \"" + entity.getId() + "\"");
         }
-        //TODO: No hay ninguna regla de negocio? 
+        //TODO: DONE No hay ninguna regla de negocio? 
+        
+        if(persistence.find(entity.getId()).getFinalizado())
+        {
+            throw new BusinessLogicException("No se puede actualizar un servicio que ya está finalizado.");
+        }
         return persistence.update(entity);
     }
 
