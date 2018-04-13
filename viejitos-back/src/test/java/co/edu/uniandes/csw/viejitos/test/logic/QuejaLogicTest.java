@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.test.logic;
 
 import co.edu.uniandes.csw.viejitos.ejb.QuejaLogic;
 import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.QuejaPersistence;
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class QuejaLogicTest {
     private UserTransaction utx;
 
     private List<QuejaEntity> data = new ArrayList<QuejaEntity>();
+    private List<ServicioEntity> dataServicio = new ArrayList<ServicioEntity>();
     
     @Deployment
     public static JavaArchive createDeployment() {
@@ -82,6 +84,7 @@ public class QuejaLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from QuejaEntity").executeUpdate();
+        em.createQuery("delete from ServicioEntity").executeUpdate();
     }
     
     /**
@@ -89,9 +92,17 @@ public class QuejaLogicTest {
      * pruebas.
      */
     private void insertData() {
-        for (int i = 0; i < 3; i++)
-        {
+         for (int i = 0; i < 3; i++) {
+            ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
+            em.persist(entity);
+            dataServicio.add(entity);
+        }
+        
+        for (int i = 0; i < 3; i++) {
             QuejaEntity entity = factory.manufacturePojo(QuejaEntity.class);
+            
+            entity.setServicio(dataServicio.get(1));
+            
             em.persist(entity);
             data.add(entity);
         }
@@ -103,7 +114,7 @@ public class QuejaLogicTest {
     @Test
     public void createQuejaTest() throws BusinessLogicException {
         QuejaEntity newEntity = factory.manufacturePojo(QuejaEntity.class);
-            QuejaEntity result = quejaLogic.create(newEntity);
+            QuejaEntity result = quejaLogic.create(data.get(0).getServicio().getId(), newEntity);
             Assert.assertNotNull(result);
             QuejaEntity entity = em.find(QuejaEntity.class, result.getId());
             Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -112,12 +123,12 @@ public class QuejaLogicTest {
             Assert.assertEquals(newEntity.getServicio(), entity.getServicio());
     }
     
-         /**
+     /**
      * Prueba para consultar la lista de Quejas
      */
     @Test
-    public void getQuejasTest() {
-        List<QuejaEntity> list =quejaLogic.getAll();
+    public void getQuejasTest() throws BusinessLogicException {
+        List<QuejaEntity> list =quejaLogic.getAll(dataServicio.get(1).getId());
         Assert.assertEquals(data.size(), list.size());
         for (QuejaEntity entity : list) {
             boolean found = false;
@@ -136,7 +147,7 @@ public class QuejaLogicTest {
     @Test
     public void getQuejaTest() {
         QuejaEntity entity = data.get(0);
-        QuejaEntity resultEntity = quejaLogic.getById(entity.getId());
+        QuejaEntity resultEntity = quejaLogic.getById(dataServicio.get(1).getId(), entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getReclamo(), resultEntity.getReclamo());
@@ -149,9 +160,9 @@ public class QuejaLogicTest {
      * Prueba para eliminar una Queja
      */
     @Test
-    public void deleteQuejaTest() {
+    public void deleteQuejaTest() throws BusinessLogicException {
         QuejaEntity entity = data.get(0);
-        quejaLogic.delete(entity);
+        quejaLogic.delete(dataServicio.get(1).getId(),entity.getId());
         QuejaEntity deleted = em.find(QuejaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
@@ -166,7 +177,7 @@ public class QuejaLogicTest {
 
         pojoEntity.setId(entity.getId());
 
-        quejaLogic.update(pojoEntity);
+        quejaLogic.update(dataServicio.get(1).getId(), pojoEntity);
 
         QuejaEntity resp = em.find(QuejaEntity.class, entity.getId());
 

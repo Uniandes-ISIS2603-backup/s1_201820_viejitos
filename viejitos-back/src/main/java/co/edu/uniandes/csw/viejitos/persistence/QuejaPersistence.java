@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,15 +27,21 @@ public class QuejaPersistence {
     @PersistenceContext(unitName = "ViejitosPU")
     protected EntityManager em;
 
-    public QuejaEntity find(Long id) {
-        LOGGER.log(Level.INFO, "Consultando queja con id={0}", id);
-        return em.find(QuejaEntity.class, id);
-    }
-
-    public List<QuejaEntity> findAll() {
-        LOGGER.info("Consultando todas las quejas");
-        Query q = em.createQuery("select u from QuejaEntity u");
-        return q.getResultList();
+    public QuejaEntity find(Long servicioid, Long quejaid) {
+        LOGGER.log(Level.INFO, "Consultando queja con id={0}", quejaid);
+        TypedQuery<QuejaEntity> q = em.createQuery("select p from QuejaEntity p where (p.servicio.id = :servicioid) and (p.id = :quejaid)", QuejaEntity.class);
+        q.setParameter("servicioid", servicioid);
+        q.setParameter("quejaid", quejaid);
+        List<QuejaEntity> results = q.getResultList();
+        QuejaEntity queja = null;
+        if (results == null) {
+            queja = null;
+        } else if (results.isEmpty()) {
+            queja = null;
+        } else if (results.size() >= 1) {
+            queja = results.get(0);
+        }
+        return queja;
     }
 
     public QuejaEntity create(QuejaEntity entity) {

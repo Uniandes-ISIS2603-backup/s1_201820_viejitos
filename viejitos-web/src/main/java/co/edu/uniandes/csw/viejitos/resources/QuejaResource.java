@@ -28,23 +28,21 @@ import javax.ws.rs.WebApplicationException;
 
 /**
  * <pre>Clase que implementa el recurso "quejas".
- * URL: /api/quejas
+ * URL: /api/servicios/{idServicios}/quejas
  * </pre>
- * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta
- * "/api" y este recurso tiene la ruta "quejas".</i>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
+ * que el servicio {@linkServicioResource} define este servicio de forma relativa 
+ * con la ruta "quejas" con respecto un servicio.</i>
  *
  * <h2>Anotaciones </h2>
  * <pre>
- * Path: indica la dirección después de "api" para acceder al recurso
  * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
- * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio).
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
  * </pre>
- *
  * @author c.gomezs
- * @version 1.0
  */
-//TODO: Revisar el path para llegar a este recurso
-@Path("quejas")
+//TODO: DONE Revisar el path para llegar a este recurso
+@Path("servicios/{idServicio: \\d+}/quejas")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -53,122 +51,131 @@ public class QuejaResource {
     @Inject
     private QuejaLogic quejaLogic;
 
-    /**
-     * <h1>POST /api/quejas : Crear una entidad de Queja.</h1>
-     * <pre>Cuerpo de petición: JSON {@link ClienteDetailDTO}.
+/**
+     * <h1>POST /api/servicios/{idServicio}/quejas : Crear una queja de un servicio.</h1>
+     *
+     * <pre>Cuerpo de petición: JSON {@link ReviewDTO}.
+     * 
+     * Crea una nueva queja con la informacion que se recibe en el cuerpo 
+     * de la petición y se regresa un objeto identico con un id auto-generado 
+     * por la base de datos.
+     * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Crea la queja.</code>
-     * </pre> Crea una nueva entidad de Queja con la informacion que se recibe
-     * en el cuerpo de la petición.
-     *
-     * @param dto {@link QuejaDetailDTO} - La entidad de Queja que se desea
-     * guardar.
-     * @return JSON {@link QuejaDTO} - La entidad de queja guardada.
+     * 200 OK Creó la nueva queja .
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe la queja.
+     * </code>
+     * </pre>
+     * @param idServicio El ID del servicio del cual se guarda la queja
+     * @param queja {@link QuejaDTO} - La queja que se desea guardar.
+     * @return JSON {@link QuejaDTO}  - La queja guardada con el atributo id autogenerado.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la queja.
      */
     @POST
-    public QuejaDTO createQueja(QuejaDTO dto) throws BusinessLogicException {
-        return new QuejaDTO(quejaLogic.create(dto.toEntity()));
+    public QuejaDTO createQueja(@PathParam("idServicio") Long idServicio, QuejaDTO dto) throws BusinessLogicException {
+        return new QuejaDTO(quejaLogic.create(idServicio, dto.toEntity()));
     }
 
-    /**
-     * <h1>GET /api/quejas : Obtener todas las entidades de Queja.</h1>
-     * <pre>Busca y devuelve todas las entidades de Queja que existen en la aplicacion.
+   /**
+     * <h1>GET /api/servicios/{idServicio}/quejas : Obtener todas las quejas de un servicio.</h1>
+     * <pre>Busca y devuelve todas las quejas que existen en un servicio.
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve las quejas.</code>
+     * 200 OK Devuelve todas las quejas del servicio.</code> 
      * </pre>
-     *
-     * @return JSONArray {@link ClienteDetailDTO} - Las entidades de Queja
-     * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe un servicio con el id dado.
+     * </code>
+     * @param idServicio El ID del servicio del cual se buscan las quejas
+     * @return JSONArray {@link QuejaDetailDTO} - Las quejas encontradas en el servicio. Si no hay ninguna retorna una lista vacía.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no se encuentra el servicio.
      */
     @GET
-    public List<QuejaDetailDTO> getQuejas() {
+    public List<QuejaDetailDTO> getQuejas(@PathParam("idServicio") Long idServicio) throws BusinessLogicException {
         List<QuejaDetailDTO> quejas = new ArrayList<QuejaDetailDTO>();
-        for (QuejaEntity actual : quejaLogic.getAll()) {
+        for (QuejaEntity actual : quejaLogic.getAll(idServicio)) {
             quejas.add(new QuejaDetailDTO(actual));
         }
         return quejas;
     }
-
+    
     /**
-     * <h1>GET /api/quejas/{id} : Obtener una entidad de Queja por id.</h1>
-     * <pre>Busca la entidad de Queja con el id asociado recibido en la URL y la devuelve.
+     * <h1>GET /api/quejas/{idServicio}/quejas/{id} : Obtener una queja de un servicio.</h1>
+     * <pre>Busca y devuelve la queja con el ID recibido en la URL, relativa a un servicio.
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve la queja.</code>
+     * 200 OK Devuelve la queja del servicio.</code> 
+     * </pre>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found. No existe la queja con el id dado.
-     * </code></pre>
-     *
-     * @param id Identificador de la entidad de Queja que se esta buscando. Este
-     * debe ser una cadena de dígitos.
-     * @return JSON {@link QuejaDetailDTO} - La entidad de Queja buscada
+     * 404 Not Found. No existe un servicio con el id dado.
+     * </code>
+     * @param idServicio El ID del servicio del cual se buscan las quejas
+     * @param id El ID de la queja que se busca
+     * @return {@link QuejaDetailDTO} - La queja encontrada en el servicio.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no se encuentra el libro.
      */
     @GET
     @Path("{id: \\d+}")
-    public QuejaDetailDTO getQueja(@PathParam("id") Long id) {
-        QuejaEntity entity = quejaLogic.getById(id);
+    public QuejaDetailDTO getQueja(@PathParam("idServicio") Long idServicio, @PathParam("id") Long id) {
+        QuejaEntity entity = quejaLogic.getById(idServicio, id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /quejas/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /servicios/" + idServicio + "/quejas/" + id + " no existe.", 404);
         }
         return new QuejaDetailDTO(entity);
     }
 
-    /**
-     * <h1>PUT /api/Quejas/{id} : Actualizar una entidad de Queja con el id
-     * dado.</h1>
-     * <pre>Cuerpo de petición: JSON {@link QuejaDetailDTO}
+   /**
+     * <h1>PUT /api/servicios/{idServicio}/quejas/{id} : Actualizar una queja de un servicio.</h1>
+     * <pre>Cuerpo de petición: JSON {@link QuejaDetailDTO}.
+     * Actualiza una queja con la informacion que se recibe en el cuerpo de la petición y se regresa el objeto actualizado.
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Actualiza la queja con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code>
-     * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found. No existe una queja con el id dado.
+     * 200 OK Se actualizó la queja
      * </code>
-     * </pre> Actualiza la entidad de Queja con el id recibido en la URL con la
-     * informacion que se recibe en el cuerpo de la petición.
-     *
-     * @param id Identificador de la entidad de Queja que se desea actualizar.
-     * Este debe ser una cadena de dígitos.
-     * @param detailDTO {@link QuejaDetailDTO} La entidad de Queja que se desea
-     * guardar.
-     * @return JSON {@link QuejaDetailDTO} - La entidad de Queja guardada.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
-     * Error de lógica que se genera al no poder actualizar la entidad de Queja
-     * porque ya existe una con ese nombre.
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: No se pudo actualizar la queja
+     * </code>
+     * </pre>
+     * @param idServicio El ID del servicio del cual se guarda la queja
+     * @param id El ID de la queja que se va a actualizar
+     * @param review {@link QuejaDetailDTO} - La queja que se desea guardar.
+     * @return JSON {@link QuejaDetailDTO}  - La queja actualizada.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando ya existe la queja.
      */
     @PUT
     @Path("{id: \\d+}")
-    public QuejaDetailDTO updateQueja(@PathParam("id") Long id, QuejaDetailDTO detailDTO) throws BusinessLogicException {
+    public QuejaDetailDTO updateQueja(@PathParam("idServicio") Long idServicio, @PathParam("id") Long id, QuejaDetailDTO detailDTO) throws BusinessLogicException {
         detailDTO.setId(id);
-        QuejaEntity entity = quejaLogic.getById(id);
+        QuejaEntity entity = quejaLogic.getById(idServicio, id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /quejas/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /servicios/" + idServicio + "/quejas/" + id + " no existe.", 404);
         }
-        return new QuejaDetailDTO(quejaLogic.update(detailDTO.toEntity()));
+        return new QuejaDetailDTO(quejaLogic.update(idServicio, detailDTO.toEntity()));
     }
 
     /**
-     * <h1>DELETE /api/Quejas/{id} : Borrar una entidad de Queja por id.</h1>
-     * <pre>Borra la entidad de Queja con el id asociado recibido en la URL.
+     * <h1>DELETE /api/servicios/{idServicio}/quejas/{id} : Borrar queja por id.</h1>
+     * <pre>Borra la queja con el id asociado recibido en la URL.
      * Códigos de respuesta:<br>
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Elimina la queja correspondiente al id dado.</code>
+     * 200 OK Elimina la queja correspondiente al id dado dentro del servicio.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found. No existe una queja con el id dado.</code>
+     * 404 Not Found. No existe una queja con el id dado en el servicio.
+     * </code>
      * </pre>
-     *
-     * @param id Identificador de la entidad de Queja que se desea borrar. Este
-     * debe ser una cadena de dígitos.
+     * @param idServicio El ID del servicio del cual se va a eliminar la queja.
+     * @param id El ID de la queja que se va a eliminar.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no se puede eliminar la queja.
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteQueja(@PathParam("id") Long id) {
-        QuejaEntity entity = quejaLogic.getById(id);
+    public void deleteQueja(@PathParam("idServicio") Long idServicio, @PathParam("id") Long id) throws BusinessLogicException {
+        QuejaEntity entity = quejaLogic.getById(idServicio, id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /quejas/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /servicios/" + idServicio + "/quejas/" + id + " no existe.", 404);
         }
-        quejaLogic.delete(entity);
+        quejaLogic.delete(idServicio, id);
     }
-
 }

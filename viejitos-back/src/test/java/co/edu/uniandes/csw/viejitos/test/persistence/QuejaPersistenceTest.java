@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.test.persistence;
 
 
 import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.persistence.QuejaPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,12 +68,14 @@ public class QuejaPersistenceTest {
      */
     private void clearData() {
         em.createQuery("delete from QuejaEntity").executeUpdate();
+        em.createQuery("delete from ServicioEntity").executeUpdate();
     }
     
      /**
      * Lista que tiene los datos de prueba.
      */
     private List<QuejaEntity> data = new ArrayList<QuejaEntity>();
+    private List<ServicioEntity> dataServicio = new ArrayList<ServicioEntity>();
     
     /**
      * Variable para marcar las transacciones del em anterior cuando se
@@ -86,13 +89,18 @@ public class QuejaPersistenceTest {
      * pruebas.
      */
     private void insertData() {
-        PodamFactory factory = new PodamFactoryImpl();
+     PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            
-            QuejaEntity entity = factory.manufacturePojo(QuejaEntity.class);
-
+            ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
             em.persist(entity);
-            
+            dataServicio.add(entity);
+        }
+        for (int i = 0; i < 3; i++) {
+            QuejaEntity entity = factory.manufacturePojo(QuejaEntity.class);
+            if (i == 0) {
+                entity.setServicio(dataServicio.get(0));
+            }
+            em.persist(entity);
             data.add(entity);
         }
     }
@@ -132,24 +140,7 @@ public class QuejaPersistenceTest {
     Assert.assertNotNull(entity);
     Assert.assertEquals(newEntity.getName(), entity.getName());
 }
-    
-    /**
-     * Prueba para consultar la lista de quejas. 
-     */
-    @Test
-    public void getQuejasTest() {
-        List<QuejaEntity> list = quejaPersistence.findAll();
-        Assert.assertEquals(data.size(), list.size());
-        for (QuejaEntity ent : list) {
-            boolean found = false;
-            for (QuejaEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
+   
     
      /**
      * Prueba para consultar una queja.
@@ -157,7 +148,7 @@ public class QuejaPersistenceTest {
     @Test
     public void getQuejaTest() {
         QuejaEntity entity = data.get(0);
-        QuejaEntity newEntity = quejaPersistence.find(entity.getId());
+        QuejaEntity newEntity = quejaPersistence.find(dataServicio.get(0).getId(), entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }
