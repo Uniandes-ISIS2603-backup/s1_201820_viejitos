@@ -152,8 +152,8 @@ public class MedicoLogic {
     /**
      * Desasocia un Author existente de un Book existente
      *
-     * @param bookId Identificador de la instancia de Book
-     * @param authorsId Identificador de la instancia de Author
+     * @param medicoId Identificador de la instancia de Book
+     * @param citaId Identificador de la instancia de Author
      * 
      */
     public void removeCita(Long medicoId, Long citaId) {
