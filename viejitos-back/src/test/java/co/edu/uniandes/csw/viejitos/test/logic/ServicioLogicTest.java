@@ -165,7 +165,7 @@ public class ServicioLogicTest {
      * Prueba para eliminar un Servicio
      */
     @Test
-    public void deleteServicioTest() {
+    public void deleteServicioTest() throws BusinessLogicException {
         ServicioEntity entity = data.get(0);
         servicioLogic.delete(entity);
         ServicioEntity deleted = em.find(ServicioEntity.class, entity.getId());
