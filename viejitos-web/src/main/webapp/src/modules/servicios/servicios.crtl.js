@@ -6,7 +6,7 @@
 (function (ng) {
     var mod = ng.module("serviciosModule");
     mod.constant("serviciosContext", "api/servicios");
-    mod.controller('serviciosCtrl', ['$scope', '$http', 'serviciosContext',
+    mod.controller('servicioCtrl', ['$scope', '$http', 'serviciosContext',
         /**
          * @ngdoc controller
          * @name servicios.controller:servicioCtrl

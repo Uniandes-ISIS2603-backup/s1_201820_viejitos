@@ -6,7 +6,7 @@
 (function (ng)
 {
     //Definición del modulo
-    var mod= ng.module("ServiciosModule", ['ui.router']);
+    var mod= ng.module("serviciosModule", ['ui.router']);
     // Configuración de los estados del módulo
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             // En basePath se encuentran los templates y controladores de módulo
