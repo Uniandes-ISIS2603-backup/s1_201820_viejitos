@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "name": "Acompañamiento a cita médica"
+    }
+    ,
+    {
+        "id": 2,
+        "name": "Acompañamiento a exámenes médicos"
+    },
+    {
+        "id": 3,
+        "name": "Acompañamiento a caminata"
+    },
+    {
+        "id": 4,
+        "name": "Acompañamiento a un programa de ejercicio"
+    },
+    
+    {
+        "id": 5,
+        "name": "Acompañamiento a una actividad lúdica"
+    }
+]

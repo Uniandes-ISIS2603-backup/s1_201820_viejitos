@@ -102,7 +102,7 @@ public class QuejaResource {
     }
     
     /**
-     * <h1>GET /api/quejas/{idServicio}/quejas/{id} : Obtener una queja de un servicio.</h1>
+     * <h1>GET /api/servicios/{idServicio}/quejas/{id} : Obtener una queja de un servicio.</h1>
      * <pre>Busca y devuelve la queja con el ID recibido en la URL, relativa a un servicio.
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
