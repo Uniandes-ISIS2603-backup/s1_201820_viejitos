@@ -168,7 +168,7 @@ public class PagoLogicTest {
      * Prueba para eliminar un Pago
      */
     @Test
-    public void deletePagoTest() {
+    public void deletePagoTest() throws BusinessLogicException {
         PagoEntity entity = data.get(0);
         pagoLogic.delete(entity);
         PagoEntity deleted = em.find(PagoEntity.class, entity.getId());
