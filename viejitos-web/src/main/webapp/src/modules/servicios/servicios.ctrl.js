@@ -37,8 +37,9 @@
              * @param {String} URL Dirección donde se encuentra el recurso
              * de los servicios o API donde se puede consultar.
              */
-            $http.get('data/servicios.json').then(function (response) {
+                $http.get('data/servicios.json').then(function (response) {
                 $scope.serviciosRecords = response.data;
+            
             });
         }
     ]);

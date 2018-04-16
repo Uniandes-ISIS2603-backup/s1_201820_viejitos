@@ -1,0 +1,15 @@
+[
+    {
+        "reclamo": "El enfermero tenía una actitud muy grosera y muy mala disposición.",
+        "resuelto": false,
+        "servicio": 123,
+        "cliente": 65
+    }
+    ,
+    {
+        "reclamo": "No pude realizar adecuadamente los pagos, no me gusta manejar otro medio que no sea efectivo",
+        "resuelto": true,
+        "servicio": 987,
+        "cliente": 1
+    }
+]
