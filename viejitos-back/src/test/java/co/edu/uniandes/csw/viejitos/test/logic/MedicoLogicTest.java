@@ -14,7 +14,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -103,28 +102,16 @@ public class MedicoLogicTest {
     public void createMedicoTest() throws BusinessLogicException {
         PodamFactory factory = new PodamFactoryImpl();
         MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
-        MedicoEntity result = null;
-                result = medicoLogic.create(newEntity);
-                Assert.assertNotNull(result);
-        if (medicoLogic.getByLogin(newEntity.getLogin()) == null) {
-            try {
-                result = medicoLogic.create(newEntity);
-                Assert.assertNotNull(result);
-            } catch (Exception e) {
-                Assert.fail("No deberia lanzar excepcion");
-            }
-        } else {
-            try {
-                result = medicoLogic.create(newEntity);
-                Assert.fail("Deberia lanzar excepcion");
-            } catch (Exception e) {
-
-            }
-        }
-
+        MedicoEntity result = medicoLogic.create(newEntity);
+        Assert.assertNotNull(result);
         MedicoEntity entity = em.find(MedicoEntity.class, result.getId());
-
         Assert.assertEquals(newEntity.getName(), entity.getName());
+        try {
+            result = medicoLogic.create(newEntity);
+            Assert.fail("Deberia lanzar excepcion");
+        } catch (Exception e) {
+
+        }
 
     }
 
@@ -185,7 +172,9 @@ public class MedicoLogicTest {
     @Test
     public void deleteMedicoTest() {
         MedicoEntity entity = data.get(0);
-        if (em.find(MedicoEntity.class, entity.getId()) != null) {
+
+        if (em.find(MedicoEntity.class,
+                entity.getId()) != null) {
             try {
                 medicoLogic.delete(entity);
             } catch (Exception e) {
@@ -195,11 +184,13 @@ public class MedicoLogicTest {
             try {
                 medicoLogic.delete(entity);
                 Assert.fail("Deberia lanzar excepcion");
+
             } catch (Exception e) {
 
             }
         }
-        MedicoEntity deleted = em.find(MedicoEntity.class, entity.getId());
+        MedicoEntity deleted = em.find(MedicoEntity.class,
+                entity.getId());
         Assert.assertNull(deleted);
     }
 
@@ -211,10 +202,13 @@ public class MedicoLogicTest {
 
         MedicoEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
-        MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class);
+        MedicoEntity newEntity = factory.manufacturePojo(MedicoEntity.class
+        );
 
         newEntity.setId(entity.getId());
-        if (em.find(MedicoEntity.class, entity.getId()) == null) {
+
+        if (em.find(MedicoEntity.class,
+                entity.getId()) == null) {
             try {
                 medicoLogic.update(newEntity);
                 Assert.fail("Deberia lanzar excepcion");
@@ -222,14 +216,25 @@ public class MedicoLogicTest {
 
             }
         } else {
-            try {
-                medicoLogic.update(newEntity);
-            } catch (Exception e) {
-                Assert.fail("No deberia lanzar excepcion");
-            }
-            MedicoEntity resp = em.find(MedicoEntity.class, entity.getId());
+            if (newEntity.getLogin().equals(entity.getLogin())) {
+                try {
+                    medicoLogic.update(newEntity);
+                } catch (Exception e) {
+                    Assert.fail("No deberia lanzar excepcion");
 
-            Assert.assertEquals(newEntity.getId(), resp.getId());
+                }
+                MedicoEntity resp = em.find(MedicoEntity.class,
+                        entity.getId());
+
+                Assert.assertEquals(newEntity.getId(), resp.getId());
+            } else {
+                try {
+                    medicoLogic.update(newEntity);
+                    Assert.fail("Deberia lanzar excepcion");
+                } catch (Exception e) {
+
+                }
+            }
         }
     }
 
