@@ -5,7 +5,8 @@
         'ui.bootstrap',
         // Internal modules dependencies       
         'viejitosModule',
-        'serviciosModule'
+        'serviciosModule',
+        'quejasModule'
 
     ]);
     // Resuelve problemas de las promesas

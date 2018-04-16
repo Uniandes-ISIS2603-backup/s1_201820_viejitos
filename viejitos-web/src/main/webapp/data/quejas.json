@@ -1,5 +1,6 @@
 [
     {
+        "id": 8965,
         "reclamo": "El enfermero tenía una actitud muy grosera y muy mala disposición.",
         "resuelto": false,
         "servicio": 123,
@@ -7,6 +8,7 @@
     }
     ,
     {
+        "id": 6547,
         "reclamo": "No pude realizar adecuadamente los pagos, no me gusta manejar otro medio que no sea efectivo",
         "resuelto": true,
         "servicio": 987,
