@@ -1,0 +1,55 @@
+[
+    {
+           "nombre":"Jorgen Wilcken",
+           "tipo": 1,
+           "login":"j.wilcken",
+           "contrasena":"amolacirugiaplastica",
+           "id":1020821314,
+           "citas":[],
+           "historiasClinicas":[],
+           "clientes":[]
+          
+    }
+    ,
+    {
+        "nombre":"Ivette Maldonado",
+           "tipo": 1,
+           "login":"i.maldonado",
+           "contrasena":"obgyn",
+           "id":345231313,
+           "citas":[],
+           "historiasClinicas":[],
+           "clientes":[]
+    },
+    {
+        "nombre":"Jaime Marino",
+           "tipo": 1,
+           "login":"j.marino",
+           "contrasena":"artroscopia",
+           "id":9999999999,
+           "citas":[],
+           "historiasClinicas":[],
+           "clientes":[]
+    },
+    {
+         "nombre":"Roberto Rueda",
+           "tipo": 1,
+           "login":"r.rueda",
+           "contrasena":"anato",
+           "id":1020345947,
+           "citas":[],
+           "historiasClinicas":[],
+           "clientes":[]
+    },
+    
+    {
+         "nombre":"Juan David Hernandez",
+           "tipo": 1,
+           "login":"jd.hernandez",
+           "contrasena":"laparoscopia39",
+           "id":91928374635,
+           "citas":[],
+           "historiasClinicas":[],
+           "clientes":[]
+    }
+]
