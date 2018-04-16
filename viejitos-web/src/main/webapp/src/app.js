@@ -5,7 +5,8 @@
        
         // Internal modules dependencies       
         'viejitosModule',
-        'serviciosModule'
+        'serviciosModule',
+        'pagosModule'
 
     ]);
     // Resuelve problemas de las promesas

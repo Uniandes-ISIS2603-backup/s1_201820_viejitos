@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.test.persistence;
 
 import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.persistence.FacturaPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +73,7 @@ public class FacturaPersistenceTest {
      * Lista que tiene los datos de prueba.
      */
     private List<FacturaEntity> data = new ArrayList<FacturaEntity>();
+    private List<ServicioEntity> dataServicio = new ArrayList<ServicioEntity>();
     
     /**
      * Variable para marcar las transacciones del em anterior cuando se
@@ -87,11 +89,16 @@ public class FacturaPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            
-            FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
-
+            ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
             em.persist(entity);
-            
+            dataServicio.add(entity);
+        }
+        for (int i = 0; i < 3; i++) {
+            FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
+            if (i == 0) {
+                entity.setServicio(dataServicio.get(0));
+            }
+            em.persist(entity);
             data.add(entity);
         }
     }
@@ -154,7 +161,7 @@ public class FacturaPersistenceTest {
     @Test
     public void getFacturaTest() {
         FacturaEntity entity = data.get(0);
-        FacturaEntity newEntity = facturaPersistence.find(entity.getId());
+        FacturaEntity newEntity = facturaPersistence.find(dataServicio.get(0).getId(), entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }

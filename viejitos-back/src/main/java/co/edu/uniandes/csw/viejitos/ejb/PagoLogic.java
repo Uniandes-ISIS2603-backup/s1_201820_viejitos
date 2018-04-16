@@ -27,9 +27,9 @@ public class PagoLogic {
     @Inject
     private PagoPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
-    //TODO: Esta variable nunca se usa
-    @Inject
-    private ServicioPersistence persistenceServicio;
+    //TODO: DONE Esta variable nunca se usa
+    //@Inject
+    //private ServicioPersistence persistenceServicio;
     
     public PagoEntity create( PagoEntity entity ) throws BusinessLogicException
 	{
@@ -100,12 +100,17 @@ public class PagoLogic {
 		return persistence.update( entity );
 	}
 
-	public void delete( PagoEntity entity )
+	public void delete( PagoEntity entity ) throws BusinessLogicException
 	{
-		LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Pago con id={0}", entity.getId( ) );
-        //TODO: este método debe recibir un id y hay que validar que existe un PagoEntity con ese id
+            if(persistence.find(entity.getId()) == null)
+            {
+               throw new BusinessLogicException("No existe una entidad de Pago con el id \"" + entity.getId() + "\""); 
+            }
+            
+            LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Pago con id={0}", entity.getId( ) );
+            //TODO: DONE este método debe recibir un id y hay que validar que existe un PagoEntity con ese id
  
-		persistence.delete( entity.getId() );
-		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Pago con id={0}", entity.getId( ) );
+            persistence.delete( entity.getId() );
+            LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Pago con id={0}", entity.getId( ) );
 	}
 }
