@@ -13,7 +13,7 @@
             var basePath = 'src/modules/servicios/';
             // Mostrar la lista de servicios será el estado por defecto del módulo
             $urlRouterProvider.otherwise("/serviciosList");
-            // Definición del estado 'serviciosList' donde se listan los autores
+            // Definición del estado 'serviciosList' donde se listan los servicios
             $stateProvider.state('serviciosList', {
                 // Url que aparecerá en el browser
                 url: '/servicios/list',
