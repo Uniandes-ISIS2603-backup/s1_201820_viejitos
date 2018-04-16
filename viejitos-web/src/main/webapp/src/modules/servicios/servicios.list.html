@@ -12,14 +12,14 @@ and open the template in the editor.
             <thead>
                 <tr>
                     <th>Id</th>    
-                    <th>name</th>  
+                    <th>Nombre</th>  
 
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="servicio in serviciosRecords">
-                    <td id="{{$index}}-id">{{servicio.id}}</td>
-                    <td id="{{$index}}-name">{{servicio.name}}</td>                   
+                    <td>{{servicio.id}}</td>
+                    <td>{{servicio.name}}</td>                   
                 </tr>
             </tbody>
         </table>
