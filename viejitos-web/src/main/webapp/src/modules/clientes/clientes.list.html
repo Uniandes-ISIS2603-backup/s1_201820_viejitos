@@ -1,0 +1,77 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+<div class="container-fluid" ng-repeat="cliente in clientesRecords">
+    <div class="col-lg-3">
+        <h3>Informacion Basica</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Login</th>
+                    <th>Calificacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{cliente.nombre}} </td>  
+                    <td> {{cliente.login}} </td> 
+                    <td> {{cliente.calificacion.puntaje}} </td> 
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-3">
+        <h3>Servicios</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Descripcion</th>
+                    <th>Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat = "servicio in cliente.servicios">
+                    <td> {{servicio.fecha}} </td>
+                    <td> {{servicio.descripcion}} </td> 
+                    <td> {{servicio.hora}} </td>  
+                </tr>
+            </tbody>
+        </table>
+    </div> 
+    <div class="col-lg-3">
+        <h3>Cita</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{cliente.cita.fecha}} </td>
+                    <td> {{cliente.cita.hora}} </td>  
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-3">
+        <h3>Historia Clinica</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Cirugias</th>
+                    <th>Enfermedades</th>
+                    <th>Medicamentos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> {{cliente.historiaC.cirugias}} </td>
+                    <td> {{cliente.historiaC.enfermedades}} </td> 
+                    <td> {{cliente.historiaC.medicamentos}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

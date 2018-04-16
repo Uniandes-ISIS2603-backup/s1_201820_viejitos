@@ -1,0 +1,41 @@
+[{
+      "nombre": "John Doe",
+      "login": "johndoe23",
+      "calificacion": {
+          "puntaje": 4
+                      },
+      "cita": {
+           "fecha": "15/02/2018",
+           "hora": "14:00" },
+      "historiaC": {
+           "id": 1114,
+           "enfermedades": "Ninguna.",
+           "medicamentos": "Ninguna",
+           "cirugias": "Reemplazo de cadera." },
+      "servicios": []
+ },
+
+ {
+      "nombre": "Alejandro Ayala",
+      "login": "alayala12",
+      "calificacion": {
+          "puntaje": 4.5
+                      },
+      "cita": {},
+      "historiaC": {
+           "id": 1115,
+           "enfermedades": "Artritis",
+           "medicamentos": "Ninguna",
+           "cirugias": "Ninguna." },
+      "servicios": [ {
+           "fecha": "15/02/2018",
+           "hora": "14:00",
+           "descripcion": "Caminata",
+           "finalizado": false },
+ 
+                     {
+           "fecha": "16/02/2018",
+           "hora": "15:00",
+           "descripcion": "Acompañamiento a cita médica.",
+           "finalizado": false } ]
+ } ]
