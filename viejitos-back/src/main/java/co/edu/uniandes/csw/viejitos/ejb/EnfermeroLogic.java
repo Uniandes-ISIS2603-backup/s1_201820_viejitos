@@ -27,14 +27,16 @@ public class EnfermeroLogic {
     private EnfermeroPersistence persistencia;
     
     public EnfermeroEntity create(EnfermeroEntity entity) throws BusinessLogicException{
-        LOGGER.info( "Inicia proceso de creación de una entidad de Enfermero" );
-	// Verifica la regla de negocio que dice que no puede haber dos entidades de Viejitos con el mismo nombre
-	if( persistencia.findByLogin(entity.getLogin()) != null ){
-            throw new BusinessLogicException( "Ya existe una entidad de Enfermero con el login \"" + entity.getLogin( ) + "\"" );
-	}
-	// Invoca la persistencia para crear la entidad de Viejito
-	persistencia.create( entity );
-	LOGGER.info( "Termina proceso de creación de entidad de Enfermero" );
+        if(entity!=null){
+            LOGGER.info( "Inicia proceso de creación de una entidad de Enfermero" );
+            // Verifica la regla de negocio que dice que no puede haber dos entidades de Viejitos con el mismo nombre
+            if( persistencia.findByLogin(entity.getLogin()) != null ){
+                throw new BusinessLogicException( "Ya existe una entidad de Enfermero con el login \"" + entity.getLogin( ) + "\"" );
+            }
+            // Invoca la persistencia para crear la entidad de Viejito
+            persistencia.create( entity );
+            LOGGER.info( "Termina proceso de creación de entidad de Enfermero" );
+        }
 	return entity;
     }
     
@@ -59,7 +61,7 @@ public class EnfermeroLogic {
     }
 
     public EnfermeroEntity update( EnfermeroEntity entity ) throws BusinessLogicException{
-        if (persistencia.findByLogin(entity.getLogin()) != null) {
+        if (persistencia.findByLogin(entity.getLogin()) == null) {
             throw new BusinessLogicException("No existe una entidad de Enfermero con el login \"" + entity.getLogin() + "\"");
         }
         return persistencia.update( entity );

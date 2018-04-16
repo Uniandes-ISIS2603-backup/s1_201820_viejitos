@@ -27,9 +27,9 @@ public class EnfermeroPersistence
 	 */
 	public EnfermeroEntity create( EnfermeroEntity entity )
 	{
-		LOGGER.info( "Creando una nueva entidad de viejitos" );
+		LOGGER.info( "Creando una nueva entidad de enfermero" );
 		em.persist( entity );
-		LOGGER.info( "Creando una entidad de viejitos" );
+		LOGGER.info( "Creando una entidad de enfermero" );
 		return entity;
 	}
 

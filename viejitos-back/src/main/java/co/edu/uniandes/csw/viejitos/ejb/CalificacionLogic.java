@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.viejitos.ejb;
 
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.CalificacionPersistence;
+import co.edu.uniandes.csw.viejitos.persistence.EnfermeroPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +27,9 @@ public class CalificacionLogic {
 
     @Inject
     private CalificacionPersistence persistencia;
+    
+    @Inject 
+    private EnfermeroPersistence persistenciaEnf;
     
     public CalificacionEntity create(CalificacionEntity entity) throws BusinessLogicException{
         if(entity!=null){
@@ -47,6 +52,10 @@ public class CalificacionLogic {
 	List<CalificacionEntity> entities = persistencia.findAll( );
 	LOGGER.info( "Termina proceso de consultar todas las entidades de Calidicaciones" );
 	return entities;
+    }
+    
+    public List<CalificacionEntity> getAllForEnf( Long idEnfermero){
+       return persistencia.findForTarget(persistenciaEnf.find(idEnfermero).getLogin());
     }
     
    public CalificacionEntity getById( Long id ){

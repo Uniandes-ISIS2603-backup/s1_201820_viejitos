@@ -1,4 +1,4 @@
-    package co.edu.uniandes.csw.viejitos.persistence;
+package co.edu.uniandes.csw.viejitos.persistence;
 
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import java.util.List;
@@ -41,6 +41,12 @@ public class CalificacionPersistence
 	{
 		return em.find( CalificacionEntity.class, id );
 	}
+        
+        public List<CalificacionEntity> findForTarget( String loginCalificado )
+        {
+            TypedQuery<CalificacionEntity> query = em.createQuery( "select u from CalificacionEntity u where u.loginCalificado = " + loginCalificado + "", CalificacionEntity.class );
+            return query.getResultList( );
+        }
 
 	public CalificacionEntity update( CalificacionEntity entity )
 	{

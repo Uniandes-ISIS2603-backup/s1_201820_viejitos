@@ -25,7 +25,8 @@ import java.util.ArrayList;
  *      "contrasenia":string,
  *      "tipo":string,
  *      "calificaciones":[calificaciones],
- *      "servicios":[servicios]
+ *      "servicios":[servicios],
+ *      "clientes":[clientes]
  *  }
  * </pre>
  *
@@ -33,14 +34,15 @@ import java.util.ArrayList;
  * <pre>
  *  {
  *      "id":2678389,
- *      "nombre":"Juan Espitia",
- *      "cv":"./documents/juanHDV.pdf",
- *      "login":,"js.espitia"
+ *      "nombre":"Miguel Andres Marulanda Ramírez",
+ *      "cv":"./documents/miguelHDV.pdf",
+ *      "login":,"ma.marulanda"
  *      "contrasenia":"a89ess0909",
  *      "tipo":"Enfermero",
  *      "calificaciones":[{"id":209873, "puntaje":4.5,"comentario":"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado","tipoCalificador":"cliente",
- * "loginCalificador":"af.ramirez","tipoCalificado":"enfermero","loginCalificado":"ma.marulanda"}]
- *      "servicios":[{ "tipo": 2,"fecha": 03/05/2017,"hora": "9:30","descripción": "Acompañamiento a cita","finalizado": true}]
+ *      "loginCalificador":"af.ramirez","tipoCalificado":"enfermero","loginCalificado":"ma.marulanda"}]
+ *      "servicios":[{ "tipo": 2,"fecha": 03/05/2017,"hora": "9:30","descripción": "Acompañamiento a cita","finalizado": true}],
+ *      "clientes":[{"id": 12345, "nombre": "Andres Felipe Ramírez Triana", "login": "af.ramirez","contrasena": "jd124, "estado": 1,"tipo": 1}]
  *  }
  * </pre>
  *
@@ -123,7 +125,7 @@ public class EnfermeroDetailDTO extends EnfermeroDTO {
     @Override
     public EnfermeroEntity toEntity() {
         EnfermeroEntity entidad = super.toEntity();
-        //TODO: this.calendar puede ser null
+        //TODO:DONE this.calendar puede ser null
         if(this.calendar!=null)
             entidad.setCalendario(this.calendar.toEntity());
         List<CalificacionEntity> cals = new ArrayList<>();
