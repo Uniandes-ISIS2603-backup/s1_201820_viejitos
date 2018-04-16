@@ -8,11 +8,14 @@ package co.edu.uniandes.csw.viejitos.test.logic;
 import co.edu.uniandes.csw.viejitos.ejb.CitaLogic;
 import co.edu.uniandes.csw.viejitos.ejb.MedicoLogic;
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
+import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.CitaPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.MedicoPersistence;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -35,7 +38,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class CitaLogicTest {
-      private PodamFactory factory = new PodamFactoryImpl();
+
+    private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private CitaLogic citaLogic;
@@ -57,7 +61,7 @@ public class CitaLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     /**
      * Configuración inicial de la prueba.
      */
@@ -77,47 +81,111 @@ public class CitaLogicTest {
             }
         }
     }
-    
-     /**
+
+    /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        
+
         em.createQuery("delete from CitaEntity").executeUpdate();
-        
+
     }
-    
+
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
      */
     private void insertData() {
-        for (int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++) {
             CitaEntity entity = factory.manufacturePojo(CitaEntity.class);
             em.persist(entity);
             data.add(entity);
         }
     }
-    
+
     /**
      * Prueba para crear un Servicio
      */
-    @Test 
+    @Test
     public void createCitaTest() throws BusinessLogicException {
-                PodamFactory factory = new PodamFactoryImpl();
+        PodamFactory factory = new PodamFactoryImpl();
         CitaEntity newEntity = factory.manufacturePojo(CitaEntity.class);
-        CitaEntity result = citaLogic.create(newEntity);
+        if (newEntity.getCliente() != null && em.find(ClienteEntity.class, newEntity.getCliente().getId()) != null) {
+            if (newEntity.getMedico() != null && em.find(MedicoEntity.class, newEntity.getMedico().getId()) == null) {
+                try {
+                    CitaEntity result = citaLogic.create(newEntity);
+                    Assert.fail("Deberia lanzar excepcion");
+                } catch (Exception e) {
 
-        Assert.assertNotNull(result);
+                }
 
-        CitaEntity entity = em.find(CitaEntity.class, result.getId());
+            } else {
+                try {
+                    CitaEntity result = citaLogic.create(newEntity);
+                    Assert.assertNotNull(result);
+                    CitaEntity entity = em.find(CitaEntity.class, result.getId());
+                    Assert.assertEquals(newEntity.getName(), entity.getName());
 
-        Assert.assertEquals(newEntity.getName(), entity.getName());
+                } catch (Exception e) {
+                    Assert.fail("No deberia lanzar excepcion");
+                }
+            }
+        }
+        if (newEntity.getMedico() != null && em.find(MedicoEntity.class, newEntity.getMedico().getId()) != null) {
+            if (newEntity.getCliente() != null && em.find(ClienteEntity.class, newEntity.getId()) == null) {
+                try {
+                    CitaEntity result = citaLogic.create(newEntity);
+                    Assert.fail("Deberia lanzar excepcion");
+                } catch (Exception e) {
+
+                }
+
+            } else {
+                if (newEntity.getCliente().getCita() == null) {
+                    try {
+                        CitaEntity result = citaLogic.create(newEntity);
+                        Assert.fail("Deberia lanzar excepcion");
+                    } catch (Exception e) {
+
+                    }
+                } else {
+                    try {
+                        CitaEntity result = citaLogic.create(newEntity);
+                        Assert.assertNotNull(result);
+                        CitaEntity entity = em.find(CitaEntity.class, result.getId());
+                        Assert.assertEquals(newEntity.getName(), entity.getName());
+                    } catch (Exception e) {
+                        Assert.fail("No deberia lanzar excepcion");
+                    }
+                }
+            }
+        }
+        if (newEntity.getMedico() != null && em.find(MedicoEntity.class, newEntity.getMedico().getId()) != null && newEntity.getCliente() != null && em.find(ClienteEntity.class, newEntity.getCliente().getId()) != null) {
+            Calendar today = Calendar.getInstance();
+            today.set(Calendar.DAY_OF_MONTH, Calendar.WEEK_OF_YEAR, Calendar.YEAR);
+            Date d = today.getTime();
+            if (newEntity.getFecha().before(d)) {
+                try {
+                    CitaEntity result = citaLogic.create(newEntity);
+                    Assert.fail("Deberia lanzar excepcion");
+                } catch (Exception e) {
+
+                }
+            } else {
+                try {
+                    CitaEntity result = citaLogic.create(newEntity);
+                    Assert.assertNotNull(result);
+                    CitaEntity entity = em.find(CitaEntity.class, result.getId());
+                    Assert.assertEquals(newEntity.getName(), entity.getName());
+                } catch (Exception e) {
+                    Assert.fail("No deberia lanzar excepcion");
+                }
+            }
+        }
         //
     }
-    
-     /**
+
+    /**
      * Prueba para consultar la lista de Servicios
      */
     @Test
@@ -134,7 +202,7 @@ public class CitaLogicTest {
             Assert.assertTrue(found);
         }
     }
-    
+
     /**
      * Prueba para consultar un Servicio
      */
@@ -145,7 +213,7 @@ public class CitaLogicTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }
-    
+
     /**
      * Prueba para eliminar un Servicio
      */
@@ -166,11 +234,11 @@ public class CitaLogicTest {
 
             }
         }
-        CitaEntity deleted = em.find( CitaEntity.class, entity.getId());
+        CitaEntity deleted = em.find(CitaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
-     /**
+
+    /**
      * Prueba para actualizar un Servicio
      */
     @Test
@@ -180,31 +248,76 @@ public class CitaLogicTest {
         CitaEntity newEntity = factory.manufacturePojo(CitaEntity.class);
 
         newEntity.setId(entity.getId());
-        if(em.find(CitaEntity.class, entity.getId())==null)
-        {
-            try
-            {
+        if (em.find(CitaEntity.class, entity.getId()) == null) {
+            try {
                 citaLogic.update(newEntity);
                 Assert.fail("Deberia lanzar excepcion");
+            } catch (Exception e) {
+
             }
-            catch(Exception e)
-            {
-                
+        } else {
+            if (newEntity.getMedico() != null && em.find(MedicoEntity.class, newEntity.getMedico().getId()) != null) {
+                if (newEntity.getCliente() != null && em.find(ClienteEntity.class, newEntity.getCliente().getId()) == null) {
+                    try {
+                        citaLogic.update(newEntity);
+                        Assert.fail("Deberia lanzar excepcion");
+                    } catch (Exception e) {
+
+                    }
+                } else {
+                    try {
+                        citaLogic.update(newEntity);
+                    } catch (Exception e) {
+                        Assert.fail("No deberia lanzar excepcion");
+                    }
+                    CitaEntity resp = em.find(CitaEntity.class, entity.getId());
+
+                    Assert.assertEquals(newEntity.getId(), resp.getId());
+                }
             }
+
+            if (newEntity.getCliente() != null && em.find(ClienteEntity.class, newEntity.getCliente().getId()) != null) {
+                if (newEntity.getMedico() != null && em.find(MedicoEntity.class, newEntity.getMedico().getId()) == null) {
+                    try {
+                        citaLogic.update(newEntity);
+                        Assert.fail("Deberia lanzar excepcion");
+                    } catch (Exception e) {
+
+                    }
+                } else {
+                    try {
+                        citaLogic.update(newEntity);
+                    } catch (Exception e) {
+                        Assert.fail("No deberia lanzar excepcion");
+                    }
+                    CitaEntity resp = em.find(CitaEntity.class, entity.getId());
+
+                    Assert.assertEquals(newEntity.getId(), resp.getId());
+                }
+            }
+            if (newEntity.getMedico() != null && em.find(MedicoEntity.class, newEntity.getMedico().getId()) != null && newEntity.getCliente() != null && em.find(ClienteEntity.class, newEntity.getCliente().getId()) != null) {
+                Calendar today = Calendar.getInstance();
+                today.set(Calendar.DAY_OF_MONTH, Calendar.WEEK_OF_YEAR, Calendar.YEAR);
+                Date d = today.getTime();
+                if (newEntity.getFecha().before(d)) {
+                    try {
+                        citaLogic.update(newEntity);
+                        Assert.fail("Deberia lanzar excepcion");
+                    } catch (Exception e) {
+
+                    }
+                } else {
+                    try {
+                        citaLogic.update(newEntity);
+                    } catch (Exception e) {
+                        Assert.fail("No deberia lanzar excepcion");
+                    }
+                    CitaEntity resp = em.find(CitaEntity.class, entity.getId());
+
+                    Assert.assertEquals(newEntity.getId(), resp.getId());
+                }
+            }
+
         }
-        else
-        {
-            try
-            {
-                citaLogic.update(newEntity);
-            }
-            catch(Exception e)
-            {
-                Assert.fail("No deberia lanzar excepcion");
-            }
-            CitaEntity resp = em.find(CitaEntity.class, entity.getId());
-         
-            Assert.assertEquals(newEntity.getId(), resp.getId());
-        }
-    }   
+    }
 }

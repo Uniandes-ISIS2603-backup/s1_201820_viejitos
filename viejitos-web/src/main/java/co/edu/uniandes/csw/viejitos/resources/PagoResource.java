@@ -164,7 +164,7 @@ public class PagoResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deletePago(@PathParam("id") Long id) {
+    public void deletePago(@PathParam("id") Long id) throws BusinessLogicException {
         PagoEntity entity = pagoLogic.getById(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso /pago/" + id + " no existe.", 404);
