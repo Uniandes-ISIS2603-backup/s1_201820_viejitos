@@ -1,24 +1,29 @@
 [
     {
         "id": 1,
-        "name": "Acompañamiento a cita médica"
+        "name": "Acompañamiento a cita médica",
+        "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a una cita médica. Nuestro enfermero llegará a su lugar de residencia, se desplazarán a las instalaciones de su médico, lo esperarará y lo acompañará devuelta a su residencia."
     }
     ,
     {
         "id": 2,
-        "name": "Acompañamiento a exámenes médicos"
+        "name": "Acompañamiento a exámenes médicos",
+        "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a realizarse un exámen médico. Nuestro enfermero llegará a su lugar de residencia, se desplazarán al laboratorio donde debe realizarse el exámen, lo esperarará y lo acompañará devuelta a su residencia."
     },
     {
         "id": 3,
-        "name": "Acompañamiento a caminata"
+        "name": "Acompañamiento a caminata",
+        "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a realizar una caminata. Nuestro enfermero llegará a su lugar de residencia, realizrán la caminata en el espacio que usted desee, y lo acompañara devuelta a su residencia."
     },
     {
         "id": 4,
-        "name": "Acompañamiento a un programa de ejercicio"
+        "name": "Acompañamiento a un programa de ejercicio",
+        "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a algún programa de ejercicio. Nuestro enfermero llegara a su lugar de residencia, se desplazarán al las instalaciones de su actividad, lo esperarará y lo acompañará devuelta a su residencia."
     },
     
     {
         "id": 5,
-        "name": "Acompañamiento a una actividad lúdica"
+        "name": "Acompañamiento a una actividad lúdica",
+        "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros acuda a su lugar de residencia para alguna actividad lúdica."
     }
 ]
