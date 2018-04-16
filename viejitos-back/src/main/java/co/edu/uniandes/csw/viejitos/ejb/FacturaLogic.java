@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.ejb;
 
 import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.FacturaPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
@@ -27,11 +28,13 @@ public class FacturaLogic {
     @Inject
     private FacturaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
-    //TODO: Esta variable no se usa
     @Inject
-    private ServicioPersistence persistenceServicio;
+    private ServicioLogic servicioLogic;
+    //TODO: DONE Esta variable no se usa
+    //@Inject
+    //private ServicioPersistence persistenceServicio;
     
-    public FacturaEntity create( FacturaEntity entity ) throws BusinessLogicException
+    public FacturaEntity create(Long serviceid, FacturaEntity entity ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de creación de una entidad de Factura" );
 		// Invoca la persistencia para crear la entidad de Factura
@@ -50,31 +53,62 @@ public class FacturaLogic {
                         throw new BusinessLogicException( "La entidad de Factura no puede tener un costo total negativo" );
                 }
                 
-		persistence.create( entity );
+                ServicioEntity servicio=servicioLogic.getById(serviceid);
+                entity.setServicio(servicio);
 		LOGGER.info( "Termina proceso de creación de entidad de Factura" );
-		return entity;
+		return persistence.create( entity );
 	}
 
-	public List<FacturaEntity> getAll( )
+        /**
+        * Obtiene la lista de los registros de Factura que pertenecen a un Servicio.
+        * @param servicioid id del Servicio el cual es padre de las Facturas.
+        * @return Colección de objetos de FacturaEntity.
+        * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException Error cuando el servicio no tiene quejas.
+        */
+	public FacturaEntity getAll( Long servicioid ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de consultar todas las entidades de Factura" );
-		List<FacturaEntity> entities = persistence.findAll( );
-		LOGGER.info( "Termina proceso de consultar todas las entidades de Factura" );
-		return entities;
-	}
-
-	public FacturaEntity getById( Long id )
-	{
-		return persistence.find( id );
-	}
-
-	public FacturaEntity update( FacturaEntity entity ) throws BusinessLogicException
-	{
-            //Reglas de negocio
-                if( persistence.find( entity.getId()) == null )
-                {
-                        throw new BusinessLogicException( "Para actualizar, debe existir una entidad de Factura con el id \"" + entity.getId( ) + "\"" );
+                ServicioEntity servicio=servicioLogic.getById(servicioid);
+                
+                if (servicio.getFactura() == null) {
+                    throw new BusinessLogicException("El servicio que consulta aún no tiene facturas");
                 }
+              
+		
+		LOGGER.info( "Termina proceso de consultar todas las entidades de Factura" );
+		return servicio.getFactura();
+	}
+
+        /**
+        * Obtiene los datos de una instancia de Factura a partir de su ID.
+        * La existencia del elemento padre Servicio se debe garantizar.
+        * @param idServicio El id del Servicio buscado
+        * @param idFactura Identificador de la Queja a consultar
+        * @return Instancia de QuejaEntity con los datos de la Queja consultada.
+        * 
+        */
+	public FacturaEntity getById( Long idServicio, Long idFactura )
+	{
+		return persistence.find( idServicio, idFactura );
+	}
+
+        /**
+        * Actualiza la información de una instancia de Factura
+        * @param entity Instancia de FacturaEntity con los nuevos datos.
+        * @param idServicio id del Servicio el cual sera padre de la Factura actualizada.
+        * @return Instancia de FacturaEntity con los datos actualizados.
+        * 
+        */
+	public FacturaEntity update( Long idServicio, FacturaEntity entity ) throws BusinessLogicException
+	{
+            LOGGER.info("Inicia proceso de actualizar factura");
+            ServicioEntity servicio=servicioLogic.getById(idServicio);
+            entity.setServicio(servicio);
+            
+            if (persistence.find(idServicio, entity.getId()) == null) {
+                throw new BusinessLogicException("No existe una entidad de Factura con el id \"" + entity.getId() + "\"");
+            }
+            //Reglas de negocio
                 /**if( entity.getServicio() == null )
 		{
 			throw new BusinessLogicException( "La entidad de Factura debe tener un servicio asociado" );
@@ -83,21 +117,32 @@ public class FacturaLogic {
 		{
 			throw new BusinessLogicException( "El Servicio de la Factura no es válido" );
 		}*/
-                if( entity.getCostoTotal() < 0 )
-                {
-                        throw new BusinessLogicException( "La entidad de Factura no puede tener un costo total negativo" );
-                }
+            if( entity.getCostoTotal() < 0 )
+            {
+                throw new BusinessLogicException( "La entidad de Factura no puede tener un costo total negativo" );
+            }
                 
-		return persistence.update( entity );
+            return persistence.update( entity );
 	}
 
-	public void delete( FacturaEntity entity )
+        /**
+        * Elimina una instancia de Queja de la base de datos.
+        * @param id Identificador de la instancia a eliminar.
+        * @param servicioid id del Servicio el cual es padre de la Queja.
+        * 
+        */
+	public void delete( Long idServicio, Long idFactura ) throws BusinessLogicException
 	{
-	//TODO: este método debe recibir un id y hay que validar que existe un FacturaEntity con ese id
-            LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Factura con id={0}", entity.getId( ) );
-                
-		persistence.delete( entity.getId() );
-		LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Factura con id={0}", entity.getId( ) );
+	//TODO: DONE este método debe recibir un id y hay que validar que existe un FacturaEntity con ese id
+            LOGGER.log( Level.INFO, "Inicia proceso de borrar la entidad de Factura con id={0}", idFactura );
+            
+            if(persistence.find(idServicio, idFactura) == null)
+            {
+               throw new BusinessLogicException("No existe una entidad de Factura con el id \"" + idFactura + "\""); 
+            }
+    
+            persistence.delete( idFactura );
+            LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Factura con id={0}", idFactura );
 	}
     
 }

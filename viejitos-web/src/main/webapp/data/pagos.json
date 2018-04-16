@@ -1,0 +1,18 @@
+[
+    
+    {
+        "id": 1,
+        "medio": "PSE",
+        "pagado": true,
+        "fechaLimite": "16/04/2018",
+        "valor": 30000
+    }
+    ,
+    {
+        "id": 2,
+        "medio": "Tarjeta de Crédito",
+        "pagado": false,
+        "fechaLimite": "18/05/2018",
+        "valor": 50000
+    }
+]

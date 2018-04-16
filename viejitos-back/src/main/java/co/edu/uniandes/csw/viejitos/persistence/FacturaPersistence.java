@@ -27,9 +27,21 @@ public class FacturaPersistence {
     @PersistenceContext(unitName = "ViejitosPU")
     protected EntityManager em;
 
-    public FacturaEntity find(Long id) {
-        LOGGER.log(Level.INFO, "Consultando Factura con id={0}", id);
-        return em.find(FacturaEntity.class, id);
+    public FacturaEntity find(Long idServicio, Long idFactura) {
+        LOGGER.log(Level.INFO, "Consultando factura con id={0}", idFactura);
+        TypedQuery<FacturaEntity> q = em.createQuery("select p from QuejaEntity p where (p.servicio.id = :idServicio) and (p.id = :idFactura)", FacturaEntity.class);
+        q.setParameter("idServicio", idServicio);
+        q.setParameter("idFactura", idFactura);
+        List<FacturaEntity> results = q.getResultList();
+        FacturaEntity factura = null;
+        if (results == null) {
+            factura = null;
+        } else if (results.isEmpty()) {
+            factura = null;
+        } else if (results.size() >= 1) {
+            factura = results.get(0);
+        }
+        return factura;
     }
 
     public List<FacturaEntity> findAll() {

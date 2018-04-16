@@ -42,7 +42,7 @@ import javax.ws.rs.WebApplicationException;
  * @author ISIS2603
  * @version 1.0
  */
-@Path("facturas")
+@Path("servicios/{idServicio: \\d+}/facturas")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -53,14 +53,18 @@ public class FacturaResource {
     FacturaLogic facturaLogic;
 
     /**
-     * <h1>POST /api/facturas : Crear una entidad de Factura.</h1>
+     * <h1>POST /api/servicios/{idServicio}/facturas : Crear una entidad de Factura.</h1>
      * <pre>Cuerpo de petición: JSON {@link FacturaDetailDTO}.
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Crea la factura.</code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: Ya existe la queja.
+     * </code>
      * </pre> Crea una nueva entidad de Factura con la informacion que se recibe
      * en el cuerpo de la petición.
      *
+     * @param idServicio id del servicio
      * @param dto {@link FacturaDetailDTO} - La entidad de Factura que se desea
      * guardar.
      * @return JSON {@link FacturaDetailDTO} - La entidad de Factura guardada.
@@ -68,32 +72,38 @@ public class FacturaResource {
      * Error de lógica que se genera cuando ya existe la entidad de Factura.
      */
     @POST
-    public FacturaDTO createFactura(FacturaDTO dto) throws BusinessLogicException {
-        return new FacturaDTO(facturaLogic.create(dto.toEntity()));
+    public FacturaDTO createFactura(@PathParam("idServicio") Long idServicio, FacturaDTO dto) throws BusinessLogicException {
+        return new FacturaDTO(facturaLogic.create(idServicio, dto.toEntity()));
     }
 
     /**
-     * <h1>GET /api/facturas : Obtener todas las entidades de Factura.</h1>
+     * <h1>GET /api/servicios/{idServicio}/facturas : Obtener todas las entidades de Factura.</h1>
      * <pre>Busca y devuelve todas las entidades de Factura que existen en la aplicacion.
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve las facturas.</code>
      * </pre>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe un servicio con el id dado.
+     * </code>
      *
+     * @param idServicio id del servicio
      * @return JSONArray {@link FacturaDetailDTO} - Las entidades de Factura
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no se encuentra el servicio.
      */
     @GET
-    public List<FacturaDetailDTO> getFacturas() {
+    public FacturaDetailDTO getFacturas(@PathParam("idServicio") Long idServicio) throws BusinessLogicException {
         List<FacturaDetailDTO> facturas = new ArrayList<>();
-        for (FacturaEntity actual : facturaLogic.getAll()) {
+        /**for (FacturaEntity actual : facturaLogic.getAll(idServicio)) {
             facturas.add(new FacturaDetailDTO(actual));
         }
-        return facturas;
+        * */
+        return new FacturaDetailDTO(facturaLogic.getAll(idServicio));
     }
 
     /**
-     * <h1>GET /api/facturas/{id} : Obtener una entidad de Factura por id.</h1>
+     * <h1>GET /api/servicios/{idServicio}/facturas/{id} : Obtener una entidad de Factura por id.</h1>
      * <pre>Busca la entidad de Factura con el id asociado recibido en la URL y la devuelve.
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
@@ -103,22 +113,23 @@ public class FacturaResource {
      * </code>
      * </pre>
      *
+     * @param idServicio id del servicio
      * @param id Identificador de la entidad de Factura que se esta buscando.
      * Este debe ser una cadena de dígitos.
      * @return JSON {@link FacturaDetailDTO} - La entidad de Factura buscada
      */
     @GET
     @Path("{id: \\d+}")
-    public FacturaDetailDTO getFactura(@PathParam("id") Long id) {
-        FacturaEntity entity = facturaLogic.getById(id);
+    public FacturaDetailDTO getFactura(@PathParam("idServicio") Long idServicio, @PathParam("id") Long id) {
+        FacturaEntity entity = facturaLogic.getById(idServicio, id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /servicios/" + idServicio + "/facturas/" + id + " no existe.", 404);
         }
         return new FacturaDetailDTO(entity);
     }
 
     /**
-     * <h1>PUT /api/facturas/{id} : Actualizar una entidad de Factura con el id
+     * <h1>PUT /api/servicios/{idServicio}/facturas/{id} : Actualizar una entidad de Factura con el id
      * dado.</h1>
      * <pre>Cuerpo de petición: JSON {@link FacturaDetailDTO}.
      * Codigos de respuesta:
@@ -127,11 +138,15 @@ public class FacturaResource {
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found. No existe una factura con el id dado.
      * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: No se pudo actualizar la queja
+     * </code>
      * </pre>
      *
      * Actualiza la entidad de Factura con el id recibido en la URL con la
      * informacion que se recibe en el cuerpo de la petición.
      *
+     * @param idServicio id del servicio
      * @param id Identificador de la entidad de Factura que se desea actualizar.
      * Este debe ser una cadena de dígitos.
      * @param detailDTO {@link FacturaDetailDTO} La entidad de Factura que se
@@ -143,17 +158,17 @@ public class FacturaResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public FacturaDetailDTO updateFactura(@PathParam("id") Long id, FacturaDetailDTO detailDTO) throws BusinessLogicException {
+    public FacturaDetailDTO updateFactura(@PathParam("idServicio") Long idServicio, @PathParam("id") Long id, FacturaDetailDTO detailDTO) throws BusinessLogicException {
         detailDTO.setId(id);
-        FacturaEntity entity = facturaLogic.getById(id);
+        FacturaEntity entity = facturaLogic.getById(idServicio, id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /servicios/" + idServicio + "/facturas/" + id + " no existe.", 404);
         }
-        return new FacturaDetailDTO(facturaLogic.update(detailDTO.toEntity()));
+        return new FacturaDetailDTO(facturaLogic.update(idServicio, detailDTO.toEntity()));
     }
 
     /**
-     * <h1>DELETE /api/facturas/{id} : Borrar una entidad de Factura por
+     * <h1>DELETE /api/servicios/{idServicio}/facturas/{id} : Borrar una entidad de Factura por
      * id.</h1>
      * <pre>Borra la entidad de Factura con el id asociado recibido en la URL.
      * Códigos de respuesta:<br>
@@ -168,11 +183,11 @@ public class FacturaResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteFactura(@PathParam("id") Long id) {
-        FacturaEntity entity = facturaLogic.getById(id);
+    public void deleteFactura(@PathParam("idServicio") Long idServicio, @PathParam("id") Long id) throws BusinessLogicException {
+        FacturaEntity entity = facturaLogic.getById(idServicio, id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /facturas/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso /servicios/" + idServicio + "/facturas/" + id + " no existe.", 404);
         }
-        facturaLogic.delete(entity);
+        facturaLogic.delete(idServicio, id);
     }
 }
