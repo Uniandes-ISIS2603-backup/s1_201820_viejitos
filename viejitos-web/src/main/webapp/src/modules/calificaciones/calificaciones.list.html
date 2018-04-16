@@ -1,0 +1,44 @@
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Tipo
+                </th>
+                <th>
+                    Fecha 
+                </th>
+                <th>
+                    Calificador
+                </th>
+                <th>
+                    Puntaje
+                </th>
+                <th>
+                    Comentario
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="servicio in servicios">
+                <td>
+                    {{servicio.tipo}}
+                </td>
+                <td>
+                    {{servicio.fecha}}
+                </td>
+                <td>
+                    {{servicio.calificacion.loginCalificador}}
+                </td>
+                <td>
+                    {{servicio.calificacion.puntaje}}
+                </td>
+                <td>
+                    {{servicio.calificacion.comentario}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
