@@ -1,0 +1,23 @@
+ [{
+       "id":2678389,
+       "nombre":"Miguel Andres Marulanda Ramírez",
+       "cv":"./documents/miguelHDV.pdf",
+       "login":"ma.marulanda",
+       "contrasenia":"a89ess0909",
+       "tipo":"Enfermero",
+       "calificaciones":[],
+       "servicios":[],
+       "clientes":[]
+  },
+  {
+       "id":1,
+       "nombre":"Luis Carlos Sarmiento",
+       "cv":"./documents/sarmientoAngHDV.pdf",
+       "login":"lsang23",
+       "contrasenia":"aprendealgodinero",
+       "tipo":"Enfermero",
+       "calificaciones":[],
+       "servicios":[],
+       "clientes":[]
+  }
+ ]

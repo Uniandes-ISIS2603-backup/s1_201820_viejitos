@@ -33,7 +33,7 @@ import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
  *      "loginCalificador":"af.ramirez",
  *      "tipoCalificado":"enfermero",
  *      "loginCalificado":"ma.marulanda"
- *      "servicio":3222221
+ *      "servicio":[{ "tipo": 2,"fecha": 03/05/2017,"hora": "9:30","descripción": "Acompañamiento a cita","finalizado": true}]
  *  }
  * </pre>
  *

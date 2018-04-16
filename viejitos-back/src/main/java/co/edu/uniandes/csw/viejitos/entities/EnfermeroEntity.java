@@ -6,11 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.xml.bind.annotation.XmlRootElement;
+// import javax.xml.bind.annotation.XmlRootElement;
 import uk.co.jemos.podam.common.PodamExclude;
 
 @Entity
-@XmlRootElement
+// @XmlRootElement
 
 public class EnfermeroEntity extends BaseEntity implements Serializable{
     private String cv;
