@@ -1,25 +1,4 @@
-<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
-<div class="container-fluid" ng-repeat="cliente in clientesRecords">
-    <div class="col-lg-3">
-        <h3>Informacion Basica</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Login</th>
-                    <th>Calificacion</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> <a ui-sref="clienteDetail({clienteId: cliente.id})" class="thumb">{{cliente.nombre}}</a> </td>  
-                    <td> {{cliente.login}} </td> 
-                    <td> {{cliente.calificacion.puntaje}} </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!--
+<div>
     <div class="col-lg-3">
         <h3>Servicios</h3>
         <table class="table table-striped">
@@ -31,7 +10,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat = "servicio in cliente.servicios">
+                <tr ng-repeat = "servicio in currentCliente.servicios">
                     <td> {{servicio.fecha}} </td>
                     <td> {{servicio.descripcion}} </td> 
                     <td> {{servicio.hora}} </td>  
@@ -50,8 +29,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td> {{cliente.cita.fecha}} </td>
-                    <td> {{cliente.cita.hora}} </td>  
+                    <td> {{currentCliente.cita.fecha}} </td>
+                    <td> {{currentCliente.cita.hora}} </td>  
                 </tr>
             </tbody>
         </table>
@@ -68,11 +47,11 @@
             </thead>
             <tbody>
                 <tr>
-                    <td> {{cliente.historiaC.cirugias}} </td>
-                    <td> {{cliente.historiaC.enfermedades}} </td> 
-                    <td> {{cliente.historiaC.medicamentos}} </td>
+                    <td> {{currentCliente.historiaC.cirugias}} </td>
+                    <td> {{currentCliente.historiaC.enfermedades}} </td> 
+                    <td> {{currentCliente.historiaC.medicamentos}} </td>
                 </tr>
             </tbody>
         </table>
-    </div> -->
     </div>
+</div>
