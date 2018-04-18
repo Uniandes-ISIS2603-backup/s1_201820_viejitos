@@ -8,7 +8,8 @@
         'serviciosModule',
         'quejasModule',
         'pagosModule',
-        'clienteModule'
+        'clienteModule',
+          'calendarioModule'
 
     ]);
     // Resuelve problemas de las promesas
