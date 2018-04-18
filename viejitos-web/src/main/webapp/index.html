@@ -32,8 +32,18 @@
         <script src="src/modules/clientes/clientes.mod.js" type="text/javascript"></script>
         <script src="src/modules/clientes/clientes.ctrl.js" type="text/javascript"></script>
         
+     
+          <!--trainers-->
+         <script src="src/modules/calendarios/calendarios.mod.js" type="text/javascript"></script>
+        <script src="src/modules/calendarios/calendarios.ctrl.js" type="text/javascript"></script>
+        
+    
+        
+        
         <script src="src/app.js" type="text/javascript"></script> 
         <script src="src/http-interceptor.factory.js" type="text/javascript"></script>
+        
+        
       
     </head>
 
@@ -45,11 +55,14 @@
                 <div class="col-md-12">
                     <ul class="nav nav-tabs">
                         <!-- Enlace al estado de listar las entidades de losViejitos -->
+                          
                         <li><a ui-sref="viejitosList">Viejitos</a></li>
                         <li><a ui-sref="serviciosList">Servicios</a></li>
                         <li><a ui-sref="quejasList">Quejas</a></li>
                         <li><a ui-sref="pagosList">Pagos</a></li>
                         <li><a ui-sref="clientesList">Clientes</a></li>
+                    
+                      <li><a ui-sref="calendariosList">calendario</a></li> 
                         
                     </ul>
                 </div>
