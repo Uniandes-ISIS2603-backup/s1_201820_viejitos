@@ -22,16 +22,43 @@
             // Mostrar la lista de clientes será el estado por defecto del módulo
             $urlRouterProvider.otherwise("/clientesList");
             // Definición del estado 'clientesList' donde se listan los clientes
-            $stateProvider.state('clientesList', {
-                // Url que aparecerá en el browser
-                url: '/clientes/list',
+            $stateProvider.state('clientes', {
+                url: '/clientes',
+                abstract: true,
                 views: {
                     'mainView': {
-                        templateUrl: basePath + 'clientes.list.html',
+                        templateUrl: basePath + 'clientes.html',
                         controller: 'clienteCtrl',
                         controllerAs: 'ctrl'
                     }
                 }
+            }).state('clientesList', {
+                url: '/list',
+                parent: 'clientes',
+                views: {
+                    'listView': {
+                        templateUrl: basePath + 'clientes.list.html'
+                    }
+                }
+            }).state('clienteDetail', {
+                url: '/{clienteId:int}/detail',
+                parent: 'clientes',
+                param: {
+                    clienteId: null
+                },
+                views: {
+                    'listView': {
+                        templateUrl: basePath + 'clientes.list.html',
+                        controller: 'clienteCtrl',
+                        controllerAs: 'ctrl'
+                    },
+                    'detailView': {
+                        templateUrl: basePath + 'cliente.detail.html',
+                        controller: 'clienteCtrl',
+                        controllerAs: 'ctrl'
+                    }
+                }
+
             });
         }
     ]);

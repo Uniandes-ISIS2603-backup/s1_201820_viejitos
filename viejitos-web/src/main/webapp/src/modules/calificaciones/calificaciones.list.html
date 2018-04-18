@@ -1,44 +1,33 @@
 
-<div>
-    <table>
+<div class="table-responsive">
+    <table class="table">
         <thead>
             <tr>
-                <th>
-                    Tipo
-                </th>
-                <th>
-                    Fecha 
-                </th>
                 <th>
                     Calificador
                 </th>
                 <th>
-                    Puntaje
+                    Calificado
                 </th>
                 <th>
-                    Comentario
+                    Puntaje
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="servicio in servicios">
+            <tr ng-repeat="calificacion in calificacionesRecords">
                 <td>
-                    {{servicio.tipo}}
+                    {{calificacion.loginCalificador}}
                 </td>
                 <td>
-                    {{servicio.fecha}}
+                    {{calificacion.loginCalificado}}
                 </td>
                 <td>
-                    {{servicio.calificacion.loginCalificador}}
-                </td>
-                <td>
-                    {{servicio.calificacion.puntaje}}
-                </td>
-                <td>
-                    {{servicio.calificacion.comentario}}
+                    {{calificacion.puntaje}}
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+
 
