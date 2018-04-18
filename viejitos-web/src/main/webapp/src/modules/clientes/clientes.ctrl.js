@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module("clienteModule");
     mod.constant("clienteContext", "api/clientes");
-    mod.controller('clienteCtrl', ['$scope', '$http', 'clienteContext',
+    mod.controller('clienteCtrl', ['$scope', '$http', 'clienteContext', '$state',
         /**
          * @ngdoc controller
          * @name clientes.controller:clienteCtrl
@@ -18,7 +18,7 @@
          * @param {Object} clienteContext Constante injectada que contiene la ruta
          * donde se encuentra el API de Clientes en el Backend.
          */
-        function ($scope, $http, clienteContext) {
+        function ($scope, $http, clienteContext, $state) {
             /**
              * @ngdoc function
              * @name getClientes
@@ -35,6 +35,11 @@
             $http.get('data/clientes.json').then(function (response) {
                 $scope.clientesRecords = response.data;
             });
+            if (($state.params.clienteId !== undefined) && ($state.params.clienteId !== null)) {
+                $http.get(clienteContext + '/' + $state.params.clienteId).then(function (response) {
+                    $scope.currentCliente = response.data;
+                });
+            }
         }
     ]);
 }

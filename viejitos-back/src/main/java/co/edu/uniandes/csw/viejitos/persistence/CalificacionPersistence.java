@@ -44,7 +44,7 @@ public class CalificacionPersistence
         
         public List<CalificacionEntity> findForTarget( String loginCalificado )
         {
-            TypedQuery<CalificacionEntity> query = em.createQuery( "select u from CalificacionEntity u where u.loginCalificado = " + loginCalificado + "", CalificacionEntity.class );
+            TypedQuery<CalificacionEntity> query = em.createQuery( ("select u from CalificacionEntity u where u.loginCalificado = " + loginCalificado + ""), CalificacionEntity.class );
             return query.getResultList( );
         }
 
