@@ -9,6 +9,10 @@
         'quejasModule',
         'pagosModule',
         'clienteModule',
+        'calificacionesModule',
+        'enfermerosModule',
+        'citasModule',
+        'medicosModule'
           'calendarioModule'
 
     ]);
