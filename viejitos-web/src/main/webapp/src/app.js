@@ -8,12 +8,7 @@
         'serviciosModule',
         'quejasModule',
         'pagosModule',
-        'clienteModule',
-        'calificacionesModule',
-        'enfermerosModule',
-        'citasModule',
-        'medicosModule'
-          'calendarioModule'
+        'clienteModule'
 
     ]);
     // Resuelve problemas de las promesas
