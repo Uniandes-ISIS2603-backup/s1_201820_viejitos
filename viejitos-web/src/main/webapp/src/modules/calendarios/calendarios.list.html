@@ -1,68 +1,46 @@
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
 <div class="container-fluid">
 
-<style>
-.false {
-    color:white;
-    background-color:lightblue;
-    padding:5px;
-    font-family:"Courier New";
-}
-.true {
-    background-color:coral;
-    padding:2px;
-    font-family:Verdana;
-}
-
-
-</style>
-
-
-    
-
     <div class="row">
-        <h1> lo que sea   </h1>
-        <table class="table table-striped">
-            <tr>
-            <th> <span style="color:blue">franja 1</span></th>
-    <th><span style="color: blue">franja 2</span></th>
+        <h1> lo que sea www  </h1>
+        <table class="table">
+            
+            <tr >
+            <th> franja 1</th>
+    <th>franja 2</th>
     <th>franja 3</th>
        <th>franja 4</th>
        <th>franja 5</th>
-   
+
   </tr>
             <tr>
                 
-                <td  ng-repeat="franja in franjasRecords" ng-model="home" >
-
-var home;
-                    <div ng-class={{franja.ocupado}}> {{franja.horaInicio}} </div> <p>
-                        <span>{{franja.horaInicio}}   </span>
-                   {{franja.color}} {{franja.propiedad}}
-                        <span style="{{franja.color}}}">  {{franja.diaSemana}}</span>   
-
-                    <span ng-style="{'color: red': franja.ocupado === 'true', 'color: blue': franja.ocupado === 'Warning', 'color: green': franja.ocupado === 'Ignored'}">{{franja.ocupado}}</span>
-                
-                
+            <td  ng-repeat="franja in franjasRecords"  >
+                               
+          <span   ng-if="franja.ocupado=='true'" style="color:blue">
+                <p  class="bg-success"> {{franja.diaSemana}} </p> 
+              <p  class="bg-success"> {{franja.horaInicio}}</p>
+              <p  class="bg-success">{{franja.horaFin}}  </p>
+              
+          </span>
+             <span ng-if="franja.ocupado=='false'" style="color:blue">
+                            
+             <p  class="bg-primary"> {{franja.diaSemana}} </p> 
+              <p  class="bg-primary"> {{franja.horaInicio}}</p>
+              <p  class="bg-primary">{{franja.horaFin}}  </p>
+                 
+                 
+                 </span>
                 </td>
-                
-  
-        </tr>
-        
-        </table>
+           </tr>
+             </table>
     </div>
-</div>
-
-
-<p>Choose a class:</p>
-
-<select ng-model="home">
-<option value="sky">Sky</option>
-<option value="tomato">Tomato</option>
-</select>
-
-<div ng-class="home">
-  <h1>Welcome Home!</h1>
-  <p>I like it!</p>
+    
+    
+   
+    
+ 
+    
+    
 </div>
 

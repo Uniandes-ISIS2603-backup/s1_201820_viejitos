@@ -1,7 +1,5 @@
 [
 {
-    "propiedad":"<p>",
-"color":"color:blue",
  "diaSemana": "lunes",
   "horaInicio": "0800",
   
@@ -11,9 +9,7 @@
     },
     
     {
-        "propiedad":"<p>",
-"color":"color:blue",
- "diaSemana": "martes",
+   "diaSemana": "martes",
   "horaInicio": "0800",
   
       "ocupado": "true",
@@ -21,9 +17,7 @@
         "id": 2
     },
     {
-         "propiedad":"<p>",
-"color":"color:green",
- "diaSemana": "miercoles",
+       "diaSemana": "miercoles",
   "horaInicio": "0800",
   
       "ocupado": "true",
@@ -32,23 +26,19 @@
     },
 
  {
-  "propiedad":"<p>",
-"color":"color:red",
  "diaSemana": "jueves",
   "horaInicio": "0930",
   
-      "ocupado": "true",
+      "ocupado": "false",
         "horaFin": "1000",
         "id": 4
     },
     
      {
-     "propiedad":"<p>",
-"color":"color:blue",
  "diaSemana": "viernes",
   "horaInicio": "0930",
   
-      "ocupado": "true",
+      "ocupado": "false",
         "horaFin": "1000",
         "id": 5
         
