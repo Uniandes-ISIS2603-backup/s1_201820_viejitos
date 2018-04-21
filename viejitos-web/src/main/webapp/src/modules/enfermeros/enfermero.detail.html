@@ -1,0 +1,33 @@
+<div>
+    <ul>
+        <li>
+           {{currentEnfermero.id}} 
+        </li>
+        <li>
+           {{currentEnfermero.login}}
+        </li>
+    </ul>
+    <table class="table">
+        <tr>
+            <th> franja 1</th>
+            <th>franja 2</th>
+            <th>franja 3</th>
+            <th>franja 4</th>
+            <th>franja 5</th>
+        </tr>
+        <tr>
+            <td  ng-repeat="franja in currentEnfermero.calendario"  >
+              <span   ng-if="franja.ocupado=='true'" style="color:blue">
+                  <p  class="bg-success"> {{franja.diaSemana}} </p> 
+                  <p  class="bg-success"> <a ui-sref="">{{franja.horaInicio}}</a></p>
+                    <p  class="bg-success">{{franja.horaFin}}  </p>
+              </span>
+              <span ng-if="franja.ocupado=='false'" style="color:blue">
+                    <p  class="bg-primary"> {{franja.diaSemana}} </p> 
+                    <p  class="bg-primary"> {{franja.horaInicio}}</p>
+                    <p  class="bg-primary">{{franja.horaFin}}  </p>
+              </span>
+            </td>
+        </tr>
+    </table>
+</div>

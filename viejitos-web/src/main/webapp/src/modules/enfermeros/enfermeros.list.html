@@ -22,7 +22,7 @@
                     {{enfermero.id}}
                 </td>
                 <td>
-                    {{enfermero.nombre}}
+                    <a ui-sref="enfermerosDetail({enfermeroId: enfermero.id})" class="thumb">{{enfermero.nombre}}</a>
                 </td>
                 <td>
                     {{enfermero.login}}

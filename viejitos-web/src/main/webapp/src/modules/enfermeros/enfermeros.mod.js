@@ -5,15 +5,42 @@
         
         $urlRouterProvider.otherwise("/enfermerosList");
         
-        $stateProvider.state("enfermerosList",{
-            url: '/enfermeros/list',
-            views:{
-                'mainView': {
+        $stateProvider.state("enfermeros",{
+                url: '/enfermeros',
+                abstract: true,
+                views:{
+                    'mainView': {
+                            templateUrl: basePath + 'enfermeros.html',
+                            controller: 'enfermerosCtrl',
+                            controllerAs: 'ctrl'
+                        }
+                }
+        }).state("enfermerosList",{
+                url:'/list',
+                parent:'enfermeros',
+                views:{
+                    'listView':{
+                        templateUrl: basePath + 'enfermeros.list.html'
+                    }
+                }
+        }).state("enfermerosDetail",{
+                url:'/{enfermeroId:int}/detail',
+                parent:'enfermeros',
+                param:{
+                    enfermeroId:null
+                },
+                views:{
+                    'listView':{
                         templateUrl: basePath + 'enfermeros.list.html',
-                        controller: 'enfermerosCtrl',
+                        controller: 'enfermerosDetailCtrl',
+                        controllerAs: 'ctrl'
+                    },
+                    detailView:{
+                        templateUrl: basePath + 'enfermero.detail.html',
+                        controller: 'enfermerosDetailCtrl',
                         controllerAs: 'ctrl'
                     }
-            }
+                }
         });
     }]);
 })(window.angular);
