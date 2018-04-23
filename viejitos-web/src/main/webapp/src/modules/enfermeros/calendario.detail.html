@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+<div class="container-fluid">
+
+    hola 
+    
+   
+    <h3>
+        {{currentEnfermero.nombre}}</h3>
+    el dia <h4> {{currentFranja.diaSemana}} </h4> deberas atender a:
+    <a ui-sref="clienteDetail({clienteId: currentClient.id})" class="thumb">{{currentClient.nombre}}</a>
+   
+    </a>quien tiene las siguientes cirugias {{currentClient.historiaC.cirugias}} y toma los siguientes
+    medicamentos {{currentClient.historiaC.medicamentos}}.
+    ofreciendo el  siguiente servicio.
+    <a ui-sref="serviciosList" class="thumb">{{currentServicio.descripcion}}  </a>
+    
+
+ 
+    
+    
+  
+    
+</div>
