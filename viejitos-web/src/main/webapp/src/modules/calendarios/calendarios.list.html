@@ -1,29 +1,34 @@
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
 <div class="container-fluid">
 
-    <div class="row">
-        <h1> lo que sea www  </h1>
-        <table class="table">
+    <div >
+        <h1  class="row"  > CALENDARIO DE </h1>
+        <table  class="table">
             
             <tr >
-            <th> franja 1</th>
-    <th>franja 2</th>
-    <th>franja 3</th>
-       <th>franja 4</th>
-       <th>franja 5</th>
+            <th> DIA 1</th>
+    <th>DIA 2</th>
+    <th>DIA 3</th>
+       <th>DIA 4</th>
+       <th>DIA 5</th>
 
   </tr>
-            <tr>
+
                 
-            <td  ng-repeat="franja in franjasRecords"  >
-                               
-          <span   ng-if="franja.ocupado=='true'" style="color:blue">
+           <tr ng-repeat="grupo in franjasRecords" >   
+               
+            
+             <td ng-repeat="franja in grupo.grupito"  >
+                           
+                    
+                    
+         <span   ng-if="franja.ocupado=='true'" style="color:blue">
                 <p  class="bg-success"> {{franja.diaSemana}} </p> 
               <p  class="bg-success"> {{franja.horaInicio}}</p>
               <p  class="bg-success">{{franja.horaFin}}  </p>
               
           </span>
-             <span ng-if="franja.ocupado=='false'" style="color:blue">
+             <div ng-if="franja.ocupado=='false'" style="color:blue">
                             
              <p  class="bg-primary"> {{franja.diaSemana}} </p> 
               <p  class="bg-primary"> {{franja.horaInicio}}</p>
@@ -34,11 +39,16 @@
                 </td>
            </tr>
              </table>
-    </div>
+    
+
+</div>
     
     
-   
+  
     
+    
+    
+ 
  
     
     
