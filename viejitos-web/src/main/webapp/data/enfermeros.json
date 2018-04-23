@@ -7,9 +7,47 @@
        "tipo":"Enfermero",
        "calificaciones":[],
        "servicios":[],
-       "clientes":[
-         ],
-       "calendario":[{"grupito":[{"diaSemana": "lunes",  "horaInicio": "0800", "ocupado": "true","horaFin": "0900","id": 1 },{"diaSemana": "martes", "horaInicio": "0800","ocupado": "true","horaFin": "0900","id": 2}, {       "diaSemana": "miercoles","horaInicio": "0800","ocupado": "true","horaFin": "0900", "id": 3},{ "diaSemana": "jueves",  "horaInicio": "0800", "ocupado": "false", "horaFin": "0900", "id": 4  }, {"diaSemana": "viernes",  "horaInicio": "0800","ocupado": "false","horaFin": "0900", "id": 5 } ] }, { "grupito":[ {"diaSemana": "lunes","horaInicio": "0900",     "ocupado": "true",  "horaFin": "1000",  "id": 11  }, {   "diaSemana": "martes", "horaInicio": "0900","ocupado": "true","horaFin": "1000", "id": 12 }, {"diaSemana": "miercoles",  "horaInicio": "0900","ocupado": "false", "horaFin": "1000", "id": 13  }, { "diaSemana": "jueves", "horaInicio": "0900","ocupado": "false", "horaFin": "1000","id": 14   }, { "diaSemana": "viernes","horaInicio": "0900","ocupado": "false","horaFin": "1000", "id": 15 } ] }, { "grupito":[{  "diaSemana": "lunes","horaInicio": "1000","ocupado": "false","horaFin": "1100", "id": 21 },  { "diaSemana": "martes","horaInicio": "1000", "ocupado": "true", "horaFin": "1100","id": 22 }, { "diaSemana": "miercoles","horaInicio": "1000","ocupado": "true","horaFin": "1100",      "id": 2  },{"diaSemana": "jueves","horaInicio": "1000","ocupado": "true",       "horaFin": "1100", "id": 24},{ "diaSemana": "viernes","horaInicio": "1000","ocupado": "true","horaFin": "1100", "id": 25   }]}]
+       "clientes":[   {   "id": 0,   "nombre": "John Doe", "login": "johndoe23","calificacion": { "puntaje": 4 }, "cita": {  "fecha": "15/02/2018",
+           "hora": "14:00" },
+      "historiaC": {
+           "id": 1114,
+           "enfermedades": "Ninguna.",
+           "medicamentos": "Ninguna",
+           "cirugias": "Reemplazo de cadera." },
+      "servicios": [
+                 
+                 
+                 
+                 
+                 ]
+ },
+
+ {
+     "id": 2, 
+      "nombre": "Alejandro Ayala",
+      "login": "alayala12",
+      "calificacion": {
+          "puntaje": 4.5
+                      },
+      "cita": {},
+      "historiaC": {
+           "id": 1115,
+           "enfermedades": "Artritis",
+           "medicamentos": "Ninguna",
+           "cirugias": "Ninguna." },
+      "servicios": [ {
+           "fecha": "15/02/2018",
+           "hora": "14:00",
+           "descripcion": "Caminata",
+           "finalizado": false },
+ 
+                     {
+           "fecha": "16/02/2018",
+           "hora": "15:00",
+           "descripcion": "Acompañamiento a cita médica.",
+           "finalizado": false } ]
+ }  ],
+       "calendario":[{"grupito":[{"diaSemana": "lunes",  "horaInicio": "0800", "ocupado": "true","horaFin": "0900","id": 0 },{"diaSemana": "martes", "horaInicio": "0800","ocupado": "true","horaFin": "0900","id": 1}, {       "diaSemana": "miercoles","horaInicio": "0800","ocupado": "true","horaFin": "0900", "id": 2},{ "diaSemana": "jueves",  "horaInicio": "0800", "ocupado": "false", "horaFin": "0900", "id": 3  }, {"diaSemana": "viernes",  "horaInicio": "0800","ocupado": "false","horaFin": "0900", "id": 4 } ] }, { "grupito":[ {"diaSemana": "lunes","horaInicio": "0900",     "ocupado": "true",  "horaFin": "1000",  "id": 10  }, {   "diaSemana": "martes", "horaInicio": "0900","ocupado": "true","horaFin": "1000", "id": 11 }, {"diaSemana": "miercoles",  "horaInicio": "0900","ocupado": "false", "horaFin": "1000", "id": 12  }, { "diaSemana": "jueves", "horaInicio": "0900","ocupado": "false", "horaFin": "1000","id": 13   }, { "diaSemana": "viernes","horaInicio": "0900","ocupado": "false","horaFin": "1000", "id": 14 } ] }, { "grupito":[{  "diaSemana": "lunes","horaInicio": "1000","ocupado": "false","horaFin": "1100", "id": 20 },  { "diaSemana": "martes","horaInicio": "1000", "ocupado": "true", "horaFin": "1100","id": 21 }, { "diaSemana": "miercoles","horaInicio": "1000","ocupado": "true","horaFin": "1100",      "id": 22  },{"diaSemana": "jueves","horaInicio": "1000","ocupado": "true",       "horaFin": "1100", "id": 23},{ "diaSemana": "viernes","horaInicio": "1000","ocupado": "true","horaFin": "1100", "id": 24   }]}]
 
              },
   {
