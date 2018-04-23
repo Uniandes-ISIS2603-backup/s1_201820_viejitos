@@ -7,27 +7,27 @@
            {{currentEnfermero.login}}
         </li>
     </ul>
-    <table class="table">
-        <tr>
-            <th> franja 1</th>
-            <th>franja 2</th>
-            <th>franja 3</th>
-            <th>franja 4</th>
-            <th>franja 5</th>
-        </tr>
-        <tr>
-            <td  ng-repeat="franja in currentEnfermero.calendario"  >
-              <span   ng-if="franja.ocupado=='true'" style="color:blue">
-                  <p  class="bg-success"> {{franja.diaSemana}} </p> 
-                  <p  class="bg-success"> <a ui-sref="">{{franja.horaInicio}}</a></p>
-                    <p  class="bg-success">{{franja.horaFin}}  </p>
-              </span>
-              <span ng-if="franja.ocupado=='false'" style="color:blue">
-                    <p  class="bg-primary"> {{franja.diaSemana}} </p> 
-                    <p  class="bg-primary"> {{franja.horaInicio}}</p>
-                    <p  class="bg-primary">{{franja.horaFin}}  </p>
-              </span>
-            </td>
-        </tr>
-    </table>
+    <div>
+    <table  class="table">
+   <tr >
+    <th> DIA 1</th>
+    <th>DIA 2</th>
+    <th>DIA 3</th>
+    <th>DIA 4</th>
+    <th>DIA 5</th>
+ </tr>
+  <tr ng-repeat="grupo in currentEnfermero.calendario" >   
+               <td ng-repeat="franja in grupo.grupito"  >
+                   <a ui-sref=""   >   
+                <span   ng-if="franja.ocupado=='true'" style="color:blue"> <p  class="bg-success"> {{franja.diaSemana}} </p> <p  class="bg-success"> {{franja.horaInicio}}</p> <p  class="bg-success">{{franja.horaFin}}  </p>
+              </a   </span>
+             <span ng-if="franja.ocupado=='false'" style="color:blue">
+                 <a ui-sref="" >
+             <p  class="bg-primary"> {{franja.diaSemana}} </p> <p  class="bg-primary"> {{franja.horaInicio}}</p> <p  class="bg-primary">{{franja.horaFin}}  </p>
+              </a>
+                 </span>
+                </td>
+           </tr>
+             </table>
+        </div>
 </div>
