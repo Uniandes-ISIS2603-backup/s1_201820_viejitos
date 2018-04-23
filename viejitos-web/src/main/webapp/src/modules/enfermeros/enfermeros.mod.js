@@ -41,7 +41,37 @@
                         controllerAs: 'ctrl'
                     }
                 }
-        });
+        }).state("enfermeroFranja",{
+            url:'/{enfermeroId:int}/{franjaId:int}/detailer',
+            parent:'enfermeros',
+            param:{
+                franjaId:null,
+                enfermeroId:null
+                
+                },
+            views:{
+                'listView':{
+                    templateUrl:basePath+'enfermeros.list.html',
+                    controller:'calendariosDetailCtrl',
+                    controllerAs:'ctrl'
+                },
+                detailView:{
+                    templateUrl:basePath+'enfermero.detail.html',
+                     controller:'calendariosDetailCtrl',
+                    controllerAs:'ctrl'
+                },
+                franjaDetailView:{
+                      templateUrl:basePath+'calendario.detail.html',
+                     controller:'calendariosDetailCtrl',
+                    controllerAs:'ctrl'
+                    
+                }
+            }
+            
+            
+        }
+        
+            );
     }]);
 })(window.angular);
 
