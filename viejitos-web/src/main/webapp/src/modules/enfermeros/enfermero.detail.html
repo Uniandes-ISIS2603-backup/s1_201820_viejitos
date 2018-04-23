@@ -18,9 +18,10 @@
  </tr>
   <tr ng-repeat="grupo in currentEnfermero.calendario" >   
                <td ng-repeat="franja in grupo.grupito"  >
-                   <a ui-sref=""   >   
+                  {{franja.id}}
+                   <a ui-sref="enfermeroFranja({ franjaId: franja.id, enfermeroId: currentEnfermero.id  })"  class="thumb" >   
                 <span   ng-if="franja.ocupado=='true'" style="color:blue"> <p  class="bg-success"> {{franja.diaSemana}} </p> <p  class="bg-success"> {{franja.horaInicio}}</p> <p  class="bg-success">{{franja.horaFin}}  </p>
-              </a   </span>
+                   </a>   </span>
              <span ng-if="franja.ocupado=='false'" style="color:blue">
                  <a ui-sref="" >
              <p  class="bg-primary"> {{franja.diaSemana}} </p> <p  class="bg-primary"> {{franja.horaInicio}}</p> <p  class="bg-primary">{{franja.horaFin}}  </p>
