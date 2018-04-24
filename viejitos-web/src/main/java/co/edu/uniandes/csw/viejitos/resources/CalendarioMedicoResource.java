@@ -28,7 +28,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author lf.naranjo11
  */
-public class CalendarioMedicoResource {
+
     
     
 
@@ -57,7 +57,7 @@ public class CalendarioMedicoResource {
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-public class CalendarioSemanalResource {
+public class CalendarioMedicoResource  {
 
     @Inject
     private CalendarioSemanalLogic calendarioLogic;
@@ -202,5 +202,4 @@ public class CalendarioSemanalResource {
     }
     
     
-}
 }
