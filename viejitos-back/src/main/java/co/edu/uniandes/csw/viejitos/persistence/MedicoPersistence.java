@@ -43,7 +43,14 @@ public class MedicoPersistence {
         TypedQuery<MedicoEntity> q
                 = em.createQuery("select u from MedicoEntity u where u.login = :login", MedicoEntity.class);
         q = q.setParameter("login", login);
-        return q.getSingleResult();
+        if( q.getResultList().size()==0)
+        {
+            return null;
+        }
+        else                                                                            
+        {
+            return q.getResultList().get(0);
+        }
     }
 
     public List<MedicoEntity> findAll() {

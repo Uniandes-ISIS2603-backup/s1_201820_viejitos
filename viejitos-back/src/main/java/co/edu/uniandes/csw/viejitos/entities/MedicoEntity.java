@@ -38,29 +38,28 @@ import uk.co.jemos.podam.common.PodamExclude;
  *
  * @author l.pardo
  */
-
 @Entity
-public class MedicoEntity extends BaseEntity implements Serializable{
-   private String nombre;
-   private Integer tipo;
-   private String login;
-   private String contrasena;
-   @PodamExclude
-   @OneToMany(mappedBy= "medico",cascade = CascadeType.PERSIST)
-   private List<CitaEntity> citas = new ArrayList<CitaEntity>();
-   @PodamExclude
-   @OneToMany(cascade = CascadeType.PERSIST)
-   private List<HistoriaClinicaEntity> historiasClinicas= new ArrayList<HistoriaClinicaEntity>();
-   @PodamExclude
-   @OneToMany(mappedBy = "medico",cascade = CascadeType.PERSIST)
-   private List<ClienteEntity> clientes=new ArrayList<ClienteEntity>(); 
-   @PodamExclude
-   @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)    
-   private CalendarioSemanalEntity calendario;
-    
-    public MedicoEntity()
-    {
-        
+public class MedicoEntity extends BaseEntity implements Serializable {
+
+    private String nombre;
+    private Integer tipo;
+    private String login;
+    private String contrasena;
+    @PodamExclude
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.PERSIST)
+    private List<CitaEntity> citas = new ArrayList<CitaEntity>();
+    @PodamExclude
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<HistoriaClinicaEntity> historiasClinicas = new ArrayList<HistoriaClinicaEntity>();
+    @PodamExclude
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.PERSIST)
+    private List<ClienteEntity> clientes = new ArrayList<ClienteEntity>();
+    @PodamExclude
+    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private CalendarioSemanalEntity calendario;
+
+    public MedicoEntity() {
+
     }
 
     /**
@@ -174,5 +173,5 @@ public class MedicoEntity extends BaseEntity implements Serializable{
     public void setCalendario(CalendarioSemanalEntity calendario) {
         this.calendario = calendario;
     }
-   
+
 }

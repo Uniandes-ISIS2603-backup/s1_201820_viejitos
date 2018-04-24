@@ -1,0 +1,39 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Login
+                </th>
+                <th>
+                    Curriculum
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat = "enfermero in enfermerosRecords">
+                <td>
+                    {{enfermero.id}}
+                </td>
+                <td>
+              <a ui-sref="enfermerosDetail({enfermeroId: enfermero.id})" class="thumb">{{enfermero.nombre}}</a>
+                </td>
+                <td>
+                    {{enfermero.login}}
+                </td>
+                <td>
+                   <!--<a href = {{enfermero.cv}} target = "_blank_">
+                        <img src = "" alt = "Descargar hoja de vida">
+                    </a>-->
+                   Ruta = {{enfermero.cv}} 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

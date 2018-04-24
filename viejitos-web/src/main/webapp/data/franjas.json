@@ -1,7 +1,8 @@
 [
+
 {
-    "propiedad":"<p>",
-"color":"color:blue",
+   "grupito":[
+        {
  "diaSemana": "lunes",
   "horaInicio": "0800",
   
@@ -11,9 +12,7 @@
     },
     
     {
-        "propiedad":"<p>",
-"color":"color:blue",
- "diaSemana": "martes",
+   "diaSemana": "martes",
   "horaInicio": "0800",
   
       "ocupado": "true",
@@ -21,9 +20,7 @@
         "id": 2
     },
     {
-         "propiedad":"<p>",
-"color":"color:green",
- "diaSemana": "miercoles",
+       "diaSemana": "miercoles",
   "horaInicio": "0800",
   
       "ocupado": "true",
@@ -32,27 +29,124 @@
     },
 
  {
-  "propiedad":"<p>",
-"color":"color:red",
  "diaSemana": "jueves",
-  "horaInicio": "0930",
+  "horaInicio": "0800",
   
-      "ocupado": "true",
-        "horaFin": "1000",
+      "ocupado": "false",
+        "horaFin": "0900",
         "id": 4
     },
     
      {
-     "propiedad":"<p>",
-"color":"color:blue",
  "diaSemana": "viernes",
-  "horaInicio": "0930",
+  "horaInicio": "0800",
+  
+      "ocupado": "false",
+        "horaFin": "0900",
+        "id": 5 }
+        ]
+        
+    },
+        
+    {
+       
+       "grupito":[
+            {
+ "diaSemana": "lunes",
+  "horaInicio": "0900",
   
       "ocupado": "true",
         "horaFin": "1000",
-        "id": 5
+        "id": 11
+    },
+    
+    {
+   "diaSemana": "martes",
+  "horaInicio": "0900",
+  
+      "ocupado": "true",
+        "horaFin": "1000",
+        "id": 12
+    },
+    {
+       "diaSemana": "miercoles",
+  "horaInicio": "0900",
+  
+      "ocupado": "false",
+        "horaFin": "1000",
+        "id": 13
+    },
+
+ {
+ "diaSemana": "jueves",
+  "horaInicio": "0900",
+  
+      "ocupado": "false",
+        "horaFin": "1000",
+        "id": 14
+    },
+    
+     {
+ "diaSemana": "viernes",
+  "horaInicio": "0900",
+  
+      "ocupado": "false",
+        "horaFin": "1000",
+        "id": 15
         
     }
+     ]
+        },
+    
+    
+    {
+        "grupito":[{
+    "diaSemana": "lunes",
+  "horaInicio": "1000",
+  
+      "ocupado": "false",
+        "horaFin": "1100",
+        "id": 21
+    },
+    
+    {
+   "diaSemana": "martes",
+  "horaInicio": "1000",
+  
+      "ocupado": "true",
+        "horaFin": "1100",
+        "id": 22
+    },
+    {
+       "diaSemana": "miercoles",
+  "horaInicio": "1000",
+  
+      "ocupado": "true",
+        "horaFin": "1100",
+        "id": 23
+    },
+
+ {
+ "diaSemana": "jueves",
+  "horaInicio": "1000",
+  
+      "ocupado": "true",
+        "horaFin": "1100",
+        "id": 24
+    },
+    
+     {
+ "diaSemana": "viernes",
+  "horaInicio": "1000",
+    "ocupado": "true",
+        "horaFin": "1100",
+        "id": 25
+        
+    }
+    
+    ]}
+    
+    
 
 
 

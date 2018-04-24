@@ -27,6 +27,7 @@ import java.util.ArrayList;
  *      "calificaciones":[calificaciones],
  *      "servicios":[servicios],
  *      "clientes":[clientes]
+ *      "calendar":{calendar}
  *  }
  * </pre>
  *
@@ -43,6 +44,7 @@ import java.util.ArrayList;
  *      "loginCalificador":"af.ramirez","tipoCalificado":"enfermero","loginCalificado":"ma.marulanda"}]
  *      "servicios":[{ "tipo": 2,"fecha": 03/05/2017,"hora": "9:30","descripción": "Acompañamiento a cita","finalizado": true}],
  *      "clientes":[{"id": 12345, "nombre": "Andres Felipe Ramírez Triana", "login": "af.ramirez","contrasena": "jd124, "estado": 1,"tipo": 1}]
+ *      "calendar":{"id": 001101,"ultimaModificacion": 01/07/2018 08:11:13pm,"franjasHorarias": [ {"id": 1,"diaSemana": 1,"horaInicio": 0700,"horaFin": 0900,"ocupado": si},{"id": 2,"diaSemana": 1, "horaInicio": 0900,"horaFin": 1100, "ocupado": no}]}
  *  }
  * </pre>
  *

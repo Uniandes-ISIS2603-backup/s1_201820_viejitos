@@ -11,8 +11,9 @@
         'clienteModule',
         'calificacionesModule',
         'enfermerosModule',
-        'citasModule',
-        'medicosModule'  
+         'citasModule',
+        'medicosModule',
+        'calendarioModule'
     ]);
     // Resuelve problemas de las promesas
     app.config(['$qProvider', function ($qProvider) {
