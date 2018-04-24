@@ -32,7 +32,7 @@
              * @param {String} URL Dirección donde se encuentra el recurso
              * de los clientes o API donde se puede consultar.
              */
-            $http.get('data/clientes.json').then(function (response) {
+            $http.get(clienteContext).then(function (response) {
                 $scope.clientesRecords = response.data;
             });
             if (($state.params.clienteId !== undefined) && ($state.params.clienteId !== null)) {
