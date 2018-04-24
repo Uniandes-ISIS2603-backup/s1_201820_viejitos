@@ -1,0 +1,20 @@
+
+<div class="container-fluid">
+    <div class="col-md-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>   
+                    <th>Fecha</th>
+                    <th>Hora</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="cita in currentMedico.citas">
+                    <td>{{cita.fecha}}</td>   
+                    <td>{{cita.hora}}</td>   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

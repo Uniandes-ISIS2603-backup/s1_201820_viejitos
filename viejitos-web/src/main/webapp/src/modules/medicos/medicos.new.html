@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><label ng-if="!edit" id="createCliente">Crear nuevo Médico</label>
+                <label ng-if="edit" id="medicoCliente">Editar Médico</label></div>
+            <div class="panel-body">
+                <form name="medico">
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="medicoLogin" class="col-sm-2">Login:</label>
+                            <input id="clienteLogin" required ng-model="data.login" class="col-sm-6"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="medicoNombre" class="col-sm-2">Nombre:</label>
+                            <input id="clienteNombre" required ng-model="data.nombre" class="col-sm-6"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="clienteNombre" class="col-sm-2">Nombre:</label>
+                            <input id="clienteNombre" required ng-model="data.contrasena" class="col-sm-6"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <div class="form-group col-sm-4" ng-if="!cliente.$valid">
+                        </div> 
+                    </div> 
+                    <div class="form-group row">
+                        <div class="form-group col-sm-12">
+                            <input ng-show="medico.$valid" ng-click="createMedico()" value="Guardar" class="btn btn-success"/>
+                            <a class="btn btn-info" ui-sref="medicosList">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
