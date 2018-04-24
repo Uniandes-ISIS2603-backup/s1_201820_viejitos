@@ -42,7 +42,7 @@ import javax.ws.rs.core.MediaType;
  */
 //TODO:done Revisar el path para llegar a este recurso
 
- @Path("calendarios/{idCalendario: \\d+}/franjashorarias")
+ @Path("calendariossemanales/{idCalendario: \\d+}/franjashorarias")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
