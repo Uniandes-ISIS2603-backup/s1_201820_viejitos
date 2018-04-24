@@ -1,6 +1,10 @@
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
-<div class="container-fluid" ng-repeat="cliente in clientesRecords">
+<div class="container-fluid">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+        <a class="btn btn-info" ui-sref="clientesCreate"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Cliente</a>
+    </div>
     <div class="col-lg-3">
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <h3>Informacion Basica</h3>
         <table class="table table-striped">
             <thead>
@@ -11,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr ng-repeat="cliente in clientesRecords">
                     <td> <a ui-sref="clienteDetail({clienteId: cliente.id})" class="thumb">{{cliente.nombre}}</a> </td>  
                     <td> {{cliente.login}} </td> 
                     <td> {{cliente.calificacion.puntaje}} </td>

@@ -59,9 +59,17 @@
                     }
                 }
 
-            });
-        }
-    ]);
+            }).state('clientesCreate', {
+                url: '/create',
+                parent: 'clientes',
+                views: {
+                    'detailView': {
+                        templateUrl: basePath + 'clientes.new.html',
+                        controller: 'clienteNewCtrl'
+                    }
+                }});
+        
+        }]);
 })(window.angular);
 
 

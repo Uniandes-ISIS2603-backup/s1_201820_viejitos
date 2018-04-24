@@ -30,6 +30,7 @@ import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 
 import javax.ws.rs.DELETE;
@@ -62,7 +63,6 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class ViejitoResource
 {
-
 	/**
 	 * <h1>POST /api/viejitos : Crear una entidad de Viejito.</h1>
 	 * <pre>Cuerpo de petición: JSON {@link ViejitoDetailDTO}.
