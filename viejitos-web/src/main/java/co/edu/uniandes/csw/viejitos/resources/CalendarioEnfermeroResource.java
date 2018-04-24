@@ -28,14 +28,13 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author lf.naranjo11
  */
-
     
     
 
 /**
  *
  * <pre>Clase que implementa el recurso "calendarioSemanal".
- * URL: /api/medicos/{idMedico}/calendariosemanal
+ * URL: /api/enfermeros/{idMedico}/calendariosemanal
  * </pre>
  * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
  * que el servicio {@link MedicoResource} define este servicio de forma relativa 
@@ -53,17 +52,18 @@ import javax.ws.rs.WebApplicationException;
 
 
 
-@Path("medicos/{medicosId: \\d+}/calendariossemanales")
+@Path("enfermeros/{enfermerosId: \\d+}/calendariossemanales")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
-public class CalendarioMedicoResource  {
+public class CalendarioEnfermeroResource {
+
 
     @Inject
     private CalendarioSemanalLogic calendarioLogic;
 
     /**
-     * <h1>POST /api/medicos/{idMedico}/calendariossemanales : Crear una entidad(la unica) de
+     * <h1>POST /api/enfermeros/{idEnfermero}/calendariossemanales : Crear una entidad(la unica) de
      * calendarioSemanal.</h1>
      *
      * <pre>Cuerpo de petición: JSON {@link calendarioSemanalDetailDTO}.
@@ -82,7 +82,7 @@ public class CalendarioMedicoResource  {
      *
      * @param dto {@link  calendarioSemanalDetailDTO} - La entidad de calendario
      * que se desea guardar.
-       * @param idMedico El ID del libro del cual se guarda la reseña
+       * @param idEnfermero El ID del libro del cual se guarda la reseña
      * @return JSON {@link calendarioSemanalDetailDTO} - La entidad de
      * calendario que se desea guardar.
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
@@ -90,13 +90,13 @@ public class CalendarioMedicoResource  {
      * semanal.
      */
     @POST
-    public CalendarioSemanalDTO createCalendario(CalendarioSemanalDTO dto,@PathParam("idMedico") Long idMedico) throws BusinessLogicException {
+    public CalendarioSemanalDTO createCalendario(CalendarioSemanalDTO dto,@PathParam("idEnfermero") Long idEnfermero) throws BusinessLogicException {
         return new CalendarioSemanalDTO(calendarioLogic.createCalendario(dto.toEntity()));
     }
 
     /**
      *
-     * <h1>GET  /api/medicos/{idMedico}/calendariossemanales/{id} : Obtener la entidad de calendario
+     * <h1>GET  /api/enfermeros/{idEnfermero}/calendariossemanales/{id} : Obtener la entidad de calendario
      * </h1>
      *
      * <pre>Busca la entidad de calendario  y la devuelve.
@@ -107,17 +107,17 @@ public class CalendarioMedicoResource  {
      *
      * @param id Identificador de la entidad de calendario buscada. esta debe
      * ser una cadena de digitos
-     * @param idMedico  identificador del medico al cual pertenece
+     * @param idEnfermero  identificador del medico al cual pertenece
      *@throws WebApplicationException si la entidad no es buena o es nula.
      * @return JSON {@link CalendarioSemanalDetailDTO} - La entidad de
      * calenadrio buscada
      */
     @GET
     @Path("{id: \\d+}")
-    public CalendarioSemanalDetailDTO getCalendario(@PathParam("id") Long id,@PathParam("idMedico") Long idMedico) throws WebApplicationException {
+    public CalendarioSemanalDetailDTO getCalendario(@PathParam("id") Long id,@PathParam("idEnfermero") Long idEnfermero) throws WebApplicationException {
         CalendarioSemanalEntity entity = calendarioLogic.getCalendario(id);
         if (entity == null) {
-            throw new WebApplicationException("el calendario /medicos/"+idMedico+"calendarios"+id+"noexiste",404);
+            throw new WebApplicationException("el calendario /enfermeros/"+idEnfermero+"calendarios"+id+"noexiste",404);
         
         }
         CalendarioSemanalDetailDTO dto = new CalendarioSemanalDetailDTO(entity);
@@ -125,7 +125,7 @@ public class CalendarioMedicoResource  {
     }
 
     /**
-     * <h1>GET  /api/medicos/{idMedico}/calendariossemanales : Obtener todas las entidades de
+     * <h1>GET  /api/enfermeros/{idEnfermero}/calendariossemanales : Obtener todas las entidades de
      * calendario semanal correspondientes a un medico o enfermero.</h1>
      * <pre>Busca y devuelve todas las entidades de franja que se relacion a un calendariosemanal.
      * Codigos de respuesta:
@@ -137,7 +137,7 @@ public class CalendarioMedicoResource  {
      * calendario semanal encontradas en la aplicación.
      */
     @GET
-    public List<CalendarioSemanalDetailDTO> getCalendariosSemanales(@PathParam("idMedico") Long idMedico) {
+    public List<CalendarioSemanalDetailDTO> getCalendariosSemanales(@PathParam("idEnfermero") Long idEnfermero) {
 
         List<CalendarioSemanalEntity> calendarioEntitys = calendarioLogic.getCalendarios();
 
@@ -149,7 +149,7 @@ public class CalendarioMedicoResource  {
     }
 
     /**
-     * <h1>PUT  /api/medicos/{idMedico}/calendariossemanales/{id} : Actualizar la entidad de calendario
+     * <h1>PUT  /api/enfermeros/{idEnfermero}/calendariossemanales/{id} : Actualizar la entidad de calendario
      * .</h1>
      * <pre>Cuerpo de petición: JSON {@link CalendarioSemanalDetailDTO}.
      * Codigos de respuesta:
@@ -171,17 +171,17 @@ public class CalendarioMedicoResource  {
      */
     @PUT
     @Path("{id: \\d+}")
-    public CalendarioSemanalDetailDTO updateCalendario(@PathParam("id") Long id, CalendarioSemanalDetailDTO detailDTO,@PathParam("idMedico") Long idMedico) throws BusinessLogicException {
+    public CalendarioSemanalDetailDTO updateCalendario(@PathParam("id") Long id, CalendarioSemanalDetailDTO detailDTO,@PathParam("idEnfermero") Long idEnfermero) throws BusinessLogicException {
         detailDTO.setid(id);
         CalendarioSemanalEntity entity = calendarioLogic.getCalendario(id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso medicos"+idMedico+"+/calendariossemanales/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso medicos"+idEnfermero+"+/calendariossemanales/" + id + " no existe.", 404);
         }
         return new CalendarioSemanalDetailDTO(calendarioLogic.updateCalendario(detailDTO.toEntity()));
     }
 
     /**
-     * <h1>DELETE  /api/medicos/{idMedico}/calendariossemanales/{id} Borrar la entidad de calendario .</h1>
+     * <h1>DELETE  /api/enfermeros/{idEnfermeros}/calendariossemanales/{id} Borrar la entidad de calendario .</h1>
      * <pre>Borra la entidad de calendario asociado recibido en la URL.
      * Códigos de respuesta:<br>
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
@@ -193,7 +193,7 @@ public class CalendarioMedicoResource  {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteCalendario(@PathParam("id") Long id,@PathParam("idMedico") Long idMedico) throws BusinessLogicException {
+    public void deleteCalendario(@PathParam("id") Long id,@PathParam("idEnfermero") Long idEnfermero) throws BusinessLogicException {
         CalendarioSemanalEntity entity = calendarioLogic.getCalendario(id);
         if (entity == null) {
             throw new WebApplicationException("la franja no existe", 404);
