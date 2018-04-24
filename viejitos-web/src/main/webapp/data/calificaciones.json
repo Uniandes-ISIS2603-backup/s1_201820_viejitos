@@ -1,4 +1,4 @@
-{
+[{
     "id":12,
     "puntaje":4.5,
     "comentario":"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado",
@@ -12,4 +12,18 @@
                  "descripción": "Acompañamiento a cita",
                  "finalizado": true
                 }
-}
+}, {
+    "id":2,
+    "puntaje":9,
+    "comentario":"Un cliente muy displicente, no tuvo paciencia conmigo a pesar de que era mi primer día",
+    "tipoCalificador":"enfermero",
+    "loginCalificador":"ma.marulanda",
+    "tipoCalificado":"cliente",
+    "loginCalificado":"af.ramirez",
+    "servicio":{ "tipo": 2,
+                 "fecha": "03/05/2017",
+                 "hora": "9:30",
+                 "descripción": "Acompañamiento a cita",
+                 "finalizado": true
+                }
+}]
