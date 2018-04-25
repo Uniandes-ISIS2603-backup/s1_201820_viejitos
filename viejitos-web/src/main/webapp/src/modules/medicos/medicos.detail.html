@@ -4,14 +4,14 @@
         <table class="table table-striped">
             <thead>
                 <tr>   
-                    <th>Fecha</th>
-                    <th>Hora</th> 
+                    <th>Login</th>
+                    <th>Tipo</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="cita in currentMedico.citas">
-                    <td>{{cita.fecha}}</td>   
-                    <td>{{cita.hora}}</td>   
+                <tr>
+                    <td>{{currentMedico.login}}</td>    
+                     <td>{{currentMedico.tipo}}</td>
                 </tr>
             </tbody>
         </table>

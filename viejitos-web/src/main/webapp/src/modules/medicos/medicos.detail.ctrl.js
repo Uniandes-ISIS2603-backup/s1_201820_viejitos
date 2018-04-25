@@ -5,11 +5,11 @@
         function ($scope, $http, medicosContext, $state) {
             if (($state.params.medicoId !== undefined) && ($state.params.medicoId !== null)) {
 
-                $http.get($state.params.medicoId).then(function (response) {
+                $http.get(medicosContext + '/' +$state.params.medicoId).then(function (response) {
                     $scope.currentMedico = response.data;
                 });
             }
         }
     ]);
-});
+})
 (window.angular);
