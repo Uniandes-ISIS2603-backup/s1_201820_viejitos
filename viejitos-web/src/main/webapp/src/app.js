@@ -13,7 +13,8 @@
         'enfermerosModule',
          'citasModule',
         'medicosModule',
-        'calendarioModule'
+        'calendarioModule',
+        'historialServiciosModule'
     ]);
     // Resuelve problemas de las promesas
     app.config(['$qProvider', function ($qProvider) {

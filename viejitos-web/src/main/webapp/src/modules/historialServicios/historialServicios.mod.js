@@ -1,56 +1,51 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 (function (ng)
 {
     //Definición del modulo
-    var mod= ng.module("quejasModule", ['ui.router']);
+    var mod= ng.module("historialServiciosModule", ['ui.router']);
     // Configuración de los estados del módulo
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             // En basePath se encuentran los templates y controladores de módulo
-            var basePath = 'src/modules/quejas/';
+            var basePath = 'src/modules/historialServicios/';
             // Mostrar la lista de quejas será el estado por defecto del módulo
-            $urlRouterProvider.otherwise("/quejasList");
+            $urlRouterProvider.otherwise("/historialServiciosList");
             // Definición del estado 'quejasList' donde se listan las quejas
             $stateProvider
-                    .state('quejasList', {
+                    .state('historialServiciosList', {
                         // Url que aparecerá en el browser
                         url: '/list',
-                        parent: 'quejas',
+                        parent: 'historialServicios',
                         views: {
-                            'quejaList': {
-                                templateUrl: basePath + 'quejas.list.html',
-                                controller: 'quejaCtrl',
+                            'historialServiciosList': {
+                                templateUrl: basePath + 'historialServicios.list.html',
+                                controller: 'historialServiciosCtrl',
                                 controllerAs: 'ctrl'
                             }
                         }
                         }
                      
                     )
-                    .state('quejas',{
-                        url: '/quejas',
+                    .state('historialServicios',{
+                        url: '/historialServicios',
                         abstract: true,
                         
                         views:{
                             'mainView':{
-                                templateUrl: basePath +'queja.html'
+                                templateUrl: basePath +'historialServicios.html'
                             }
                         }
                     })
                     
-                    .state('quejaDetail',{
+                    .state('historialServiciosDetail',{
                         url:'/:id',
-                        parent:'quejas',
+                        parent:'historialServicios',
                         params:{
                             id:null
                         },
                         
                         views:{
-                            'quejaDetail':{
-                                templateUrl: basePath + 'quejas.detail.html',
-                                controller: 'quejaDetailCtrl',
+                            'historialServiciosDetail':{
+                                templateUrl: basePath + 'historialServicios.detail.html',
+                                controller: 'historialServiciosDetailCtrl'
                             }
                             
                         }
