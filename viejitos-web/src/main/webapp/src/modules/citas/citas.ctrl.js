@@ -6,7 +6,7 @@
 
         function ($scope, $http, citasContext) {
 
-            $http.get('data/citas.json').then(function (response) {
+            $http.get(citasContext).then(function (response) {
                 $scope.citasRecords = response.data;
             });
         }
