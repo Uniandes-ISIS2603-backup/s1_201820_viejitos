@@ -102,10 +102,10 @@ public class CalendarioSemanalResource {
     @GET
     @Path("{id: \\d+}")
     public CalendarioSemanalDetailDTO getCalendario(@PathParam("id") Long id) throws WebApplicationException {
-        CalendarioSemanalEntity entity = calendarioLogic.getCalendario(id);
+         CalendarioSemanalEntity entity = calendarioLogic.getCalendario(id);
         if (entity == null) {
             //TODO:DONE Aqui se debe disparar WebApplicationException
-            throw new WebApplicationException("la franja no existe con id" + id);
+            throw new WebApplicationException("el calendario no existe con id" + id);
         }
         CalendarioSemanalDetailDTO dto = new CalendarioSemanalDetailDTO(entity);
         return dto;
@@ -133,7 +133,7 @@ public class CalendarioSemanalResource {
         for (CalendarioSemanalEntity actual : calendarioEntitys) {
             calendarios.add(new CalendarioSemanalDetailDTO(actual));
         }
-        return calendarios;
+        return calendarios;        
     }
 
     /**
@@ -165,6 +165,8 @@ public class CalendarioSemanalResource {
         if (entity == null) {
             throw new WebApplicationException("El recurso /calendariossemanales/" + id + " no existe.", 404);
         }
+         
+
         return new CalendarioSemanalDetailDTO(calendarioLogic.updateCalendario(detailDTO.toEntity()));
     }
 
@@ -185,7 +187,7 @@ public class CalendarioSemanalResource {
     public void deleteCalendario(@PathParam("id") Long id) throws BusinessLogicException {
         CalendarioSemanalEntity entity = calendarioLogic.getCalendario(id);
         if (entity == null) {
-            throw new WebApplicationException("la franja no existe", 404);
+            throw new WebApplicationException("el calendario NO existe", 404);
         }
         calendarioLogic.deleteCalendario(entity);
     }
