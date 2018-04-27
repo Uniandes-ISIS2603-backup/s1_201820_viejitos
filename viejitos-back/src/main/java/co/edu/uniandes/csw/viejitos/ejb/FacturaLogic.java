@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import org.hibernate.validator.HibernateValidator;
 
 /**
  *
@@ -55,6 +56,7 @@ public class FacturaLogic {
                 
                 ServicioEntity servicio=servicioLogic.getById(serviceid);
                 entity.setServicio(servicio);
+                //servicio.setFactura(entity);
 		LOGGER.info( "Termina proceso de creación de entidad de Factura" );
 		return persistence.create( entity );
 	}
@@ -63,13 +65,14 @@ public class FacturaLogic {
         * Obtiene la lista de los registros de Factura que pertenecen a un Servicio.
         * @param servicioid id del Servicio el cual es padre de las Facturas.
         * @return Colección de objetos de FacturaEntity.
-        * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException Error cuando el servicio no tiene quejas.
+        * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
         */
 	public FacturaEntity getAll( Long servicioid ) throws BusinessLogicException
 	{
 		LOGGER.info( "Inicia proceso de consultar todas las entidades de Factura" );
                 ServicioEntity servicio=servicioLogic.getById(servicioid);
                 
+                System.out.println(servicio.getId());
                 if (servicio.getFactura() == null) {
                     throw new BusinessLogicException("El servicio que consulta aún no tiene facturas");
                 }
@@ -89,6 +92,7 @@ public class FacturaLogic {
         */
 	public FacturaEntity getById( Long idServicio, Long idFactura )
 	{
+            System.out.println("idservicio= " + idServicio + "; idfactura = " + idFactura);
 		return persistence.find( idServicio, idFactura );
 	}
 
