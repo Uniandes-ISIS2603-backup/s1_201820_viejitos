@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.persistence;
 
 import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
+import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -61,5 +63,20 @@ public class CalendarioSemanalPersistence {
         CalendarioSemanalEntity entity = em.find(CalendarioSemanalEntity.class, id);
         em.remove(entity);
     }
+            
+         public EnfermeroEntity findByEnfermero(Long id,Long idEnfermero)
+        {
+            String msg="buscando calendario con id="+id+"y que se supone en el enfemro con id"+idEnfermero;
+          LOGGER.log(Level.INFO,msg);
+          TypedQuery<EnfermeroEntity> q = em.createQuery("select u from EnfermeroEntity where (u.id= :idEnfermero) and (u.calendario.id= :id)",EnfermeroEntity.class);
+          return q.getSingleResult();
+        }
+         
+         public CalendarioSemanalEntity findCalendarioOfEnfermero(Long idCalendario,Long idEnfermero)
+                 {
+        return null;
+                 
+                 
+                 }
                 
 }

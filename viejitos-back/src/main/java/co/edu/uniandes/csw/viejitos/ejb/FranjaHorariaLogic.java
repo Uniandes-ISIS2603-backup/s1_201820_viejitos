@@ -48,8 +48,8 @@ public class FranjaHorariaLogic {
      */
     public FranjaHorariaEntity getFranjaByCalendario(Long id,Long idCalendario) {
         String msg="Inicia proceso de consultar franja con id=" +id +"y cuyo calendario es el que tiene id="+idCalendario;
-LOGGER.log(Level.INFO, msg);
-FranjaHorariaEntity franja = persistencia.findByCalendario(id,idCalendario);
+        LOGGER.log(Level.INFO, msg);
+        FranjaHorariaEntity franja = persistencia.findByCalendario(id,idCalendario);
         LOGGER.info("Termina proceso de consultar todas los franjas");
         return franja;
 
@@ -85,9 +85,10 @@ FranjaHorariaEntity franja = persistencia.findByCalendario(id,idCalendario);
     public FranjaHorariaEntity create(FranjaHorariaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de una entidad de franja");
 
-//TODO:DONE. No hay ninguna regla de negocio? .revisar que no existe la id y ya, PORQUE las reglas se revisan cuando 
+//TODO:DONE. No hay ninguna regla de negocio? .revisar que no existe la id y ya, 
+//PORQUE las reglas se revisan cuando 
 //se intenta añadir una franja a un calendairo
-        if(entity!=null&&this.getFranja(entity.getId())!=null)
+        if(entity!=null&&entity.getId()!=null &&this.getFranja(entity.getId())!=null)
         {
         throw new BusinessLogicException("Ya existe la franja a crear o por lo menos su id ya esta en uso");
         }
@@ -95,6 +96,32 @@ FranjaHorariaEntity franja = persistencia.findByCalendario(id,idCalendario);
         {
           throw new BusinessLogicException("la entidad proporcionada no sirve");
          }
+        /* if(entity.getHoraInicio()>=entity.getHoraFin())
+        { 
+        throw new BusinessLogicException("la entidad proporcionada no tiene una hora de inicio que pase antes que la hora defin");
+        }
+          String[ ] diasValidos = new String[7];
+          diasValidos[0]="LUNES";
+          diasValidos[0]="MARTES";
+          diasValidos[0]="MIERCOLES";
+          diasValidos[0]="JUEVES";
+          diasValidos[0]="VIERNES";
+          diasValidos[0]="SABADO";
+            boolean sirveDia=true;
+        for(int i=0;i<7 && sirveDia;i++)
+        {
+            String diaDado=entity.getDiaSemana().toUpperCase();
+            
+     if( diasValidos[i].equals(diaDado))
+     {
+            sirveDia=false;
+     }
+        }
+      if(!sirveDia)
+      {
+     throw new BusinessLogicException("la entidad proporcionada no tiene un dia valido");
+      }
+        */
         persistencia.create(entity);
         LOGGER.info("Termina proceso de creación de entidad franja horaria");
         return entity;
@@ -111,7 +138,7 @@ FranjaHorariaEntity franja = persistencia.findByCalendario(id,idCalendario);
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar una franja ");
 
 //TODO:DONE No hay ninguna regla de negocio? (solo la mas basica)
-         if(entity!=null&&this.getFranja(entity.getId())==null)
+         if(entity!=null&&entity.getId()!=null&&this.getFranja(entity.getId())==null)
         {
         throw new BusinessLogicException("NO existe la franja a modificar");
         }
@@ -119,8 +146,34 @@ FranjaHorariaEntity franja = persistencia.findByCalendario(id,idCalendario);
         {
           throw new BusinessLogicException("la entidad proporcionada no sirve");
          }
-
-
+  /*      if(entity.getHoraInicio()>=entity.getHoraFin())
+        { 
+        throw new BusinessLogicException("la entidad proporcionada no tiene una hora de inicio que pase antes que la hora defin");
+        }
+          String[ ] diasValidos = new String[7];
+          diasValidos[0]="LUNES";
+          diasValidos[0]="MARTES";
+          diasValidos[0]="MIERCOLES";
+          diasValidos[0]="JUEVES";
+          diasValidos[0]="VIERNES";
+          diasValidos[0]="SABADO";
+            boolean sirveDia=true;
+        for(int i=0;i<7 && sirveDia;i++)
+        {
+            String diaDado=entity.getDiaSemana().toUpperCase();
+            
+     if( diasValidos[i].equals(diaDado))
+     {
+            sirveDia=false;
+     }
+        }
+      if(!sirveDia)
+      {
+     throw new BusinessLogicException("la entidad proporcionada no tiene un dia valido");
+      } 
+        
+        */
+    
         return persistencia.update(entity);
     }
 
