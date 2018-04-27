@@ -2,32 +2,51 @@
     <table class="table">
         <thead>
             <tr>
-                <th>
+                <th colspan='2'>
                     Calificador
                 </th>
-                <th>
+                <th colspan="2">
                     Calificado
                 </th>
                 <th>
                     Puntaje
                 </th>
+                <th>
+                    Comentario
+                </th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="calificacion in calificacionesRecords ">
+            <tr ng-repeat="calificacion in calificacionesRecords">
                 
-                <td>
-                    {{calificacion.loginCalificador}}
-                </td>
-                <td>
-                    {{calificacion.loginCalificado}}
-                </td>
+                    <td>
+                        {{calificacion.loginCalificador}}
+                    </td>
+                    <td>
+                        <div ng-if='calificacion.tipoCalificador=="enfermero"'><img src ="http://icons.iconarchive.com/icons/icons-land/vista-people/256/Medical-Nurse-Male-Light-icon.png" style="width:20px;height:20px"></div>
+                        <div ng-if='calificacion.tipoCalificador=="cliente"'><img src ="http://icons.iconarchive.com/icons/aha-soft/free-large-boss/256/Old-Boss-icon.png" style="width:20px;height:20px"></div>
+
+                    </td>
+                    
+                    <td>
+                        {{calificacion.loginCalificado}}
+                    </td>
+                    <td>
+                        <div ng-if='calificacion.tipoCalificado=="enfermero"'><img src ="http://icons.iconarchive.com/icons/icons-land/vista-people/256/Medical-Nurse-Male-Light-icon.png" style="width:20px;height:20px"></div>
+                        <div ng-if='calificacion.tipoCalificado=="cliente"'><img src ="http://icons.iconarchive.com/icons/aha-soft/free-large-boss/256/Old-Boss-icon.png" style="width:20px;height:20px"></div>
+
+                    </td>
                 <td>
                     {{calificacion.puntaje}}
+                </td>
+                <td>
+                    {{calificacion.comentario}}
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+
+
 
 

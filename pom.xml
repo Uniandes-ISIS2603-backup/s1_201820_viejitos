@@ -8,10 +8,7 @@
     <packaging>pom</packaging>
     <name>s1_viejitos</name>
 
-    <modules>
-        <module>viejitos-back</module>
-        <module>viejitos-web</module>
-    </modules>
+    <modules></modules>
     
     <repositories>
         <repository>
