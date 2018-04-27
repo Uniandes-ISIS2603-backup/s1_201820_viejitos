@@ -89,10 +89,10 @@ public class ServicioResource {
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<ServicioDetailDTO> getServicios() {
-        List<ServicioDetailDTO> servicios = new ArrayList<>();
+    public List<ServicioDTO> getServicios() {
+        List<ServicioDTO> servicios = new ArrayList<>();
         for (ServicioEntity actual : servicioLogic.getAll()) {
-            servicios.add(new ServicioDetailDTO(actual));
+            servicios.add(new ServicioDTO(actual));
         }
         return servicios;
     }

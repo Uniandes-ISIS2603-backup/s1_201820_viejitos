@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 
 import co.edu.uniandes.csw.viejitos.dtos.FranjaHorariaDTO;
+import co.edu.uniandes.csw.viejitos.ejb.CalendarioSemanalLogic;
 import co.edu.uniandes.csw.viejitos.ejb.FranjaHorariaLogic;
 import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
@@ -42,7 +43,7 @@ import javax.ws.rs.core.MediaType;
  */
 //TODO:done Revisar el path para llegar a este recurso
 
- @Path("calendarios/{idCalendario: \\d+}/franjashorarias")
+ @Path("calendariossemanales/{idCalendario: \\d+}/franjashorarias")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
@@ -50,6 +51,9 @@ public class FranjaHorariaResource {
     
    @Inject
    private FranjaHorariaLogic franjaLogic;
+   
+   @Inject
+   private CalendarioSemanalLogic calendarioLogic;
     
      /**
 	 * <h1>POST /api/calendariossemanales/{idCalendario}/franjashorarias : Crear una entidad de FranjaHoraria.</h1>
@@ -72,8 +76,15 @@ public class FranjaHorariaResource {
 	@POST
 	public FranjaHorariaDTO createFranjaHoraria( FranjaHorariaDTO dto,@PathParam("idCalendario")Long idCalendario ) throws BusinessLogicException
 	{
-		  return new FranjaHorariaDTO(franjaLogic.create(dto.toEntity()));
-	}
+
+            FranjaHorariaDTO dto2=new FranjaHorariaDTO(franjaLogic.create(dto.toEntity()));
+            if(dto2!=null)
+            {  
+            calendarioLogic.addFranja(dto2.getId(), idCalendario);
+	 
+            }
+            return  dto2;
+       }
         
         /**
 	 * <h1>GET /api/calendariossemanales/{idCalendario}/franjashorarias : Obtener todas las entidades de franja horaria correspondientes a un calendario semanal.</h1>
@@ -85,9 +96,10 @@ public class FranjaHorariaResource {
 	 * @return JSONArray {@link FranjaHorariaDTO} - Las entidades de franja horaria encontradas en la aplicación.
 	 */
 	@GET
-	public List<FranjaHorariaDTO> getFranjasHorarias(@PathParam("idCalendario")Long idCalendario )
+	public List<FranjaHorariaDTO> getFranjasHorarias(@PathParam("idCalendario")Long idCalendario ) throws BusinessLogicException  
 	{
-          List<FranjaHorariaEntity> franjasE =franjaLogic.getFranjas();
+            List<FranjaHorariaEntity> franjasE= calendarioLogic.listFranjas(idCalendario);
+       //   List<FranjaHorariaEntity> franjasE =franjaLogic.getFranjas();
 		List<FranjaHorariaDTO> franjas= new ArrayList<>();
             for(FranjaHorariaEntity actual: franjasE)
             {

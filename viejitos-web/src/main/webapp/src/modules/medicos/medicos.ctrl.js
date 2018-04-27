@@ -6,7 +6,7 @@
 
         function ($scope, $http, medicosContext) {
 
-            $http.get('data/medicos.json').then(function (response) {
+            $http.get(medicosContext).then(function (response) {
                 $scope.medicosRecords = response.data;
             });
         }

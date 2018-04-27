@@ -14,17 +14,13 @@ and open the template in the editor.
                     <th>Id</th>
                     <th>Reclamo</th>    
                     <th>Resuelto</th>  
-                    <th>Servicio</th>
-                    <th>Cliente</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="queja in quejasRecords">
+                <tr ng-repeat="queja in quejasRecords" ui-sref="quejaDetail({id:queja.id})">
                     <td>{{queja.id}}</td>
                     <td>{{queja.reclamo}}</td>  
                     <td>{{queja.resuelto}}</td> 
-                    <td>{{queja.servicio}}</td> 
-                    <td>{{queja.cliente}}</td> 
                 </tr>
             </tbody>
         </table>

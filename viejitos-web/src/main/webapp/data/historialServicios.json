@@ -1,6 +1,7 @@
 
  [    
      {
+       "id":2,  
        "tipo": 1,
        "fecha": "12/02/2018",
        "hora": "8:30",
@@ -11,6 +12,23 @@
        "pagoInicial": {"medio": "Efectivo", "pagado": true, "fechaLimite": "12/04/18", "valor": 150000},
        "pagoFinal": null,
        "factura": {"costoTotal": 120100, "fechaExpedicion": "12/04/18", "descripcion": "Acompanar al banco", "nombreCliente": "Felipe Escobar", "ccCliente": 1234567, "servicioPrestado": "Acompanamiento", "nombreEmpresa": "Hospital"},
+       "cliente": {"id": 12345, "nombre": "John Doe", "login": "johndoe23", "contrasena": "jd124", "estado": 1, "tipo": 1},
+       "calificacion": {"id":209873, "puntaje":4.5, "comentario":"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado", "tipoCalificador":"cliente", "loginCalificador":"af.ramirez", "tipoCalificado":"enfermero", "loginCalificado":"ma.marulanda"},
+      "enfermero": {"id":2678389, "nombre":"Juan Espitia", "cv":"./documents/juanHDV.pdf", "login":"js.espitia", "contrasenia":"a89ess0909", "tipo":"Enfermero"}
+     }
+     ,
+     
+     {
+       "id":1,  
+       "tipo": 2,
+       "fecha": "10/03/2018",
+       "hora": "10:30",
+       "descripción": "Acompañamiento a exámenes médicos",
+       "finalizado": true,
+       "quejas": [],
+       "pagoInicial": {"medio": "PSE", "pagado": true, "fechaLimite": "10/03/18", "valor": 100000},
+       "pagoFinal": {"medio": "PSE", "pagado": true, "fechaLimite": "10/04/18", "valor": 100000},
+       "factura": {"costoTotal": 200000, "fechaExpedicion": "12/04/18", "descripcion": "Acompanar a examenes médicos", "nombreCliente": "Felipe Escobar", "ccCliente": 1234567, "servicioPrestado": "Acompanamiento", "nombreEmpresa": "Hospital"},
        "cliente": {"id": 12345, "nombre": "John Doe", "login": "johndoe23", "contrasena": "jd124", "estado": 1, "tipo": 1},
        "calificacion": {"id":209873, "puntaje":4.5, "comentario":"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado", "tipoCalificador":"cliente", "loginCalificador":"af.ramirez", "tipoCalificado":"enfermero", "loginCalificado":"ma.marulanda"},
       "enfermero": {"id":2678389, "nombre":"Juan Espitia", "cv":"./documents/juanHDV.pdf", "login":"js.espitia", "contrasenia":"a89ess0909", "tipo":"Enfermero"}
