@@ -3,7 +3,7 @@
     mod.constant('enfermeroContext','api/enfermeros');
     mod.controller('enfermerosCtrl', ['$scope', '$http', 'enfermeroContext',
         function($scope, $http, enfermeroContext){
-            $http.get('data/enfermeros.json').then(function (response){
+            $http.get(enfermeroContext).then(function (response){
                 $scope.enfermerosRecords = response.data;
             });
     }]);

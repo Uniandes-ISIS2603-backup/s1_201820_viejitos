@@ -5,7 +5,7 @@
         function($scope, $http, enfermeroContext, $state){
              if($state.params.enfermeroId!==null &&$state.params.enfermeroId!==undefined)
                  $http.get('data/enfermeros.json').then(function (response){
-                    $scope.currentEnfermero = response.data[$state.params.enfermeroId];
+                    $scope.currentEnfermero = response.data[0];
             });
     }]);
 })(window.angular);
