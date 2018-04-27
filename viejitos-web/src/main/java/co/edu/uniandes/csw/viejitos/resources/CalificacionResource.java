@@ -97,11 +97,11 @@ public class CalificacionResource {
      * @return JSONArray con las entidades de Calificacion encontradas.
      */
     @GET
-    public List<CalificacionDetailDTO> getCalificaciones() {
+    public List<CalificacionDTO> getCalificaciones() {
         List<CalificacionEntity> califs = logic.getAll();
-        List<CalificacionDetailDTO> resp = new ArrayList<>();
+        List<CalificacionDTO> resp = new ArrayList<>();
         for (CalificacionEntity actual : califs) {
-            resp.add(new CalificacionDetailDTO(actual));
+            resp.add(new CalificacionDTO(actual));
         }
         return resp;
     }
@@ -129,10 +129,10 @@ public class CalificacionResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) throws WebApplicationException {
+    public CalificacionDTO getCalificacion(@PathParam("id") Long id) throws WebApplicationException {
         CalificacionEntity calif = logic.getById(id);
         if (calif != null) {
-            return new CalificacionDetailDTO(calif);
+            return new CalificacionDTO(calif);
         }
         else{
             throw new WebApplicationException("No existe una calificacion con el id " + id , 404);

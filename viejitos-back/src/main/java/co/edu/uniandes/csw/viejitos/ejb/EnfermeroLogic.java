@@ -5,9 +5,11 @@
  */
 package co.edu.uniandes.csw.viejitos.ejb;
 
+import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.EnfermeroPersistence;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,6 +74,16 @@ public class EnfermeroLogic {
         
         persistencia.delete( id );
         LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Enfermero con id={0}", id );
+    }
+
+    public CalificacionEntity addCalificacion(Long enfermeroId, CalificacionEntity toEntity) {
+        EnfermeroEntity enfermero = getById(enfermeroId);
+        if(enfermero!=null){
+            List<CalificacionEntity> calificacionest = enfermero.getCalificaciones();
+            calificacionest.add(toEntity);
+            enfermero.setCalificaciones(calificacionest);
+        }
+        return toEntity;
     }
     
     

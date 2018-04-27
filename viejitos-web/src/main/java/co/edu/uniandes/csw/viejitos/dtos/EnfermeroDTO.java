@@ -27,9 +27,9 @@ import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
  *      "id":2678389,
  *      "nombre":"Juan Espitia",
  *      "cv":"./documents/juanHDV.pdf",
- *      "login":,"js.espitia"
+ *      "login":"js.espitia",
  *      "contrasenia":"a89ess0909",
- *      "tipo":"Enfermero",
+ *      "tipo":"Enfermero"
  *  }
  * </pre>
  *
