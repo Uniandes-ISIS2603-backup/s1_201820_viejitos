@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+<div id="alertPanel" style="text-align: center"></div>
+<div class="container-fluid">
+    <div class="col-md-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>   
+                    <th>Id</th>  
+                    <th>Costo Total</th>
+                    <th>Fecha Expedicion</th>
+                    <th>Descripcion</th>
+                    <th>Nombre Cliente</th>
+                    <th>cc Cliente</th>
+                    <th>Servicio Prestado</th>
+                    <th>Nombre Empresa</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="factura in facturasRecords">
+                    <td>{{factura.id}}</td>  
+                    <td>{{factura.costoTotal}}</td>
+                    <td>{{factura.fechaExpedicion}}</td>
+                    <td>{{factura.descripcion}}</td>
+                    <td>{{factura.nombreCliente}}</td>
+                    <td>{{factura.ccCliente}}</td>
+                    <td>{{factura.servicioPrestado}}</td>
+                    <td>{{factura.nombreEmpresa}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
