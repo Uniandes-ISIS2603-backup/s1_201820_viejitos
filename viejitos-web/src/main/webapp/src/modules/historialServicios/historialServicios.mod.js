@@ -43,9 +43,15 @@
                         },
                         
                         views:{
+                            'listView': {
+                                templateUrl: basePath + 'historialServicios.list.html',
+                                controller: 'historialServiciosCtrl',
+                                controllerAs: 'ctrl'
+                            },
                             'historialServiciosDetail':{
                                 templateUrl: basePath + 'historialServicios.detail.html',
-                                controller: 'historialServiciosDetailCtrl'
+                                controller: 'historialServiciosDetailCtrl',
+                                controllerAs:'ctrl'
                             }
                             
                         }

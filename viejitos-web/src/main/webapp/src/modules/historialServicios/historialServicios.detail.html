@@ -1,2 +1,109 @@
-<h1> {{historialActual.id}} </h1>
+<div class="col-lg-6" >
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+    <div id="alertPanel" style="text-align: center"></div>
+    <div class="container-fluid">
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Tipo</th>    
+                        <th>Fecha</th> 
+                        <th>Hora</th>
+                        <th>Descripcion</th>
+                        <th>Finalizado</th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="historialServicio in historialServiciosRecords" ui-sref="historialServiciosDetail({id:historialServicio.id})">
+                        <td>{{historialServicio.id}}</td>
+                        <td>{{historialServicio.tipo}}</td>  
+                        <td>{{historialServicio.fecha}}</td>
+                        <td>{{historialServicio.hora}}</td>
+                        <td>{{historialServicio.descripcion}}</td>
+                        <td>{{historialServicio.finalizado}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <h1> {{historialActual.id}} </h1> <br>
+    <div>
+        <h2>Cliente: </h2>
+            <div class="panel panel-default">
+                   <div class="panel-body">
+                        <h3>{{historialActual.cliente.id}}</h3>
+                        <br>
+                        Nombre:
+                        <p>{{historialActual.cliente.nombre}}</p>
+                        <br>
+                        Login:
+                        <p>{{historialActual.cliente.login}}</p>
+                        <br>
+                        Estado:
+                        <p>{{historialActual.cliente.estado}}</p>
+                        <br>
+                        Tipo:
+                        <p>{{historialActual.cliente.tipo}}</p>
+                        <br>
+                        <br>
+                   </div>
+               </div>  
+        
+        <h2>Enfermero: </h2>
+            <div class="panel panel-default">
+                   <div class="panel-body">
+                        <h3>{{historialActual.enfermero.id}}</h3>
+                        <br>
+                        Nombre:
+                        <p>{{historialActual.enfermero.nombre}}</p>
+                        <br>
+                        Login:
+                        <p>{{historialActual.enfermero.login}}</p>
+                        <br>
+                   </div>
+               </div> 
+        <h2>Pago Inicial: </h2>
+            <div class="panel panel-default">
+                   <div class="panel-body">
+                        <h3>{{historialActual.pagoInicial.id}}</h3>
+                        <br>
+                        Medio:
+                        <p>{{historialActual.pagoInicial.medio}}</p>
+                        <br>
+                        Pagado:
+                        <p>{{historialActual.pagoInicial.pagado}}</p>
+                        <br>
+                        Fecha Limite:
+                        <p>{{historialActual.pagoInicial.fechaLimite}}</p>
+                        <br>
+                        Valor:
+                        <p>{{historialActual.pagoInicial.valor}}</p>
+                        <br>
+                   </div>
+               </div> 
+        <h2>Pago Final: </h2>
+            <div class="panel panel-default">
+                   <div class="panel-body">
+                        <h3>{{historialActual.pagoFinal.id}}</h3>
+                        <br>
+                        Medio:
+                        <p>{{historialActual.pagoFinal.medio}}</p>
+                        <br>
+                        Pagado:
+                        <p>{{historialActual.pagoFinal.pagado}}</p>
+                        <br>
+                        Fecha Limite:
+                        <p>{{historialActual.pagoFinal.fechaLimite}}</p>
+                        <br>
+                        Valor:
+                        <p>{{historialActual.pagoFinal.valor}}</p>
+                        <br>
+                   </div>
+               </div> 
+    </div>
+</div>
 

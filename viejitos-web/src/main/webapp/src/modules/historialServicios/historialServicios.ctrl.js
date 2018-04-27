@@ -6,7 +6,7 @@
         
         function ($scope, $http, historialServiciosContext) {
             
-                $http.get('data/historialServicios.json').then(function (response) {
+                $http.get('http://localhost:8080/viejitos-web/api/servicios').then(function (response) {
                 $scope.historialServiciosRecords = response.data;
             
             });
