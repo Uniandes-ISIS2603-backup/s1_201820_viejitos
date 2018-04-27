@@ -44,7 +44,7 @@
                 url: '/{clienteId:int}/detail',
                 parent: 'clientes',
                 param: {
-                    clienteId: null
+                    medicoId: null
                 },
                 views: {
                     'listView': {

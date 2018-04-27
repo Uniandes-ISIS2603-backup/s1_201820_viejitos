@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.viejitos.ejb;
 
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.viejitos.persistence.CalendarioSemanalPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.CitaPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
 import co.edu.uniandes.csw.viejitos.persistence.MedicoPersistence;

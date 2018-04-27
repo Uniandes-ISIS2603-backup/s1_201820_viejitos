@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.ejb;
 
 //TODO:DONE Borrar lo que no se utilice
 import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
+import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.CalendarioSemanalPersistence;
@@ -30,6 +31,14 @@ public class CalendarioSemanalLogic {
 
     @Inject
     private CalendarioSemanalPersistence persistencia;
+    
+    @Inject
+    private MedicoLogic medicoLogic;
+    
+    
+   @Inject
+    private EnfermeroLogic enfermeroLogic;
+    
 
     /**
      * Obtiene los datos de una instancia de CalendarioSemanal a partir de su
@@ -74,7 +83,7 @@ public class CalendarioSemanalLogic {
 
           CalendarioSemanalEntity ent=null;
         //TODO :DONE validar regla de negocio.
-        if(entity!=null&&persistencia.find(entity.getId())!=null)
+        if(entity!=null&&entity.getId()!=null &&persistencia.find(entity.getId())!=null)
        {
             throw new  BusinessLogicException("el id no es valido"); 
         }  
@@ -134,8 +143,7 @@ public class CalendarioSemanalLogic {
       if(calendarioId!=null)
           {
         return getCalendario(calendarioId).getFranjas();
-    
-          }
+         }
       else
           {
           throw new BusinessLogicException("se necesita prporcionar una id");
@@ -183,18 +191,20 @@ public class CalendarioSemanalLogic {
      *
      */
     
-    //TODO:DONE Darle una doble revisada a este código complicado
+    //TODO:UNDONE Darle una doble revisada a este código complicado. NO ENTIENDO PORQUE NO ESTA FUNCIONANDO LA REVISION DE LA BUSSINESS RULE.LA QUE ESTA COMENTADA LLAMA A UN NULLLPOINTEREXCEPTION
     public FranjaHorariaEntity addFranja(Long franjaId, Long calendarioId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de agregar una franja con id = {0}", calendarioId);
         FranjaHorariaEntity entityF = franjaLogic.getFranja(franjaId);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar las franja de un"
+                + "calendario con id = {0}", calendarioId);
 
-        CalendarioSemanalEntity ent = persistencia.find(calendarioId);
-        List<FranjaHorariaEntity> lista = ent.getFranjas();
+       CalendarioSemanalEntity ent = persistencia.find(calendarioId);
+       List<FranjaHorariaEntity> lista = ent.getFranjas();
         for (FranjaHorariaEntity franja : lista) {
             if (franja.getDiaSemana().equals(entityF.getDiaSemana())) {
-                if (franja.getHoraInicio() < entityF.getHoraInicio() && entityF.getHoraInicio() < franja.getHoraInicio()
-                        || entityF.getHoraInicio() < franja.getHoraInicio() && franja.getHoraInicio() < entityF.getHoraFin()
-                        || entityF.getHoraInicio() < franja.getHoraFin() && franja.getHoraFin() < entityF.getHoraFin()) {
+                if ((franja.getHoraInicio() < entityF.getHoraInicio() && entityF.getHoraFin() < franja.getHoraFin())
+                        || (entityF.getHoraInicio() < franja.getHoraInicio() && franja.getHoraInicio() < entityF.getHoraFin())
+                        || (entityF.getHoraInicio() < franja.getHoraFin() && franja.getHoraFin() < entityF.getHoraFin())) {
                     throw new BusinessLogicException("el horario de la franja ya esta ocupado");
                 }
             }
@@ -207,10 +217,15 @@ public class CalendarioSemanalLogic {
             }
 
         }
-        lista.add(entityF);
-        ent.setFranjas(lista);
-        persistencia.update(ent);
-        return entityF;
+   //BookEntity book = bookLogic.getBook(bookid);
+       // entity.setBook(book);
+      // persistence.update(entity);
+     lista.add(entityF);
+     ent.setFranjas(lista);
+     entityF.setCalendario(ent);
+     franjaLogic.updateFranja(entityF);
+     persistencia.update(ent);
+     return entityF;
     }
 
     /**
@@ -255,5 +270,77 @@ public class CalendarioSemanalLogic {
             }
         LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de calendario con id={0}", entity.getId());
     }
+    
+    
+    /**
+     * Asigna una instancia de enfermero Existente a un calendario NUEVO, es decir que aun no existe(el calendario).
+     * @param idEnfermero
+     * @param calendarioId
+     * @return la entidad de nefermero
+     */
+    public CalendarioSemanalEntity setCalendariotoEnfermero(Long idEnfermero,Long calendarioId) throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de obtener un enfermero con id  = {0}", idEnfermero);
+        EnfermeroEntity entityEnf = enfermeroLogic.getById(idEnfermero);
+        LOGGER.log(Level.INFO, "termina proceso de obtener un enfermero");
+        
+        LOGGER.log(Level.INFO, "Inicia proceso de obtener un calendario con id  = {0}", calendarioId);
+        CalendarioSemanalEntity entityCal =getCalendario(calendarioId);
+        LOGGER.log(Level.INFO, "termina proceso de obtener un enfermero");
+
+        
+      LOGGER.log(Level.INFO, "Inicia proceso de asignar a un  enfermero"+idEnfermero+ "con calendario con id  = {0}", calendarioId);
+      entityEnf.setCalendario(entityCal);
+      enfermeroLogic.update(entityEnf);
+     LOGGER.log(Level.INFO, "finaliza proceso de asignar a un  enfermero "+idEnfermero+"con calendario con id  = {0}", calendarioId);
+
+     return entityCal;
+    
+    
+    }
+    
+    
+
+    
+    
+    /**
+     * 
+     * dado el id del enfermero entrega el calendario.
+     * @param  enfermeroId  la id del enfermero
+     *@return la entidad de calendario asociada a un enefermo con id dado
+     **/
+    public CalendarioSemanalEntity getCalendarioByEnfermero(Long enfermeroId)
+    {
+        CalendarioSemanalEntity cal=null;
+    LOGGER.log(Level.INFO,"Inicia proceso de consultar enfermero con id={0}" , enfermeroId);
+       EnfermeroEntity enf= enfermeroLogic.getById(enfermeroId);
+       LOGGER.log(Level.INFO,"Finaliza porceso de consulta de enfermero con id={0}" , enfermeroId);
+        if(enf!=null)
+       {
+        cal=enf.getCalendario(); 
+      }
+      
+     return cal;
+    
+    }
+    
+    /**
+     * dado el id de un enfermero le remueve su calendario
+     * @param el id de enfermero
+     * @return el entidad de enfermero ya sin su calendario
+     */
+    //TODO ES posible que sobre y se pueda poner con setCalendarioToeEnfefermero
+    public EnfermeroEntity   removeCalendarioOfEnfermero(Long idEnfermero) throws BusinessLogicException
+    {
+         LOGGER.log(Level.INFO, "Inicia proceso de obtener un enfermero con id  = {0}", idEnfermero);
+        EnfermeroEntity entityEnf = enfermeroLogic.getById(idEnfermero);
+        LOGGER.log(Level.INFO, "termina proceso de obtener un enfermero");
+        entityEnf.setCalendario(null);
+        enfermeroLogic.update(entityEnf);
+        LOGGER.log(Level.INFO, "finaliza proceso de asignar a un  enfermero "+idEnfermero);
+        return entityEnf;
+        
+    }
+ 
 
 }
