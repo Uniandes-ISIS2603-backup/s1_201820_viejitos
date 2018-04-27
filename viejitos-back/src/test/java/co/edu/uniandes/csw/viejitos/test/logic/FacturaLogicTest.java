@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.FacturaPersistence;
+import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -55,6 +56,8 @@ public class FacturaLogicTest {
                 .addPackage(FacturaEntity.class.getPackage())
                 .addPackage(FacturaLogic.class.getPackage())
                 .addPackage(FacturaPersistence.class.getPackage())
+                .addPackage(ServicioEntity.class.getPackage())
+                .addPackage(ServicioPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -94,8 +97,15 @@ public class FacturaLogicTest {
      * pruebas.
      */
     private void insertData() {
-        for (int i = 0; i < 3; i++) {
+        data = new ArrayList<>();
+        dataServicio = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
             ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
+            
+            if(i==0)
+            {
+                System.out.println("ID servicio 0= " + entity.getId());
+            }
             em.persist(entity);
             dataServicio.add(entity);
         }
@@ -103,11 +113,18 @@ public class FacturaLogicTest {
         for (int i = 0; i < 3; i++) {
             FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
             
-            entity.setServicio(dataServicio.get(1));
-            
+            if(i==0)
+            {
+                System.out.println("ID factura 0= " +entity.getId());
+            }
+            entity.setServicio(dataServicio.get(i));
+            //dataServicio.get(i).setFactura(entity);
             em.persist(entity);
+            //em.persist(dataServicio.get(i));
             data.add(entity);
         }
+        System.out.println("ID servicio 0= " + dataServicio.get(0).getId());
+        System.out.println("ID factura 0= " +data.get(0).getId());
     }
     
     /**
@@ -118,7 +135,7 @@ public class FacturaLogicTest {
         FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
         
         
-            FacturaEntity result = facturaLogic.create(data.get(0).getServicio().getId(), newEntity);
+            FacturaEntity result = facturaLogic.create(dataServicio.get(3).getId(), newEntity);
             Assert.assertNotNull(result);
             FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
             Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -135,10 +152,12 @@ public class FacturaLogicTest {
     
      /**
      * Prueba para consultar la lista de Facturas
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @Test
     public void getFacturasTest() throws BusinessLogicException {
-        FacturaEntity entity = facturaLogic.getAll(dataServicio.get(1).getId());
+        System.out.println("HOLAAAAAAAAAA" + dataServicio.get(0).getId());
+        FacturaEntity entity = facturaLogic.getAll(dataServicio.get(0).getId());
         
             boolean found = false;
             for (FacturaEntity storedEntity : data) {
@@ -156,7 +175,10 @@ public class FacturaLogicTest {
     @Test
     public void getFacturaTest() {
         FacturaEntity entity = data.get(0);
-        FacturaEntity resultEntity = facturaLogic.getById(dataServicio.get(1).getId(), entity.getId());
+        
+        System.out.println("HOLAAAAAAAAAAf" + dataServicio.get(0).getId());
+        
+        FacturaEntity resultEntity = facturaLogic.getById(dataServicio.get(0).getId(), entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getCostoTotal(), resultEntity.getCostoTotal());
@@ -174,7 +196,7 @@ public class FacturaLogicTest {
      */
     @Test
     public void deleteFacturaTest() throws BusinessLogicException {
-        FacturaEntity entity = data.get(0);
+        FacturaEntity entity = data.get(1);
         facturaLogic.delete(dataServicio.get(1).getId(), entity.getId());
         FacturaEntity deleted = em.find(FacturaEntity.class, entity.getId());
         Assert.assertNull(deleted);
@@ -185,11 +207,11 @@ public class FacturaLogicTest {
      */
     @Test
     public void updateFacturaTest() throws BusinessLogicException {
-        FacturaEntity entity = data.get(0);
+        FacturaEntity entity = data.get(2);
         FacturaEntity pojoEntity = factory.manufacturePojo(FacturaEntity.class);
 
         pojoEntity.setId(entity.getId());
-            facturaLogic.update(dataServicio.get(1).getId(), pojoEntity);
+            facturaLogic.update(dataServicio.get(2).getId(), pojoEntity);
 
             FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
 
