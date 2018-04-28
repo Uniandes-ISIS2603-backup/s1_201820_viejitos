@@ -2,45 +2,30 @@
 <div class="container-fluid">
 
     <div >
-        <h1  class="row"  > CALENDARIO DE </h1>
-        <table  class="table">
-            
-            <tr >
-            <th> DIA 1</th>
-    <th>DIA 2</th>
-    <th>DIA 3</th>
-       <th>DIA 4</th>
-       <th>DIA 5</th>
-
-  </tr>
-
-                
-           <tr ng-repeat="grupo in franjasRecords" >   
-               
-            
-             <td ng-repeat="franja in grupo.grupito"  >
-                           
-                    
-                    
-         <span   ng-if="franja.ocupado=='true'" style="color:blue">
-                <p  class="bg-success"> {{franja.diaSemana}} </p> 
-              <p  class="bg-success"> {{franja.horaInicio}}</p>
-              <p  class="bg-success">{{franja.horaFin}}  </p>
-              
-          </span>
-             <div ng-if="franja.ocupado=='false'" style="color:blue">
-                            
-             <p  class="bg-primary"> {{franja.diaSemana}} </p> 
-              <p  class="bg-primary"> {{franja.horaInicio}}</p>
-              <p  class="bg-primary">{{franja.horaFin}}  </p>
-                 
-                 
-                 </span>
-                </td>
-           </tr>
-             </table>
+        <h1  class="row"  > ESTA PESTAÑA ES PARA EL ADMINISTRADOR </h1>
+    {{n}}
+        <h2>TODOS LOS CALENDARIOS EXISTENTES SON LOS SIGUIENTES </h2>
+       
+        <div ng-repeat="calendario in calendariosRecords" >
+       ultimaModificacion: {{calendario.ultimaModificacion}} 
+       
+           
+       
+       
+       <hr>
+       
+        
+        
+        </div>
+        
+        
+        
+        
+           <h3>TODOS LOS CALENDARIOS CREADOS SON LOS SIGUIENTES </h3>
+        <h3> LOS CALENDARIOS DE LOS MEDICOS SON LOS SIGUIENTES    </h3>
     
-
+        
+         {{miamigo}}
 </div>
     
     
