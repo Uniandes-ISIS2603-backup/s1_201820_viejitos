@@ -1,0 +1,89 @@
+{
+	"id": "a14eabfa-0cb5-7980-a8a6-9813e82beebc",
+	"name": "calendarioSemanalEnfermero",
+	"description": "",
+	"order": [
+		"215a647b-8198-ab09-e72d-ad5d56ab57ac",
+		"5202aa7e-baef-61dd-ec0b-007dc75042a4",
+		"de87f3ba-84fd-d962-2f74-c1e01617402b"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1524618365793,
+	"owner": "3730883",
+	"public": false,
+	"requests": [
+		{
+			"id": "215a647b-8198-ab09-e72d-ad5d56ab57ac",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/viejitos-web/api/enfermeros/1/calendariossemanales/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1524933429994,
+			"name": "anadirCalendarioNuevoaEnfermero_tambien_lo_updatea",
+			"description": "",
+			"collectionId": "a14eabfa-0cb5-7980-a8a6-9813e82beebc",
+			"responses": [],
+			"rawModeData": "  {\n       \n        \"ultimaModificacion\": \"2000-01-05T13:59:00-05:00\", \n       \"franjasHorarias\": [\n       \t] \n               }"
+		},
+		{
+			"id": "5202aa7e-baef-61dd-ec0b-007dc75042a4",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8080/viejitos-web/api/enfermeros/1/calendariossemanales/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1524697343288,
+			"name": "getCalendarioDeEnfermero",
+			"description": "DA EL CALENDARIO DE UN ENFERMERO CON ID DADO",
+			"collectionId": "a14eabfa-0cb5-7980-a8a6-9813e82beebc",
+			"responses": []
+		},
+		{
+			"id": "de87f3ba-84fd-d962-2f74-c1e01617402b",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8080/viejitos-web/api/enfermeros/1/calendariossemanales/27",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1524889233588,
+			"name": "put un calendario a un enfermero",
+			"description": "",
+			"collectionId": "a14eabfa-0cb5-7980-a8a6-9813e82beebc",
+			"responses": []
+		}
+	]
+}
