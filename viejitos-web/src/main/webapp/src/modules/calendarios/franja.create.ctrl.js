@@ -11,6 +11,8 @@
         
             $scope.createFranja = function () {
                 $http.post('api/calendariossemanales/71/franjashorarias', $scope.data).then(function (response) {
+     $state.go('calendariosList', {reload: true});
+
                 });
             };
         }
