@@ -11,7 +11,7 @@
         
             $scope.createCalendario = function () {
                 $http.post(calendariosContext, $scope.data).then(function (response) {
-                   // $state.go('calendariosList', {calendarioId: response.data.id}, {reload: true});
+                    $state.go('calendariosList',  {reload: true});
                 });
             };
         }
