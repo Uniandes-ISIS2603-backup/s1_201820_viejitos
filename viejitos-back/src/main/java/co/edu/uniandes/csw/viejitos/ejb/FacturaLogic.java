@@ -53,14 +53,14 @@ public class FacturaLogic {
                 {
                         throw new BusinessLogicException( "La entidad de Factura no puede tener un costo total negativo" );
                 }
-                
-                ServicioEntity servicio=servicioLogic.getById(serviceid);
-                entity.setServicio(servicio);
-                servicio.setFactura(entity);
-                servicioLogic.update(servicio);
-		LOGGER.info( "Termina proceso de creación de entidad de Factura" );
-		return persistence.create( entity );
-	}
+            
+        ServicioEntity servicio = servicioLogic.getById(serviceid);
+        entity.setServicio(servicio);
+        servicio.setFactura(entity);
+        servicioLogic.update(servicio);
+        LOGGER.info("Termina proceso de creación de entidad de Factura");
+        return persistence.create(entity);
+    }
 
         /**
         * Obtiene la lista de los registros de Factura que pertenecen a un Servicio.
