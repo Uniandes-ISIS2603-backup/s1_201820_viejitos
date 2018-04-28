@@ -6,7 +6,6 @@
         // Internal modules dependencies       
         'viejitosModule',
         'serviciosModule',
-        'quejasModule',
         'pagosModule',
         'clienteModule',
         'calificacionesModule',
