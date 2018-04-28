@@ -37,8 +37,10 @@
                 }}).state('franjasCreate', {
                 url: '/createfranja',
                 parent: 'calendarios',
-               
-                views: {
+                   param: {
+                    calendarioId: null
+                },
+                   views: {
                     'detailView': {
                         templateUrl: basePath + 'franja.create.html',
                         controller: 'franjaNewCtrl'
