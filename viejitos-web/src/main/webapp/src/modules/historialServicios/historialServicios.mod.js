@@ -1,7 +1,7 @@
 (function (ng)
 {
     //Definición del modulo
-    var mod= ng.module("historialServiciosModule", ['ui.router']);
+    var mod = ng.module("historialServiciosModule", ['ui.router']);
     // Configuración de los estados del módulo
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             // En basePath se encuentran los templates y controladores de módulo
@@ -21,55 +21,53 @@
                                 controllerAs: 'ctrl'
                             }
                         }
-                        }
-                     
+                    }
+
                     )
-                    .state('historialServicios',{
+                    .state('historialServicios', {
                         url: '/historialServicios',
                         abstract: true,
-                        
-                        views:{
-                            'mainView':{
-                                templateUrl: basePath +'historialServicios.html'
+                        views: {
+                            'mainView': {
+                                templateUrl: basePath + 'historialServicios.html'
                             }
                         }
                     })
-                    
-                    .state('historialServiciosDetail',{
-                        url:'/:id',
-                        parent:'historialServicios',
-                        params:{
-                            id:null
+
+                    .state('historialServiciosDetail', {
+                        url: '/:id',
+                        parent: 'historialServicios',
+                        params: {
+                            id: null
                         },
-                        
-                        views:{
+
+                        views: {
                             'listView': {
                                 templateUrl: basePath + 'historialServicios.list.html',
                                 controller: 'historialServiciosCtrl',
                                 controllerAs: 'ctrl'
                             },
-                            'historialServiciosDetail':{
+                            'historialServiciosDetail': {
                                 templateUrl: basePath + 'historialServicios.detail.html',
                                 controller: 'historialServiciosDetailCtrl',
-                                controllerAs:'ctrl'
-                            }, 
-                            'createQueja':{
+                                controllerAs: 'ctrl'
+                            },
+                            'createQueja': {
                                 templateUrl: basePath + 'historialServicios.createQueja.html',
                                 controller: 'historialServiciosCreateQuejaCtrl',
-                                controllerAs:'ctrl'
+                                controllerAs: 'ctrl'
                             }
-                            
+
                         }
                     })
-                            .state('historialServiciosCreate', {
-                            url: '/create',
-                            parent: 'historialServicios',
-                            views: {
-                                'historialServiciosList': {
-                                    templateUrl: basePath + 'historialServicios.new.html',
-                                    controller: 'historialServiciosNewCtrl'
-                                }
-                            }});
-                    }
+                    .state('historialServiciosCreate', {
+                        url: '/create',
+                        views: {
+                            'mainView': {
+                                templateUrl: basePath + 'historialServicios.new.html',
+                                controller: 'historialServiciosNewCtrl'
+                            }
+                        }});
+        }
     ]);
 })(window.angular);
