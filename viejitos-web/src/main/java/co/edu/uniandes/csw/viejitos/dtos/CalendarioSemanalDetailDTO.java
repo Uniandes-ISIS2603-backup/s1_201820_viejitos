@@ -77,7 +77,7 @@ public class CalendarioSemanalDetailDTO extends CalendarioSemanalDTO {
 
     public CalendarioSemanalDetailDTO(CalendarioSemanalEntity entity) {
         super(entity);
-        if (entity != null) {
+        if (entity.getFranjas() != null) {
             List<FranjaHorariaEntity> frjsEnt = entity.getFranjas();
             List<FranjaHorariaDTO> frjsDTO = new ArrayList<>();
 
