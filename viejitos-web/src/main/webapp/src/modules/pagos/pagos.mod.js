@@ -15,28 +15,27 @@
                 abstract: true,
                 views: {
                     'mainView': {
-                        templateUrl: basePath + 'pagos.list.html',
+                        templateUrl: basePath + 'pagos.html',
                         controller: 'pagoCtrl',
                         controllerAs: 'ctrl'
                     }
                 }
             }).state('pagosList', {
-                url: '/pagos/list',
+                url: '/list',
                 parent: 'pagos',
                 views: {
                     'listView': {
                         templateUrl: basePath + 'pagos.list.html',
-                        /*controller: 'pagoCtrl',
-                        controllerAs: 'ctrl'*/
                     }
                 }
             }).state('pagosCreate', {
                 url: '/create',
                 parent: 'pagos',
                 views: {
-                    'detailView': {
+                    'createView': {
                         templateUrl: basePath + 'pagos.new.html',
-                        controller: 'pagoNewCtrl'
+                        controller: 'pagoNewCtrl',
+                        controllerAs: 'ctrl'
                     }
                 }});
         }

@@ -5,12 +5,13 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
-<div id="alertPanel" style="text-align: center"></div>
 <div class="container-fluid">
     <div class="btn-group mr-2" role="group" aria-label="First group">
         <a class="btn btn-info" ui-sref="pagosCreate"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Pago</a>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-3">
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <h3>Informacion Basica</h3>
         <table class="table table-striped">
 
             <thead>
