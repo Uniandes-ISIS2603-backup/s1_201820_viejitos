@@ -64,7 +64,7 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
      * asociacion al servicio
      */
     @PodamExclude
-    @OneToOne (mappedBy="factura", cascade = CascadeType.PERSIST) 
+    @OneToOne (cascade = CascadeType.PERSIST) 
     private ServicioEntity servicio;
 
     /**

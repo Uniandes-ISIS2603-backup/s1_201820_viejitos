@@ -115,20 +115,20 @@ public class FacturaPersistenceTest {
         data = new ArrayList<>();
         dataServicio = new ArrayList<>();
         PodamFactory factory = new PodamFactoryImpl();
-        //for (int i = 0; i < 3; i++) {
-            ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
-            entity.setId(1L);
-            em.persist(entity);
-            dataServicio.add(entity);
-        //}
+        
+        ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
+           
+        em.persist(entity);
+        dataServicio.add(entity);
+      
         for (int i = 0; i < 1; i++) {
             FacturaEntity entityFactura = factory.manufacturePojo(FacturaEntity.class);
             if (i == 0) {
                 System.out.println("id servicio insert: " + dataServicio.get(0).getId());
                 entityFactura.setServicio(dataServicio.get(0));
-                entity.setFactura(entityFactura);
+                //entity.setFactura(entityFactura);
             }
-            entityFactura.setId((long)i);
+           
             em.persist(entityFactura);
             data.add(entityFactura);
         }
@@ -172,8 +172,8 @@ public class FacturaPersistenceTest {
     @Test
     public void getFacturaTest() {
         FacturaEntity entity = data.get(0);
-        System.out.println("id del servicio: " + dataServicio.get(0).getId());
-        System.out.println("id del servicio: " + entity.getServicio().getId() + " ; " + entity.getId());
+        //System.out.println("id del servicio: " + dataServicio.get(0).getId());
+        //System.out.println("id del servicio: " + entity.getServicio().getId() + " ; " + entity.getId());
         FacturaEntity newEntity = facturaPersistence.find(entity.getServicio().getId(), entity.getId());
         System.out.println(newEntity == null);
         Assert.assertNotNull(newEntity);
