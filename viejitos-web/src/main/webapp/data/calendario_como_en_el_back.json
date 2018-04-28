@@ -1,0 +1,151 @@
+[
+   
+   { 
+        
+            "id": "1",
+       "ultimaModificacion": "01/07/2018 08:11:13pm",
+  "franjasHorarias": [
+
+
+        {
+ "diaSemana": "lunes",
+  "horaInicio": "0800",
+  
+      "ocupado": "true",
+        "horaFin": "0900",
+        "id": 1
+    },
+    
+    {
+   "diaSemana": "martes",
+  "horaInicio": "0800",
+  
+      "ocupado": "true",
+        "horaFin": "0900",
+        "id": 2
+    },
+    {
+       "diaSemana": "miercoles",
+  "horaInicio": "0800",
+  
+      "ocupado": "true",
+        "horaFin": "0900",
+        "id": 3
+    },
+
+ {
+ "diaSemana": "jueves",
+  "horaInicio": "0800",
+  
+      "ocupado": "false",
+        "horaFin": "0900",
+        "id": 4
+    },
+    
+     {
+ "diaSemana": "viernes",
+  "horaInicio": "0800",
+  
+      "ocupado": "false",
+        "horaFin": "0900",
+        "id": 5 },
+        
+        
+      {
+ "diaSemana": "lunes",
+  "horaInicio": "0900",
+  
+      "ocupado": "true",
+        "horaFin": "1000",
+        "id": 11
+    },
+    
+    {
+   "diaSemana": "martes",
+  "horaInicio": "0900",
+  
+      "ocupado": "true",
+        "horaFin": "1000",
+        "id": 12
+    },
+    {
+       "diaSemana": "miercoles",
+  "horaInicio": "0900",
+  
+      "ocupado": "false",
+        "horaFin": "1000",
+        "id": 13
+    },
+
+ {
+ "diaSemana": "jueves",
+  "horaInicio": "0900",
+  
+      "ocupado": "false",
+        "horaFin": "1000",
+        "id": 14
+    },
+    
+     {
+ "diaSemana": "viernes",
+  "horaInicio": "0900",
+  
+      "ocupado": "false",
+        "horaFin": "1000",
+        "id": 15
+        
+    },
+   
+    
+    
+   {
+    "diaSemana": "lunes",
+  "horaInicio": "1000",
+  
+      "ocupado": "false",
+        "horaFin": "1100",
+        "id": 21
+    },
+    
+    {
+   "diaSemana": "martes",
+  "horaInicio": "1000",
+  
+      "ocupado": "true",
+        "horaFin": "1100",
+        "id": 22
+    },
+    {
+       "diaSemana": "miercoles",
+  "horaInicio": "1000",
+  
+      "ocupado": "true",
+        "horaFin": "1100",
+        "id": 23
+    },
+
+ {
+ "diaSemana": "jueves",
+  "horaInicio": "1000",
+  
+      "ocupado": "true",
+        "horaFin": "1100",
+        "id": 24
+    },
+    
+     {
+ "diaSemana": "viernes",
+  "horaInicio": "1000",
+    "ocupado": "true",
+        "horaFin": "1100",
+        "id": 25
+        
+    }
+    
+
+    
+  
+
+  ]
+   }
+]
