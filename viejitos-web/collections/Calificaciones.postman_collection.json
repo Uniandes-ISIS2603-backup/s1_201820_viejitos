@@ -1,0 +1,191 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Calificaciones",
+		"_postman_id": "32d4f5cb-4e9a-f22f-c3a0-e98214fcfbc4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get de todas las calificaciones",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/calificaciones",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"id\":1,\r\n       \"nombre\":\"Juan Espitia\",\r\n       \"cv\":\"./documents/juanHDV.pdf\",\r\n       \"login\":\"js.espitia\",\r\n       \"contrasenia\":\"a89ess0909\",\r\n       \"tipo\":\"Enfermero\"\r\n\t\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Post de una calificacion nueva",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/calificaciones/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"comentario\": \"Que chimba ser atendido por este enfermero, lo amé\",\n        \"loginCalificado\": \"js.espitia\",\n        \"loginCalificador\": \"j.salazar\",\n        \"puntaje\": 10,\n        \"tipoCalificado\": \"enfermero\",\n        \"tipoCalificador\": \"cliente\",\n        \"servicio\": {}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get de una calificación particular",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/calificaciones/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"comentario\": \"Que chimba ser atendido por este enfermero, lo amé\",\n        \"loginCalificado\": \"js.espitia\",\n        \"loginCalificador\": \"j.salazar\",\n        \"puntaje\": 10,\n        \"tipoCalificado\": \"enfermero\",\n        \"tipoCalificador\": \"cliente\",\n        \"servicio\": {}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Put para actualizar una calificacion existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/calificaciones/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"calificacionDetailDTO\",\n    \"comentario\": \"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado\",\n    \"idCalificacion\": 1,\n    \"loginCalificado\": \"ma.marulanda\",\n    \"loginCalificador\": \"af.ramirez\",\n    \"puntaje\": 4.9,\n    \"tipoCalificado\": \"enfermero\",\n    \"tipoCalificador\": \"cliente\",\n    \"servicio\": {}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get de una calificacion inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 404\"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/calificaciones/999",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"calificacionDetailDTO\",\n    \"comentario\": \"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado\",\n    \"idCalificacion\": 1,\n    \"loginCalificado\": \"ma.marulanda\",\n    \"loginCalificador\": \"af.ramirez\",\n    \"puntaje\": 4.9,\n    \"tipoCalificado\": \"enfermero\",\n    \"tipoCalificador\": \"cliente\",\n    \"servicio\": {}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
