@@ -3,15 +3,16 @@
     mod.controller('historialServiciosNewCtrl', ['$scope', '$http', '$state', '$rootScope',
         
         function ($scope, $http, $state, $rootScope) {
-            $rootScope.edit = false;
 
-            $scope.data = {};
+            //$rootScope.edit = false;
+
+            //$scope.data = {};
             
-            $scope.createServicio = function () {
-                $http.post("'http://localhost:8080/viejitos-web/api/servicios", $scope.data).then(function (response) {
-                    $state.go('historialServiciosList', {servicoId: response.data.id}, {reload: true});
-                });
-            };
+            //$scope.createServicio = function () {
+             //   $http.post("api/servicios", $scope.data).then(function (response) {
+              //      $state.go('historialServiciosList', {servicoId: response.data.id}, {reload: true});
+               // });
+            //};
         }
     ]);
 }
