@@ -20,57 +20,20 @@
                 parent:'calendarios',
                 views:{
                     'listView':{
-                        templateUrl: basePath + 'calendarios.list.html'
+                        templateUrl: basePath + 'calendarios.list.html',
+                        controller:'calendariosCtrl',
+                        controllerAs:'ctrl'
+                        
                     }
                 }
-        }).state("calendariosDetail",{
-                url:'/{calendarioId:int}/detail',
-                parent:'calendarios',
-                param:{
-                    enfermeroId:null
-                },
-                views:{
-                    'listView':{
-                        templateUrl: basePath + 'enfermeros.list.html',
-                        controller: 'enfermerosDetailCtrl',
-                        controllerAs: 'ctrl'
-                    },
-                    detailView:{
-                        templateUrl: basePath + 'enfermero.detail.html',
-                        controller: 'enfermerosDetailCtrl',
-                        controllerAs: 'ctrl'
+        }).state('calendariosCreate', {
+                url: '/create',
+                parent: 'calendarios',
+                views: {
+                    'detailView': {
+                        templateUrl: basePath + 'calendario.create.html',
+                        controller: 'calendarioNewCtrl'
                     }
-                }
-        }).state("enfermeroFranja",{
-            url:'/{enfermeroId:int}/{franjaId:int}/detailer',
-            parent:'enfermeros',
-            param:{
-                franjaId:null,
-                enfermeroId:null
-                
-                },
-            views:{
-                'listView':{
-                    templateUrl:basePath+'enfermeros.list.html',
-                    controller:'calendariosDetailCtrl',
-                    controllerAs:'ctrl'
-                },
-                detailView:{
-                    templateUrl:basePath+'enfermero.detail.html',
-                     controller:'calendariosDetailCtrl',
-                    controllerAs:'ctrl'
-                },
-                franjaDetailView:{
-                      templateUrl:basePath+'calendario.detail.html',
-                     controller:'calendariosDetailCtrl',
-                    controllerAs:'ctrl'
-                    
-                }
-            }
-            
-            
-        }
-        
-            );
+                }});
     }]);
 })(window.angular);
