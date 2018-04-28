@@ -37,7 +37,7 @@
                 }}).state('franjasCreate', {
                 url: '/createfranja',
                 parent: 'calendarios',
-                   param: {
+                   params: {
                     calendarioId: null
                 },
                    views: {
