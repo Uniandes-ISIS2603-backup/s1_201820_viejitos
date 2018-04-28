@@ -56,7 +56,8 @@ public class FacturaLogic {
                 
                 ServicioEntity servicio=servicioLogic.getById(serviceid);
                 entity.setServicio(servicio);
-                //servicio.setFactura(entity);
+                servicio.setFactura(entity);
+                //servicioLogic.update(servicio);
 		LOGGER.info( "Termina proceso de creación de entidad de Factura" );
 		return persistence.create( entity );
 	}
