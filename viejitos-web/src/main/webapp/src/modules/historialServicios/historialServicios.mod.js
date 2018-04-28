@@ -55,9 +55,15 @@
                             }
                             
                         }
-                    });
-        }
+                    }).state('historialServiciosCreate', {
+                            url: '/create',
+                            parent: 'historialServicios',
+                            views: {
+                                'createView': {
+                                    templateUrl: basePath + 'historialServicios.new.html',
+                                    controller: 'historialServiciosNewCtrl'
+                                }
+                            }});
+                    }
     ]);
 })(window.angular);
-
-

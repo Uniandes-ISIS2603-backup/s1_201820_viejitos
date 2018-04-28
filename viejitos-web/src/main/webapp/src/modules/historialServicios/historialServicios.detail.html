@@ -1,3 +1,4 @@
+
 <div class="col-lg-6" >
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
     <div id="alertPanel" style="text-align: center"></div>
@@ -29,14 +30,14 @@
     </div>
 </div>
 
-<div class="col-lg-3">
+<div class="col-lg-6">
     <h1> {{historialActual.id}} </h1> <br>
-    <div>
+    <div class="row">
         <h2>Cliente: </h2>
             <div class="panel panel-default">
                    <div class="panel-body">
                         <h3>{{historialActual.cliente.id}}</h3>
-                        <br
+                        <br>
                         Nombre:
                         <p>{{historialActual.cliente.nombre}}</p>
                         <br>
@@ -101,6 +102,48 @@
                         
                    </div>
                </div> 
+        <h2>Factura: </h2>
+            <div class="panel panel-default">
+                   <div class="panel-body">
+                        <h3>{{historialActual.factura.id}}</h3>
+                        <br>
+                        Costo Total:
+                        <p>{{historialActual.factura.costoTotal}}</p>
+                        <br>
+                        Fecha de Expedición:
+                        <p>{{historialActual.factura.fechaExpedicion}}</p>
+                        <br>
+                        Descripción:
+                        <p>{{historialActual.factura.expedicion}}</p>
+                        <br>
+                        Nombre del Cliente:
+                        <p>{{historialActual.factura.nombreCliente}}</p>
+                        <br>
+                        Cédula del Cliente:
+                        <p>{{historialActual.factura.ccCliente}}</p>
+                        <br>
+                        Servicio Prestado:
+                        <p>{{historialActual.factura.servicioPrestado}}</p>
+                        <br>
+                        Nombre de la Empresa:
+                        <p>{{historialActual.factura.nombreEmpresa}}</p>
+                   </div>
+               </div> 
+                <h2>Quejas: </h2>
+            <div class="panel panel-default" >
+                   <div class="panel-body">
+                       <div ng-repeat="q in historialActual.quejas">
+                            <h3>{{q.id}}</h3>
+                            <br>
+                            Reclamo:
+                            <p>{{q.reclamo}}</p>
+                            <br>
+                            Resuelto:
+                            <p>{{q.resuelto}}</p>
+                            <br>
+                        </div>
+                   </div>
+               </div>
     </div>
 </div>
 

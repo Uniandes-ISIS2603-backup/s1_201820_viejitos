@@ -1,7 +1,9 @@
-
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
 <div id="alertPanel" style="text-align: center"></div>
 <div class="container-fluid">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+        <a class="btn btn-info" ui-sref="historialServiciosCreate"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Servicio</a>
+    </div>
     <div class="col-md-6">
         <table class="table table-striped">
             <thead>
