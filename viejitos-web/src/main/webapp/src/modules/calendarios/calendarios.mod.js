@@ -34,6 +34,16 @@
                         templateUrl: basePath + 'calendario.create.html',
                         controller: 'calendarioNewCtrl'
                     }
-                }});
+                }}).state('franjasCreate', {
+                url: '/createfranja',
+                parent: 'calendarios',
+               
+                views: {
+                    'detailView': {
+                        templateUrl: basePath + 'franja.create.html',
+                        controller: 'franjaNewCtrl'
+                    }
+                }})
+            ;
     }]);
 })(window.angular);
