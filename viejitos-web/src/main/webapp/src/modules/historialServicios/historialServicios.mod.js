@@ -52,6 +52,11 @@
                                 templateUrl: basePath + 'historialServicios.detail.html',
                                 controller: 'historialServiciosDetailCtrl',
                                 controllerAs:'ctrl'
+                            }, 
+                            'createQueja':{
+                                templateUrl: basePath + 'historialServicios.createQueja.html',
+                                controller: 'historialServiciosCreateQuejaCtrl',
+                                controllerAs:'ctrl'
                             }
                             
                         }

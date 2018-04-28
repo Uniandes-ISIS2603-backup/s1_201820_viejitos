@@ -1,16 +1,15 @@
 (function (ng) {
     var mod = ng.module("historialServiciosModule");
-    mod.constant("historialServiciosContext", "api/servicios");
-    mod.controller('historialServiciosNewCtrl', ['$scope', '$http', 'historialServiciosContext', '$state', '$rootScope',
+    mod.controller('historialServiciosNewCtrl', ['$scope', '$http', '$state', '$rootScope',
         
-        function ($scope, $http, historialServiciosContext, $state, $rootScope) {
+        function ($scope, $http, $state, $rootScope) {
             $rootScope.edit = false;
 
             $scope.data = {};
             
             $scope.createServicio = function () {
-                $http.post(historialServiciosContext, $scope.data).then(function (response) {
-                    $state.go('historialServiciosList', {Id: response.data.id}, {reload: true});
+                $http.post("'http://localhost:8080/viejitos-web/api/servicios", $scope.data).then(function (response) {
+                    $state.go('historialServiciosList', {servicoId: response.data.id}, {reload: true});
                 });
             };
         }
