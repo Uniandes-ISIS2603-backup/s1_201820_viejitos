@@ -1,7 +1,23 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+(function (ng) {
+    var mod = ng.module("calendariosModule");
+    mod.constant("calendariosContext", "api/calendariossemanales");
+    mod.controller('franjaNewCtrl', ['$scope', '$http', 'calendariosContext', '$state', '$rootScope',
+      
+        function ($scope, $http, calendariosContext, $state, $rootScope) {
+            $rootScope.edit = false;
+
+            $scope.data = {};
+        
+        
+            $scope.createFranja = function () {
+                $http.post('api/calendariossemanales/71/franjashorarias', $scope.data).then(function (response) {
+                });
+            };
+        }
+    ]);
+}
+)(window.angular);
+
+
 
 
