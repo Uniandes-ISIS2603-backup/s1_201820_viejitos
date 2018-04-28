@@ -1,10 +1,11 @@
 (function (ng) {
     var mod = ng.module("historialServiciosModule");
-    mod.controller('historialServiciosCreateQuejaCtrl', ['$scope', '$http', '$state', '$rootScope', '$statetParams',
+    mod.controller('historialServiciosCreateQuejaCtrl', ['$scope', '$http', '$state', '$rootScope', '$stateParams',
         
         function ($scope, $http, $state, $rootScope, $stateParams) {
             $rootScope.edit = false;
 
+            $scope.idDetail=$stateParams.id
             $scope.data = {};
             
             $scope.createQueja = function () {

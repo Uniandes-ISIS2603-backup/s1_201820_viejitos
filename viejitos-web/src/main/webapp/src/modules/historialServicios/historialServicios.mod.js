@@ -51,13 +51,7 @@
                                 templateUrl: basePath + 'historialServicios.detail.html',
                                 controller: 'historialServiciosDetailCtrl',
                                 controllerAs: 'ctrl'
-                            },
-                            'createQueja': {
-                                templateUrl: basePath + 'historialServicios.createQueja.html',
-                                controller: 'historialServiciosCreateQuejaCtrl',
-                                controllerAs: 'ctrl'
                             }
-
                         }
                     })
                     .state('historialServiciosCreate', {
@@ -66,6 +60,18 @@
                             'mainView': {
                                 templateUrl: basePath + 'historialServicios.new.html',
                                 controller: 'historialServiciosNewCtrl'
+                            }
+                        }})
+                    .state('quejaCreate', {
+                        url: '/quejaCreate',
+                        params: {
+                            id: null
+                        },
+                        views: {
+                            'mainView': {
+                                templateUrl: basePath + 'historialServicios.createQueja.html',
+                                controller: 'historialServiciosCreateQuejaCtrl',
+                                controllerAs: 'ctrl'
                             }
                         }});
         }

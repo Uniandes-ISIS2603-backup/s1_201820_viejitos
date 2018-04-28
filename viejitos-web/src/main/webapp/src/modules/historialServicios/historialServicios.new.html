@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="form-group col-md-6">
-                            <label for="historialServicioDescripcion" class="col-sm-2">Hora:</label>
+                            <label for="historialServicioDescripcion" class="col-sm-2">Descripción:</label>
                             <input id="historialServicioDescripcion" required ng-model="data.descripcion" class="col-sm-6"/>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                     </div> 
                     <div class="form-group row">
                         <div class="form-group col-sm-12">
-                            <input ng-show="historialServicio.$valid" ng-click="createHistorialServicio()" value="Guardar" class="btn btn-success"/>
+                            <input ng-show="historialServicio.$valid" ng-click="createServicio()" value="Guardar" class="btn btn-success"/>
                             <a class="btn btn-info" ui-sref="historialServicioList">Cancelar</a>
                         </div>
                     </div>
