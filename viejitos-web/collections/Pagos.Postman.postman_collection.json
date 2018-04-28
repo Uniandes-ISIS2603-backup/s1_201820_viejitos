@@ -1,0 +1,186 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Pagos.Postman",
+		"_postman_id": "57e6468c-daf3-fd3c-a4cc-ea417252690a",
+		"description": "Pruebas para el recurso Pago",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/viejitos-web/api/pagos",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/pagos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"medio\": \"Efectivo\",\r\n  \"pagado\": true,\r\n  \"fechaLimite\": \"12/04/18\",\r\n  \"valor\": 150000\r\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/pagos",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/pagos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"medio\": \"PSE\",\r\n  \"pagado\": true,\r\n  \"fechaLimite\": \"28/04/18\",\r\n  \"valor\": 200000\r\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/pagos/2",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/pagos/2",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/pagos/3",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/pagos/3",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/pagos/2",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/pagos/2",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"medio\": \"PSE\",\r\n  \"pagado\": true,\r\n  \"fechaLimite\": \"28/04/18\",\r\n  \"valor\": 300000\r\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/pagos/5",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/pagos/5",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/pagos",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/pagos",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"medio\": \"Efectivo\",\r\n  \"pagado\": true,\r\n  \"fechaLimite\": \"12/04/18\",\r\n  \"valor\": 100000\r\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

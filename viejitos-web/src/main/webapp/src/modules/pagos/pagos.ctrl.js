@@ -11,7 +11,7 @@
 
         function ($scope, $http, pagosContext) {
 
-            $http.get('data/pagos.json').then(function (response) {
+            $http.get('http://localhost:8080/viejitos-web/api/pagos').then(function (response) {
                 $scope.pagosRecords = response.data;
             });
         }
