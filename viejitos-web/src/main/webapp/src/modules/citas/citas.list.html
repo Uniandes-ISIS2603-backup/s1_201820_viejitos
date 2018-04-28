@@ -19,8 +19,8 @@ and open the template in the editor.
             <tbody>
                 <tr ng-repeat="cita in citasRecords">
                     <td><a ui-sref="citasDetail({citaId: cita.id})" class="thumb">{{cita.id}}</a></td>
-                    <td>{{cita.fecha}}</td>   
-                    <td>{{cita.hora}}</td>   
+                    <td>{{cita.fecha | date:"yyyy-MM-dd"}}</td>   
+                    <td>{{cita.hora|date : "HH:mm:ss"}}</td>   
                 </tr>
             </tbody>
         </table>

@@ -44,13 +44,14 @@ public class MedicoPersistence {
                 = em.createQuery("select u from MedicoEntity u where u.login = :login", MedicoEntity.class);
         q = q.setParameter("login", login);
         
-        if(q.getResultList().isEmpty())
+        try
+        {
+          MedicoEntity ent =  q.getSingleResult();
+            return ent;
+        }
+        catch(Exception e)
         {
             return null;
-        }
-        else                                                                            
-        {
-            return q.getResultList().get(0);
         }
     }
 

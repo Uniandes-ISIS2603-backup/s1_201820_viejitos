@@ -14,6 +14,22 @@
                      <td>{{currentMedico.tipo}}</td>
                 </tr>
             </tbody>
+             <table class="table table-striped">
+            <thead>
+                <tr>   
+                    <th>Fecha</th>
+                    <th>Hora</th> 
+                    <th>Paciente</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="cita in currentMedico.citas">
+                    <td>{{cita.fecha | date:"yyyy-MM-dd"}}</td>   
+                    <td>{{cita.hora|date : "HH:mm:ss"}}</td>   
+                    <td>{{cita.cliente.nombre}}</td> 
+                </tr>
+            </tbody>
+        </table>
         </table>
     </div>
 </div>
