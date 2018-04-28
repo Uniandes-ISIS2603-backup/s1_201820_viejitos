@@ -19,7 +19,7 @@
                     <tr ng-repeat="historialServicio in historialServiciosRecords" ui-sref="historialServiciosDetail({id:historialServicio.id})">
                         <td>{{historialServicio.id}}</td>
                         <td>{{historialServicio.tipo}}</td>  
-                        <td>{{historialServicio.fecha}}</td>
+                        <td>{{historialServicio.fecha|date}}</td>
                         <td>{{historialServicio.hora}}</td>
                         <td>{{historialServicio.descripcion}}</td>
                         <td>{{historialServicio.finalizado}}</td>
