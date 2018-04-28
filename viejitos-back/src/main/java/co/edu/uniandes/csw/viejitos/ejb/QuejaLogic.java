@@ -104,10 +104,11 @@ public class QuejaLogic {
         if (persistence.find(servicioid, entity.getId()) == null) {
             throw new BusinessLogicException("No existe una entidad de Queja con el id \"" + entity.getId() + "\"");
         }
-        if(persistence.find(servicioid, entity.getId()).getResuelto())
-        {
-            throw new BusinessLogicException ("La queja ya esta resuelta, esta no puede actualizarse");
-        }
+        
+        //if(persistence.find(servicioid, entity.getId()).getResuelto())
+        //{
+          //  throw new BusinessLogicException ("La queja ya esta resuelta, esta no puede actualizarse");
+        //}
         //TODO: DONE No hay ninguna regla de negocio? 
         return persistence.update(entity);
     }

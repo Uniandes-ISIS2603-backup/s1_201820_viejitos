@@ -104,6 +104,7 @@ public class ServicioLogicTest {
     @Test
     public void createServicioTest() throws BusinessLogicException {
         ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setFinalizado(Boolean.FALSE);        
             ServicioEntity result = servicioLogic.create(newEntity);
             Assert.assertNotNull(result);
             ServicioEntity entity = em.find(ServicioEntity.class, result.getId());
@@ -181,8 +182,11 @@ public class ServicioLogicTest {
         ServicioEntity pojoEntity = factory.manufacturePojo(ServicioEntity.class);
 
         pojoEntity.setId(entity.getId());
+        if(pojoEntity.getFinalizado()==true)
+        
         servicioLogic.update(pojoEntity);
-
+        
+        
         ServicioEntity resp = em.find(ServicioEntity.class, entity.getId());
 
         
