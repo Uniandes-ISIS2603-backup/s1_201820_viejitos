@@ -4,7 +4,7 @@
     mod.controller('calendarioNewCtrl', ['$scope', '$http', 'calendariosContext', '$state', '$rootScope',
       
         function ($scope, $http, calendariosContext, $state, $rootScope) {
-            $rootScope.edit = false;
+                  $rootScope.edit = false;
 
             $scope.data = {};
         
