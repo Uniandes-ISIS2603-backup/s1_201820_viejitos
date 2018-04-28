@@ -3,7 +3,7 @@
     
     mod.controller('historialServiciosDetailCtrl', ["$scope", "$stateParams", "$http", function($scope, $stateParams, $http){
             
-            $http.get("'http://localhost:8080/viejitos-web/api/servicios/"+$stateParams.id)
+            $http.get("api/servicios/"+$stateParams.id)
                     .then(function bien (response){
                         $scope.historialActual=response.data;
             })

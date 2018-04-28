@@ -60,11 +60,12 @@
                             }
                             
                         }
-                    }).state('historialServiciosCreate', {
+                    })
+                            .state('historialServiciosCreate', {
                             url: '/create',
                             parent: 'historialServicios',
                             views: {
-                                'createView': {
+                                'historialServiciosList': {
                                     templateUrl: basePath + 'historialServicios.new.html',
                                     controller: 'historialServiciosNewCtrl'
                                 }

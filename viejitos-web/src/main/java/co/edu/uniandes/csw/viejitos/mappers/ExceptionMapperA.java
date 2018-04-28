@@ -49,7 +49,7 @@ public class ExceptionMapperA implements ExceptionMapper<Exception> {
      */
     @Override
     public Response toResponse(Exception e) {
-
+        e.printStackTrace();
         return Response.status(Response.Status.UNAUTHORIZED.getStatusCode())
                 .entity(getInitCause(e).getMessage())
                 .type(MediaType.TEXT_PLAIN_TYPE)
