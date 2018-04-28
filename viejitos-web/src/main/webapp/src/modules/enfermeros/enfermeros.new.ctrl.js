@@ -1,10 +1,10 @@
 (function (ng) {
     var mod = ng.module("enfermerosModule");
     mod.constant("enfermerosContext", "api/enfermeros");
-    mod.controller('enfermeroNewCtrl', ['$scope', '$http', 'enfermerosContext', '$state', '$rootScope',
+    mod.controller('enfermerosNewCtrl', ['$scope', '$http', 'enfermerosContext', '$state', '$rootScope',
         /**
          * @ngdoc controller
-         * @name enfermeros.controller:'enfermeroNewCtrl'
+         * @name enfermeros.controller:'enfermerosNewCtrl'
          * @description
          * Definición del controlador auxiliar para crear Enfermeros. 
          * @param {Object} $scope Referencia injectada al Scope definida para este
@@ -27,7 +27,7 @@
             /**
              * @ngdoc function
              * @name createEnfermero
-             * @methodOf enfermeros.controller:'enfermeroNewCtrl'
+             * @methodOf enfermeros.controller:'enfermerosNewCtrl'
              * @description
              * Esta función utiliza el protocolo HTTP para crear el enfermero.
              * @param {Object} enfermero Objeto con la nueva del enfermero.

@@ -76,7 +76,7 @@
                 views: {
                     'detailView': {
                         templateUrl: basePath + 'enfermeros.new.html',
-                        controller: 'enfermeroNewCtrl'
+                        controller: 'enfermerosNewCtrl'
                     }
                 }})
             ;
