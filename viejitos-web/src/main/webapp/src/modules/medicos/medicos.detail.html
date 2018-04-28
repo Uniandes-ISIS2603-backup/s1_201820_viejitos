@@ -1,36 +1,61 @@
 
-<div class="container-fluid">
-    <div class="col-md-4">
-        <table class="table table-striped">
-            <thead>
-                <tr>   
-                    <th>Login</th>
-                    <th>Tipo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{currentMedico.login}}</td>    
-                     <td>{{currentMedico.tipo}}</td>
-                </tr>
-            </tbody>
-             <table class="table table-striped">
-            <thead>
-                <tr>   
-                    <th>Fecha</th>
-                    <th>Hora</th> 
-                    <th>Paciente</th> 
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="cita in currentMedico.citas">
-                    <td>{{cita.fecha | date:"yyyy-MM-dd"}}</td>   
-                    <td>{{cita.hora|date : "HH:mm:ss"}}</td>   
-                    <td>{{cita.cliente.nombre}}</td> 
-                </tr>
-            </tbody>
-        </table>
-        </table>
+<div class="container-fluid ">
+    <h3>Detalle</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Detalle {{currentMedico.nombre}}</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>   
+                        <th>Login</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{currentMedico.login}}</td>    
+                        <td>{{currentMedico.tipo}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <h3>Citas de {{currentMedico.nombre}}</h3>
+                <thead>
+                    <tr>   
+                        <th>Fecha</th>
+                        <th>Hora</th> 
+                        <th>Paciente</th> 
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="cita in currentMedico.citas">
+                        <td>{{cita.fecha| date:"yyyy-MM-dd"}}</td>   
+                        <td>{{cita.hora|date : "HH:mm:ss"}}</td>   
+                        <td>{{cita.cliente.nombre}}</td> 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Pacientes de {{currentMedico.nombre}}</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>   
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="cliente in currentMedico.clientes">
+                        <td>{{cliente.nombre}}</td>    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
