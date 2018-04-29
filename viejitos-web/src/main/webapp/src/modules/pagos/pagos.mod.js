@@ -30,9 +30,9 @@
                 }
             }).state('pagosCreate', {
                 url: '/create',
-                parent: 'pagos',
+                
                 views: {
-                    'createView': {
+                    'mainView': {
                         templateUrl: basePath + 'pagos.new.html',
                         controller: 'pagoNewCtrl',
                         controllerAs: 'ctrl'

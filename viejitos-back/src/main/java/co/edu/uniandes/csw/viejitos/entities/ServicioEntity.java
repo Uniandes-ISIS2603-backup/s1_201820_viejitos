@@ -49,7 +49,7 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     @PodamExclude
     private EnfermeroEntity enfermero;
    
-    @OneToOne (mappedBy="servicio")
+    @OneToOne
     @PodamExclude
     private FacturaEntity factura;
     
