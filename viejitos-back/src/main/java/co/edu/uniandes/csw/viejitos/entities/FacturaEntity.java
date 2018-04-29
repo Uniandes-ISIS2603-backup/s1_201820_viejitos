@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import uk.co.jemos.podam.common.PodamExclude;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
@@ -65,7 +66,7 @@ public class FacturaEntity extends BaseEntity implements Serializable  {
      * asociacion al servicio
      */
     @PodamExclude
-    @OneToOne (mappedBy="factura", fetch=FetchType.LAZY) 
+    @ManyToOne 
     private ServicioEntity servicio;
 
     /**

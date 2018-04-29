@@ -93,13 +93,15 @@ public class FacturaResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no se encuentra el servicio.
      */
     @GET
-    public FacturaDetailDTO getFacturas(@PathParam("idServicio") Long idServicio) throws BusinessLogicException {
-        List<FacturaDetailDTO> facturas = new ArrayList<>();
-        /**for (FacturaEntity actual : facturaLogic.getAll(idServicio)) {
+    public List<FacturaDetailDTO> getFacturas(@PathParam("idServicio") Long idServicio) throws BusinessLogicException {
+        List<FacturaDetailDTO> facturas = new ArrayList<FacturaDetailDTO>();
+        
+        for(FacturaEntity actual : facturaLogic.getAll(idServicio))
+        {
             facturas.add(new FacturaDetailDTO(actual));
         }
-        * */
-        return new FacturaDetailDTO(facturaLogic.getAll(idServicio));
+        
+        return facturas;
     }
 
     /**

@@ -40,22 +40,14 @@ public class FacturaLogic {
         // Invoca la persistencia para crear la entidad de Factura
         // Verifica las reglas de negocio
 
-        /**
-         * if( entity.getServicio() == null ) { throw new
-         * BusinessLogicException( "La entidad de Factura debe tener un servicio
-         * asociado" ); } if(
-         * persistenceServicio.find(entity.getServicio().getId()) == null ) {
-         * throw new BusinessLogicException( "El Servicio de la Factura no es
-         * válido" );
-		}
-         */
+       
         if (entity.getCostoTotal() < 0) {
             throw new BusinessLogicException("La entidad de Factura no puede tener un costo total negativo");
         }
 
         ServicioEntity servicio = servicioLogic.getById(serviceid);
-        //entity.setServicio(servicio);
-        servicio.setFactura(entity);
+        entity.setServicio(servicio);
+        //servicio.setFacturas(entity);
         //servicioLogic.update(servicio);
         LOGGER.info("Termina proceso de creación de entidad de Factura");
         return persistence.create(entity);
@@ -69,17 +61,20 @@ public class FacturaLogic {
      * @return Colección de objetos de FacturaEntity.
      * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
-    public FacturaEntity getAll(Long servicioid) throws BusinessLogicException {
+    public List<FacturaEntity> getAll(Long servicioid) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de consultar todas las entidades de Factura");
         ServicioEntity servicio = servicioLogic.getById(servicioid);
 
         System.out.println(servicio.getId());
-        if (servicio.getFactura() == null) {
+        if (servicio.getFacturas() == null) {
+            throw new BusinessLogicException("El servicio que consulta aún no tiene facturas");
+        }
+        if (servicio.getFacturas().isEmpty()) {
             throw new BusinessLogicException("El servicio que consulta aún no tiene facturas");
         }
 
         LOGGER.info("Termina proceso de consultar todas las entidades de Factura");
-        return servicio.getFactura();
+        return servicio.getFacturas();
     }
 
     /**
@@ -92,7 +87,7 @@ public class FacturaLogic {
      *
      */
     public FacturaEntity getById(Long idServicio, Long idFactura) {
-        System.out.println("idservicio= " + idServicio + "; idfactura = " + idFactura);
+        //System.out.println("idservicio= " + idServicio + "; idfactura = " + idFactura);
         return persistence.find(idServicio, idFactura);
     }
 
@@ -109,21 +104,13 @@ public class FacturaLogic {
     public FacturaEntity update(Long idServicio, FacturaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de actualizar factura");
         ServicioEntity servicio = servicioLogic.getById(idServicio);
-        //entity.setServicio(servicio);
+        entity.setServicio(servicio);
 
         if (persistence.find(idServicio, entity.getId()) == null) {
             throw new BusinessLogicException("No existe una entidad de Factura con el id \"" + entity.getId() + "\"");
         }
         //Reglas de negocio
-        /**
-         * if( entity.getServicio() == null ) { throw new
-         * BusinessLogicException( "La entidad de Factura debe tener un servicio
-         * asociado" ); } if(
-         * persistenceServicio.find(entity.getServicio().getId()) == null ) {
-         * throw new BusinessLogicException( "El Servicio de la Factura no es
-         * válido" );
-		}
-         */
+        
         if (entity.getCostoTotal() < 0) {
             throw new BusinessLogicException("La entidad de Factura no puede tener un costo total negativo");
         }

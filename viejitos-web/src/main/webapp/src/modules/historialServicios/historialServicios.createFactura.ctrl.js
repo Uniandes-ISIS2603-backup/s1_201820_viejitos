@@ -9,7 +9,7 @@
             $scope.data = {};
             
             $scope.createFactura = function () {
-                $http.post("api/servicios/"+ $stateParams.id+ "/factura", $scope.data).then(function (response) {
+                $http.post("api/servicios/"+ $stateParams.id+ "/facturas", $scope.data).then(function (response) {
                     $state.go('historialServiciosList', {facturaId: response.data.id}, {reload: true});
                 });
             };

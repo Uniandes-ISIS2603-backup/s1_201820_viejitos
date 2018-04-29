@@ -105,29 +105,31 @@
         <h2>Factura: </h2>
             <div class="panel panel-default">
                    <div class="panel-body">
-                        <h3>{{historialActual.factura.id}}</h3>
+                       <div ng-repeat="x in historialActual.facturas">
+                        <h3>{{x.id}}</h3>
                         <br>
                         Costo Total:
-                        <p>{{historialActual.factura.costoTotal}}</p>
+                        <p>{{x.costoTotal}}</p>
                         <br>
                         Fecha de Expedición:
-                        <p>{{historialActual.factura.fechaExpedicion}}</p>
+                        <p>{{x.fechaExpedicion}}</p>
                         <br>
                         Descripción:
-                        <p>{{historialActual.factura.expedicion}}</p>
+                        <p>{{x.descripcion}}</p>
                         <br>
                         Nombre del Cliente:
-                        <p>{{historialActual.factura.nombreCliente}}</p>
+                        <p>{{x.nombreCliente}}</p>
                         <br>
                         Cédula del Cliente:
-                        <p>{{historialActual.factura.ccCliente}}</p>
+                        <p>{{x.ccCliente}}</p>
                         <br>
                         Servicio Prestado:
-                        <p>{{historialActual.factura.servicioPrestado}}</p>
+                        <p>{{x.servicioPrestado}}</p>
                         <br>
                         Nombre de la Empresa:
-                        <p>{{historialActual.factura.nombreEmpresa}}</p>
+                        <p>{{x.nombreEmpresa}}</p>
                         <br>
+                       </div>
                         <div class="btn-group mr-2" role="group" aria-label="First group">
                             <a class="btn btn-info" ui-sref="facturaCreate({id:historialActual.id})"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Factura</a>
                         </div>

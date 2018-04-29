@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.dtos;
 
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class ServicioDetailDTO extends ServicioDTO {
 
     private PagoDTO pagoFinal;
 
-    private FacturaDTO factura;
+    private List<FacturaDTO> facturas;
 
     private ClienteDTO cliente;
 
@@ -94,10 +95,14 @@ public class ServicioDetailDTO extends ServicioDTO {
             this.cliente = new ClienteDTO(entity.getCliente());
             this.pagoInicial = new PagoDTO(entity.getPagoInicial());
             this.pagoFinal = new PagoDTO(entity.getPagoFinal());
-            this.factura = new FacturaDTO(entity.getFactura());
             this.enfermero = new EnfermeroDTO(entity.getEnfermero());
+            this.facturas = new ArrayList<>();
             this.quejas = new ArrayList<>();
 
+            for (FacturaEntity entityFacturas : entity.getFacturas()) {
+                facturas.add(new FacturaDTO(entityFacturas));
+            }
+            
             for (QuejaEntity entityQuejas : entity.getQuejas()) {
                 quejas.add(new QuejaDTO(entityQuejas));
             }
@@ -129,15 +134,17 @@ public class ServicioDetailDTO extends ServicioDTO {
         {
             entity.setCliente(this.cliente.toEntity());
         }
-        if(this.factura!=null)
-        {
-            entity.setFactura(this.factura.toEntity());
-        }
         if(this.enfermero!=null)
         {
             entity.setEnfermero(this.enfermero.toEntity());
         }
-            
+        
+        List<FacturaEntity> facturasEntity = new ArrayList<>();
+        for (FacturaDTO actual : facturas) {
+            facturasEntity.add(actual.toEntity());
+        }
+        entity.setFacturas(facturasEntity);
+        
         List<QuejaEntity> quejasEntity = new ArrayList<>();
         for (QuejaDTO actual : quejas) {
             quejasEntity.add(actual.toEntity());
@@ -192,15 +199,15 @@ public class ServicioDetailDTO extends ServicioDTO {
     /**
      * @return la factura
      */
-    public FacturaDTO getFactura() {
-        return factura;
+    public List<FacturaDTO> getFacturas() {
+        return facturas;
     }
 
     /**
-     * @param factura la nueva factura
+     * @param facturas la nueva factura
      */
-    public void setFactura(FacturaDTO factura) {
-        this.factura = factura;
+    public void setFactura(List<FacturaDTO> facturas) {
+        this.facturas = facturas;
     }
 
     /**
