@@ -27,7 +27,7 @@ import java.util.List;
  *      "quejas":[],
  *      "pagoInicial": pagoDTO,
  *      "pagoFinal": pagoDTO,
- *      "factura": facturaDTO,
+ *      "facturas": [],
  *      "cliente": clienteDTO,
  *      "calificacion": calificacionDTO,
  *      "enfermero": enfermeroDTO
@@ -48,7 +48,7 @@ import java.util.List;
  *      "resuelto: true}]
  *      "pagoInicial": {"medio": "Efectivo", "pagado": TRUE, "fechaLimite": 12/04/18, "valor": 150000},
  *      "pagoFinal": null,
- *      "factura": {"costoTotal": 120100, "fechaExpedicion": 12/04/18, "descripcion": "Acompanar al banco", "nombreCliente": "Felipe Escobar", "ccCliente": 1234567, "servicioPrestado": "Acompanamiento", "nombreEmpresa": "Hospital"},
+ *      "factura": [{"costoTotal": 120100, "fechaExpedicion": 12/04/18, "descripcion": "Acompanar al banco", "nombreCliente": "Felipe Escobar", "ccCliente": 1234567, "servicioPrestado": "Acompanamiento", "nombreEmpresa": "Hospital"}],
  *      "cliente": {"id": 12345, "nombre: "John Doe", "login": "johndoe23", "contrasena": "jd124", "estado": 1, "tipo": 1},
  *      "calificacion": {"id":209873, "puntaje":4.5, "comentario":"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado", "tipoCalificador":"cliente", "loginCalificador":"af.ramirez", "tipoCalificado":"enfermero", "loginCalificado":"ma.marulanda",},
  *      "enfermero": {"id":2678389, "nombre":"Juan Espitia", "cv":"./documents/juanHDV.pdf", "login":,"js.espitia" "contrasenia":"a89ess0909", "tipo":"Enfermero",}
@@ -206,7 +206,7 @@ public class ServicioDetailDTO extends ServicioDTO {
     /**
      * @param facturas la nueva factura
      */
-    public void setFactura(List<FacturaDTO> facturas) {
+    public void setFacturas(List<FacturaDTO> facturas) {
         this.facturas = facturas;
     }
 
