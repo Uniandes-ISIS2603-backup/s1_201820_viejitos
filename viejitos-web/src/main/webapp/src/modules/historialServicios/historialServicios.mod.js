@@ -73,6 +73,18 @@
                                 controller: 'historialServiciosCreateQuejaCtrl',
                                 controllerAs: 'ctrl'
                             }
+                        }})
+                    .state('facturaCreate', {
+                        url: '/facturaCreate',
+                        params: {
+                            id: null
+                        },
+                        views: {
+                            'mainView': {
+                                templateUrl: basePath + 'historialServicios.createFactura.html',
+                                controller: 'historialServiciosCreateFacturaCtrl',
+                                controllerAs: 'ctrl'
+                            }
                         }});
         }
     ]);
