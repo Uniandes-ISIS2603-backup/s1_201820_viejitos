@@ -1,0 +1,63 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+<div class="container-fluid">
+
+    <div>
+        <h1  class="row"  > ESTA PESTAÑA ES PARA EL ADMINISTRADOR. </h1>
+    
+        <h1>dado que el back no bota id de calendairo. es necesario
+         hasta que se solucione esto. buscar en las tablas el id del primer 
+        y remplazarlo por el 70 que suma a la variable j en calendarios.ctrl.js </h1>
+             <a class="btn btn-info" ui-sref="calendariosCreate"><span class="glyphicon glyphicon-plus-sign"></span> Agregar calendario</a>
+        
+        <h2>TODOS LOS CALENDARIOS EXISTENTES SON LOS SIGUIENTES: </h2>
+
+        
+        
+        
+        <div ng-repeat="calendario in currentCalendario" >
+       ultimaModificacion: {{calendario.ultimaModificacion}} 
+        id:{{calendario.id}}
+    <a class="btn btn-info" ui-sref="franjasCreate({calendarioId: calendario.id})"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Franja</a>
+    <a class="btn btn-warning" ui-sref="enfermeroAsign({calendarioId: calendario.id})" ><span class="glyphicon glyphicon-plus-sign"></span> Agregar a un enfermero</a>
+   <table  class="table">
+   <tr >
+    <th> DIA 1</th>
+    <th>DIA 2</th>
+    <th>DIA 3</th>
+    <th>DIA 4</th>
+    <th>DIA 5</th>
+ </tr>
+  <tr ng-repeat="chunk in calendario.franjasGanadoras" >   
+               <td ng-repeat="franja in chunk"  >
+                  {{franja.id}}
+                 
+                   <a ui-sref="enfermeroFranja({ franjaId: franja.id, enfermeroId: currentEnfermero.id  })"  class="thumb" >   
+                <span   ng-if="franja.ocupado" style="color:blue"> <p  class="bg-success"> {{franja.diaSemana}} </p> <p  class="bg-success"> {{franja.horaInicio}}</p> <p  class="bg-success">{{franja.horaFin}}  </p>
+                   </a>   </span>
+             <span ng-if="!franja.ocupado" style="color:blue">
+                 <a ui-sref="" >
+             <p  class="bg-primary"> {{franja.diaSemana}} </p> <p  class="bg-primary"> {{franja.horaInicio}}</p> <p  class="bg-primary">{{franja.horaFin}}  </p>
+              </a>
+                 </span>
+                </td>
+           </tr>
+             </table>
+       
+       
+
+       
+       <hr>
+        </div>
+</div>
+    
+    
+  
+    
+    
+    
+ 
+ 
+    
+    
+</div>
+
