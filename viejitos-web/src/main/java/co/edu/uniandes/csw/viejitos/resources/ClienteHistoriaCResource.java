@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.viejitos.resources;
 import co.edu.uniandes.csw.viejitos.dtos.HistoriaClinicaDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
+import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -45,6 +46,9 @@ public class ClienteHistoriaCResource
 {
     @Inject
     private ClienteLogic clienteLogic;
+    
+    @Inject
+    private HistoriaClinicaLogic hcLogic;
 
     /**
      * Convierte una HistoriaClinicaEntity a una HistoriaClinicaDetailDTO.
@@ -149,7 +153,7 @@ public class ClienteHistoriaCResource
      * @return JSONArray {@link HistoriaClinicaDetailDTO}  - La historia clinica actualizada.
      */
     @PUT
-    public HistoriaClinicaDetailDTO replaceHistoriaC(@PathParam("clienteId") Long clienteId, HistoriaClinicaDetailDTO historiac)
+    public HistoriaClinicaDetailDTO replaceHistoriaC(@PathParam("clienteId") Long clienteId, HistoriaClinicaDetailDTO historiac) throws BusinessLogicException
     {
         if(clienteLogic.getById(clienteId) == null)
         {
@@ -157,7 +161,7 @@ public class ClienteHistoriaCResource
         }
         else
         {
-          return historiac;  
+           return historiaClinicaEntity2DetailDTO(clienteLogic.replaceHistoriaC(clienteId, historiasCDTO2Entity(historiac))) ;
         }
     }
 }
