@@ -114,6 +114,7 @@ public class QuejaLogicTest {
     @Test
     public void createQuejaTest() throws BusinessLogicException {
         QuejaEntity newEntity = factory.manufacturePojo(QuejaEntity.class);
+            newEntity.setResuelto(Boolean.FALSE);
             QuejaEntity result = quejaLogic.create(data.get(0).getServicio().getId(), newEntity);
             Assert.assertNotNull(result);
             QuejaEntity entity = em.find(QuejaEntity.class, result.getId());

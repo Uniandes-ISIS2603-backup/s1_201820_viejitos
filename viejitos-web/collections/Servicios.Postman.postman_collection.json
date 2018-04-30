@@ -1,0 +1,161 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Servicios.Postman",
+		"_postman_id": "b23334cd-2ca1-3d34-a925-4d3faac1c18d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"tipo\": 1,\r\n       \"fecha\": \"12/02/2018\",\r\n       \"hora\": \"8:37\",\r\n       \"descripción\": \"Acompañamiento a cita médica\",\r\n       \"finalizado\": false\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"tipo\": 2,\r\n       \"fecha\": \"22/04/2018\",\r\n       \"hora\": \"9:37\",\r\n       \"descripción\": \"Acompañamiento a examen medico\",\r\n       \"finalizado\": false\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"tipo\": 2,\r\n       \"fecha\": \"22/04/2018\",\r\n       \"hora\": \"9:37\",\r\n       \"descripción\": \"Acompañamiento a examen medico\",\r\n       \"finalizado\": false\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/2",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/2",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"id\":2,  \r\n       \"tipo\": 1,\r\n       \"fecha\": \"12/02/2018\",\r\n       \"hora\": \"8:30\",\r\n       \"descripción\": \"Acompañamiento a cita médica\",\r\n       \"finalizado\": true,\r\n       \"quejas\": [{\"reclamo\": \"El enfermero tenia una actitud muy grosera.\",\r\n       \"resuelto\": true}],\r\n       \"pagoInicial\": {\"medio\": \"Efectivo\", \"pagado\": true, \"fechaLimite\": \"12/04/18\", \"valor\": 150000},\r\n       \"pagoFinal\": null,\r\n       \"factura\": {\"costoTotal\": 120100, \"fechaExpedicion\": \"12/04/18\", \"descripcion\": \"Acompanar al banco\", \"nombreCliente\": \"Felipe Escobar\", \"ccCliente\": 1234567, \"servicioPrestado\": \"Acompanamiento\", \"nombreEmpresa\": \"Hospital\"},\r\n       \"cliente\": {\"id\": 12345, \"nombre\": \"John Doe\", \"login\": \"johndoe23\", \"contrasena\": \"jd124\", \"estado\": 1, \"tipo\": 1},\r\n       \"calificacion\": {\"id\":209873, \"puntaje\":4.5, \"comentario\":\"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado\", \"tipoCalificador\":\"cliente\", \"loginCalificador\":\"af.ramirez\", \"tipoCalificado\":\"enfermero\", \"loginCalificado\":\"ma.marulanda\"},\r\n      \"enfermero\": {\"id\":2678389, \"nombre\":\"Juan Espitia\", \"cv\":\"./documents/juanHDV.pdf\", \"login\":\"js.espitia\", \"contrasenia\":\"a89ess0909\", \"tipo\":\"Enfermero\"}\r\n     }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/2",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/3",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"tipo\": 1,\r\n       \"fecha\": \"12/02/2018\",\r\n       \"hora\": \"8:37\",\r\n       \"descripción\": \"Acompañamiento a cita médica\",\r\n       \"finalizado\": false\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

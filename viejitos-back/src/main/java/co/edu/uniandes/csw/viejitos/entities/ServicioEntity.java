@@ -49,9 +49,9 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     @PodamExclude
     private EnfermeroEntity enfermero;
    
-    @OneToOne 
+    @OneToMany (mappedBy="servicio", cascade=CascadeType.PERSIST)
     @PodamExclude
-    private FacturaEntity factura;
+    private List<FacturaEntity> facturas;
     
     @ManyToOne
     @PodamExclude
@@ -139,15 +139,15 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     /**
      * @return the factura
      */
-    public FacturaEntity getFactura() {
-        return factura;
+    public List<FacturaEntity> getFacturas() {
+        return facturas;
     }
 
     /**
-     * @param factura the factura to set
+     * @param facturas the factura to set
      */
-    public void setFactura(FacturaEntity factura) {
-        this.factura = factura;
+    public void setFacturas(List<FacturaEntity> facturas) {
+        this.facturas = facturas;
     }
 
     /**

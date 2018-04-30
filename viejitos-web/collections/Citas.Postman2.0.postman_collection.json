@@ -1,0 +1,147 @@
+{
+	"info": {
+		"name": "Citas.Postman2.0",
+		"_postman_id": "4edbb33d-b66b-4307-8110-c5bb369a2207",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/viejitos-web/api/citas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1596179-b32a-46e2-ad08-e42b9808f354",
+						"type": "text/javascript",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"medicos count\"] = data.length >= 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"fecha\":\"1997-07-16T19:20:30.45+01:00\",\r\n       \"hora\": \"1997-08-16T19:20:30.45+01:00\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/citas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"citas"
+					]
+				},
+				"description": "Obtiene todas las citas"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/citas/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1596179-b32a-46e2-ad08-e42b9808f354",
+						"type": "text/javascript",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"tests[\"medicos count\"] = data.length >= 0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"fecha\":\"1997-07-16T19:20:30.45+01:00\",\r\n       \"hora\": \"1997-08-16T19:20:30.45+01:00\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/citas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"citas",
+						"1"
+					]
+				},
+				"description": "Obtiene la cita con id 1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/citas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fd3c6cb4-dc95-41b6-b225-cdc877960623",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id\",data.id);",
+							"tests[\"Status code is 200\"] = responseCode.code !== 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {  \"fecha\": \"2018-02-03T08:00:00-05:00\",\n    \"hora\": \"2018-02-03T08:00:00-05:00\",\n    \"id\": 1,\n    \"medico\": {\n        \"contrasena\": \"LOL\",\n        \"id\": 3,\n        \"login\": \"j.wilcken\",\n        \"nombre\": \"Jorgen Wilcken\",\n        \"tipo\": 1\n    }\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/viejitos-web/api/citas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"viejitos-web",
+						"api",
+						"citas"
+					]
+				},
+				"description": "No cumple regas de negocio"
+			},
+			"response": []
+		}
+	]
+}

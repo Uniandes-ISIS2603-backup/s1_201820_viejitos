@@ -1,0 +1,177 @@
+{
+	"variables": [],
+	"info": {
+		"name": "prueba Juan",
+		"_postman_id": "6c2a6f28-043d-327c-9aee-71139ca2d7bc",
+		"description": "Back step by step editorial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all enfermeros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/enfermeros",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{       \"id\": 1234,\r\n       \"nombre\": \"John Doe\",\r\n       \"login\": \"johndoe23\",\r\n       \"contrasena\": \"jd124\",\r\n       \"estado\": 1,\r\n       \"tipo\": 1,\r\n       \"calificacion\": {\r\n           \"idCalificacion\": 1111,\r\n          \"puntaje\": 4,\r\n           \"comentario\": \"Excelente persona.\",\r\n           \"loginCalificado\": \"johndoe23\",\r\n           \"tipoCalificado\": \"1\",\r\n           \"loginCalificador\": \"jblack45\",\r\n           \"tipoCalificador\": \"2\" },\r\n       \"calificaciones\": [ {\r\n           \"idCalificacion\": 1112,\r\n           \"puntaje\": 5,\r\n           \"comentario\": \"Enfermero de muy alta calidad.\",\r\n           \"loginCalificado\": \"jblack45\",\r\n           \"tipoCalificado\": \"2\",\r\n           \"loginCalificador\": \"johndoe23\",\r\n           \"tipoCalificador\": \"1\" }],\r\n       \"cita\": {\r\n           \"fecha\": \"2012-04-23T18:25:43.511Z\",\r\n           \"hora\": \"14:00\" },\r\n       \"enfermero\": {\r\n           \"nombre\": \"Jack Black\",\r\n           \"id\": \"1113\",\r\n           \"contrasena\": \"jb125\",\r\n           \"cv\": \"string\",\r\n           \"tipo\": 2 },\r\n       \"historiaC\": {\r\n           \"id\": 1114,\r\n           \"enfermedades\": \"Ninguna.\",\r\n           \"medicamentos\": \"Ninguna\",\r\n           \"cirugias\": \"Reemplazo de cadera.\" },\r\n       \"medico\": {\r\n           \"nombre\": \"Carlos Gonzalez\",\r\n           \"tipo\": 3,\r\n           \"id\": \"1115\",\r\n           \"contrasena\": \"cg777\" },\r\n       \"quejas\": [ {\r\n           \"reclamo\": \"El cliente se demoro en pagar.\",\r\n           \"resuelto\": true } ],\r\n      \"servicios\": [ {\r\n           \"tipo\": 1,\r\n           \"fecha\": \"2012-04-23T18:25:43.511Z\",\r\n           \"hora\": \"14:00\",\r\n           \"descripcion\": \"Caminata\",\r\n          \"finalizado\": false } ]\r\n   }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get enfermero específico",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/enfermeros/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Post de un nuevo enfermero a partir de su dto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/enfermeros",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"cv\": \"./documents/vegaCV.pdf\",\n        \"login\": \"m.vega\",\n        \"nombre\": \"Mateo Vega\",\n        \"calendar\": {},\n        \"calificaciones\": [],\n        \"cliente\": [],\n        \"servicios\": []\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Put para actualizar un enfermero existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/enfermeros/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"type\": \"enfermeroDetailDTO\",\n        \"cv\": \"./documents/juanEspitiaHDV.pdf\",\n        \"login\": \"js.espitia\",\n        \"nombre\": \"Juan Sebastian Espitia\",\n        \"calendar\": {},\n        \"calificaciones\": [],\n        \"cliente\": [],\n        \"servicios\": []\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get de un enfermero inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 404\"] = responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/enfermeros/99",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"id\":1,\r\n       \"nombre\":\"Juan Espitia\",\r\n       \"cv\":\"./documents/juanHDV.pdf\",\r\n       \"login\":\"js.espitia\",\r\n       \"contrasenia\":\"a89ess0909\",\r\n       \"tipo\":\"Enfermero\"\r\n\t\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

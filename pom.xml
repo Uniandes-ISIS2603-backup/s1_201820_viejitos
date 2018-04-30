@@ -9,8 +9,8 @@
     <name>s1_viejitos</name>
 
     <modules>
-        <module>viejitos-back</module>
         <module>viejitos-web</module>
+        <module>viejitos-back</module>
     </modules>
     
     <repositories>

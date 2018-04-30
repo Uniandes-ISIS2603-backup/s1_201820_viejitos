@@ -1,0 +1,31 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+<div id="alertPanel" style="text-align: center"></div>
+<div class="container-fluid">
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+        <a class="btn btn-info" ui-sref="historialServiciosCreate"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Servicio</a>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tipo</th>    
+                    <th>Fecha</th> 
+                    <th>Hora</th>
+                    <th>Descripcion</th>
+                    <th>Finalizado</th>  
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="historialServicio in historialServiciosRecords" ui-sref="historialServiciosDetail({id:historialServicio.id})">
+                    <td>{{historialServicio.id}}</td>
+                    <td>{{historialServicio.tipo}}</td>  
+                    <td>{{historialServicio.fecha|date}}</td>
+                    <td>{{historialServicio.hora}}</td>
+                    <td>{{historialServicio.descripcion}}</td>
+                    <td>{{historialServicio.finalizado}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

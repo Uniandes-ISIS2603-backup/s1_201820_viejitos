@@ -20,7 +20,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+ */
 package co.edu.uniandes.csw.viejitos.test.persistence;
 
 import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
@@ -48,7 +48,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class MedicoPersistenceTest {
-     /**
+
+    /**
      *
      * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
      * embebido. El jar contiene las clases de Editorial, el descriptor de la
@@ -65,8 +66,8 @@ public class MedicoPersistenceTest {
     }
 
     /**
-     * Inyección de la dependencia a la clase MedicoPersistence cuyos métodos
-     * se van a probar.
+     * Inyección de la dependencia a la clase MedicoPersistence cuyos métodos se
+     * van a probar.
      */
     @Inject
     private MedicoPersistence medicoPersistence;
@@ -77,8 +78,6 @@ public class MedicoPersistenceTest {
      */
     @PersistenceContext
     private EntityManager em;
-
-
 
     /**
      * Limpia las tablas que están implicadas en la prueba.
@@ -99,6 +98,7 @@ public class MedicoPersistenceTest {
      */
     @Inject
     UserTransaction utx;
+
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
@@ -108,15 +108,15 @@ public class MedicoPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            
+
             MedicoEntity entity = factory.manufacturePojo(MedicoEntity.class);
 
             em.persist(entity);
-            
+
             data.add(entity);
         }
     }
-    
+
     /**
      * Configuración inicial de la prueba.
      *
@@ -157,10 +157,11 @@ public class MedicoPersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
     }
-        /**
+
+    /**
      * Prueba para consultar la lista de Medicos.
      *
-     * 
+     *
      */
     @Test
     public void getMedicosTest() {
@@ -176,10 +177,11 @@ public class MedicoPersistenceTest {
             Assert.assertTrue(found);
         }
     }
-     /**
+
+    /**
      * Prueba para consultar un Medico.
      *
-     * 
+     *
      */
     @Test
     public void getMedicoTest() {
@@ -188,31 +190,48 @@ public class MedicoPersistenceTest {
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }
-         /**
+
+    /**
      * Prueba para consultar un Medico.
      *
-     * 
+     *
      */
     @Test
     public void getMedicoByLoginTest() {
         MedicoEntity entity = data.get(0);
-        MedicoEntity newEntity = medicoPersistence.findByLogin(entity.getLogin());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getLogin(), newEntity.getLogin());
+        if (medicoPersistence.find(entity.getId()) != null) {
+            try {
+                MedicoEntity newEntity = medicoPersistence.findByLogin(entity.getLogin());
+                Assert.assertNotNull(newEntity);
+                Assert.assertEquals(entity.getLogin(), newEntity.getLogin());
+            } catch (Exception e) {
+
+            }
+        } else {
+            try {
+                MedicoEntity newEntity = medicoPersistence.findByLogin(entity.getLogin());
+                Assert.assertNull(newEntity);
+            } catch (Exception e) {
+                
+            }
+        }
+
     }
-    
+
     @Test
     public void getMedicoByNameTest() {
         MedicoEntity entity = data.get(0);
+
         MedicoEntity newEntity = medicoPersistence.findByName(entity.getName());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getLogin(), newEntity.getLogin());
+
     }
 
     /**
      * Prueba para eliminar un Medico.
      *
-     * 
+     *
      */
     @Test
     public void deleteMedicoTest() {
@@ -225,7 +244,7 @@ public class MedicoPersistenceTest {
     /**
      * Prueba para actualizar un Medico.
      *
-     * 
+     *
      */
     @Test
     public void updateMedicoTest() {
@@ -241,6 +260,5 @@ public class MedicoPersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
     }
-
 
 }

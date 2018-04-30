@@ -34,7 +34,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.websocket.ClientEndpointConfig;
+
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
@@ -51,10 +51,10 @@ public class CitaEntity extends BaseEntity implements Serializable {
     @PodamStrategyValue(DateStrategy.class)
     private Date hora;
     @PodamExclude
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = ClienteEntity.class, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = ClienteEntity.class, cascade = CascadeType.PERSIST)
     private ClienteEntity cliente;
     @PodamExclude
-    @ManyToOne( fetch = FetchType.LAZY)
+    @ManyToOne( fetch = FetchType.EAGER)
     private MedicoEntity medico;
     
     public CitaEntity()

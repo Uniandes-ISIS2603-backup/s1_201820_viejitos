@@ -59,7 +59,7 @@ public class FacturaResource {
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Crea la factura.</code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 412 Precodition Failed: Ya existe la queja.
+     * 412 Precodition Failed: Ya existe la factura.
      * </code>
      * </pre> Crea una nueva entidad de Factura con la informacion que se recibe
      * en el cuerpo de la petición.
@@ -93,13 +93,15 @@ public class FacturaResource {
      * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no se encuentra el servicio.
      */
     @GET
-    public FacturaDetailDTO getFacturas(@PathParam("idServicio") Long idServicio) throws BusinessLogicException {
-        List<FacturaDetailDTO> facturas = new ArrayList<>();
-        /**for (FacturaEntity actual : facturaLogic.getAll(idServicio)) {
+    public List<FacturaDetailDTO> getFacturas(@PathParam("idServicio") Long idServicio) throws BusinessLogicException {
+        List<FacturaDetailDTO> facturas = new ArrayList<FacturaDetailDTO>();
+        
+        for(FacturaEntity actual : facturaLogic.getAll(idServicio))
+        {
             facturas.add(new FacturaDetailDTO(actual));
         }
-        * */
-        return new FacturaDetailDTO(facturaLogic.getAll(idServicio));
+        
+        return facturas;
     }
 
     /**
@@ -178,8 +180,10 @@ public class FacturaResource {
      * 404 Not Found. No existe una factura con el id dado.</code>
      * </pre>
      *
+     * @param idServicio
      * @param id Identificador de la entidad de Factura que se desea borrar.
      * Este debe ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @DELETE
     @Path("{id: \\d+}")

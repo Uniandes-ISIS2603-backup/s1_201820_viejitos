@@ -104,6 +104,7 @@ public class ServicioLogicTest {
     @Test
     public void createServicioTest() throws BusinessLogicException {
         ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
+            newEntity.setFinalizado(Boolean.FALSE);        
             ServicioEntity result = servicioLogic.create(newEntity);
             Assert.assertNotNull(result);
             ServicioEntity entity = em.find(ServicioEntity.class, result.getId());
@@ -118,7 +119,7 @@ public class ServicioLogicTest {
             Assert.assertEquals(newEntity.getCliente(), entity.getCliente());
             Assert.assertEquals(newEntity.getPagoInicial(), entity.getPagoInicial());
             Assert.assertEquals(newEntity.getPagoFinal(), entity.getPagoFinal());
-            Assert.assertEquals(newEntity.getFactura(), entity.getFactura());
+            Assert.assertEquals(newEntity.getFacturas(), entity.getFacturas());
     }
     
      /**
@@ -158,7 +159,7 @@ public class ServicioLogicTest {
         Assert.assertEquals(entity.getCliente(), resultEntity.getCliente());
         Assert.assertEquals(entity.getPagoInicial(), resultEntity.getPagoInicial());
         Assert.assertEquals(entity.getPagoFinal(), resultEntity.getPagoFinal());
-        Assert.assertEquals(entity.getFactura(), resultEntity.getFactura());
+        Assert.assertEquals(entity.getFacturas(), resultEntity.getFacturas());
     }
     
     /**
@@ -181,8 +182,11 @@ public class ServicioLogicTest {
         ServicioEntity pojoEntity = factory.manufacturePojo(ServicioEntity.class);
 
         pojoEntity.setId(entity.getId());
+        if(pojoEntity.getFinalizado()==true)
+        
         servicioLogic.update(pojoEntity);
-
+        
+        
         ServicioEntity resp = em.find(ServicioEntity.class, entity.getId());
 
         
@@ -197,7 +201,7 @@ public class ServicioLogicTest {
         Assert.assertEquals(pojoEntity.getCliente(), resp.getCliente());
         Assert.assertEquals(pojoEntity.getPagoInicial(), resp.getPagoInicial());
         Assert.assertEquals(pojoEntity.getPagoFinal(), resp.getPagoFinal());
-        Assert.assertEquals(pojoEntity.getFactura(), resp.getFactura());
+        Assert.assertEquals(pojoEntity.getFacturas(), resp.getFacturas());
         
     }
     

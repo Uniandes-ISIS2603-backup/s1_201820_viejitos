@@ -92,6 +92,7 @@ public class EnfermeroCalificacionResource {
             return null;
             //return new CalificacionDetailDTO(enfermeroLogic.addCalificacion(enfermeroId, calificacion.toEntity()));
         } 
+        return null;
     }
     
     /**

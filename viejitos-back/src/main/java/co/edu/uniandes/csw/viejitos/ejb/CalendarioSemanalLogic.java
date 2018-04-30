@@ -326,18 +326,20 @@ public class CalendarioSemanalLogic {
     
     /**
      * dado el id de un enfermero le remueve su calendario
-     * @param el id de enfermero
+     * @param idEnfermero
      * @return el entidad de enfermero ya sin su calendario
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     //TODO ES posible que sobre y se pueda poner con setCalendarioToeEnfefermero
     public EnfermeroEntity   removeCalendarioOfEnfermero(Long idEnfermero) throws BusinessLogicException
     {
          LOGGER.log(Level.INFO, "Inicia proceso de obtener un enfermero con id  = {0}", idEnfermero);
-        EnfermeroEntity entityEnf = enfermeroLogic.getById(idEnfermero);
+        EnfermeroEntity entityEnf;
+        entityEnf = enfermeroLogic.getById(idEnfermero);
         LOGGER.log(Level.INFO, "termina proceso de obtener un enfermero");
         entityEnf.setCalendario(null);
         enfermeroLogic.update(entityEnf);
-        LOGGER.log(Level.INFO, "finaliza proceso de asignar a un  enfermero "+idEnfermero);
+        LOGGER.log(Level.INFO, "finaliza proceso de asignar a un  enfermero {0}", idEnfermero);
         return entityEnf;
         
     }

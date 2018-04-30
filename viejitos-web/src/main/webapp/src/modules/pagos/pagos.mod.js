@@ -10,16 +10,34 @@
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/pagos/';
             $urlRouterProvider.otherwise("/pagosList");
-            $stateProvider.state('pagosList', {
-                url: '/pagos/list',
+            $stateProvider.state('pagos', {
+                url: '/pagos',
+                abstract: true,
                 views: {
                     'mainView': {
-                        templateUrl: basePath + 'pagos.list.html',
+                        templateUrl: basePath + 'pagos.html',
                         controller: 'pagoCtrl',
                         controllerAs: 'ctrl'
                     }
                 }
-            });
+            }).state('pagosList', {
+                url: '/list',
+                parent: 'pagos',
+                views: {
+                    'listView': {
+                        templateUrl: basePath + 'pagos.list.html',
+                    }
+                }
+            }).state('pagosCreate', {
+                url: '/create',
+                
+                views: {
+                    'mainView': {
+                        templateUrl: basePath + 'pagos.new.html',
+                        controller: 'pagoNewCtrl',
+                        controllerAs: 'ctrl'
+                    }
+                }});
         }
     ]);
 })(window.angular);

@@ -27,18 +27,22 @@ public class FacturaPersistence {
     @PersistenceContext(unitName = "ViejitosPU")
     protected EntityManager em;
 
-    public FacturaEntity find(Long idServicio, Long idFactura) {
-        LOGGER.log(Level.INFO, "Consultando factura con id={0}", idFactura);
-        TypedQuery<FacturaEntity> q = em.createQuery("select p from QuejaEntity p where (p.servicio.id = :idServicio) and (p.id = :idFactura)", FacturaEntity.class);
-        q.setParameter("idServicio", idServicio);
-        q.setParameter("idFactura", idFactura);
+    public FacturaEntity find(Long servicioid, Long facturaid) {
+        LOGGER.log(Level.INFO, "Consultando factura con id={0}", facturaid);
+        System.out.println(servicioid);
+        TypedQuery<FacturaEntity> q = em.createQuery("select p from FacturaEntity p where (p.servicio.id = :servicioid) and (p.id = :facturaid)", FacturaEntity.class);
+        q.setParameter("servicioid", servicioid);
+        q.setParameter("facturaid", facturaid);
         List<FacturaEntity> results = q.getResultList();
         FacturaEntity factura = null;
         if (results == null) {
+            System.out.println("pasa");
             factura = null;
         } else if (results.isEmpty()) {
+            System.out.println("pasa2");
             factura = null;
         } else if (results.size() >= 1) {
+            System.out.println("pasa3");
             factura = results.get(0);
         }
         return factura;

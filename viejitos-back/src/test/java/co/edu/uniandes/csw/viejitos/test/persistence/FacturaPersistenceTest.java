@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.viejitos.test.persistence;
 import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.persistence.FacturaPersistence;
+import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -44,6 +45,7 @@ public class FacturaPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(FacturaEntity.class.getPackage())
                 .addPackage(FacturaPersistence.class.getPackage())
+                .addPackage(ServicioEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -62,46 +64,12 @@ public class FacturaPersistenceTest {
     @Inject
     private FacturaPersistence facturaPersistence;
     
-     /**
-     * Limpia las tablas que están implicadas en la prueba.
-     */
-    private void clearData() {
-        em.createQuery("delete from FacturaEntity").executeUpdate();
-    }
-    
-     /**
-     * Lista que tiene los datos de prueba.
-     */
-    private List<FacturaEntity> data = new ArrayList<FacturaEntity>();
-    private List<ServicioEntity> dataServicio = new ArrayList<ServicioEntity>();
-    
     /**
      * Variable para marcar las transacciones del em anterior cuando se
      * crean/borran datos para las pruebas.
      */
     @Inject
     UserTransaction utx;
-    
-    /**
-     * Inserta los datos iniciales para el correcto funcionamiento de las
-     * pruebas.
-     */
-    private void insertData() {
-        PodamFactory factory = new PodamFactoryImpl();
-        for (int i = 0; i < 3; i++) {
-            ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
-            em.persist(entity);
-            dataServicio.add(entity);
-        }
-        for (int i = 0; i < 3; i++) {
-            FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
-            if (i == 0) {
-                entity.setServicio(dataServicio.get(0));
-            }
-            em.persist(entity);
-            data.add(entity);
-        }
-    }
     
     /**
      * Configuración inicial de la prueba.
@@ -122,6 +90,49 @@ public class FacturaPersistenceTest {
                 e1.printStackTrace();
             }
         }
+    }
+    
+     /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
+    private void clearData() {
+        em.createQuery("delete from FacturaEntity").executeUpdate();
+        em.createQuery("delete from ServicioEntity").executeUpdate();
+    }
+    
+     /**
+     * Lista que tiene los datos de prueba.
+     */
+    private List<FacturaEntity> data = new ArrayList<FacturaEntity>();
+    private List<ServicioEntity> dataServicio = new ArrayList<ServicioEntity>();
+    
+    
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
+    private void insertData() {
+        data = new ArrayList<>();
+        dataServicio = new ArrayList<>();
+        PodamFactory factory = new PodamFactoryImpl();
+        
+        ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
+           
+        em.persist(entity);
+        dataServicio.add(entity);
+      
+        for (int i = 0; i < 1; i++) {
+            FacturaEntity entityFactura = factory.manufacturePojo(FacturaEntity.class);
+            if (i == 0) {
+                System.out.println("id servicio insert: " + dataServicio.get(0).getId());
+                entityFactura.setServicio(dataServicio.get(0));
+                //entity.setFactura(entityFactura);
+            }
+           
+            em.persist(entityFactura);
+            data.add(entityFactura);
+        }
+        System.out.println("id del servicio: " + data.get(0).getServicio().getId() + " ; " + data.get(0).getId());
     }
 
     
@@ -161,7 +172,10 @@ public class FacturaPersistenceTest {
     @Test
     public void getFacturaTest() {
         FacturaEntity entity = data.get(0);
-        FacturaEntity newEntity = facturaPersistence.find(dataServicio.get(0).getId(), entity.getId());
+        //System.out.println("id del servicio: " + dataServicio.get(0).getId());
+        //System.out.println("id del servicio: " + entity.getServicio().getId() + " ; " + entity.getId());
+        FacturaEntity newEntity = facturaPersistence.find(entity.getServicio().getId(), entity.getId());
+        System.out.println(newEntity == null);
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }

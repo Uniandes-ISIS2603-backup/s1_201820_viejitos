@@ -1,0 +1,136 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Facturas.Postman",
+		"_postman_id": "72559cf2-4f4f-3733-1461-ea3346cdf2dc",
+		"description": "Pruebas para el recurso Factura\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/facturas",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/facturas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"costoTotal\": 120100,\r\n       \"fechaExpedicion\": \"12/04/18\",\r\n       \"descripcion\": \"Acompanar al banco\",\r\n       \"nombreCliente\": \"Felipe Escobar\",\r\n       \"ccCliente\": 1234567,\r\n       \"servicioPrestado\": \"Acompanamiento\",\r\n       \"nombreEmpresa\": \"Hospital\"\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/facturas",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/facturas",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"costoTotal\": 120100,\r\n       \"fechaExpedicion\": \"12/04/18\",\r\n       \"descripcion\": \"Acompanar al banco\",\r\n       \"nombreCliente\": \"Felipe Escobar\",\r\n       \"ccCliente\": 1234567,\r\n       \"servicioPrestado\": \"Acompanamiento\",\r\n       \"nombreEmpresa\": \"Hospital\"\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/facturas/1",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/facturas/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"costoTotal\": 120100,\r\n       \"fechaExpedicion\": \"12/04/18\",\r\n       \"descripcion\": \"Acompanar al banco\",\r\n       \"nombreCliente\": \"Felipe Escobar\",\r\n       \"ccCliente\": 1234567,\r\n       \"servicioPrestado\": \"Acompanamiento\",\r\n       \"nombreEmpresa\": \"Hospital\"\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/facturas/1",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/facturas/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"costoTotal\": 140100,\r\n       \"fechaExpedicion\": \"12/04/18\",\r\n       \"descripcion\": \"Acompanar al banco\",\r\n       \"nombreCliente\": \"Felipe Escobar\",\r\n       \"ccCliente\": 1234567,\r\n       \"servicioPrestado\": \"Acompanamiento\",\r\n       \"nombreEmpresa\": \"Hospital\"\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/facturas/1",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/facturas/1",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

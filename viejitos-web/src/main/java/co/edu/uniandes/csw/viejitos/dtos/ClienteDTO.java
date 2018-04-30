@@ -61,12 +61,15 @@ public class ClienteDTO {
      * @param ClienteEntity: Es la entidad que se va a convertir a DTO
      */
     public ClienteDTO(ClienteEntity clienteEntity) {
+        if(clienteEntity!=null)
+        {
         this.id = clienteEntity.getId();
         this.nombre = clienteEntity.getNombre();
         this.estado = clienteEntity.getEstado();
         this.tipo = clienteEntity.getTipo();
         this.login = clienteEntity.getLogin();
         this.contrasena = clienteEntity.getContrasena();
+        }
 
     }
 

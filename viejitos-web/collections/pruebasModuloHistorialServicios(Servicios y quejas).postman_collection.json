@@ -1,0 +1,111 @@
+{
+	"variables": [],
+	"info": {
+		"name": "pruebasModuloHistorialServicios(Servicios y quejas)",
+		"_postman_id": "f1e54367-74fd-9298-1f22-9456a7946ca9",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"id\":1,  \r\n       \"tipo\": 1,\r\n       \"fecha\": \"2018-05-12T18:30:00.511Z\",\r\n       \"hora\": \"8:30\",\r\n       \"descripcion\": \"Acompañamiento a cita médica\",\r\n       \"finalizado\": false\r\n     }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"id\":2,  \r\n       \"tipo\": 2,\r\n       \"fecha\": \"2018-05-01T18:30:00.511Z\",\r\n       \"hora\": \"8:30\",\r\n       \"descripcion\": \"Acompañamiento a exámen médico\",\r\n       \"finalizado\": false\r\n     }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/quejas",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/quejas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"reclamo\": \"No pude realizar adecuadamente los pagos, no me gusta manejar otro medio que no sea efectivo\",\r\n        \"resuelto\": false\r\n        \r\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/quejas",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/quejas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"reclamo\": \"El enfermero tenía una actitud muy grosera y muy mala disposición.\",\r\n        \"resuelto\": false\r\n        \r\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

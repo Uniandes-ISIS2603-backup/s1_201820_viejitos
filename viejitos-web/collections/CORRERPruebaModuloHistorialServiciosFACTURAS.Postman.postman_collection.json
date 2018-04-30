@@ -1,0 +1,61 @@
+{
+	"variables": [],
+	"info": {
+		"name": "CORRERPruebaModuloHistorialServiciosFACTURAS.Postman",
+		"_postman_id": "a70f9e76-777f-ea2d-ad33-d5a31ad6995b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/2/facturas",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/2/facturas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"costoTotal\": 120100,\r\n       \"fechaExpedicion\": \"22/04/18\",\r\n       \"descripcion\": \"Acompanar al banco\",\r\n       \"nombreCliente\": \"Camilo Escobar\",\r\n       \"ccCliente\": 1234567,\r\n       \"servicioPrestado\": \"Acompanamiento\",\r\n       \"nombreEmpresa\": \"Hospital\"\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/facturas",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/facturas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"costoTotal\": 150100,\r\n       \"fechaExpedicion\": \"23/04/18\",\r\n       \"descripcion\": \"Acompanar al medico\",\r\n       \"nombreCliente\": \"Ricardo Escobar\",\r\n       \"ccCliente\": 234578,\r\n       \"servicioPrestado\": \"Acompanamiento\",\r\n       \"nombreEmpresa\": \"Hospital\"\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

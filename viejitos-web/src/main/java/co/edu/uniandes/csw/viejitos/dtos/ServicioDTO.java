@@ -165,14 +165,14 @@ public class ServicioDTO {
     /**
      * @return true si ha finalizado el servicio, false de lo contrario.
      */
-    public boolean isFinalizado() {
+    public Boolean isFinalizado() {
         return finalizado;
     }
 
     /**
      * @param finalizado nuevo estado del servicio
      */
-    public void setFinalizado(boolean finalizado) {
+    public void setFinalizado(Boolean finalizado) {
         this.finalizado = finalizado;
     }
 
