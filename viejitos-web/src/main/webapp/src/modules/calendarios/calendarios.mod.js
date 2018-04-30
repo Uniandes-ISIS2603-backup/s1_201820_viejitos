@@ -45,6 +45,17 @@
                         templateUrl: basePath + 'franja.create.html',
                         controller: 'franjaNewCtrl'
                     }
+                }}).state('enfermeroAsign', {
+                url: '/asigntoenfermero',
+                parent: 'calendarios',
+                   params: {
+                    calendarioId: null
+                },
+                   views: {
+                    'detailView': {
+                        templateUrl: basePath + 'enfermero.assign.html',
+                        controller: 'enfermeroUpdateCalCtrl'
+                    }
                 }})
             ;
     }]);
