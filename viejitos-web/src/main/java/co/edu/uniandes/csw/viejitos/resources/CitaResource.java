@@ -60,8 +60,8 @@ public class CitaResource {
      * Error de lógica que se genera cuando ya existe la entidad de Servicio.
      */
     @POST
-    public CitaDTO createCita(CitaDTO dto) throws BusinessLogicException {
-        return new CitaDTO(logic.create(dto.toEntity()));
+    public CitaDetailDTO createCita(CitaDetailDTO dto) throws BusinessLogicException {
+        return new CitaDetailDTO(logic.create(dto.toEntity()));
     }
 
     /**
@@ -79,10 +79,10 @@ public class CitaResource {
      * encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
      */
     @GET
-    public List<CitaDTO> getCitas() {
-        List<CitaDTO> list = new ArrayList<>();
+    public List<CitaDetailDTO> getCitas() {
+        List<CitaDetailDTO> list = new ArrayList<>();
         for (CitaEntity e : logic.getAll()) {
-            list.add(new CitaDTO(e));
+            list.add(new CitaDetailDTO(e));
         }
         return list;
     }
@@ -106,8 +106,8 @@ public class CitaResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public CitaDTO getCita(@PathParam("id") Long id) {
-        return new CitaDTO(logic.getById(id));
+    public CitaDetailDTO getCita(@PathParam("id") Long id) {
+        return new CitaDetailDTO(logic.getById(id));
     }
 
     /**

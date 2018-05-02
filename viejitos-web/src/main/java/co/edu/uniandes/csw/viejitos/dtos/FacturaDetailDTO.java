@@ -73,9 +73,9 @@ public class FacturaDetailDTO extends FacturaDTO {
         //TODO: DONE primero preguntar si entity!= null
         if(entity != null)
         {
-            if (entity.getServicio() != null) {
+            //if (entity.getServicio() != null) {
                 this.servicio = new ServicioDTO(entity.getServicio());
-            }
+            //}
         }
     }
 

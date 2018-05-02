@@ -129,6 +129,7 @@ public class FacturaLogicTest {
     
     /**
      * Prueba para crear una Factura
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @Test
     public void createFacturaTest() throws BusinessLogicException {
@@ -156,17 +157,19 @@ public class FacturaLogicTest {
      */
     @Test
     public void getFacturasTest() throws BusinessLogicException {
-        System.out.println("HOLAAAAAAAAAA" + dataServicio.get(0).getId());
-        FacturaEntity entity = facturaLogic.getAll(dataServicio.get(0).getId());
-        
+        //System.out.println("HOLAAAAAAAAAA" + dataServicio.get(0).getId());
+        List<FacturaEntity> list = facturaLogic.getAll(dataServicio.get(0).getId());
+        Assert.assertEquals(data.size(), list.size());
+        for(FacturaEntity entity: list){
             boolean found = false;
             for (FacturaEntity storedEntity : data) {
                 if (entity.getId().equals(storedEntity.getId())) {
                     found = true;
                 }
             }
-            Assert.assertTrue(found);
         
+            Assert.assertTrue(found);
+        }
     }
     
     /**
@@ -193,6 +196,7 @@ public class FacturaLogicTest {
     
     /**
      * Prueba para eliminar una Factura
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @Test
     public void deleteFacturaTest() throws BusinessLogicException {
@@ -204,6 +208,7 @@ public class FacturaLogicTest {
     
      /**
      * Prueba para actualizar una Factura
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @Test
     public void updateFacturaTest() throws BusinessLogicException {

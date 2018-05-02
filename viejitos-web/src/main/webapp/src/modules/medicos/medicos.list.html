@@ -1,24 +1,23 @@
 
 <div class="container-fluid">
-        <div class="btn-group mr-2" role="group" aria-label="First group">
-            <a class="btn btn-info" ui-sref="medicosCreate"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Médico</a>
-        </div>
-        <div class="col-lg-4">
-            <table>
-                <thead>
-                    <tr>   
-                        <th>Nombres</th>  
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="medico in medicosRecords">
-                        <td><a ui-sref="medicosDetail({medicoId: medico.id})" class="thumb">{{medico.nombre}}</a></td>                   
-                    </tr>
-                </tbody>
-            </table>
-        </div> 
-
+    <div class="col-lg-4">
+        <table>
+            <thead>
+                <tr>   
+                    <th>Nombres de los Médicos</th>  
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="medico in medicosRecords">
+                    <td><a ui-sref="medicosDetail({medicoId: medico.id})" class="thumb">{{medico.nombre}}</a></td>                   
+                </tr>
+            </tbody>
+        </table>
+    </div> 
+    <div class="btn-group mr-2" role="group" aria-label="First group">
+        <a class="btn btn-info" ui-sref="medicosCreate"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Médico</a>
+    </div>
 
 </div>
 

@@ -65,10 +65,10 @@ public class ServicioLogic {
         }
         //TODO: DONE No hay ninguna regla de negocio? 
         
-        if(persistence.find(entity.getId()).getFinalizado())
-        {
-            throw new BusinessLogicException("No se puede actualizar un servicio que ya está finalizado.");
-        }
+        //if(persistence.find(entity.getId()).getFinalizado()==true)
+        //{
+          //  throw new BusinessLogicException("No se puede actualizar un servicio que ya está finalizado.");
+        //}
         return persistence.update(entity);
     }
 

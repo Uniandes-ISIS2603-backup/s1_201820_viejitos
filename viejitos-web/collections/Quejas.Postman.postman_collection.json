@@ -1,0 +1,161 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Quejas.Postman",
+		"_postman_id": "c0ab305d-1a43-efb3-9bfe-a9875363bef5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/quejas",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/quejas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"reclamo\": \"El enfermero tenía una actitud muy grosera y muy mala disposición.\",\r\n        \"resuelto\": false\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/quejas",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/quejas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"reclamo\": \"El enfermerollego tarde\",\r\n        \"resuelto\": false\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/quejas",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/quejas",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"reclamo\": \"El enfermero no sabe nada\",\r\n        \"resuelto\": false\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/quejas/1",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/quejas/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"reclamo\": \"El enfermerollego tarde\",\r\n        \"resuelto\": false\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/quejas/1",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/quejas/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"reclamo\": \"El enfermero no sabe nada\",\r\n        \"resuelto\": false\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/servicios/1/quejas/1",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/servicios/1/quejas/1",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

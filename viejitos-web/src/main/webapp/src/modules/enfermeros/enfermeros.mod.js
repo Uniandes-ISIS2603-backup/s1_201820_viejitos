@@ -69,9 +69,17 @@
             }
             
             
-        }
-        
-            );
+        })
+                .state('enfermerosCreate', {
+                url: '/create',
+                parent: 'enfermeros',
+                views: {
+                    'detailView': {
+                        templateUrl: basePath + 'enfermeros.new.html',
+                        controller: 'enfermerosNewCtrl'
+                    }
+                }})
+            ;
     }]);
 })(window.angular);
 

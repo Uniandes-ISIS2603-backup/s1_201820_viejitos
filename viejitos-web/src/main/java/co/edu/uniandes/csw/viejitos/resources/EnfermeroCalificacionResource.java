@@ -89,8 +89,9 @@ public class EnfermeroCalificacionResource {
         }
         else
         {
-            return new CalificacionDetailDTO(enfermeroLogic.addCalificacion(enfermeroId, calificacion.toEntity()));
+            //return new CalificacionDetailDTO(enfermeroLogic.addCalificacion(enfermeroId, calificacion.toEntity()));
         } 
+        return null;
     }
     
     /**

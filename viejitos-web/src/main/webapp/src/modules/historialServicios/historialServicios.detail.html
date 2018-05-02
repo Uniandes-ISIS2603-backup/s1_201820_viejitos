@@ -1,3 +1,4 @@
+
 <div class="col-lg-6" >
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
     <div id="alertPanel" style="text-align: center"></div>
@@ -18,7 +19,7 @@
                     <tr ng-repeat="historialServicio in historialServiciosRecords" ui-sref="historialServiciosDetail({id:historialServicio.id})">
                         <td>{{historialServicio.id}}</td>
                         <td>{{historialServicio.tipo}}</td>  
-                        <td>{{historialServicio.fecha}}</td>
+                        <td>{{historialServicio.fecha|date}}</td>
                         <td>{{historialServicio.hora}}</td>
                         <td>{{historialServicio.descripcion}}</td>
                         <td>{{historialServicio.finalizado}}</td>
@@ -30,8 +31,8 @@
 </div>
 
 <div class="col-lg-6">
-    <h1> {{historialActual.id}} </h1> <br>
-    <div>
+    <h1> Servicio {{historialActual.id}} </h1> <br>
+    <div class="row">
         <h2>Cliente: </h2>
             <div class="panel panel-default">
                    <div class="panel-body">
@@ -48,8 +49,6 @@
                         <br>
                         Tipo:
                         <p>{{historialActual.cliente.tipo}}</p>
-                        <br>
-                        <br>
                    </div>
                </div>  
         
@@ -63,7 +62,6 @@
                         <br>
                         Login:
                         <p>{{historialActual.enfermero.login}}</p>
-                        <br>
                    </div>
                </div> 
         <h2>Pago Inicial: </h2>
@@ -82,7 +80,7 @@
                         <br>
                         Valor:
                         <p>{{historialActual.pagoInicial.valor}}</p>
-                        <br>
+                        
                    </div>
                </div> 
         <h2>Pago Final: </h2>
@@ -101,9 +99,60 @@
                         <br>
                         Valor:
                         <p>{{historialActual.pagoFinal.valor}}</p>
-                        <br>
+                        
                    </div>
                </div> 
+        <h2>Factura: </h2>
+            <div class="panel panel-default">
+                   <div class="panel-body">
+                       <div ng-repeat="f in historialActual.facturas">
+                        <h3>{{f.id}}</h3>
+                        <br>
+                        Costo Total:
+                        <p>{{f.costoTotal}}</p>
+                        <br>
+                        Fecha de Expedición:
+                        <p>{{f.fechaExpedicion}}</p>
+                        <br>
+                        Descripción:
+                        <p>{{f.descripcion}}</p>
+                        <br>
+                        Nombre del Cliente:
+                        <p>{{f.nombreCliente}}</p>
+                        <br>
+                        Cédula del Cliente:
+                        <p>{{f.ccCliente}}</p>
+                        <br>
+                        Servicio Prestado:
+                        <p>{{f.servicioPrestado}}</p>
+                        <br>
+                        Nombre de la Empresa:
+                        <p>{{f.nombreEmpresa}}</p>
+                        <br>
+                       </div>
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <a class="btn btn-info" ui-sref="facturaCreate({id:historialActual.id})"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Factura</a>
+                        </div>
+                   </div>  
+               </div> 
+                <h2>Quejas: </h2>
+            <div class="panel panel-default" >
+                   <div class="panel-body">
+                       <div ng-repeat="q in historialActual.quejas">
+                            <h3>{{q.id}}</h3>
+                            <br>
+                            Reclamo:
+                            <p>{{q.reclamo}}</p>
+                            <br>
+                            Resuelto:
+                            <p>{{q.resuelto}}</p>
+                            <br>
+                        </div>
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <a class="btn btn-info" ui-sref="quejaCreate({id:historialActual.id})"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Queja</a>
+                        </div>
+                   </div>
+               </div>
     </div>
 </div>
 

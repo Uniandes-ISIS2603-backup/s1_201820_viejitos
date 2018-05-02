@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><label ng-if="!edit" id="createPago">Crear nuevo Pago</label>
+                <label ng-if="edit" id="editPago">Editar Pago</label></div>
+            <div class="panel-body">
+                <form name="pago">
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="pagoMedio" class="col-sm-2">Medio:</label>
+                            <input id="pagoMedio" required ng-model="data.medio" class="col-sm-6"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="pagoPagado" class="col-sm-2">Pagado:</label>
+                            <input id="pagoPagado" required ng-model="data.pagado" class="col-sm-6"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="pagoFechaLimite" class="col-sm-2">Fecha Limite:</label>
+                            <input type="date" id="pagoFechaLimite" required ng-model="data.fechaLimite" class="col-sm-6"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="pagoValor" class="col-sm-2">Valor:</label>
+                            <input id="pagoValor" required ng-model="data.valor" class="col-sm-6"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <div class="form-group col-sm-4" ng-if="!pago.$valid">
+                        </div> 
+                    </div> 
+                    <div class="form-group row">
+                        <div class="form-group col-sm-12">
+                            <input ng-show="pago.$valid" ng-click="createPago()" value="Guardar" class="btn btn-success"/>
+                            <a class="btn btn-info" ui-sref="pagosList">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

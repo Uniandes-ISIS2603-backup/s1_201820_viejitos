@@ -337,8 +337,9 @@ public class CalendarioSemanalLogic {
     
     /**
      * dado el id de un enfermero le remueve su calendario
-     * @param el id de enfermero
+     * @param idEnfermero
      * @return el entidad de enfermero ya sin su calendario
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     //TODO ES posible que sobre y se pueda poner con setCalendarioToeEnfefermero
     public EnfermeroEntity   removeCalendarioOfEnfermero(Long idEnfermero) throws BusinessLogicException

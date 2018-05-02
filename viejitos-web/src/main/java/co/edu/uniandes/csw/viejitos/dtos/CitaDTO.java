@@ -73,6 +73,7 @@ public class CitaDTO {
         if (entity != null) {
             this.fecha = entity.getFecha();
             this.hora = entity.getHora();
+            this.id=entity.getId();
         }
     }
 
@@ -86,6 +87,7 @@ public class CitaDTO {
         CitaEntity entity = new CitaEntity();
         entity.setFecha(this.fecha);
         entity.setHora(this.hora);
+        entity.setId(this.getId());
         return entity;
     }
 

@@ -1,0 +1,61 @@
+{
+	"variables": [],
+	"info": {
+		"name": "CORRERPruebaModuloPagos.Postman",
+		"_postman_id": "01bb12a0-06d7-0011-dca7-789d6e4057a0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/viejitos-web/api/pagos",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/pagos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"medio\": \"PSE\",\r\n  \"pagado\": true,\r\n  \"fechaLimite\": \"28/04/18\",\r\n  \"valor\": 200000\r\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/viejitos-web/api/pagos",
+			"request": {
+				"url": "http://localhost:8080/viejitos-web/api/pagos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"medio\": \"Efectivo\",\r\n  \"pagado\": true,\r\n  \"fechaLimite\": \"12/04/18\",\r\n  \"valor\": 150000\r\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
