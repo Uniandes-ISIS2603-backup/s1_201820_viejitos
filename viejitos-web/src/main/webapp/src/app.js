@@ -13,7 +13,7 @@
         'enfermerosModule',
          'citasModule',
         'medicosModule',
-        'calendarioModule',
+        'calendariosModule',
         'historialServiciosModule'
     ]);
     // Resuelve problemas de las promesas
