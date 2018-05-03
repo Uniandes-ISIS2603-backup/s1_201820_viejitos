@@ -74,7 +74,7 @@ public class CitaDetailDTO extends CitaDTO {
         return cliente;
     }
 
-    public void setClienteDTO(ClienteDTO c) {
+    public void setCliente(ClienteDTO c) {
         cliente = c;
     }
 
