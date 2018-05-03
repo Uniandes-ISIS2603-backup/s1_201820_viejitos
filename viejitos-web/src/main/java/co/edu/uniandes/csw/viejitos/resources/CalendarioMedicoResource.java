@@ -172,7 +172,7 @@ public class CalendarioMedicoResource  {
     @PUT
     @Path("{id: \\d+}")
     public CalendarioSemanalDetailDTO updateCalendario(@PathParam("id") Long id, CalendarioSemanalDetailDTO detailDTO,@PathParam("idMedico") Long idMedico) throws BusinessLogicException {
-        detailDTO.setid(id);
+        detailDTO.setId(id);
         CalendarioSemanalEntity entity = calendarioLogic.getCalendario(id);
         if (entity == null) {
             throw new WebApplicationException("El recurso medicos"+idMedico+"+/calendariossemanales/" + id + " no existe.", 404);
