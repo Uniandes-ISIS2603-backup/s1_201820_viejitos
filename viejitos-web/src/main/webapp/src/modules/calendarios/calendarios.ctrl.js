@@ -25,7 +25,7 @@
                         }
   
         $scope.currentCalendario[j].franjasGanadoras=$scope.franjas;     
-         $scope.currentCalendario[j].id=Number(j)+70;       
+         $scope.currentCalendario[j].id=$scope.calendariosRecords[j].id;      
                     }
                 
             });
