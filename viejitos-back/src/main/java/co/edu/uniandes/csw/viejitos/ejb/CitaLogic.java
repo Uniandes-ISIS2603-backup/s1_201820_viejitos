@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.viejitos.ejb;
 
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
+import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
+import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.CitaPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
@@ -65,6 +67,10 @@ public class CitaLogic {
         if (clientePersistence.find(entity.getCliente().getId()).getCita() != null) {
             throw new BusinessLogicException("El cliente con el id " + entity.getId() + "ya tiene una cita de valoracion asignada");
         }
+        ClienteEntity ent=clientePersistence.find(entity.getCliente().getId());
+        entity.setCliente(ent);
+        MedicoEntity entMed=medicoPersistence.find(entity.getMedico().getId());
+        entity.setMedico(entMed);
         persistence.create(entity);
         return entity;
     }
