@@ -177,7 +177,7 @@ public class MedicoLogicTest {
                 entity.getId()) != null) {
             try {
                 medicoLogic.delete(entity);
-            } catch (Exception e) {
+            } catch (BusinessLogicException e) {
                 Assert.fail("No deberia lanzar excepcion");
             }
         } else {
@@ -185,7 +185,7 @@ public class MedicoLogicTest {
                 medicoLogic.delete(entity);
                 Assert.fail("Deberia lanzar excepcion");
 
-            } catch (Exception e) {
+            } catch (BusinessLogicException e) {
 
             }
         }
@@ -208,7 +208,7 @@ public class MedicoLogicTest {
         newEntity.setId(entity.getId());
 
         if (em.find(MedicoEntity.class,
-                entity.getId()) == null) {
+                newEntity.getId()) == null) {
             try {
                 medicoLogic.update(newEntity);
                 Assert.fail("Deberia lanzar excepcion");
