@@ -110,6 +110,7 @@ public class CitaLogicTest {
     public void createCitaTest() throws BusinessLogicException {
         PodamFactory factory = new PodamFactoryImpl();
         CitaEntity newEntity = factory.manufacturePojo(CitaEntity.class);
+
         if (newEntity.getCliente() != null && em.find(ClienteEntity.class, newEntity.getCliente().getId()) != null) {
             if (newEntity.getMedico() != null && em.find(MedicoEntity.class, newEntity.getMedico().getId()) == null) {
                 try {
@@ -132,7 +133,7 @@ public class CitaLogicTest {
             }
         }
         if (newEntity.getMedico() != null && em.find(MedicoEntity.class, newEntity.getMedico().getId()) != null) {
-            if (newEntity.getCliente() != null && em.find(ClienteEntity.class, newEntity.getId()) == null) {
+            if (newEntity.getCliente() != null && em.find(ClienteEntity.class, newEntity.getCliente().getId()) == null) {
                 try {
                     CitaEntity result = citaLogic.create(newEntity);
                     Assert.fail("Deberia lanzar excepcion");
@@ -164,7 +165,7 @@ public class CitaLogicTest {
             Calendar today = Calendar.getInstance();
             today.set(Calendar.DAY_OF_MONTH, Calendar.WEEK_OF_YEAR, Calendar.YEAR);
             Date d = today.getTime();
-            if (newEntity.getFecha().before(d)) {
+            if (newEntity.getFecha() == null) {
                 try {
                     CitaEntity result = citaLogic.create(newEntity);
                     Assert.fail("Deberia lanzar excepcion");
@@ -172,13 +173,22 @@ public class CitaLogicTest {
 
                 }
             } else {
-                try {
-                    CitaEntity result = citaLogic.create(newEntity);
-                    Assert.assertNotNull(result);
-                    CitaEntity entity = em.find(CitaEntity.class, result.getId());
-                    Assert.assertEquals(newEntity.getName(), entity.getName());
-                } catch (Exception e) {
-                    Assert.fail("No deberia lanzar excepcion");
+                if (newEntity.getFecha().before(d)) {
+                    try {
+                        CitaEntity result = citaLogic.create(newEntity);
+                        Assert.fail("Deberia lanzar excepcion");
+                    } catch (Exception e) {
+
+                    }
+                } else {
+                    try {
+                        CitaEntity result = citaLogic.create(newEntity);
+                        Assert.assertNotNull(result);
+                        CitaEntity entity = em.find(CitaEntity.class, result.getId());
+                        Assert.assertEquals(newEntity.getName(), entity.getName());
+                    } catch (Exception e) {
+                        Assert.fail("No deberia lanzar excepcion");
+                    }
                 }
             }
         }
@@ -223,14 +233,14 @@ public class CitaLogicTest {
         if (citaLogic.getById(entity.getId()) != null) {
             try {
                 citaLogic.delete(entity);
-            } catch (Exception e) {
+            } catch (BusinessLogicException e) {
                 Assert.fail("No deberia lanzar excepcion");
             }
         } else {
             try {
                 citaLogic.delete(entity);
                 Assert.fail("Deberia lanzar excepcion");
-            } catch (Exception e) {
+            } catch (BusinessLogicException e) {
 
             }
         }
