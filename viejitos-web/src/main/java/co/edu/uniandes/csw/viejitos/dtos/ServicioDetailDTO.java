@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.dtos;
 
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
+import co.edu.uniandes.csw.viejitos.entities.PagoEntity;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import java.util.ArrayList;
@@ -62,9 +63,7 @@ public class ServicioDetailDTO extends ServicioDTO {
 
     private List<QuejaDTO> quejas;
 
-    private PagoDTO pagoInicial;
-
-    private PagoDTO pagoFinal;
+    private List<PagoDTO> pagos;
 
     private List<FacturaDTO> facturas;
 
@@ -93,11 +92,14 @@ public class ServicioDetailDTO extends ServicioDTO {
         if (entity != null) {
             this.calificacion = new CalificacionDTO(entity.getCalificacion());
             this.cliente = new ClienteDTO(entity.getCliente());
-            this.pagoInicial = new PagoDTO(entity.getPagoInicial());
-            this.pagoFinal = new PagoDTO(entity.getPagoFinal());
             this.enfermero = new EnfermeroDTO(entity.getEnfermero());
+            this.pagos = new ArrayList<>();
             this.facturas = new ArrayList<>();
             this.quejas = new ArrayList<>();
+            
+            for (PagoEntity entityPagos : entity.getPagos()) {
+                pagos.add(new PagoDTO(entityPagos));
+            }
 
             for (FacturaEntity entityFacturas : entity.getFacturas()) {
                 facturas.add(new FacturaDTO(entityFacturas));
@@ -122,14 +124,6 @@ public class ServicioDetailDTO extends ServicioDTO {
         {
             entity.setCalificacion(this.calificacion.toEntity());
         }
-        if(this.pagoInicial!=null)
-        {
-            entity.setPagoInicial(this.pagoInicial.toEntity());
-        }
-        if(this.pagoFinal!=null)
-        {
-            entity.setPagoFinal(this.pagoFinal.toEntity());
-        }
         if(this.cliente!=null)
         {
             entity.setCliente(this.cliente.toEntity());
@@ -138,6 +132,12 @@ public class ServicioDetailDTO extends ServicioDTO {
         {
             entity.setEnfermero(this.enfermero.toEntity());
         }
+        
+        List<PagoEntity> pagosEntity = new ArrayList<>();
+        for (PagoDTO actual : pagos) {
+            pagosEntity.add(actual.toEntity());
+        }
+        entity.setPagos(pagosEntity);
         
         List<FacturaEntity> facturasEntity = new ArrayList<>();
         for (FacturaDTO actual : facturas) {
@@ -169,31 +169,17 @@ public class ServicioDetailDTO extends ServicioDTO {
     }
 
     /**
-     * @return el pago inicial
+     * @return pagos
      */
-    public PagoDTO getPagoInicial() {
-        return pagoInicial;
+    public List<PagoDTO> getPagos() {
+        return pagos;
     }
 
     /**
-     * @param pagoInicial nuevo pago inicial
+     * @param pagos nuevos pagos
      */
-    public void setPagoInicial(PagoDTO pagoInicial) {
-        this.pagoInicial = pagoInicial;
-    }
-
-    /**
-     * @return el pago final
-     */
-    public PagoDTO getPagoFinal() {
-        return pagoFinal;
-    }
-
-    /**
-     * @param pagoFinal el nuevo pago final
-     */
-    public void setPagoFinal(PagoDTO pagoFinal) {
-        this.pagoFinal = pagoFinal;
+    public void setPagos(List<PagoDTO> pagos) {
+        this.pagos = pagos;
     }
 
     /**

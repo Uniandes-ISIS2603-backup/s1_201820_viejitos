@@ -9,13 +9,11 @@ import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.FacturaPersistence;
-import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import org.hibernate.validator.HibernateValidator;
 
 /**
  *
@@ -119,10 +117,10 @@ public class FacturaLogic {
     }
 
     /**
-     * Elimina una instancia de Queja de la base de datos.
+     * Elimina una instancia de Factura de la base de datos.
      *
      * @param idFactura Identificador de la instancia a eliminar.
-     * @param idServicio id del Servicio el cual es padre de la Queja.
+     * @param idServicio id del Servicio el cual es padre de la Factura.
      * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      *
      */

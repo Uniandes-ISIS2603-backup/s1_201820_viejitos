@@ -66,10 +66,10 @@ public class EnfermeroLogic {
     }
 
     public EnfermeroEntity update( EnfermeroEntity entity ) throws BusinessLogicException{
-        if (persistencia.findByLogin(entity.getLogin()) == null) {
-            throw new BusinessLogicException("No existe una entidad de Enfermero con el login \"" + entity.getLogin() + "\"");
+         if (persistencia.find(entity.getId()) == null) {
+            throw new BusinessLogicException("No existe una entidad de Enfermero con el id \"" + entity.getId() + "\"");
         }
-        return persistencia.update( entity );
+         return persistencia.update(entity);
     }
 
     public void delete( long id) {
@@ -162,4 +162,5 @@ public class EnfermeroLogic {
         servicio.setEnfermero(null);
         enfermeroEntity.getServicios().remove(servicio);
     }
+    
 }
