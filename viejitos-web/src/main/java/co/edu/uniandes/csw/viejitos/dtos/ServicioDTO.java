@@ -30,7 +30,7 @@ import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
  *      "tipo": 1,
  *      "fecha": "12/02/2018",
  *      "hora": "8:37",
- *      "descripción": "Acompañamiento a cita médica",
+ *      "descripcion": "Acompañamiento a cita médica",
  *      "finalizado": false
  *   }
  *
