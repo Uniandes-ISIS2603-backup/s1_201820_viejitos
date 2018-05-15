@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.test.persistence;
 
 import co.edu.uniandes.csw.viejitos.entities.PagoEntity;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.persistence.PagoPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class PagoPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(PagoEntity.class.getPackage())
                 .addPackage(PagoPersistence.class.getPackage())
+                .addPackage(ServicioEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -65,12 +67,14 @@ public class PagoPersistenceTest {
      */
     private void clearData() {
         em.createQuery("delete from PagoEntity").executeUpdate();
+        em.createQuery("delete from ServicioEntity").executeUpdate();
     }
     
      /**
      * Lista que tiene los datos de prueba.
      */
     private List<PagoEntity> data = new ArrayList<PagoEntity>();
+    private List<ServicioEntity> dataServicio = new ArrayList<ServicioEntity>();
     
     /**
      * Variable para marcar las transacciones del em anterior cuando se
@@ -84,14 +88,25 @@ public class PagoPersistenceTest {
      * pruebas.
      */
     private void insertData() {
+        data = new ArrayList<>();
+        dataServicio = new ArrayList<>();
         PodamFactory factory = new PodamFactoryImpl();
-        for (int i = 0; i < 3; i++) {
-            
-            PagoEntity entity = factory.manufacturePojo(PagoEntity.class);
-
-            em.persist(entity);
-            
-            data.add(entity);
+        
+        ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
+           
+        em.persist(entity);
+        dataServicio.add(entity);
+        
+        for (int i = 0; i < 1; i++) {
+            PagoEntity entityPago = factory.manufacturePojo(PagoEntity.class);
+            if (i == 0) {
+                System.out.println("id servicio insert: " + dataServicio.get(0).getId());
+                entityPago.setServicio(dataServicio.get(0));
+                //entity.setFactura(entityFactura);
+            }
+           
+            em.persist(entityPago);
+            data.add(entityPago);
         }
     }
     
@@ -119,14 +134,14 @@ public class PagoPersistenceTest {
     
     @Test
     public void createPagoEntityTest() {
-    PodamFactory factory = new PodamFactoryImpl();
-    PagoEntity newEntity = factory.manufacturePojo(PagoEntity.class);
-    PagoEntity result = pagoPersistence.create(newEntity);
+        PodamFactory factory = new PodamFactoryImpl();
+        PagoEntity newEntity = factory.manufacturePojo(PagoEntity.class);
+        PagoEntity result = pagoPersistence.create(newEntity);
 
-    Assert.assertNotNull(result);
-    PagoEntity entity = em.find(PagoEntity.class, result.getId());
-    Assert.assertNotNull(entity);
-    Assert.assertEquals(newEntity.getName(), entity.getName());
+        Assert.assertNotNull(result);
+        PagoEntity entity = em.find(PagoEntity.class, result.getId());
+        Assert.assertNotNull(entity);
+        Assert.assertEquals(newEntity.getName(), entity.getName());
     }
     
     /**
@@ -153,7 +168,7 @@ public class PagoPersistenceTest {
     @Test
     public void getPagoTest() {
         PagoEntity entity = data.get(0);
-        PagoEntity newEntity = pagoPersistence.find(entity.getId());
+        PagoEntity newEntity = pagoPersistence.find(entity.getServicio().getId(), entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }

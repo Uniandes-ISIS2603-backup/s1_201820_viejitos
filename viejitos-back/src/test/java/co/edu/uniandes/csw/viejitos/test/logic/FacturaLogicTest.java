@@ -35,7 +35,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class FacturaLogicTest {
-    
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -49,7 +49,7 @@ public class FacturaLogicTest {
 
     private List<FacturaEntity> data = new ArrayList<FacturaEntity>();
     private List<ServicioEntity> dataServicio = new ArrayList<ServicioEntity>();
-    
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -61,7 +61,7 @@ public class FacturaLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     /**
      * Configuración inicial de la prueba.
      *
@@ -83,15 +83,15 @@ public class FacturaLogicTest {
             }
         }
     }
-    
-     /**
+
+    /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
         em.createQuery("delete from FacturaEntity").executeUpdate();
         em.createQuery("delete from ServicioEntity").executeUpdate();
     }
-    
+
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
@@ -101,58 +101,47 @@ public class FacturaLogicTest {
         dataServicio = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
-            
-            if(i==0)
-            {
-                System.out.println("ID servicio 0= " + entity.getId());
-            }
+
             em.persist(entity);
             dataServicio.add(entity);
         }
-        
+
         for (int i = 0; i < 3; i++) {
             FacturaEntity entity = factory.manufacturePojo(FacturaEntity.class);
-            
-            if(i==0)
-            {
-                System.out.println("ID factura 0= " +entity.getId());
-            }
-            entity.setServicio(dataServicio.get(i));
-            //dataServicio.get(i).setFactura(entity);
+
+            entity.setServicio(dataServicio.get(0));
             em.persist(entity);
-            //em.persist(dataServicio.get(i));
             data.add(entity);
         }
-        System.out.println("ID servicio 0= " + dataServicio.get(0).getId());
-        System.out.println("ID factura 0= " +data.get(0).getId());
     }
-    
+
     /**
      * Prueba para crear una Factura
+     *
      * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @Test
     public void createFacturaTest() throws BusinessLogicException {
         FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
-        
-        
-            FacturaEntity result = facturaLogic.create(dataServicio.get(3).getId(), newEntity);
-            Assert.assertNotNull(result);
-            FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
-            Assert.assertEquals(newEntity.getId(), entity.getId());
-            Assert.assertEquals(newEntity.getCostoTotal(), entity.getCostoTotal());
-            Assert.assertEquals(newEntity.getFechaExpedicion(), entity.getFechaExpedicion());
-            Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
-            Assert.assertEquals(newEntity.getNombreCliente(), entity.getNombreCliente());
-            Assert.assertEquals(newEntity.getCcCliente(), entity.getCcCliente());
-            Assert.assertEquals(newEntity.getServicioPrestado(), entity.getServicioPrestado());
-            Assert.assertEquals(newEntity.getNombreEmpresa(), entity.getNombreEmpresa());
-            Assert.assertEquals(newEntity.getServicio(), entity.getServicio());
-        
+
+        FacturaEntity result = facturaLogic.create(dataServicio.get(3).getId(), newEntity);
+        Assert.assertNotNull(result);
+        FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getCostoTotal(), entity.getCostoTotal());
+        Assert.assertEquals(newEntity.getFechaExpedicion(), entity.getFechaExpedicion());
+        Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(newEntity.getNombreCliente(), entity.getNombreCliente());
+        Assert.assertEquals(newEntity.getCcCliente(), entity.getCcCliente());
+        Assert.assertEquals(newEntity.getServicioPrestado(), entity.getServicioPrestado());
+        Assert.assertEquals(newEntity.getNombreEmpresa(), entity.getNombreEmpresa());
+        Assert.assertEquals(newEntity.getServicio(), entity.getServicio());
+
     }
-    
-     /**
+
+    /**
      * Prueba para consultar la lista de Facturas
+     *
      * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @Test
@@ -160,27 +149,27 @@ public class FacturaLogicTest {
         //System.out.println("HOLAAAAAAAAAA" + dataServicio.get(0).getId());
         List<FacturaEntity> list = facturaLogic.getAll(dataServicio.get(0).getId());
         Assert.assertEquals(data.size(), list.size());
-        for(FacturaEntity entity: list){
+        for (FacturaEntity entity : list) {
             boolean found = false;
             for (FacturaEntity storedEntity : data) {
                 if (entity.getId().equals(storedEntity.getId())) {
                     found = true;
                 }
             }
-        
+
             Assert.assertTrue(found);
         }
     }
-    
+
     /**
      * Prueba para consultar una Factura
      */
     @Test
     public void getFacturaTest() {
         FacturaEntity entity = data.get(0);
-        
+
         System.out.println("HOLAAAAAAAAAAf" + dataServicio.get(0).getId());
-        
+
         FacturaEntity resultEntity = facturaLogic.getById(dataServicio.get(0).getId(), entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
@@ -193,21 +182,23 @@ public class FacturaLogicTest {
         Assert.assertEquals(entity.getNombreEmpresa(), resultEntity.getNombreEmpresa());
         Assert.assertEquals(entity.getServicio(), resultEntity.getServicio());
     }
-    
+
     /**
      * Prueba para eliminar una Factura
+     *
      * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @Test
     public void deleteFacturaTest() throws BusinessLogicException {
         FacturaEntity entity = data.get(1);
-        facturaLogic.delete(dataServicio.get(1).getId(), entity.getId());
+        facturaLogic.delete(dataServicio.get(0).getId(), entity.getId());
         FacturaEntity deleted = em.find(FacturaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
-     /**
+
+    /**
      * Prueba para actualizar una Factura
+     *
      * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @Test
@@ -216,22 +207,20 @@ public class FacturaLogicTest {
         FacturaEntity pojoEntity = factory.manufacturePojo(FacturaEntity.class);
 
         pojoEntity.setId(entity.getId());
-            facturaLogic.update(dataServicio.get(2).getId(), pojoEntity);
+        facturaLogic.update(dataServicio.get(0).getId(), pojoEntity);
 
-            FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
+        FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
 
-            Assert.assertEquals(pojoEntity.getId(), resp.getId());
-            Assert.assertEquals(pojoEntity.getCostoTotal(), resp.getCostoTotal());
-            Assert.assertEquals(pojoEntity.getFechaExpedicion(), resp.getFechaExpedicion());
-            Assert.assertEquals(pojoEntity.getDescripcion(), resp.getDescripcion());
-            Assert.assertEquals(pojoEntity.getNombreCliente(), resp.getNombreCliente());
-            Assert.assertEquals(pojoEntity.getCcCliente(), resp.getCcCliente());
-            Assert.assertEquals(pojoEntity.getServicioPrestado(), resp.getServicioPrestado());
-            Assert.assertEquals(pojoEntity.getNombreEmpresa(), resp.getNombreEmpresa());
-            Assert.assertEquals(pojoEntity.getServicio(), resp.getServicio());
-        
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getCostoTotal(), resp.getCostoTotal());
+        Assert.assertEquals(pojoEntity.getFechaExpedicion(), resp.getFechaExpedicion());
+        Assert.assertEquals(pojoEntity.getDescripcion(), resp.getDescripcion());
+        Assert.assertEquals(pojoEntity.getNombreCliente(), resp.getNombreCliente());
+        Assert.assertEquals(pojoEntity.getCcCliente(), resp.getCcCliente());
+        Assert.assertEquals(pojoEntity.getServicioPrestado(), resp.getServicioPrestado());
+        Assert.assertEquals(pojoEntity.getNombreEmpresa(), resp.getNombreEmpresa());
+        Assert.assertEquals(pojoEntity.getServicio(), resp.getServicio());
+
     }
-    
-}
-    
 
+}
