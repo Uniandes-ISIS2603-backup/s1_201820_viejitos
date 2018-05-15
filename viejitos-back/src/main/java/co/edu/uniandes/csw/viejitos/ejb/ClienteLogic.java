@@ -6,7 +6,9 @@
 package co.edu.uniandes.csw.viejitos.ejb;
 
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
+import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
 import java.util.List;
@@ -26,6 +28,9 @@ public class ClienteLogic {
 
     @Inject
     private ClientePersistence persistence;
+    
+    @Inject
+    private ServicioLogic servicioLogic;
 
     public ClienteEntity create(ClienteEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de una entidad de Cliente");
@@ -117,5 +122,79 @@ public class ClienteLogic {
         ClienteEntity clienteEntity = getById(clienteId);
         clienteEntity.setHistoriaC(historiac);
         return clienteEntity.getHistoriaC();
+    }
+    
+     /**
+     * Obtiene una colección de instancias de ServicioEntity asociadas a una
+     * instancia de Cliente
+     * @param clienteId Identificador de la instancia de Cliente
+     * @return Colección de instancias de ServicioEntity asociadas a la instancia de
+     * Cliente
+     */
+    public List<ServicioEntity> listServicios(Long clienteId) {
+        return getById(clienteId).getServicios();
+    }
+    
+     /**
+     * Retorna un servicio asociado a un cliente
+     * @param clienteId El id del cliente a buscar.
+     * @param servicioId El id del servicio a buscar
+     * @return El servicio encontrado dentro del cliente.
+     * @throws BusinessLogicException Si el servicio no se encuentra en el cliente
+     */
+    public ServicioEntity getServicio(Long clienteId, Long servicioId) throws BusinessLogicException {
+        List<ServicioEntity> servicios = getById(clienteId).getServicios();
+        ServicioEntity servicio = servicioLogic.getById(servicioId);
+        int index = servicios.indexOf(servicio);
+        if (index >= 0) {
+            return servicios.get(index);
+        }
+        throw new BusinessLogicException("El servicio no está asociado al cliente");
+
+    }
+    
+     /**
+     * Agregar un servicio al cliente
+     * @paramservicioId El id del servicio a guardar
+     * @param clienteId El id del cliente en la cual se va a guardar el
+     * servicio.
+     * @return El servicio que fue agregado al cliente.
+     */
+    public ServicioEntity addServicio(Long clienteId, Long servicioId) {
+        ClienteEntity clienteEntity = getById(clienteId);
+        ServicioEntity servicioEntity = servicioLogic.getById(servicioId);
+        servicioEntity.setCliente(clienteEntity);
+        return servicioEntity;
+    }
+    
+     /**
+     * Remplazar servicios de un cliente
+     * @param servicios Lista de servicios que serán los del cliente.
+     * @param enfermeroId El id del cliente que se quiere actualizar.
+     * @return La lista de servicios actualizada.
+     */
+    public List<ServicioEntity> replaceServicios(Long clienteId, List<ServicioEntity> servicios) {
+        ClienteEntity cliente = getById(clienteId);
+        List<ServicioEntity> serviciosList = servicioLogic.getAll();
+        for (ServicioEntity servicio : serviciosList) {
+            if (servicios.contains(servicio)) {
+                servicio.setCliente(cliente);
+            } else if (servicio.getCliente() != null && servicio.getCliente().equals(cliente)) {
+                servicio.setCliente(null);
+            }
+        }
+        return servicios;
+    }
+    
+     /**
+     * Borrar un servicio de un cliente
+     * @param servicioId El servicio que se desea borrar del cliente.
+     * @param clienteId El cliente del cual se desea eliminar.
+     */
+    public void removeServicio(Long servicioId, Long clienteId) {
+        ClienteEntity clienteEntity = getById(clienteId);
+        ServicioEntity servicio = servicioLogic.getById(servicioId);
+        servicio.setCliente(null);
+        clienteEntity.getServicios().remove(servicio);
     }
 }
