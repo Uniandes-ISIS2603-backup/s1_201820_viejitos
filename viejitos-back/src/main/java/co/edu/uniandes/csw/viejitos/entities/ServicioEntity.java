@@ -57,42 +57,26 @@ public class ServicioEntity extends BaseEntity implements Serializable{
     @PodamExclude
     private ClienteEntity cliente;
     
-    @OneToOne (cascade=CascadeType.PERSIST)
+    @OneToMany (mappedBy="servicio", cascade=CascadeType.PERSIST)
     @PodamExclude 
-    private PagoEntity pagoInicial;
+    private List<PagoEntity> pagos;
     
-    @OneToOne (cascade=CascadeType.PERSIST)
-    @PodamExclude
-    private PagoEntity pagoFinal;
+    private Integer tipo;
+    
+    
     /**
      * @return the pagoInicial
      */
-    public PagoEntity getPagoInicial() {
-        return pagoInicial;
+    public List<PagoEntity> getPagos() {
+        return pagos;
     }
 
     /**
-     * @param pagoInicial the pagoInicial to set
+     * @param pagos the pagoInicial to set
      */
-    public void setPagoInicial(PagoEntity pagoInicial) {
-        this.pagoInicial = pagoInicial;
+    public void setPagos(List<PagoEntity> pagos) {
+        this.pagos = pagos;
     }
-
-    /**
-     * @return the pagoFinal
-     */
-    public PagoEntity getPagoFinal() {
-        return pagoFinal;
-    }
-
-    /**
-     * @param pagoFinal the pagoFinal to set
-     */
-    public void setPagoFinal(PagoEntity pagoFinal) {
-        this.pagoFinal = pagoFinal;
-    }
-
-        private Integer tipo;
     
     /**
      * @return the quejas

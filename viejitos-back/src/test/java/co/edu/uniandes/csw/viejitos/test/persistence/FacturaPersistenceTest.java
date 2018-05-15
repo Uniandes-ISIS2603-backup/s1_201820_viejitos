@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.viejitos.test.persistence;
 import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.persistence.FacturaPersistence;
-import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -138,16 +137,16 @@ public class FacturaPersistenceTest {
     
     @Test
     public void createFacturaEntityTest() {
-    PodamFactory factory = new PodamFactoryImpl();
-    FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
-    FacturaEntity result = facturaPersistence.create(newEntity);
+        PodamFactory factory = new PodamFactoryImpl();
+        FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+        FacturaEntity result = facturaPersistence.create(newEntity);
 
-    Assert.assertNotNull(result);
-    FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
-    Assert.assertNotNull(entity);
-    Assert.assertEquals(newEntity.getName(), entity.getName());
+        Assert.assertNotNull(result);
+        FacturaEntity entity = em.find(FacturaEntity.class, result.getId());
+        Assert.assertNotNull(entity);
+        Assert.assertEquals(newEntity.getName(), entity.getName());
     }
-    
+
     /**
      * Prueba para consultar la lista de facturas. 
      */

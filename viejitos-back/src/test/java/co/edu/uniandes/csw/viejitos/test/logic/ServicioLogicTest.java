@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.viejitos.test.logic;
 
 import co.edu.uniandes.csw.viejitos.ejb.ServicioLogic;
-import co.edu.uniandes.csw.viejitos.entities.QuejaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.persistence.ServicioPersistence;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
@@ -21,7 +20,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +32,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class ServicioLogicTest {
-    
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -57,7 +55,7 @@ public class ServicioLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     /**
      * Configuración inicial de la prueba.
      */
@@ -77,52 +75,51 @@ public class ServicioLogicTest {
             }
         }
     }
-    
-     /**
+
+    /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
         em.createQuery("delete from ServicioEntity").executeUpdate();
     }
-    
+
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
      */
     private void insertData() {
-        for (int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++) {
             ServicioEntity entity = factory.manufacturePojo(ServicioEntity.class);
             em.persist(entity);
             data.add(entity);
         }
     }
-    
+
     /**
      * Prueba para crear un Servicio
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @Test
     public void createServicioTest() throws BusinessLogicException {
         ServicioEntity newEntity = factory.manufacturePojo(ServicioEntity.class);
-            newEntity.setFinalizado(Boolean.FALSE);        
-            ServicioEntity result = servicioLogic.create(newEntity);
-            Assert.assertNotNull(result);
-            ServicioEntity entity = em.find(ServicioEntity.class, result.getId());
-            Assert.assertEquals(newEntity.getId(), entity.getId());
-            Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
-            Assert.assertEquals(newEntity.getFecha(), entity.getFecha());
-            Assert.assertEquals(newEntity.getHora(), entity.getHora());
-            Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
-            Assert.assertEquals(newEntity.getQuejas(), entity.getQuejas());
-            Assert.assertEquals(newEntity.getCalificacion(), entity.getCalificacion());
-            Assert.assertEquals(newEntity.getEnfermero(), entity.getEnfermero());
-            Assert.assertEquals(newEntity.getCliente(), entity.getCliente());
-            Assert.assertEquals(newEntity.getPagoInicial(), entity.getPagoInicial());
-            Assert.assertEquals(newEntity.getPagoFinal(), entity.getPagoFinal());
-            Assert.assertEquals(newEntity.getFacturas(), entity.getFacturas());
+        newEntity.setFinalizado(Boolean.FALSE);
+        ServicioEntity result = servicioLogic.create(newEntity);
+        Assert.assertNotNull(result);
+        ServicioEntity entity = em.find(ServicioEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
+        Assert.assertEquals(newEntity.getFecha(), entity.getFecha());
+        Assert.assertEquals(newEntity.getHora(), entity.getHora());
+        Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(newEntity.getQuejas(), entity.getQuejas());
+        Assert.assertEquals(newEntity.getCalificacion(), entity.getCalificacion());
+        Assert.assertEquals(newEntity.getEnfermero(), entity.getEnfermero());
+        Assert.assertEquals(newEntity.getCliente(), entity.getCliente());
+        Assert.assertEquals(newEntity.getPagos(), entity.getPagos());
+        Assert.assertEquals(newEntity.getFacturas(), entity.getFacturas());
     }
-    
-     /**
+
+    /**
      * Prueba para consultar la lista de Servicios
      */
     @Test
@@ -139,7 +136,7 @@ public class ServicioLogicTest {
             Assert.assertTrue(found);
         }
     }
-    
+
     /**
      * Prueba para consultar un Servicio
      */
@@ -157,13 +154,13 @@ public class ServicioLogicTest {
         Assert.assertEquals(entity.getCalificacion(), resultEntity.getCalificacion());
         Assert.assertEquals(entity.getEnfermero(), resultEntity.getEnfermero());
         Assert.assertEquals(entity.getCliente(), resultEntity.getCliente());
-        Assert.assertEquals(entity.getPagoInicial(), resultEntity.getPagoInicial());
-        Assert.assertEquals(entity.getPagoFinal(), resultEntity.getPagoFinal());
+        Assert.assertEquals(entity.getPagos(), resultEntity.getPagos());
         Assert.assertEquals(entity.getFacturas(), resultEntity.getFacturas());
     }
-    
+
     /**
      * Prueba para eliminar un Servicio
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @Test
     public void deleteServicioTest() throws BusinessLogicException {
@@ -172,9 +169,11 @@ public class ServicioLogicTest {
         ServicioEntity deleted = em.find(ServicioEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
-     /**
+
+    /**
      * Prueba para actualizar un Servicio
+     *
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
      */
     @Test
     public void updateServicioTest() throws BusinessLogicException {
@@ -182,14 +181,12 @@ public class ServicioLogicTest {
         ServicioEntity pojoEntity = factory.manufacturePojo(ServicioEntity.class);
 
         pojoEntity.setId(entity.getId());
-        if(pojoEntity.getFinalizado()==true)
-        
-        servicioLogic.update(pojoEntity);
-        
-        
+        if (pojoEntity.getFinalizado() == true) {
+            servicioLogic.update(pojoEntity);
+        }
+
         ServicioEntity resp = em.find(ServicioEntity.class, entity.getId());
 
-        
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getTipo(), resp.getTipo());
         Assert.assertEquals(pojoEntity.getFecha(), resp.getFecha());
@@ -199,10 +196,9 @@ public class ServicioLogicTest {
         Assert.assertEquals(pojoEntity.getCalificacion(), resp.getCalificacion());
         Assert.assertEquals(pojoEntity.getEnfermero(), resp.getEnfermero());
         Assert.assertEquals(pojoEntity.getCliente(), resp.getCliente());
-        Assert.assertEquals(pojoEntity.getPagoInicial(), resp.getPagoInicial());
-        Assert.assertEquals(pojoEntity.getPagoFinal(), resp.getPagoFinal());
+        Assert.assertEquals(pojoEntity.getPagos(), resp.getPagos());
         Assert.assertEquals(pojoEntity.getFacturas(), resp.getFacturas());
-        
+
     }
-    
+
 }
