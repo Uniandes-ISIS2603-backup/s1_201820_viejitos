@@ -71,7 +71,13 @@
       <script src="src/modules/calendarios/franja.create.ctrl.js" type="text/javascript"></script>
     <script src="src/modules/calendarios/enfermero.assign.ctrl.js" type="text/javascript"></script>
 
-       
+    <!--login-->
+      
+    <script src="src/modules/login/login.mod.js" type="text/javascript"></script>
+    <script src="src/modules/login/login.ctrl.js" type="text/javascript"></script>
+    
+    
+    <head>
         <script src="src/app.js" type="text/javascript"></script> 
         <script src="src/http-interceptor.factory.js" type="text/javascript"></script>
 
@@ -91,18 +97,21 @@
                     <div class="col-sm-1"></div>
                     <div class="col-sm-4">
                         <div class="row">
-                            <ul class="nav nav-tabs">
-                                <li class="loglink login">
-                                    <a href="" style="color:black; background-color:lightgray">Iniciar sesión </a>
-                                </li>
-                                <li class="loglink login">
-                                    <a href="" style="color:black; background-color:lightgray">Registro</a>
-                                </li>
-                            </ul>
+                            
+                            
+                            
+                             <div class="col-md-5">
+                    <ul ng-if="!isAuthenticated()" class="nav navbar-nav navbar-right">
+                        <li><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
+                    <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
+                        <li class="nameUser">Hola, {{currentUser}}</li>
+                        <li><a ui-sref="logout">Logout</a></li>
+                    </ul>
+                    </div>
+             
                         </div>
-                        <div ng-if="false" class="row">
-                            Bienvenido, Juan
-                        </div>
+               
                     </div>
                 </div>          
                 <div class="row">
