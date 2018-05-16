@@ -56,9 +56,10 @@
                     requireLogin: true,
                     roles: ['cliente']
                 },
-             
-                   param: {
-                    servicioTipo: 1
+            
+                params: {
+                    servicioTipo: null,
+                    servicioDesc: null
                 },
                 views: {
                      'detailView': {
