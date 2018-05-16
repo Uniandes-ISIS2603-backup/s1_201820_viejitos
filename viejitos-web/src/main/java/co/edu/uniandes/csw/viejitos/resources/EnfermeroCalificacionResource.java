@@ -6,14 +6,21 @@
 package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.CalificacionDetailDTO;
+import co.edu.uniandes.csw.viejitos.dtos.HistoriaClinicaDTO;
+import co.edu.uniandes.csw.viejitos.dtos.HistoriaClinicaDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.CalificacionLogic;
+import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.viejitos.ejb.EnfermeroLogic;
+import co.edu.uniandes.csw.viejitos.ejb.HistoriaClinicaLogic;
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
+import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -21,67 +28,121 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
+ * <pre>Clase que implementa el recurso "enfermeros/calificaciones".
+ * URL: /api/enfermeros/{enfermeroId}/calificaciones
+ * </pre>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
+ * que el servicio {@link MedicoResource} define este servicio de forma relativa 
+ * con la ruta "citas" con respecto un libro.</i>
  *
- * @author js.espitia
+ * <h2>Anotaciones </h2>
+ * <pre>
+ * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
+ * </pre>
+ * @author jj.silva
+ * @version 1.0
  */
 @Path("enfermeros/{enfermeroId: \\d+}/calificaciones")
-@Produces("application/json")
-@Consumes("application/json")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @RequestScoped
-public class EnfermeroCalificacionResource {
-     @Inject
-    private CalificacionLogic calificacionLogic;
-     
-     @Inject
+public class EnfermeroCalificacionResource 
+{
+    @Inject
     private EnfermeroLogic enfermeroLogic;
-     /**
-     * <h1>GET /api/enfermeros/{enfermeroId}/calificaciones : Obtener todas las entidades de
-     * Calificacion asociadas a un enfermero en particular.</h1>
-     * <p>
-     * <pre>Busca y devuelve todas las entidades de Calificacion que existen en la aplicacion.
-     *
-     * Codigos de respuesta:
-     * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Devuelve todas las calificaciones de la aplicacion.</code>
-     * </pre>
-     *
-     * @param enfermeroId el id del enfermero dueño de las calificaciones.
-     * @return JSONArray con las entidades de Calificacion encontradas.
-     */
-    @GET
-    public List<CalificacionDetailDTO> getCalificaciones(@PathParam("enfermeroId") Long enfermeroId) {
-        List<CalificacionEntity> califs = calificacionLogic.getAllForEnf(enfermeroId);
-        List<CalificacionDetailDTO> resp = new ArrayList<>();
-        for (CalificacionEntity actual : califs) {
-            resp.add(new CalificacionDetailDTO(actual));
-        }
-        return resp;
-    }
     
-    
-    
+    @Inject
+    private CalificacionLogic cLogic;
+
     /**
-     * <h1>POST /api/enfermeros/{enfermeroId}/calificaciones/{calificacionId}} : Asociar una calificacion a un enfermero.</h1>
+     * <h1>GET /api/enfermeros/{enfermeroId}/calificaciones : Obtener las calificaciones de un enfermero.</h1>
      *
-     * <pre> Asocia una nueva calificacion a un enfermero ya existente
+     * <pre>Busca y devuelve las calificaciones que tiene el enfermero.
      * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Se creo la calificacion .
+     * 200 OK Devuelve las calificaciones del enfermero.</code> 
+     * </pre>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe un enfermero con el id dado.
+     * </code>
+     * @param enfermeroId El ID del enfermero del cual se busca las calificaciones
+     * @return JSONArray {@link CalificacionDetailDTO} - Las calificaciones encontradas del enfermero.
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException Cuando el enfermero no tiene Calificaciones asociadas.
+     */
+    @GET
+    public List<CalificacionDetailDTO> getCalificaciones(@PathParam("enfermeroId") Long enfermeroId) throws BusinessLogicException
+    {
+        if(enfermeroLogic.getById(enfermeroId) == null)
+        {
+             throw new WebApplicationException("No existe un enfermero con ese id", 404);
+        }
+        else
+        {
+            List<CalificacionDetailDTO> calificaciones = new ArrayList<CalificacionDetailDTO>();
+            for (CalificacionEntity actual : enfermeroLogic.getCalificaciones(enfermeroId)) {
+                calificaciones.add(new CalificacionDetailDTO(actual));
+            }
+        return calificaciones;
+        }
+    }
+    
+    /**
+     * <h1>GET /api/enfermeros/{enfermeroId}/calificaciones/{id} : Obtener una calificacion de un Enfermero.</h1>
+     * <pre>Busca y devuelve la calificacion con el ID recibido en la URL, relativa a un Enfermero.
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve la calificacion del Enfermero.</code> 
+     * </pre>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe un enfermero con el id dado.
+     * </code>
+     * @param enfermeroId El ID del enfermero del cual se busca la calificacion
+     * @param id El ID de la calificacion que se busca
+     * @return {@link CalificacionDetailDTO} - La calificacion encontrada en el cliente.
+     */
+    @GET
+    @Path("{id: \\d+}")
+    public CalificacionDetailDTO getCalificacion(@PathParam("enfermeroId") Long enfermeroId, @PathParam("id") Long id) {
+        if(enfermeroLogic.getById(enfermeroId) == null)
+        {
+             throw new WebApplicationException("No existe un enfermero con ese id", 404);
+        }
+        try
+        {
+        CalificacionEntity entity = enfermeroLogic.getCalificacionById(enfermeroId, id);
+        return new CalificacionDetailDTO(entity);
+        }
+        catch(BusinessLogicException e)
+        {
+            throw new WebApplicationException(e.getMessage(), 404);
+        }
+    }
+
+    /**
+     * <h1>POST /api/enfermeros/{enfermeroId}/calificaciones/ : Crear una calificacion para un enfermero</h1>
+     *
+     * <pre> Crea una calificacion para un enfermero existente
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Creo la calificacion .
      * </code>
      * <code style="color: #c7254e; background-color: #f9f2f4;">
      * 404 Not Found: No existe el enfermero
      * </code>
      * </pre>
-     * @param calificacion {@link CalificacionDetailDTO} El ID de la calificacion que se va a asociar
-     * @param enfermeroId El ID del enfermero al cual se le va a asociar la calificacion
-     * @return JSON {@link CalificacionDetailDTO} - La calificacion asociada.
+     * @param enfermeroId El ID del enfermero al cual se le va a crear la calificacion
+     * @param dto El dto de la Calificacion que se va a agregar
+     * @return JSON {@link CalificacionDetailDTO} - La calificacion creada.
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException Cuando el enfermero al cual se le quiere agregar la Calificacion no existe
      */
     @POST
-    @Path("{calificacionId: \\d+}")
-    public CalificacionDetailDTO addCalificacion(@PathParam("enfermeroId") Long enfermeroId, CalificacionDetailDTO calificacion)
+    public CalificacionDetailDTO addCalificacion(@PathParam("enfermeroId") Long enfermeroId, CalificacionDetailDTO dto) throws BusinessLogicException
     {
         if(enfermeroLogic.getById(enfermeroId) == null)
         {
@@ -89,44 +150,24 @@ public class EnfermeroCalificacionResource {
         }
         else
         {
-            //return new CalificacionDetailDTO(enfermeroLogic.addCalificacion(enfermeroId, calificacion.toEntity()));
+            return new CalificacionDetailDTO(enfermeroLogic.addCalificacion(enfermeroId, dto.toEntity()));
         } 
-        return null;
     }
     
     /**
-     * <h1>PUT /api/enfermeros/{enfermeroId}/calificaciones/{calificacionId} : Actualizar una de las calificaciones de un enfermero.</h1>
+     * <h1>DELETE /api/enfermeros/{enfermeroId}/calificaciones/{calificacionId} : Elimina una calificacion de un enfermero.</h1>
      *
-     * <pre>Cuerpo de petición: JSONArray {@link CalificacionDetailDTO}.
-     * 
-     * Actualiza una calificacion particular de un enfermero con la calificacion que pasa por parámetro
-     * 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Se actualizó la calificacion deseada
-     * </code>
-     * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 412 Precodition Failed: No se pudo actualizar la calificacion
-     * </code>
-     * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not found: No existe el enfermero o la calificacion
+     * 200 OK Se eliminó la calificacion del enfermero.
      * </code>
      * </pre>
-     * @param enfermeroId El ID del enfermero al cual se le va a actualizar la calificacion
-     * @param calificacion JSONArray {@link CalificacionDetailDTO} - La calificacion que se desea cambiar.
-     * @return JSONArray {@link CalificacionDetailDTO}  - La calificacion actualizada.
+     * @param enfermeroId Identificador del enfermero que se esta buscando.
+     * @param id Identificador de la calificacion que se desea borrar.
      */
-    @PUT
-    public CalificacionDetailDTO replaceCalificacion(@PathParam("enfermeroId") Long enfermeroId, CalificacionDetailDTO calificacion)
-    {
-        if(enfermeroLogic.getById(enfermeroId) == null)
-        {
-             throw new WebApplicationException("No existe un enfermero con ese id", 404);
-        }
-        else
-        {
-            //Procesamiento y actualización
-          return calificacion;  
-        }
+    @DELETE
+    @Path("{id: \\d+}")
+    public void removeCalificacion(@PathParam("enfermeroId") Long enfermeroId, @PathParam("id") Long id) {
+        enfermeroLogic.removeCalificacion(enfermeroId, id);
     }
 }

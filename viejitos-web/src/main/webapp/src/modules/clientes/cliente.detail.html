@@ -46,10 +46,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td> {{currentCliente.historiaC.cirugias}} </td>
-                    <td> {{currentCliente.historiaC.enfermedades}} </td> 
-                    <td> {{currentCliente.historiaC.medicamentos}} </td>
+                <tr ng-repeat = "historia in currentCliente.historiaC">
+                    <td> {{historia.cirugias}} </td>
+                    <td> {{historia.enfermedades}} </td> 
+                    <td> {{historia.medicamentos}} </td>
                 </tr>
             </tbody>
         </table>

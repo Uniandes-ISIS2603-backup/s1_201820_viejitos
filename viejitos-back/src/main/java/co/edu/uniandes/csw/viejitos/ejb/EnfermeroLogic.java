@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.EnfermeroPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,12 @@ public class EnfermeroLogic {
     
     @Inject
     private ServicioLogic servicioLogic;
+    
+     @Inject
+    private CalificacionLogic cLogic;
+     
+     @Inject
+    private CalificacionPersistence cPersistence;
     
     public EnfermeroEntity create(EnfermeroEntity entity) throws BusinessLogicException{
         if(entity!=null){
@@ -80,14 +87,12 @@ public class EnfermeroLogic {
         LOGGER.log( Level.INFO, "Termina proceso de borrar la entidad de Enfermero con id={0}", id );
     }
 
-    public CalificacionEntity addCalificacion(Long enfermeroId, CalificacionEntity toEntity) {
+    public CalificacionEntity addCalificacion(Long enfermeroId, CalificacionEntity entity) throws BusinessLogicException {
+        LOGGER.info("Inicia proceso de creación de una entidad de Calificacion");  
         EnfermeroEntity enfermero = getById(enfermeroId);
-        if(enfermero!=null){
-            List<CalificacionEntity> calificacionest = enfermero.getCalificaciones();
-            calificacionest.add(toEntity);
-            enfermero.setCalificaciones(calificacionest);
-        }
-        return toEntity;
+        enfermero.getCalificaciones().add(entity);
+        LOGGER.info("Termina proceso de creación de entidad de Calificacion");
+        return cPersistence.create(entity);
     }
     
     /**
@@ -162,6 +167,33 @@ public class EnfermeroLogic {
         ServicioEntity servicio = servicioLogic.getById(servicioId);
         servicio.setEnfermero(null);
         enfermeroEntity.getServicios().remove(servicio);
+    }
+    
+    public List<CalificacionEntity> getCalificaciones(Long enfermeroId) throws BusinessLogicException {
+        LOGGER.info("Inicia proceso de consultar todas las entidades de Calificacion");
+        EnfermeroEntity enfermero = getById(enfermeroId);
+        if (enfermero.getCalificaciones() == null || enfermero.getCalificaciones().isEmpty()) {
+            throw new BusinessLogicException("El enfermero que consulta aún no tiene calificaciones");
+        }
+        LOGGER.info("Termina proceso de consultar todas las entidades de Calificacion");
+        return enfermero.getCalificaciones();
+    }
+    
+    public CalificacionEntity getCalificacionById(Long enfermeroId, Long calificacionId) throws BusinessLogicException {
+        List<CalificacionEntity> calificaciones = getCalificaciones(enfermeroId);
+        CalificacionEntity calificacion = cLogic.getById(calificacionId);
+        int index = calificaciones.indexOf(calificacion);
+        if (index >= 0) {
+            return calificaciones.get(index);
+        }
+        throw new BusinessLogicException("La calificacion no está asociada al enfermero");
+    }
+    
+     public void removeCalificacion(Long enfermeroId, Long id) {
+        EnfermeroEntity enfermero = getById(enfermeroId);
+        CalificacionEntity calificacion = cLogic.getById(id);
+        enfermero.getCalificaciones().remove(calificacion);
+        cPersistence.delete(calificacion);
     }
     
 }
