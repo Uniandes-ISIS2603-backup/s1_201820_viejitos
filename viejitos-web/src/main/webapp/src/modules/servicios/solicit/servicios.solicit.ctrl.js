@@ -8,38 +8,15 @@
         function ($scope, $http, serviciosContext, $state, $rootScope) {
                   $rootScope.edit = false;
 
-
-          
-  
-                 
-       
-   
-  //$http.get(enfermerosContext).then(function (response) {
-    //         $scope.enfermero = response.data;
-
-            
-   $scope.idcliente=sessionStorage.getItem("id");
+               $scope.idcliente=sessionStorage.getItem("id");
                 console.log(sessionStorage.getItem("id"));
            
-            
-                        if (($scope.idcliente !== undefined) && ($scope.idcliente !== null)) {
+              if (($scope.idcliente !== undefined) && ($scope.idcliente !== null)) {
                 $http.get("api/clientes/"  + $scope.idcliente).then(function (response) {
                     $scope.cliente = response.data;
                 });
-                        }
-            
-            
-            
-            //$scope.data.enfermero=$scope.enfermero;
-     //console.log($rootScope.currentUser);
-    // console.log($rootScope.currentId);
-     //console.log($scope.cliente);
-     //console.log($scope.data);
- 
-
-            //console.log($state.params.servicioTipo);
-             //  console.log($state.params.servicioDesc);  
-  
+                  }
+                   
             $scope.data = {};
                $scope.data.finalizado="false";
                $scope.data.descripcion=$state.params.servicioDesc;

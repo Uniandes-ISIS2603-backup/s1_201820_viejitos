@@ -10,11 +10,12 @@
         'clienteModule',
         'calificacionesModule',
         'enfermerosModule',
-         'citasModule',
+        'citasModule',
         'medicosModule',
         'calendariosModule',
         'historialServiciosModule',
-        'loginModule'
+        'loginModule',
+        'historialServiciosClienteModule'
     ]);
     // Resuelve problemas de las promesas
     app.config(['$qProvider', function ($qProvider) {

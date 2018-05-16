@@ -7,8 +7,7 @@
         function ($scope, $http, historialServiciosContext) {
             
                 $http.get('api/servicios').then(function (response) {
-                $scope.historialServiciosRecords = response.data;
-            
+                    $scope.historialServiciosRecords = response.data;           
             });
         }
     ]);
