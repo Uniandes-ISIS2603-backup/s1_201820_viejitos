@@ -17,14 +17,15 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class FranjaHorariaEntity extends BaseEntity implements Serializable {
-     private Integer horaInicio;
+
+    private Integer horaInicio;
     private Integer horaFin;
     private Boolean ocupado;
     private String diaSemana;
-    
-@PodamExclude
-@ManyToOne(cascade = CascadeType.PERSIST)
-private CalendarioSemanalEntity calendario;
+
+    @PodamExclude
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private CalendarioSemanalEntity calendario;
 
     /**
      * @return the horaInicio
@@ -33,8 +34,6 @@ private CalendarioSemanalEntity calendario;
         return horaInicio;
     }
 
-   
-    
     /**
      * @param horaInicio the horaInicio to set
      */
@@ -98,6 +97,4 @@ private CalendarioSemanalEntity calendario;
         this.calendario = calendario;
     }
 
-   
-    
 }

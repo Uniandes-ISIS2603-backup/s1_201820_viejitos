@@ -215,7 +215,7 @@ public class MedicoPersistenceTest {
                 MedicoEntity newEntity = medicoPersistence.findByLogin(entity.getLogin());
                 Assert.assertNull(newEntity);
             } catch (Exception e) {
-                
+
             }
         }
 
@@ -263,28 +263,23 @@ public class MedicoPersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), resp.getName());
     }
-    
+
     @Test
-    public void findFirstAvailableTest()
-    {
+    public void findFirstAvailableTest() {
         MedicoEntity entity = data.get(0);
-         PodamFactory factory = new PodamFactoryImpl();
+        PodamFactory factory = new PodamFactoryImpl();
         CalendarioSemanalEntity calendar = factory.manufacturePojo(CalendarioSemanalEntity.class);
         List<FranjaHorariaEntity> l = new ArrayList<>();
-        for(int i =0;i<11;i++)
-        {
-           l.add(factory.manufacturePojo(FranjaHorariaEntity.class)); 
+        for (int i = 0; i < 11; i++) {
+            l.add(factory.manufacturePojo(FranjaHorariaEntity.class));
         }
-        
+
         calendar.setFranjas(l);
         entity.setCalendario(calendar);
         medicoPersistence.update(entity);
-        if(l.get(0).isOcupado())
-        {
+        if (l.get(0).isOcupado()) {
             Assert.assertNull(medicoPersistence.findFirstAvailable(l.get(0)));
-        }
-        else
-        {
+        } else {
             Assert.assertEquals(entity, medicoPersistence.findFirstAvailable(l.get(0)));
         }
     }
