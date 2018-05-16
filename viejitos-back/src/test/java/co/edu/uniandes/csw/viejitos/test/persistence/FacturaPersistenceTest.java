@@ -134,6 +134,7 @@ public class FacturaPersistenceTest {
         }
         System.out.println("id del servicio: " + data.get(0).getServicio().getId() + " ; " + data.get(0).getId());
     }
+<<<<<<< HEAD
     
      /**
      * Limpia las tablas que están implicadas en la prueba.
@@ -177,6 +178,8 @@ public class FacturaPersistenceTest {
         }
         System.out.println("id del servicio: " + data.get(0).getServicio().getId() + " ; " + data.get(0).getId());
     }
+=======
+>>>>>>> origin/master
 
     
     @Test

@@ -47,9 +47,8 @@ public class CitaEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
-    @Temporal(TemporalType.DATE)
-    @PodamStrategyValue(DateStrategy.class)
-    private Date hora;
+    
+    private String hora;
     @PodamExclude
     @OneToOne(fetch = FetchType.EAGER, targetEntity = ClienteEntity.class, cascade = CascadeType.PERSIST)
     private ClienteEntity cliente;
@@ -78,14 +77,14 @@ public class CitaEntity extends BaseEntity implements Serializable {
     /**
      * @return the hora
      */
-    public Date getHora() {
+    public String getHora() {
         return hora;
     }
 
     /**
      * @param hora the hora to set
      */
-    public void setHora(Date hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 

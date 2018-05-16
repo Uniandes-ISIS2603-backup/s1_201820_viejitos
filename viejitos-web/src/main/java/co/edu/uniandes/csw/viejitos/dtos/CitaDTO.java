@@ -56,7 +56,7 @@ import java.util.Date;
 public class CitaDTO {
 
     private Date fecha;
-    private Date hora;
+    private String hora;
     private Long id;
 
     public CitaDTO() {
@@ -95,7 +95,7 @@ public class CitaDTO {
         return fecha;
     }
 
-    public Date getHora() {
+    public String getHora() {
         return hora;
     }
 
@@ -103,7 +103,7 @@ public class CitaDTO {
         fecha = pFecha;
     }
 
-    public void setHora(Date pHora) {
+    public void setHora(String pHora) {
         hora = pHora;
     }
 

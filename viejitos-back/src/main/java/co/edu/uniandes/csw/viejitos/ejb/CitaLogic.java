@@ -71,6 +71,11 @@ public class CitaLogic {
         entity.setCliente(ent);
         MedicoEntity entMed=medicoPersistence.find(entity.getMedico().getId());
         entity.setMedico(entMed);
+        //if(entity.getFecha()==null)
+        //{
+        //     throw new BusinessLogicException("La cita debe tener una fecha");
+        //}
+        
         persistence.create(entity);
         return entity;
     }
