@@ -23,6 +23,8 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.viejitos.test.persistence;
 
+import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
+import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
 import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
 import co.edu.uniandes.csw.viejitos.persistence.MedicoPersistence;
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -212,7 +215,7 @@ public class MedicoPersistenceTest {
                 MedicoEntity newEntity = medicoPersistence.findByLogin(entity.getLogin());
                 Assert.assertNull(newEntity);
             } catch (Exception e) {
-                
+
             }
         }
 
@@ -261,4 +264,23 @@ public class MedicoPersistenceTest {
         Assert.assertEquals(newEntity.getName(), resp.getName());
     }
 
+    @Test
+    public void findFirstAvailableTest() {
+        MedicoEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        CalendarioSemanalEntity calendar = factory.manufacturePojo(CalendarioSemanalEntity.class);
+        List<FranjaHorariaEntity> l = new ArrayList<>();
+        for (int i = 0; i < 11; i++) {
+            l.add(factory.manufacturePojo(FranjaHorariaEntity.class));
+        }
+
+        calendar.setFranjas(l);
+        entity.setCalendario(calendar);
+        medicoPersistence.update(entity);
+        if (l.get(0).isOcupado()) {
+            Assert.assertNull(medicoPersistence.findFirstAvailable(l.get(0)));
+        } else {
+            Assert.assertEquals(entity, medicoPersistence.findFirstAvailable(l.get(0)));
+        }
+    }
 }

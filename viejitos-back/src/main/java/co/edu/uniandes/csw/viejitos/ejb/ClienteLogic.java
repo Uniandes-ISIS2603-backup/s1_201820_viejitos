@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.ejb;
 
+import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
@@ -31,6 +32,9 @@ public class ClienteLogic {
     
     @Inject
     private ServicioLogic servicioLogic;
+    
+    @Inject
+    private CitaLogic citaLogic;
 
     public ClienteEntity create(ClienteEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de una entidad de Cliente");
@@ -196,5 +200,86 @@ public class ClienteLogic {
         ServicioEntity servicio = servicioLogic.getById(servicioId);
         servicio.setCliente(null);
         clienteEntity.getServicios().remove(servicio);
+    }
+    
+    /**
+     * Obtiene una colección de instancias de CitaEntity asociadas a una
+     * instancia de Cliente
+     * @param clienteId Identificador de la instancia de Cliente
+     * @return Colección de instancias de ServicioEntity asociadas a la instancia de
+     * Cliente
+     */
+    public CitaEntity listCitas(Long clienteId) {
+        return getById(clienteId).getCita();
+    }
+    
+     /**
+     * Retorna una cita asociado a un cliente
+     * @param clienteId El id del cliente a buscar.
+     * @param citaId El id de la cita a buscar
+     * @return La cita encontrada dentro del cliente.
+     * @throws BusinessLogicException Si la cita no se encuentra en el cliente
+     */
+    public CitaEntity getCita(Long clienteId, Long citaId) throws BusinessLogicException {
+        CitaEntity cita1 = getById(clienteId).getCita();
+        CitaEntity cita = citaLogic.getById(citaId);
+        
+        if(cita1 == cita )
+        {
+            return cita1;
+        }
+        
+        throw new BusinessLogicException("El servicio no está asociado al cliente");
+
+    }
+    
+     /**
+     * Agregar una cita al cliente
+     * @param citaId
+     * @paramcitaId El id de la cita a guardar
+     * @param clienteId El id del cliente en la cual se va a guardar el
+     * cita.
+     * @return La cita que fue agregada al cliente.
+     */
+    public CitaEntity addCita(Long clienteId, Long citaId) {
+        ClienteEntity clienteEntity = getById(clienteId);
+        CitaEntity citaEntity = citaLogic.getById(citaId);
+        citaEntity.setCliente(clienteEntity);
+        return citaEntity;
+    }
+    
+     /**
+     * Remplazar cita de un cliente
+     * @param cita cita que será la del cliente.
+     * @param clienteId El id del cliente que se quiere actualizar.
+     * @return La cita actualizada.
+     */
+    public CitaEntity replaceCita(Long clienteId,CitaEntity cita) throws BusinessLogicException {
+        ClienteEntity cliente = getById(clienteId);
+        List<CitaEntity> citasList = citaLogic.getAll();
+        for (CitaEntity citaActual : citasList) {
+            if(citaActual == cita )
+            {
+                citaActual.setCliente(cliente);
+                cliente.setCita(citaActual);
+                update(cliente);
+            }
+            else if (citaActual.getCliente() != null && citaActual.getCliente().equals(cliente)) {
+                citaActual.setCliente(null);
+            }
+        }
+        return cita;
+    }
+    
+     /**
+     * Borrar una cita de un cliente
+     * @param citaId El servicio que se desea borrar del cliente.
+     * @param clienteId El cliente del cual se desea eliminar.
+     */
+    public void removeCita(Long clienteId, Long citaId) {
+        ClienteEntity clienteEntity = getById(clienteId);
+        CitaEntity cita = citaLogic.getById(citaId);
+        cita.setCliente(null);
+        clienteEntity.setCita(null);
     }
 }
