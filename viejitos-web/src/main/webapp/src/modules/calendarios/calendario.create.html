@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><label  id="createCalendarioSemanal">Crear nuevo calendario</label>
+            
+            <div class="panel-body">
+                <form name="calendario">
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="calendarioUltima" class="col-sm-2">Ultima Modificacion:</label>
+                            <input id="calendarioUltima" required ng-model="data.ultimaModificacion" class="col-sm-6"/>
+                        </div>
+                    </div>
+                 
+                    
+                    <div class="form-group row">
+                        <div class="form-group col-sm-4" ng-if="!calendario.$valid">
+                        </div> 
+                    </div> 
+                    <div class="form-group row">
+                        <div class="form-group col-sm-12">
+                            <input ng-show="calendario.$valid" ng-click="createCalendario()" value="Guardar" class="btn btn-success"/>
+                            <a class="btn btn-info" ui-sref="calendariosList">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

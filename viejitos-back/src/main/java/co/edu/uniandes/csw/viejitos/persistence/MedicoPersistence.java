@@ -5,7 +5,9 @@
  */
 package co.edu.uniandes.csw.viejitos.persistence;
 
+import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
 import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,10 +23,11 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class MedicoPersistence {
-     private static final Logger LOGGER = Logger.getLogger(MedicoPersistence.class.getName());
-         @PersistenceContext(unitName = "ViejitosPU")
+
+    private static final Logger LOGGER = Logger.getLogger(MedicoPersistence.class.getName());
+    @PersistenceContext(unitName = "ViejitosPU")
     protected EntityManager em;
-    
+
     public MedicoEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando medico con id={0}", id);
         return em.find(MedicoEntity.class, id);
@@ -37,20 +40,18 @@ public class MedicoPersistence {
         q = q.setParameter("name", name);
         return q.getSingleResult();
     }
-        public MedicoEntity findByLogin(String login) {
+
+    public MedicoEntity findByLogin(String login) {
         LOGGER.log(Level.INFO, "Consultando medico con login= ", login);
 
         TypedQuery<MedicoEntity> q
                 = em.createQuery("select u from MedicoEntity u where u.login = :login", MedicoEntity.class);
         q = q.setParameter("login", login);
-        
-        try
-        {
-          MedicoEntity ent =  q.getSingleResult();
+
+        try {
+            MedicoEntity ent = q.getSingleResult();
             return ent;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }
@@ -78,5 +79,17 @@ public class MedicoPersistence {
         MedicoEntity entity = em.find(MedicoEntity.class, id);
         em.remove(entity);
     }
-    
+
+    public MedicoEntity findFirstAvailable(FranjaHorariaEntity f) {
+        LOGGER.info("Consultando todos los Medicos disponibles");
+        TypedQuery<MedicoEntity> q
+                = em.createQuery("select u from MedicoEntity u,FranjaHorariaEntity x where u.calendario = x.calendario and x.diaSemana=:diasemana and x.ocupado='false'", MedicoEntity.class);
+        q = q.setParameter("diasemana", f.getDiaSemana());
+        try {
+            return q.getResultList().get(0);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

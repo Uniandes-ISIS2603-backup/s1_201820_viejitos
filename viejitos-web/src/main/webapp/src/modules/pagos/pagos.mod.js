@@ -25,14 +25,14 @@
                 parent: 'pagos',
                 views: {
                     'listView': {
-                        templateUrl: basePath + 'pagos.list.html',
+                        templateUrl: basePath + 'pagos.list.html'
                     }
                 }
             }).state('pagosCreate', {
                 url: '/create',
-                
+                parent: 'pagos',
                 views: {
-                    'mainView': {
+                    'detailView': {
                         templateUrl: basePath + 'pagos.new.html',
                         controller: 'pagoNewCtrl',
                         controllerAs: 'ctrl'

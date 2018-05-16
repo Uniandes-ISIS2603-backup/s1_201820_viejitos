@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.ejb;
 
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.EnfermeroPersistence;
 import java.util.ArrayList;
@@ -27,6 +28,9 @@ public class EnfermeroLogic {
 
     @Inject
     private EnfermeroPersistence persistencia;
+    
+    @Inject
+    private ServicioLogic servicioLogic;
     
     public EnfermeroEntity create(EnfermeroEntity entity) throws BusinessLogicException{
         if(entity!=null){
@@ -63,10 +67,10 @@ public class EnfermeroLogic {
     }
 
     public EnfermeroEntity update( EnfermeroEntity entity ) throws BusinessLogicException{
-        if (persistencia.findByLogin(entity.getLogin()) == null) {
-            throw new BusinessLogicException("No existe una entidad de Enfermero con el login \"" + entity.getLogin() + "\"");
+         if (persistencia.find(entity.getId()) == null) {
+            throw new BusinessLogicException("No existe una entidad de Enfermero con el id \"" + entity.getId() + "\"");
         }
-        return persistencia.update( entity );
+         return persistencia.update(entity);
     }
 
     public void delete( long id) {
@@ -86,5 +90,78 @@ public class EnfermeroLogic {
         return toEntity;
     }
     
+    /**
+     * Obtiene una colección de instancias de ServicioEntity asociadas a una
+     * instancia de Enfermero
+     * @param enfermeroId Identificador de la instancia de Enfermero
+     * @return Colección de instancias de ServicioEntity asociadas a la instancia de
+     * Enfermero
+     */
+    public List<ServicioEntity> listServicios(Long enfermeroId) {
+        return getById(enfermeroId).getServicios();
+    }
+    
+     /**
+     * Retorna un servicio asociado a un enfermero
+     * @param enfermeroId El id del enfermero a buscar.
+     * @param servicioId El id del servicio a buscar
+     * @return El servicio encontrado dentro del enfermero.
+     * @throws BusinessLogicException Si el servicio no se encuentra en el enfermero
+     */
+    public ServicioEntity getServicio(Long enfermeroId, Long servicioId) throws BusinessLogicException {
+        List<ServicioEntity> servicios = getById(enfermeroId).getServicios();
+        ServicioEntity servicio = servicioLogic.getById(servicioId);
+        int index = servicios.indexOf(servicio);
+        if (index >= 0) {
+            return servicios.get(index);
+        }
+        throw new BusinessLogicException("El servicio no está asociado al enfermero");
+
+    }
+    
+     /**
+     * Agregar un servicio al enfermero
+     * @paramservicioId El id del servicio a guardar
+     * @param enfermeroId El id del enfermero en la cual se va a guardar el
+     * servicio.
+     * @return El servicio que fue agregado al enfermero.
+     */
+    public ServicioEntity addServicio(Long enfermeroId, Long servicioId) {
+        EnfermeroEntity enfermeroEntity = getById(enfermeroId);
+        ServicioEntity servicioEntity = servicioLogic.getById(servicioId);
+        servicioEntity.setEnfermero(enfermeroEntity);
+        return servicioEntity;
+    }
+    
+     /**
+     * Remplazar servicios de un enfermero
+     * @param servicios Lista de servicios que serán los del enfermero.
+     * @param enfermeroId El id del enfermero que se quiere actualizar.
+     * @return La lista de servicios actualizada.
+     */
+    public List<ServicioEntity> replaceServicios(Long enfermeroId, List<ServicioEntity> servicios) {
+        EnfermeroEntity enfermero = getById(enfermeroId);
+        List<ServicioEntity> serviciosList = servicioLogic.getAll();
+        for (ServicioEntity servicio : serviciosList) {
+            if (servicios.contains(servicio)) {
+                servicio.setEnfermero(enfermero);
+            } else if (servicio.getEnfermero() != null && servicio.getEnfermero().equals(enfermero)) {
+                servicio.setEnfermero(null);
+            }
+        }
+        return servicios;
+    }
+    
+     /**
+     * Borrar un servicio de un enfermero
+     * @param servicioId El servicio que se desea borrar del enfermero.
+     * @param enfermeroId El enfermero del cual se desea eliminar.
+     */
+    public void removeServicio(Long servicioId, Long enfermeroId) {
+        EnfermeroEntity enfermeroEntity = getById(enfermeroId);
+        ServicioEntity servicio = servicioLogic.getById(servicioId);
+        servicio.setEnfermero(null);
+        enfermeroEntity.getServicios().remove(servicio);
+    }
     
 }

@@ -1,0 +1,46 @@
+<form ng-submit="postServicio()">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <label>Seleccione el tipo de servicio</label>
+                </div>
+                <div class="row">
+                    <input list="tipoServicio" name="servicio">
+                    <datalist id="tipoServicio" ng-repeat="servicio in serviciosRecords">
+                        <option value="Caminar">Caminar</option>  
+                        <option value="pasear">Pasear perritos</option>  
+                        <option value="examen">Examen</option>  
+                    </datalist>
+                 </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <label>Hora de inicio</label>
+                </div>
+                <div class="row">
+                    <input type="time" ng-model="hora">
+                </div>
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="col-sm-6"> 
+                <div class="row">
+                    <label>Fecha del servicio</label>
+                </div>
+                <div class="row">
+                    <input type="date" ng-model="fechaInicio">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <label>Consideraciones a tener en cuenta</label>
+                </div>
+                <div class="row">
+                    <input type="text" ng-model="desc" value="Ej: Llevar silla de ruedas, cargar bala de oxígeno, etc."> 
+                </div>
+            </div>
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>

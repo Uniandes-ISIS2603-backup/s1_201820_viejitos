@@ -6,47 +6,24 @@
        "contrasenia":"a89ess0909",
        "tipo":"Enfermero",
        "calificaciones":[],
-       "servicios":[],
-       "clientes":[   {   "id": 0,   "nombre": "John Doe", "login": "johndoe23","calificacion": { "puntaje": 4 }, "cita": {  "fecha": "15/02/2018",
-           "hora": "14:00" },
-      "historiaC": {
-           "id": 1114,
-           "enfermedades": "Ninguna.",
-           "medicamentos": "Ninguna",
-           "cirugias": "Reemplazo de cadera." },
-      "servicios": [
-                 
-                 
-                 
-                 
-                 ]
- },
-
- {
-     "id": 2, 
-      "nombre": "Alejandro Ayala",
-      "login": "alayala12",
-      "calificacion": {
-          "puntaje": 4.5
-                      },
-      "cita": {},
-      "historiaC": {
-           "id": 1115,
-           "enfermedades": "Artritis",
-           "medicamentos": "Ninguna",
-           "cirugias": "Ninguna." },
-      "servicios": [ {
-           "fecha": "15/02/2018",
-           "hora": "14:00",
-           "descripcion": "Caminata",
-           "finalizado": false },
- 
-                     {
-           "fecha": "16/02/2018",
-           "hora": "15:00",
-           "descripcion": "Acompañamiento a cita médica.",
-           "finalizado": false } ]
- }  ],
+       "servicios":[    
+     {"id":1,
+       "tipo": 1,
+       "fecha": "12/02/2018",
+       "hora": "8:30",
+       "descripción": "Acompañamiento a cita médica",
+       "finalizado": true,
+       "quejas": [{"reclamo": "El enfermero tenia una actitud muy grosera.",
+       "resuelto": true}],
+       "pagoInicial": {"medio": "Efectivo", "pagado": true, "fechaLimite": "12/04/18", "valor": 150000},
+       "pagoFinal": null,
+       "factura": {"costoTotal": 120100, "fechaExpedicion": "12/04/18", "descripcion": "Acompanar al banco", "nombreCliente": "Felipe Escobar", "ccCliente": 1234567, "servicioPrestado": "Acompanamiento", "nombreEmpresa": "Hospital"},
+       "cliente": {"id": 1, "nombre": "John Doe", "login": "johndoe23", "contrasena": "jd124", "estado": 1, "tipo": 1},
+       "calificacion": {"id":209873, "puntaje":4.5, "comentario":"El enfermero fue grosero conmigo, se rehuso a prestarme un servicio adecuado", "tipoCalificador":"cliente", "loginCalificador":"af.ramirez", "tipoCalificado":"enfermero", "loginCalificado":"ma.marulanda"},
+      "enfermero": {"id":2678389, "nombre":"Juan Espitia", "cv":"./documents/juanHDV.pdf", "login":"js.espitia", "contrasenia":"a89ess0909", "tipo":"Enfermero"}
+     }
+],
+       "clientes":[  ],
        "calendario":[{"grupito":[{"diaSemana": "lunes",  "horaInicio": "0800", "ocupado": "true","horaFin": "0900","id": 0 },{"diaSemana": "martes", "horaInicio": "0800","ocupado": "true","horaFin": "0900","id": 1}, {       "diaSemana": "miercoles","horaInicio": "0800","ocupado": "true","horaFin": "0900", "id": 2},{ "diaSemana": "jueves",  "horaInicio": "0800", "ocupado": "false", "horaFin": "0900", "id": 3  }, {"diaSemana": "viernes",  "horaInicio": "0800","ocupado": "false","horaFin": "0900", "id": 4 } ] }, { "grupito":[ {"diaSemana": "lunes","horaInicio": "0900",     "ocupado": "true",  "horaFin": "1000",  "id": 10  }, {   "diaSemana": "martes", "horaInicio": "0900","ocupado": "true","horaFin": "1000", "id": 11 }, {"diaSemana": "miercoles",  "horaInicio": "0900","ocupado": "false", "horaFin": "1000", "id": 12  }, { "diaSemana": "jueves", "horaInicio": "0900","ocupado": "false", "horaFin": "1000","id": 13   }, { "diaSemana": "viernes","horaInicio": "0900","ocupado": "false","horaFin": "1000", "id": 14 } ] }, { "grupito":[{  "diaSemana": "lunes","horaInicio": "1000","ocupado": "false","horaFin": "1100", "id": 20 },  { "diaSemana": "martes","horaInicio": "1000", "ocupado": "true", "horaFin": "1100","id": 21 }, { "diaSemana": "miercoles","horaInicio": "1000","ocupado": "true","horaFin": "1100",      "id": 22  },{"diaSemana": "jueves","horaInicio": "1000","ocupado": "true",       "horaFin": "1100", "id": 23},{ "diaSemana": "viernes","horaInicio": "1000","ocupado": "true","horaFin": "1100", "id": 24   }]}]
 
              },

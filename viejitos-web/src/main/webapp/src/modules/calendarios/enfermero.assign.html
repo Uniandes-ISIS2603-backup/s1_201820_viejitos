@@ -1,0 +1,34 @@
+<div class="container-fluid"> 
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><label  id="createFranjaHoraria">Crear nuevo franja</label>
+            
+            <div class="panel-body">
+                <form name="franja">
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="franjaDia" class="col-sm-2">dia Semana</label>
+                            <input id="franjaDia" required ng-model="data.diaSemana" class="col-sm-6"/>
+                        </div>
+                    </div>
+                           
+                    
+                    
+                 
+                    
+                    <div class="form-group row">
+                        <div class="form-group col-sm-4" ng-if="!franja.$valid">
+                        </div> 
+                    </div> 
+                    <div class="form-group row">
+                        <div class="form-group col-sm-12">
+                            <input ng-show="franja.$valid" ng-click="updateEnfermero()" value="Guardar" class="btn btn-success"/>
+                            <a class="btn btn-info" ui-sref="calendariosList">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    </div>

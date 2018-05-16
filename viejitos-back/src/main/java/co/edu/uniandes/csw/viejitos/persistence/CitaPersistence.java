@@ -49,14 +49,6 @@ public class CitaPersistence {
         return em.find(CitaEntity.class, id);
     }
 
-    public CitaEntity findByName(String name) {
-        LOGGER.log(Level.INFO, "Consultando cita con name= ", name);
-        TypedQuery<CitaEntity> q
-                = em.createQuery("select u from CitaEntity u where u.name = :name", CitaEntity.class);
-        q = q.setParameter("name", name);
-        return q.getSingleResult();
-    }
-
     public List<CitaEntity> findAll() {
         LOGGER.info("Consultando todos las Citas");
         Query q = em.createQuery("select u from CitaEntity u");

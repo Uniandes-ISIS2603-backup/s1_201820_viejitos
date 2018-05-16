@@ -260,7 +260,7 @@ public class CalendarioSemanalLogic {
     public void deleteCalendario(CalendarioSemanalEntity entity) throws BusinessLogicException {
         // TODO:DONE Hay que validar que existe CalendarioSemanalEntity con ese id
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de calendario con id={0}", entity.getId());
-        if(entity!=null &&getCalendario(entity.getId())!=null)
+        if(entity!=null && entity.getId()!=null &&getCalendario(entity.getId())!=null)
         {   
         persistencia.delete(entity.getId());
        }
@@ -280,20 +280,26 @@ public class CalendarioSemanalLogic {
      */
     public CalendarioSemanalEntity setCalendariotoEnfermero(Long idEnfermero,Long calendarioId) throws BusinessLogicException
     {
+        EnfermeroEntity entityEnf =null;
+        CalendarioSemanalEntity entityCal= new CalendarioSemanalEntity();
+        if(idEnfermero!=null && calendarioId!=null)
+            {
         LOGGER.log(Level.INFO, "Inicia proceso de obtener un enfermero con id  = {0}", idEnfermero);
-        EnfermeroEntity entityEnf = enfermeroLogic.getById(idEnfermero);
+        entityEnf = enfermeroLogic.getById(idEnfermero);
         LOGGER.log(Level.INFO, "termina proceso de obtener un enfermero");
-        
+                 
         LOGGER.log(Level.INFO, "Inicia proceso de obtener un calendario con id  = {0}", calendarioId);
-        CalendarioSemanalEntity entityCal =getCalendario(calendarioId);
+       entityCal =getCalendario(calendarioId);
         LOGGER.log(Level.INFO, "termina proceso de obtener un enfermero");
+        if(entityEnf!=null && entityCal!=null)
+        {
 
-        
       LOGGER.log(Level.INFO, "Inicia proceso de asignar a un  enfermero"+idEnfermero+ "con calendario con id  = {0}", calendarioId);
       entityEnf.setCalendario(entityCal);
       enfermeroLogic.update(entityEnf);
      LOGGER.log(Level.INFO, "finaliza proceso de asignar a un  enfermero "+idEnfermero+"con calendario con id  = {0}", calendarioId);
-
+         }    
+        }
      return entityCal;
     
     
@@ -312,13 +318,18 @@ public class CalendarioSemanalLogic {
     public CalendarioSemanalEntity getCalendarioByEnfermero(Long enfermeroId)
     {
         CalendarioSemanalEntity cal=null;
-    LOGGER.log(Level.INFO,"Inicia proceso de consultar enfermero con id={0}" , enfermeroId);
+        if(enfermeroId!=null)
+        {
+        LOGGER.log(Level.INFO,"Inicia proceso de consultar enfermero con id={0}" , enfermeroId);
        EnfermeroEntity enf= enfermeroLogic.getById(enfermeroId);
        LOGGER.log(Level.INFO,"Finaliza porceso de consulta de enfermero con id={0}" , enfermeroId);
         if(enf!=null)
        {
         cal=enf.getCalendario(); 
-      }
+      }          
+        }
+        
+    
       
      return cal;
     
@@ -333,13 +344,23 @@ public class CalendarioSemanalLogic {
     //TODO ES posible que sobre y se pueda poner con setCalendarioToeEnfefermero
     public EnfermeroEntity   removeCalendarioOfEnfermero(Long idEnfermero) throws BusinessLogicException
     {
+        
+        EnfermeroEntity    entityEnf=null;
          LOGGER.log(Level.INFO, "Inicia proceso de obtener un enfermero con id  = {0}", idEnfermero);
-        EnfermeroEntity entityEnf;
-        entityEnf = enfermeroLogic.getById(idEnfermero);
-        LOGGER.log(Level.INFO, "termina proceso de obtener un enfermero");
-        entityEnf.setCalendario(null);
-        enfermeroLogic.update(entityEnf);
-        LOGGER.log(Level.INFO, "finaliza proceso de asignar a un  enfermero {0}", idEnfermero);
+         if(idEnfermero!=null)
+             {
+         entityEnf = enfermeroLogic.getById(idEnfermero);
+               if(entityEnf!=null)
+               {
+             entityEnf.setCalendario(null);
+             LOGGER.log(Level.INFO, "termina proceso de obtener un enfermero");
+       enfermeroLogic.update(entityEnf);
+             LOGGER.log(Level.INFO, "finaliza proceso de asignar a un  enfermero "+idEnfermero);
+               }
+             
+             }
+       
+        
         return entityEnf;
         
     }

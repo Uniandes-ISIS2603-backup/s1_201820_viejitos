@@ -1,4 +1,4 @@
-(function(ng){
+(function (ng) {
     var mod = ng.module('enfermerosModule');
     mod.constant('enfermeroContext','api/enfermeros');
     mod.controller('enfermerosDetailCtrl', ['$scope', '$http', 'enfermeroContext','$state',

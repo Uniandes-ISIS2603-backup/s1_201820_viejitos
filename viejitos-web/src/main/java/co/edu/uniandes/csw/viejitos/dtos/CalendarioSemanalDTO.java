@@ -65,7 +65,7 @@ public class CalendarioSemanalDTO {
     /**
      * @param pId la nueva id del calendario semanal.
      */
-    public void setid(Long pId) {
+    public void setId(Long pId) {
         id = pId;
     }
 

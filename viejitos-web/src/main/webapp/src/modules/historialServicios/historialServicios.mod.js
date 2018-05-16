@@ -56,6 +56,7 @@
                     })
                     .state('historialServiciosCreate', {
                         url: '/create',
+                        
                         views: {
                             'mainView': {
                                 templateUrl: basePath + 'historialServicios.new.html',

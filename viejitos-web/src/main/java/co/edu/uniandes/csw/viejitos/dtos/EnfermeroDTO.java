@@ -16,7 +16,7 @@ import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
  *      "nombre":string,
  *      "cv":string,
  *      "login":string,
- *      "contrasenia":string,
+ *      "contrasena":string,
  *      "tipo":string,
  *  }
  * </pre>
@@ -28,8 +28,8 @@ import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
  *      "nombre":"Juan Espitia",
  *      "cv":"./documents/juanHDV.pdf",
  *      "login":"js.espitia",
- *      "contrasenia":"a89ess0909",
- *      "tipo":"Enfermero"
+ *      "contrasena":"a89ess0909",
+ *      "tipo":1
  *  }
  * </pre>
  *
@@ -72,10 +72,15 @@ public class EnfermeroDTO {
         this.login = login;
     }
 
+     public Long getId() {
+        return id;
+    }
+    
+    
     public void setId(Long id) {
         this.id = id;
     }
-
+    
     public String getNombre() {
         return nombre;
     }

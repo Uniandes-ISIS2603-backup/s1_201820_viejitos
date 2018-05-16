@@ -27,9 +27,25 @@ public class PagoPersistence {
     @PersistenceContext(unitName = "ViejitosPU")
     protected EntityManager em;
 
-    public PagoEntity find(Long id) {
-        LOGGER.log(Level.INFO, "Consultando pago con id={0}", id);
-        return em.find(PagoEntity.class, id);
+    public PagoEntity find(Long servicioid, Long pagoid) {
+        LOGGER.log(Level.INFO, "Consultando pago con id={0}", pagoid);
+        System.out.println(servicioid);
+        TypedQuery<PagoEntity> q = em.createQuery("select p from PagoEntity p where (p.servicio.id = :servicioid) and (p.id = :pagoid)", PagoEntity.class);
+        q.setParameter("servicioid", servicioid);
+        q.setParameter("pagoid", pagoid);
+        List<PagoEntity> results = q.getResultList();
+        PagoEntity pago = null;
+        if (results == null) {
+            System.out.println("pasa");
+            pago = null;
+        } else if (results.isEmpty()) {
+            System.out.println("pasa2");
+            pago = null;
+        } else if (results.size() >= 1) {
+            System.out.println("pasa3");
+            pago = results.get(0);
+        }
+        return pago;
     }
 
     public List<PagoEntity> findAll() {

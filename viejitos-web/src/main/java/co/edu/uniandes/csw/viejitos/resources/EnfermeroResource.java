@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.EnfermeroDTO;
 import co.edu.uniandes.csw.viejitos.dtos.EnfermeroDetailDTO;
+import co.edu.uniandes.csw.viejitos.dtos.ServicioDTO;
 import co.edu.uniandes.csw.viejitos.ejb.EnfermeroLogic;
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
@@ -74,14 +75,8 @@ public class EnfermeroResource {
      * su id correspondiente
      */
     @POST
-    public EnfermeroDTO createEnfermero(EnfermeroDTO enfermero)  {
-        
-        try {
-            logic.create(enfermero.toEntity());
-            return enfermero;
-        } catch (BusinessLogicException ex) {
-            throw new WebApplicationException(ex.getMessage(), 412);
-        }
+    public EnfermeroDTO createEnfermero(EnfermeroDTO enfermero) throws BusinessLogicException  {
+        return new EnfermeroDTO(logic.create(enfermero.toEntity()));
     }
 
     /**
