@@ -12,7 +12,7 @@ and open the template in the editor.
             <div class="thumbnail">          
                 <img class="img-responsive" ng-src='{{servicio.imagen}}' alt="{{servicio.name}}" style="width:100%"> <br>  
                 <div class="text-justify"> {{servicio.tipo}}</div> <br> 
-                <button  ng-if="isCliente()" ui-sref="serviciosSolicit({servicioTipo: servicio.tipo })"  type="button" class="btn btn-primary btn-block">Solicitar Servicio</button>
+                <button  ng-if="isCliente()" ui-sref="serviciosSolicit({servicioTipo: servicio.tipo, servicioDesc: servicio.descripcion})"  type="button" class="btn btn-primary btn-block">Solicitar Servicio</button>
             </div>
         </div>
     </div>
