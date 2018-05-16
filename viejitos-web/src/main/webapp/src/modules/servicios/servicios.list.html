@@ -10,10 +10,9 @@ and open the template in the editor.
         <div class="col-lg-3" ng-repeat="servicio in serviciosRecords">
             <div class="text-center h3" style="color:#3f6b7a ;font-family: 'Calibri'">{{servicio.name}}</div>
             <div class="thumbnail">          
-                <img class="img-responsive" ng-src='{{servicio.imagen}}' alt="{{servicio.name}}" style="width:100%;font-family: 'Calibri'"> <br>  
-                <div class="text-justify" style="font-family: 'Calibri'"> {{servicio.descripcion}}</div> <br> 
-                <button type="button" class="btn btn-block" style="font-family: 'Calibri';background-color:#6d97a5;
-  transform: translateY(4px); ">Solicitar Servicio</button>
+                <img class="img-responsive" ng-src='{{servicio.imagen}}' alt="{{servicio.name}}" style="width:100%"> <br>  
+                <div class="text-justify"> {{servicio.tipo}}</div> <br> 
+                <button  ng-if="isCliente()" ui-sref="serviciosSolicit({servicioTipo: servicio.tipo })"  type="button" class="btn btn-primary btn-block">Solicitar Servicio</button>
             </div>
         </div>
     </div>

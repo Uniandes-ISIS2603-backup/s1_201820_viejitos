@@ -8,6 +8,10 @@
         $stateProvider.state("calendarios",{
                 url: '/calendarios',
                 abstract: true,
+               data: {
+                    requireLogin: true,
+                    roles: ['admin']
+                },
                 views:{
                     'mainView': {
                             templateUrl: basePath + 'calendarios.html',
@@ -18,6 +22,10 @@
         }).state("calendariosList",{
                 url:'/list',
                 parent:'calendarios',
+                 data: {
+                    requireLogin: true,
+                    roles: ['admin']
+                },
                 views:{
                     'listView':{
                         templateUrl: basePath + 'calendarios.list.html',
@@ -29,6 +37,10 @@
         }).state('calendariosCreate', {
                 url: '/create',
                 parent: 'calendarios',
+                 data: {
+                    requireLogin: true,
+                    roles: ['admin']
+                },
                 views: {
                     'detailView': {
                         templateUrl: basePath + 'calendario.create.html',
@@ -48,6 +60,10 @@
                 }}).state('enfermeroAsign', {
                 url: '/asigntoenfermero',
                 parent: 'calendarios',
+                 data: {
+                    requireLogin: true,
+                    roles: ['admin']
+                },
                    params: {
                     calendarioId: null
                 },
