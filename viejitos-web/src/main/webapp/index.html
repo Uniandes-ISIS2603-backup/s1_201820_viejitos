@@ -67,75 +67,173 @@
         <!--calendarios-->
         <script src="src/modules/calendarios/calendarios.mod.js" type="text/javascript"></script>
         <script src="src/modules/calendarios/calendarios.ctrl.js" type="text/javascript"></script>
-        <<script src="src/modules/calendarios/calendario.create.ctrl.js" type="text/javascript"></script>
-      <script src="src/modules/calendarios/franja.create.ctrl.js" type="text/javascript"></script>
-    <script src="src/modules/calendarios/enfermero.assign.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/calendarios/calendario.create.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/calendarios/franja.create.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/calendarios/enfermero.assign.ctrl.js" type="text/javascript"></script>
 
-    <!--login-->
-      
-    <script src="src/modules/login/login.mod.js" type="text/javascript"></script>
-    <script src="src/modules/login/login.ctrl.js" type="text/javascript"></script>
-    <script src="src/modules/login/logout.ctrl.js" type="text/javascript"></script>
-    
-    
-    <head>
+        <!--login-->
+
+        <script src="src/modules/login/login.mod.js" type="text/javascript"></script>
+        <script src="src/modules/login/login.ctrl.js" type="text/javascript"></script>
+        <script src="src/modules/login/logout.ctrl.js" type="text/javascript"></script>
+
+        <link rel="stylesheet" href="./style.css">
         <script src="src/app.js" type="text/javascript"></script> 
         <script src="src/http-interceptor.factory.js" type="text/javascript"></script>
 
     </head>
 
-    <body style="padding-top: 20px;">
+    <body class="webpage">
         <div class="container-fluid col-md-12">
-            <div class="container-fluid col-md-12">
-                <div class="row page-header" style=" background:#e1efbb url('https://www.w3schools.com/css/mountain.jpg')">
-                    <div class="col-sm-1">
-                        <img style="width:100%" src="http://3.bp.blogspot.com/-RGitcbieSBw/T2_ErkO6ZeI/AAAAAAAADTE/7Fmj6TROOK4/s1600/geriatria.jpg" alt="Servicios geriátricos">
-                        <p>slogan ingenioso </p>
+            <div class="container-fluid col-md-12 header">
+                <div class="row"  style=" background: url('src/img/mountain.jpg')">
+                    <div class="logo">
+                        <img class="imagen img-responsive" src="src\img\logo.png" alt="Servicios geriátricos">
+                        <!--<div class="center">A tu lado</div>-->
                     </div>
-                    <div class="columntitle col-sm-6">
-                        <h3 style="font-size:350%">EL COMPAÑERO</h3>
+                    <div  class= "col-sm-8">
+                        <h1 class="columntitle">EL COMPAÑERO</h1>
                     </div>
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-4">
+                    
+                    <div class="col-sm-2">
                         <div class="row">
-                            
-                            
-                            
                              <div class="col-md-5">
-                    <ul ng-if="!isAuthenticated()" class="nav navbar-nav navbar-right">
-                        <li><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    </ul>
-                    <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
-                        <li class="nameUser">Hola, {{currentUser}}</li>
-                        <li><a ui-sref="logout">Logout</a></li>
-                    </ul>
-                    </div>
+                                <ul ng-if="!isAuthenticated()" class="nav navbar-nav navbar-right">
+                                    <li><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                                </ul>
+                                <ul ng-if="isAuthenticated()" class="nav navbar-nav pull-right">
+                                    <li class="nameUser">Hola, {{currentUser}}</li>
+                                    <li><a ui-sref="logout">Logout</a></li>
+                                </ul>
+                            </div>
              
                         </div>
                
                     </div>
                 </div>          
                 <div class="row">
-                    <div class="col-md-12">
-                        <ul class="nav nav-tabs">
+                    <div class="col-md-12 navegacion">
+                        <ul class="nav nav-tabs barranav">
                             <!-- Enlace al estado de listar las entidades de losViejitos -->
-                            <li><a ui-sref="viejitosList">Viejitos</a></li>
-                            <li><a ui-sref="serviciosList">Servicios</a></li>
-                            <li><a ui-sref="pagosList">Pagos</a></li>
-                            <li><a ui-sref="clientesList">Clientes</a></li>
-                            <li><a ui-sref="calificacionesList">Calificaciones</a></li>
-                            <li><a ui-sref="enfermerosList">Enfermeros</a></li>
-                            <li><a ui-sref="citasList">Citas</a></li>
-                            <li><a ui-sref="medicosList">Medicos</a></li>
-
-                            <li><a ui-sref="calendariosList">Calendarios</a></li>
-
-                            <li><a ui-sref="historialServiciosList">Historial Servicios</a></li>
-
+                            <li class="barranavitem"><a class="vinculo" href="./">Inicio</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="viejitosList">Viejitos</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="serviciosList">Servicios</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="pagosList">Pagos</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="clientesList">Clientes</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="calificacionesList">Calificaciones</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="enfermerosList">Enfermeros</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="citasList">Citas</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="medicosList">Medicos</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="calendariosList">Calendarios</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="historialServiciosList">Historial Servicios</a></li>
                         </ul>
                     </div>
                 </div>
-                <div ui-view="mainView"></div> 
+                <div ui-view="mainView">
+                    <section class="showcase">
+                        <div class="container-fluid p-0">
+                          <h1 class="text-center modal-title">Siempre a tu lado</h1>
+                          <div class="row no-gutters">
+                                <div class="col-lg-6  text-white showcase-img" style="background-image: url('src/img/happy2.png'); opacity: 0.90; height: 500px"></div>
+                                <div class="col-lg-6  my-auto showcase-text descripinic">
+                                  <h2>Te brindamos todo el apoyo que necesites en esta etapa de la vida</h2>
+                                  <p class="lead mb-0">Creemos que el tiempo vale oro, por eso queremos compartirlo contigo</p>
+                                  <p class="lead mb-0">Nuestros enfermeros están especializados en brindar servicios de geriatría, y tienen la disposición para ayudarte en lo que necesites. Nosotros entendemos tus necesidades y trabajamos con amor y paciencia por ti. </p>
+                                  <span class="blankfill"></span>
+                                </div>
+                          </div>
+                        </div>
+                    </section>
+                    <hr><h2>El proyecto</h2>   
+                    <!---->
+
+                      <div class="section_wrapper mcb-section-inner">
+                          <div class="wrap mcb-wrap one  valign-top clearfix functions">
+                              <div class="mcb-wrap-inner">
+                                  <div class="column mcb-column one-third column_icon_box benefits-img">
+                                      <div class = "col-lg-4">
+                                          <div class="icon_box icon_position_top no_border">
+                                                  <div class="image_wrapper">
+                                                      <img src="src/img/schedule.png" class="scale-with-grid imginfo" alt="Contratacion" ></div>
+                                                      <div class="desc_wrapper">
+                                                          <h4 class="text-center"><strong>Amplia oferta de servicios</strong></h4>
+                                                          <div class="desc">Con nosotros podrás contratar los servicios que gustes de la oferta. Sal a caminar, pide compañía, no tengas miedo de necesitar a alguien más, pues estamos dispuestos a apoyarte </div>
+
+                                                      </div>             
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="column mcb-column one-third column_icon_box benefits-img">
+                                      <div class = "col-lg-4">
+                                          <div class="icon_box icon_position_top no_border">
+                                                <div class="image_wrapper">
+                                                    <img src="src/img/healthcare.png" class="scale-with-grid imginfo" alt="Diagnóstico previo" >
+                                                </div>
+                                                <div class="desc_wrapper">
+                                                    <h4 class="text-center"><strong>Nos importa tu salud</strong></h4>
+                                                    <div class="desc">Si eres nuevo, te agendaremos una cita de medicina general para validar que eres apto para usar nuestros servicios</div>
+                                                </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="column mcb-column one-third column_icon_box benefits-img">
+                                      <div class = "col-lg-4">
+                                          <div class="icon_box icon_position_top no_border">
+                                                <div class="image_wrapper">
+                                                    <img src="src/img/quality.svg" class="scale-with-grid imginfo" alt="Califica">
+                                                </div>
+                                                <div class="desc_wrapper">
+                                                    <h4 class="text-center"><strong>Escuchamos tu opinión</strong></h4>
+                                                    <div class="desc">Tu retroalimentación es importante para que te podamos dar el mejor de los servicios. Puedes calificar a un enfermero que te haya prestado un servicio o poner una queja particular.</div>
+                                                </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!---->
+                      <hr>
+                      <!--Integrantes-->
+                      <div id = "integrantes">
+                          <h2>El equipo de desarrollo</h2>
+                          <div>
+                              <div class ="col-lg-2 odddev">
+                                  <img src="src/img/dev-female.png" alt="Líder y desarrolladora" width="200">
+                                  <h4 class='nombreI'>Laura Pardo Borrero</h4><br>
+                              </div>
+                              <div class ="col-lg-2 evdev">
+                                  <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
+                                  <h4 class='nombreI'>Juan José Silva Reyes</h4><br>
+                              </div>
+                              <div class ="col-lg-2 odddev">
+                                  <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
+                                  <h4 class='nombreI'>Juan Sebastián Espitia Acero</h4>
+                              </div>
+                              <div class ="col-lg-2 evdev">
+                                  <img src="src/img/dev-female.png" alt="Desarrolladora" width="200"> 
+                                  <h4 class='nombreI'>Camila Gómez Schrader</h4>
+                              </div>
+                              <div class ="col-lg-2 odddev">
+                                  <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
+                                  <h4 class='nombreI'>Leonel Francisco Naranjo Forero</h4>
+                              </div>
+                              <div class ="col-lg-2 evdev">
+                                  <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
+                                  <h4 class='nombreI'>Felipe Escobar Ávila</h4><br>
+                              </div>
+                          </div>
+                      </div>
+                      <div>
+                          <ul>
+                              <li id = "correo"></li>
+                              <li id = "carrera"></li>
+                              <li id = "codigo"></li>
+                          </ul>
+                      </div>
+  <!---->
+                </div> 
             </div>
     </body>
 </html>
