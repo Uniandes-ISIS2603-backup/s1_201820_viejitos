@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module("historialServiciosClienteModule");
    
-    mod.controller('serviciosClienteDeleteCtrl', ['$scope', '$http', 'authorsContext', '$state',
+    mod.controller('serviciosClienteCancelCtrl', ['$scope', '$http', '$state',
         /**
          * @ngdoc controller
          * @name authors.controller:authorDeleteCtrl
@@ -17,8 +17,9 @@
          * @param {Object} $state Dependencia injectada en la que se recibe el 
          * estado actual de la navegación definida en el módulo.
          */
-        function ($scope, $http, authorsContext, $state) {
-            var idAuthor = $state.params.authorId;
+        function ($scope, $http,  $state) {
+            var id = $state.params.id;
+            console.log($state.params);
             /**
              * @ngdoc function
              * @name deleteAuthor
@@ -29,8 +30,8 @@
              */
             
             $scope.cancelServicio = function () {
-                $http.delete('api/servicios/'+ '/' + idAuthor, {}).then(function (response) {
-                    $state.go('authorsList', {authorId: response.data.id}, {reload: true});
+                $http.delete('api/servicios/'+ id, {}).then(function (response) {
+                    $state.go('historialServiciosClienteList',  {reload: true});
                 });
             };
         }
