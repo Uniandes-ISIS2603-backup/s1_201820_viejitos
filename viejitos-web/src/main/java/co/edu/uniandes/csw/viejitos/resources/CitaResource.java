@@ -60,8 +60,9 @@ public class CitaResource {
      * Error de lógica que se genera cuando ya existe la entidad de Servicio.
      */
     @POST
-    public CitaDetailDTO createCita(CitaDetailDTO dto) throws BusinessLogicException {
-        return new CitaDetailDTO(logic.create(dto.toEntity()));
+    public CitaDTO createCita(CitaDTO dto) throws BusinessLogicException {
+        System.out.println("hola: " + dto.getFecha());
+        return new CitaDTO(logic.create(dto.toEntity()));
     }
 
     /**

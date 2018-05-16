@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.viejitos.test.logic;
 import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class ClienteLogicTest
 
     private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
     private List<CitaEntity> citasData = new ArrayList<CitaEntity>();
+    private List<ServicioEntity> serviciosData = new ArrayList();
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -88,6 +90,7 @@ public class ClienteLogicTest
     private void clearData() {
         em.createQuery("delete from CitaEntity").executeUpdate();
         em.createQuery("delete from ClienteEntity").executeUpdate();
+        em.createQuery("delete from ServicioEntity").executeUpdate();
     }
     
     /**
@@ -100,6 +103,13 @@ public class ClienteLogicTest
             em.persist(cita);
             citasData.add(cita);
         }
+        
+        for (int i = 0; i < 3; i++) {
+            ServicioEntity servicios = factory.manufacturePojo(ServicioEntity.class);
+            em.persist(servicios);
+            serviciosData.add(servicios);
+        }
+        
         for (int i = 0; i < 3; i++)
         {
             ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
@@ -107,6 +117,7 @@ public class ClienteLogicTest
             data.add(entity);
             if (i == 0) {
                 citasData.get(i).setCliente(entity);
+                serviciosData.get(i).setCliente(entity);
             }
         }
     }
@@ -248,6 +259,58 @@ public class ClienteLogicTest
         try {
             clienteLogic.removeCita(data.get(0).getId(), citasData.get(2).getId());
             CitaEntity response = clienteLogic.getCita(data.get(0).getId(), citasData.get(2).getId());
+        } catch (BusinessLogicException e) {
+        }
+
+    }
+    
+    /**
+     * Prueba para obtener una colección de instancias de Servicios asociados a una
+     * instancia Cliente
+     */
+    @Test
+    public void lisServiciosTest() {
+        List<ServicioEntity> list = clienteLogic.listServicios(data.get(0).getId());
+        Assert.assertEquals(1, list.size());
+    }
+    
+     /**
+     * Prueba para asociar un Servicio existente a un Cliente
+     */
+    @Test
+    public void addServicioTest() {
+        ClienteEntity entity = data.get(0);
+        ServicioEntity servicioEntity = serviciosData.get(1);
+        ServicioEntity response = clienteLogic.addServicio(entity.getId(), servicioEntity.getId());
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(servicioEntity.getId(), response.getId());
+    }
+    
+    /**
+     * Prueba para remplazar las instancias de Servicios asociadas a una instancia
+     * de Cliente
+     */
+    @Test
+    public void replaceServiciosTest() {
+        ClienteEntity entity = data.get(0);
+        List<ServicioEntity> list = serviciosData.subList(1, 3);
+        clienteLogic.replaceServicios(entity.getId(), list);
+
+        entity = clienteLogic.getById(entity.getId());
+        Assert.assertFalse(entity.getServicios().contains(serviciosData.get(0)));
+        Assert.assertTrue(entity.getServicios().contains(serviciosData.get(1)));
+        Assert.assertTrue(entity.getServicios().contains(serviciosData.get(2)));
+    }
+    
+    /**
+     * Prueba para desasociar un Servicio existente de un Cliente existente 
+     */
+    @Test
+    public void removeServiciosTest() throws BusinessLogicException {
+        try {
+            clienteLogic.removeServicio(data.get(0).getId(), serviciosData.get(0).getId());
+            ServicioEntity response = clienteLogic.getServicio(data.get(0).getId(), serviciosData.get(0).getId());
         } catch (BusinessLogicException e) {
         }
 

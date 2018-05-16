@@ -43,34 +43,11 @@ public class CitaLogic {
         Calendar today = Calendar.getInstance();
         today.set(Calendar.DAY_OF_MONTH, Calendar.WEEK_OF_YEAR, Calendar.YEAR);
         Date d = today.getTime();
-        if(entity.getFecha()==null)
-        {
-             throw new BusinessLogicException("La cita debe tener una fecha");
-        }
-        if (entity.getFecha().before(d)) {
-            throw new BusinessLogicException("La fecha de la cita es antes de la fecha de hoy");
-        }
-        if(entity.getMedico()==null)
-        {
-            throw new BusinessLogicException("La cita debe tener un medico");
-        }
-        if (medicoPersistence.find(entity.getMedico().getId()) == null) {
-            throw new BusinessLogicException("El medico con el id " + entity.getId()+"no esta registrado");
-        }
-        if(entity.getCliente()==null)
-        {
-            throw new BusinessLogicException("La cita debe tener un cliente");
-        }
-        if (clientePersistence.find(entity.getCliente().getId()) == null) {
-            throw new BusinessLogicException("El cliente con el id " + entity.getId()+ "no esta registrado");
-        }
-        if (clientePersistence.find(entity.getCliente().getId()).getCita() != null) {
-            throw new BusinessLogicException("El cliente con el id " + entity.getId() + "ya tiene una cita de valoracion asignada");
-        }
-        ClienteEntity ent=clientePersistence.find(entity.getCliente().getId());
-        entity.setCliente(ent);
-        MedicoEntity entMed=medicoPersistence.find(entity.getMedico().getId());
-        entity.setMedico(entMed);
+        //if(entity.getFecha()==null)
+        //{
+        //     throw new BusinessLogicException("La cita debe tener una fecha");
+        //}
+        
         persistence.create(entity);
         return entity;
     }
