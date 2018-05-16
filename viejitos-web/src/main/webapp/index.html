@@ -127,8 +127,10 @@
                             <li class="barranavitem"><a class="vinculo" ui-sref="enfermerosList">Enfermeros</a></li>
                             <li class="barranavitem"><a class="vinculo" ui-sref="citasList">Citas</a></li>
                             <li class="barranavitem"><a class="vinculo" ui-sref="medicosList">Medicos</a></li>
-                            <li class="barranavitem"><a class="vinculo" ui-sref="calendariosList">Calendarios</a></li>
-                            <li class="barranavitem"><a class="vinculo" ui-sref="historialServiciosList">Historial Servicios</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="calendariosList" ng-if="isAdmin()">Calendarios</a></li>
+                            <li class="barranavitem"><a class="vinculo" ui-sref="historialServiciosList" ng-if="isCliente()">Historial Servicios</a></li>
+                      
+
                         </ul>
                     </div>
                 </div>

@@ -59,8 +59,8 @@
                     sessionStorage.setItem("name", $scope.user.name);
                     sessionStorage.setItem("rol", $scope.user.rol);
                     sessionStorage.setItem("id",$scope.user.id) 
-                $rootScope.currentId = $scope.user.name; 
-                    $rootScope.currentUser = $scope.user.id; 
+                $rootScope.currentId = $scope.user.id; 
+                    $rootScope.currentUser = $scope.user.name; 
             
                
                     }
