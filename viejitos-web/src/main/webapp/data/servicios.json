@@ -3,32 +3,37 @@
         "id": 1,
         "name": "Acompañamiento a cita médica",
         "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a una cita médica. Nuestro enfermero llegará a su lugar de residencia, se desplazarán a las instalaciones de su médico, lo esperará y lo acompañará devuelta a su residencia.",
-        "imagen": "src/img/citamedica.jpg"
+        "imagen": "src/img/citamedica.jpg",
+        "tipo":1
     }
     ,
     {
         "id": 2,
         "name": "Acompañamiento a exámenes médicos",
         "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a realizarse un examen médico. Nuestro enfermero llegará a su lugar de residencia, se desplazarán al laboratorio donde debe realizarse el examen, lo esperará y lo acompañará devuelta a su residencia.",
-        "imagen": "src/img/examenmedico.jpg"
+        "imagen": "src/img/examenmedico.jpg",
+        "tipo":2
     },
     {
         "id": 3,
         "name": "Acompañamiento a caminata",
         "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a realizar una caminata. Nuestro enfermero llegará a su lugar de residencia, realizarán la caminata en el espacio que usted desee, y lo acompañará devuelta a su residencia.",
-        "imagen": "src/img/caminata.jpg"
+        "imagen": "src/img/caminata.jpg",
+        "tipo":3
     },
     {
         "id": 4,
         "name": "Acompañamiento a un programa de ejercicio",
         "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a algún programa de ejercicio. Nuestro enfermero llegara a su lugar de residencia, se desplazarán a las instalaciones de su actividad, lo esperará y lo acompañará devuelta a su residencia.",
-        "imagen": "src/img/ejercicio.jpg"
+        "imagen": "src/img/ejercicio.jpg",
+         "tipo":4
     },
     
     {
         "id": 5,
         "name": "Acompañamiento a una actividad lúdica",
         
-        "imagen": "src/img/ludica.jpg"
+        "imagen": "src/img/ludica.jpg",
+         "tipo":5
     }
 ]
