@@ -23,9 +23,7 @@
    
      app.run(['$rootScope',"$state", function ($rootScope,$state) {
              
-             
-             console.log($state.current.data);
-             
+          
            
                  
                
@@ -59,6 +57,26 @@
                         return false;
                     }
                 };
+                
+                $rootScope.isAdmin=function(){
+                    if(($rootScope.isAuthenticated) && (sessionStorage.getItem("rol")=='admin')){
+                        return true;
+                    }
+                    else{
+                        return false;
+                                     }
+                };
+
+
+                $rootScope.isCliente=function(){
+                    if(($rootScope.isAuthenticated) && (sessionStorage.getItem("rol")=='cliente')){
+                        return true;
+                    }
+                    else{
+                        return false;
+                                     }
+                };
+
 
 
                 if (requireLogin && (sessionStorage.getItem("username") === null)) {
