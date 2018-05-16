@@ -5,7 +5,9 @@
  */
 package co.edu.uniandes.csw.viejitos.persistence;
 
+import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
 import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,6 +79,21 @@ public class MedicoPersistence {
         LOGGER.log(Level.INFO, "Borrando Medico con id={0}", id);
         MedicoEntity entity = em.find(MedicoEntity.class, id);
         em.remove(entity);
+    }
+    public MedicoEntity findFirstAvailable(FranjaHorariaEntity f)
+    {
+         LOGGER.info("Consultando todos los Medicos disponibles");
+         TypedQuery<MedicoEntity> q
+                = em.createQuery("select u from MedicoEntity u,FranjaHorariaEntity x where u.calendario = x.calendario and x.diaSemana=:diasemana and x.ocupado='false'", MedicoEntity.class);
+        q = q.setParameter("diasemana", f.getDiaSemana());
+        try
+        {
+            return q.getResultList().get(0);
+        }
+        catch(Exception e )
+        {
+            return  null;
+        }
     }
     
 }
