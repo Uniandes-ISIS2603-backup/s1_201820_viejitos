@@ -25,7 +25,7 @@
             $scope.data = {};
             
             $http.get('data/users.json').then(function (response) {
-              
+         
                 $scope.users = response.data;
                 
             });
@@ -58,9 +58,11 @@
                     sessionStorage.setItem("username", $scope.user.user);
                     sessionStorage.setItem("name", $scope.user.name);
                     sessionStorage.setItem("rol", $scope.user.rol);
-                    $rootScope.currentUser = $scope.user.name; 
-                  console.log($rootScope.currentUser);
-                  console.log(sessionStorage);
+                    sessionStorage.setItem("id",$scope.user.id) 
+                $rootScope.currentId = $scope.user.name; 
+                    $rootScope.currentUser = $scope.user.id; 
+            
+               
                     }
                 });
             };
