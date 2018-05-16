@@ -89,8 +89,8 @@ public class ClienteLogicTest
      */
     private void clearData() {
         em.createQuery("delete from CitaEntity").executeUpdate();
-        em.createQuery("delete from ClienteEntity").executeUpdate();
         em.createQuery("delete from ServicioEntity").executeUpdate();
+        em.createQuery("delete from ClienteEntity").executeUpdate();
     }
     
     /**
