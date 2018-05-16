@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.viejitos.test.logic;
 
 import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
+import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
 import java.util.ArrayList;
@@ -45,6 +47,8 @@ public class ClienteLogicTest
     private UserTransaction utx;
 
     private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
+    
+    private List<ServicioEntity> serviciosData = new ArrayList();
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -82,6 +86,7 @@ public class ClienteLogicTest
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
+        em.createQuery("delete from ServicioEntity").executeUpdate();
         em.createQuery("delete from ClienteEntity").executeUpdate();
     }
     
@@ -90,11 +95,20 @@ public class ClienteLogicTest
      * pruebas.
      */
     private void insertData() {
+        for (int i = 0; i < 3; i++) {
+            ServicioEntity servicios = factory.manufacturePojo(ServicioEntity.class);
+            em.persist(servicios);
+            serviciosData.add(servicios);
+        }
+        
         for (int i = 0; i < 3; i++)
         {
             ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
             em.persist(entity);
             data.add(entity);
+            if (i == 0) {
+                serviciosData.get(i).setCliente(entity);
+            }
         }
     }
     
@@ -180,5 +194,57 @@ public class ClienteLogicTest
         Assert.assertEquals(pojoEntity.getEstado(), resp.getEstado());
         Assert.assertEquals(pojoEntity.getLogin(), resp.getLogin());
         Assert.assertEquals(pojoEntity.getTipo(), resp.getTipo());
+    }
+    
+     /**
+     * Prueba para obtener una colección de instancias de Servicios asociados a una
+     * instancia Cliente
+     */
+    @Test
+    public void lisServiciosTest() {
+        List<ServicioEntity> list = clienteLogic.listServicios(data.get(0).getId());
+        Assert.assertEquals(1, list.size());
+    }
+    
+     /**
+     * Prueba para asociar un Servicio existente a un Cliente
+     */
+    @Test
+    public void addServicioTest() {
+        ClienteEntity entity = data.get(0);
+        ServicioEntity servicioEntity = serviciosData.get(1);
+        ServicioEntity response = clienteLogic.addServicio(entity.getId(), servicioEntity.getId());
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(servicioEntity.getId(), response.getId());
+    }
+    
+    /**
+     * Prueba para remplazar las instancias de Servicios asociadas a una instancia
+     * de Cliente
+     */
+    @Test
+    public void replaceServiciosTest() {
+        ClienteEntity entity = data.get(0);
+        List<ServicioEntity> list = serviciosData.subList(1, 3);
+        clienteLogic.replaceServicios(entity.getId(), list);
+
+        entity = clienteLogic.getById(entity.getId());
+        Assert.assertFalse(entity.getServicios().contains(serviciosData.get(0)));
+        Assert.assertTrue(entity.getServicios().contains(serviciosData.get(1)));
+        Assert.assertTrue(entity.getServicios().contains(serviciosData.get(2)));
+    }
+    
+    /**
+     * Prueba para desasociar un Servicio existente de un Cliente existente 
+     */
+    @Test
+    public void removeServiciosTest() throws BusinessLogicException {
+        try {
+            clienteLogic.removeServicio(data.get(0).getId(), serviciosData.get(0).getId());
+            ServicioEntity response = clienteLogic.getServicio(data.get(0).getId(), serviciosData.get(0).getId());
+        } catch (BusinessLogicException e) {
+        }
+
     }
 }
