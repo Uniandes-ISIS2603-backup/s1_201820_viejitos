@@ -6,11 +6,14 @@
 package co.edu.uniandes.csw.viejitos.test.logic;
 
 import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
+import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -45,6 +48,7 @@ public class ClienteLogicTest
     private UserTransaction utx;
 
     private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
+    private List<CitaEntity> citasData = new ArrayList<CitaEntity>();
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -82,6 +86,7 @@ public class ClienteLogicTest
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
+        em.createQuery("delete from CitaEntity").executeUpdate();
         em.createQuery("delete from ClienteEntity").executeUpdate();
     }
     
@@ -90,11 +95,19 @@ public class ClienteLogicTest
      * pruebas.
      */
     private void insertData() {
+        for (int i = 0; i < 3; i++) {
+            CitaEntity cita = factory.manufacturePojo(CitaEntity.class);
+            em.persist(cita);
+            citasData.add(cita);
+        }
         for (int i = 0; i < 3; i++)
         {
             ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
             em.persist(entity);
             data.add(entity);
+            if (i == 0) {
+                citasData.get(i).setCliente(entity);
+            }
         }
     }
     
@@ -180,5 +193,63 @@ public class ClienteLogicTest
         Assert.assertEquals(pojoEntity.getEstado(), resp.getEstado());
         Assert.assertEquals(pojoEntity.getLogin(), resp.getLogin());
         Assert.assertEquals(pojoEntity.getTipo(), resp.getTipo());
+    }
+    
+    
+      /**
+     * Prueba para obtener una colección de instancias de Citas asociados a una
+     * instancia Enfermero
+     */
+    @Test
+    public void listCitasTest() {
+        CitaEntity list = clienteLogic.listCitas(data.get(0).getId());
+        Assert.assertEquals(citasData.get(0), list);
+    }
+    
+       /**
+     * Prueba para asociar una cita existente a un Cliente
+     */
+    @Test
+    public void addCitaTest() {
+        ClienteEntity entity = data.get(0);
+        CitaEntity citaEntity = citasData.get(1);
+        CitaEntity response = clienteLogic.addCita(entity.getId(), citaEntity.getId());
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(citaEntity.getId(), response.getId());
+    }
+    
+     /**
+     * Prueba para remplazar las instancias de citas asociadas a una instancia
+     * de Cliente
+     */
+    @Test
+    public void replaceCitaTest() {
+        ClienteEntity entity = data.get(0);
+        CitaEntity list = citasData.get(2);
+        try {
+            clienteLogic.replaceCita(entity.getId(), list);
+        } catch (BusinessLogicException ex) {
+            Logger.getLogger(ClienteLogicTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        entity = clienteLogic.getById(entity.getId());
+        Assert.assertFalse(entity.getCita() == citasData.get(0));
+        Assert.assertFalse(entity.getCita() == citasData.get(1));
+        Assert.assertTrue(entity.getCita() == citasData.get(2));
+    }
+    
+    /**
+     * Prueba para desasociar una cita existente de un cliente existente 
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
+     */
+    @Test
+    public void removeCitaTest() throws BusinessLogicException {
+        try {
+            clienteLogic.removeCita(data.get(0).getId(), citasData.get(2).getId());
+            CitaEntity response = clienteLogic.getCita(data.get(0).getId(), citasData.get(2).getId());
+        } catch (BusinessLogicException e) {
+        }
+
     }
 }
