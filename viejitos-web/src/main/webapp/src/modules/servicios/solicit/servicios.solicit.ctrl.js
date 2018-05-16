@@ -2,7 +2,7 @@
     var mod = ng.module("serviciosModule");
     mod.constant("serviciosContext", "api/servicios");
     mod.constant("enfermerosContext","api/enfermeros/1");
-    mod.constant("clientesContext","api/clientes")
+    mod.constant("clientesContext","api/clientes");
     mod.controller('solicitCtrl', ['$scope', '$http', 'serviciosContext', '$state', '$rootScope',
       
         function ($scope, $http, serviciosContext, $state, $rootScope) {
@@ -11,41 +11,52 @@
 
           
   
-       ///                 $scope.data.finalizado=false;
+                 
        
    
-    // $http.get(enfermerosContext).then(function (response) {
-      //          $scope.enfermero = response.data;
-        //    });
+  //$http.get(enfermerosContext).then(function (response) {
+    //         $scope.enfermero = response.data;
+
+            
+   $scope.idcliente=sessionStorage.getItem("id");
+                console.log(sessionStorage.getItem("id"));
+           
+            
+                        if (($scope.idcliente !== undefined) && ($scope.idcliente !== null)) {
+                $http.get("api/clientes/"  + $scope.idcliente).then(function (response) {
+                    $scope.cliente = response.data;
+                });
+                        }
             
             
+            
+            //$scope.data.enfermero=$scope.enfermero;
+     //console.log($rootScope.currentUser);
+    // console.log($rootScope.currentId);
+     //console.log($scope.cliente);
+     //console.log($scope.data);
+ 
+
+            //console.log($state.params.servicioTipo);
+             //  console.log($state.params.servicioDesc);  
+  
+            $scope.data = {};
+               $scope.data.finalizado="false";
+               $scope.data.descripcion=$state.params.servicioDesc;
+               if($state.params.servicioTipo!==null)
+                    $scope.data.tipo=($state.params.servicioTipo).toString();
+                       
              
-     $http.get(clientesContext+$rootScope.currentId).then(function (response) {
-                $scope.cliente = response.data;
-          });
-            
-            
-            
-            ///$scope.data.enfermero=$scope.enfermero;
-     console.log($rootScope.currentUser);
-     console.log($rootScope.currentId);
-     console.log($scope.cliente);
-    
-  
-         
-
-
-            
-            
             $scope.solicitServicio = function () {
-                                      
-
                 $http.post("api/servicios", $scope.data).then(function (response) {
-                    
-  
-                    $state.go('seviciosList',  {reload: true});
+                    $scope.serv = response.data.id;
+                    console.log($scope.serv);
+                    $http.post("api/clientes/" + sessionStorage.getItem("id")+"/servicios/"+$scope.serv,).then(function(response){
+                        $state.go('serviciosList', {reload: true});
+                    });
                 });
             };
+            
         }
     ]);
 }
