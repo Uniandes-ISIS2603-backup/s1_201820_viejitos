@@ -1,5 +1,5 @@
 .vinculo{
-    color:black;
+    color:white;
     text-align: center;
 }
 .login{
@@ -36,7 +36,7 @@
     background-color: #e7e7e7
 }
 .navegacion{
-    background-color: #c1e2b3;
+    background-color: #6d97a5;
     border-style: groove
 }
 .columntitle{
@@ -135,11 +135,21 @@
     transform: translate(-50%, -50%);
     font-size: 10px;
     text-align: center;
-    font-family: "verdana";
+    font-family: "Calibri";
     color:#122b40;
     text-decoration: blink
 }
 .texto{
     
-    font-family: "verdana";
+    font-family: "Calibri";
+}
+.nameUser{
+     font-family: "Calibri";
+     font-size: 150%;
+     font-weight: bold;
+}
+.logout{
+    font-weight: bold;
+    font-size: 150%;
+    color: white;
 }
