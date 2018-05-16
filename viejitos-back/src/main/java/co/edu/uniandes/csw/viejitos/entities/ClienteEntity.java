@@ -63,9 +63,9 @@ public class ClienteEntity extends BaseEntity implements Serializable
     @PodamExclude
     private List<EnfermeroEntity> enfermeros;
     
-    @OneToOne(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
     @PodamExclude
-    private HistoriaClinicaEntity historiaC;
+    private List<HistoriaClinicaEntity> historiaC;
 
     /**
      * @return the estado
@@ -238,14 +238,16 @@ public class ClienteEntity extends BaseEntity implements Serializable
     /**
      * @return the historiaC
      */
-    public HistoriaClinicaEntity getHistoriaC() {
+    public List<HistoriaClinicaEntity> getHistoriaC() {
         return historiaC;
     }
 
     /**
      * @param historiaC the historiaC to set
      */
-    public void setHistoriaC(HistoriaClinicaEntity historiaC) {
+    public void setHistoriaC(List<HistoriaClinicaEntity> historiaC) {
         this.historiaC = historiaC;
     }
+
+    
 }

@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.HistoriaClinicaDTO;
 import co.edu.uniandes.csw.viejitos.dtos.HistoriaClinicaDetailDTO;
+import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.viejitos.ejb.HistoriaClinicaLogic;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
@@ -23,141 +24,187 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
- * <pre>Clase que implementa el recurso "historia clinica".
- * URL: /api/historiasc
+ * <pre>Clase que implementa el recurso "clientes/historiasc".
+ * URL: /api/clientes/{clienteId}/historiasc
+ * </pre>
+ * <i>Note que la aplicación (definida en {@link RestConfig}) define la ruta "/api" y
+ * que el servicio {@link MedicoResource} define este servicio de forma relativa 
+ * con la ruta "citas" con respecto un libro.</i>
+ *
+ * <h2>Anotaciones </h2>
+ * <pre>
+ * Produces/Consumes: indica que los servicios definidos en este recurso reciben y devuelven objetos en formato JSON
+ * RequestScoped: Inicia una transacción desde el llamado de cada método (servicio). 
  * </pre>
  * @author jj.silva
+ * @version 1.0
  */
-//TODO: Revisar el path para llegar a este recurso
-@Path( "historiasc" )
-@Produces( "application/json" )
-@Consumes( "application/json" )
+@Path("clientes/{clienteId: \\d+}/historiasc")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @RequestScoped
-public class HistoriaClinicaResource
-{ 
+public class HistoriaClinicaResource 
+{
     @Inject
-    HistoriaClinicaLogic hcLogic;
-    /**
-	 * <h1>POST /api/historiasc : Crear una entidad de HistoriaClinica.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link HistoriaClinicaDetailDTO}.
-         * * Codigos de respuesta:
-         * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Crea la HistoriaClinica.</code> 
-	 *</pre>
-	 * Crea una nueva entidad de HistoriaClinica con la informacion que se recibe en el cuerpo
-	 * de la petición.
-	 * @param dto {@link HistoriaClinicaDetailDTO} - La entidad de HistoriaClinica que se desea guardar.
-	 * @return JSON {@link HistoriaClinicaDetailDTO}  - La entidad de HistoriaClinica guardada.
-	 */
-	@POST
-	public HistoriaClinicaDTO createHistoriaC( HistoriaClinicaDTO dto ) throws BusinessLogicException 
-	{
-		return new HistoriaClinicaDTO(hcLogic.create(dto.toEntity()));
-	}
-        
-        /**
-	 * <h1>GET /api/historiasc : Obtener todas las entidades de HistoriaClinica.</h1>
-	 * <pre>Busca y devuelve todas las entidades de HistoriaClinica que existen en la aplicacion.
-         * Codigos de respuesta:
-         * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Devuelve las historias clinicas..</code>
-         * </pre>
-	 * @return JSONArray {@link HistoriaClinicaDetailDTO} - Las entidades de HistoriaClinica encontradas en la aplicación. Si no hay ninguna retorna una lista vacía.
-	 */
-	@GET
-	public List<HistoriaClinicaDetailDTO> getHistoriasC( )
-	{
-		return listHistoriaClinicaEntity2DetailDTO(hcLogic.getAll());
-	}
-        
-        /**
-	 * <h1>GET /api/historiasc/{id} : Obtener una entidad de HistoriaClinica por id.</h1>
-	 * <pre>Busca la entidad de HistoriaClinica con el id asociado recibido en la URL y la devuelve.
-         * Codigos de respuesta:
-         * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Devuelve la hisotria clinica.</code> 
-         * <code style="color: #c7254e; background-color: #f9f2f4;">
-         * 404 Not Found. No existe una Historia Clinica con el id dado.
-         * </code>
-         * </pre>
-	 * @param id Identificador de la entidad de HistoriaClinica que se esta buscando. Este debe ser una cadena de dígitos.
-	 * @return JSON {@link HistoriaClinicaDetailDTO} - La entidad de HistoriaClinica buscada
-	 */
-	@GET
-	@Path( "{id: \\d+}" )
-	public HistoriaClinicaDetailDTO getHistoriaC( @PathParam( "id" ) Long id )
-	{
-            HistoriaClinicaEntity entity = hcLogic.getById(id);
-            if (entity == null)
-            {
-                throw new WebApplicationException("El recurso /historiasc/" + id + " no existe.", 404);
-            }
-            return new HistoriaClinicaDetailDTO(entity);
-	}
-        
-        /**
-	 * <h1>PUT /api/historiasc/{id} : Actualizar una entidad de HistoriaClinica con el id dado.</h1>
-	 * <pre>Cuerpo de petición: JSON {@link HistoriaClinicaDetailDTO}.
-         * Codigos de respuesta:
-         * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Actualiza la Historia Clinica con el id dado con la información enviada como parámetro. Retorna un objeto identico.</code> 
-         * <code style="color: #c7254e; background-color: #f9f2f4;">
-         * 404 Not Found. No existe una Historia Clinica con el id dado.
-         * </code> 
-	 *</pre>
-	 * Actualiza la entidad de HistoriaClinica con el id recibido en la URL con la informacion que se recibe en el cuerpo de la petición.
-	 * @param id        Identificador de la entidad de HistoriaClinica que se desea actualizar. Este debe ser una cadena de dígitos.
-	 * @param detailDTO {@link HistoriaClinicaDetailDTO} La entidad de HistoriaClinica que se desea guardar.
-	 * @return JSON {@link HistoriaClinicaDetailDTO} - La entidad de HistoriaClinica guardada.
-	 */
-	@PUT
-	@Path( "{id: \\d+}" )
-	public HistoriaClinicaDetailDTO updateHistoriaC( @PathParam( "id" ) Long id, HistoriaClinicaDetailDTO detailDTO ) 
-        {
-            detailDTO.setId(id);
-            HistoriaClinicaEntity entity = hcLogic.getById(id);
-            if (entity == null)
-            {
-                throw new WebApplicationException("El recurso /historiasc/" + id + " no existe.", 404);
-            }
-            return new HistoriaClinicaDetailDTO(hcLogic.update(detailDTO.toEntity()));
-	}
-        
-        /**
-	 * <h1>DELETE /api/historiasc/{id} : Borrar una entidad de HistoriaClinica por id.</h1>
-	 * <p>
-	 * <pre>Borra la entidad de HistoriaClinica con el id asociado recibido en la URL.
-         * Códigos de respuesta:<br>
-         * <code style="color: mediumseagreen; background-color: #eaffe0;">
-         * 200 OK Elimina la Historia Clinica correspondiente al id dado.</code>
-         * <code style="color: #c7254e; background-color: #f9f2f4;">
-         * 404 Not Found. No existe una Historia Clinica con el id dado.</code>
-	 * </pre>
-	 *
-	 * @param id Identificador de la entidad de HistoriaClinica que se desea borrar. Este debe ser una cadena de dígitos.
-	 */
-	@DELETE
-	@Path( "{id: \\d+}" )
-	public void deleteHistoriaC( @PathParam( "id" ) Long id ) throws BusinessLogicException
-	{
-            HistoriaClinicaEntity entity = hcLogic.getById(id);
-            if (entity == null)
-            {
-                throw new WebApplicationException("El recurso /historiasc/" + id + " no existe.", 404);
-            }
-            hcLogic.delete(entity);
-	}
-        
-        private List<HistoriaClinicaDetailDTO> listHistoriaClinicaEntity2DetailDTO(List<HistoriaClinicaEntity> entityList)
-        {
-            List<HistoriaClinicaDetailDTO> list = new ArrayList<>();
-            for (HistoriaClinicaEntity entity : entityList)
-            {
-                list.add(new HistoriaClinicaDetailDTO(entity));
-            }
-            return list;
-        }
-}
+    private ClienteLogic clienteLogic;
+    
+    @Inject
+    private HistoriaClinicaLogic hcLogic;
 
+    /**
+     * Convierte una HistoriaClinicaEntity a una HistoriaClinicaDetailDTO.
+     *
+     * @param entity HistoriaClinicaEntity a convertir.
+     * @return HistoriaClinicaDetailDTO convertida.
+     * 
+     */
+    private HistoriaClinicaDTO historiaClinicaEntity2DTO(HistoriaClinicaEntity entity)
+        {
+            return new HistoriaClinicaDTO(entity);
+        }
+
+    /**
+     * Convierte una lista de HistoriaClinicaDetailDTO a una lista de HistoriaClinicaEntity.
+     *
+     * @param dtos Lista de HistoriaClinicaDetailDTO a convertir.
+     * @return Lista de HistoriaClinicaEntity convertida.
+     * 
+     */
+    private HistoriaClinicaEntity historiasCDTO2Entity(HistoriaClinicaDTO dtos) {
+        return dtos.toEntity();
+    }
+
+    /**
+     * <h1>GET /api/clientes/{clienteId}/historiasC : Obtener la historia clinica de un cliente.</h1>
+     *
+     * <pre>Busca y devuelve la historia clinica que tiene el cliente.
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Devuelve la historia clinica del cliente.</code> 
+     * </pre>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe un cliente con el id dado.
+     * </code>
+     * @param clienteId El ID del cliente del cual se busca la historia clinica
+     * @return JSONArray {@link HistoriaClinicaDetailDTO} - La historia clinica encontrada del cliente.
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException Cuando el cliente no tiene una HistoriaClinica asociada.
+     */
+    @GET
+    public HistoriaClinicaDetailDTO getHistoriaC(@PathParam("clienteId") Long clienteId) throws BusinessLogicException
+    {
+        if(clienteLogic.getById(clienteId) == null)
+        {
+             throw new WebApplicationException("No existe un cliente con ese id", 404);
+        }
+        else
+        {
+            HistoriaClinicaEntity entity = hcLogic.get(clienteId);
+            return new HistoriaClinicaDetailDTO(entity);
+        }
+    }
+
+    /**
+     * <h1>POST /api/clientes/{clienteId}/historiasc/{historiacId}} : Asociar una historia clinica a un cliente.</h1>
+     *
+     * <pre> Asocia una historia clinica existente con un cliente existente
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Asoció la historia clinica .
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found: No existe el cliente o la historia clinica
+     * </code>
+     * </pre>
+     * @param clienteId El ID del cliente al cual se le va a asociar la historia clinica
+     * @param dto El dto de la HistoriaClinica que se va a agregar
+     * @return JSON {@link HistoriaClinicaDetailDTO} - La historia clinica asociada.
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException Cuando el cliente al cual se le quiere agregar la HistoriaClinica no existe
+     */
+    @POST
+    public HistoriaClinicaDetailDTO addHistoriaC(@PathParam("clienteId") Long clienteId, HistoriaClinicaDetailDTO dto) throws BusinessLogicException
+    {
+        if(clienteLogic.getById(clienteId) == null)
+        {
+             throw new WebApplicationException("No existe un cliente con ese id", 404);
+        }
+        else
+        {
+            return new HistoriaClinicaDetailDTO(hcLogic.create(clienteId, dto.toEntity()));
+        } 
+    }
+
+    /**
+     * <h1>PUT /api/clientes/{clienteId}/historiasc/ : Actualizar la historia clinica de un cliente.</h1>
+     *
+     * <pre>Cuerpo de petición: JSONArray {@link HistoriaClinicaDetailDTO}.
+     * 
+     * Actualiza la historia clinica de un cliente con la historia clinica que se recibe en el
+     * cuerpo
+     * 
+     * Codigos de respuesta:
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Se actualizó la historia clinica
+     * </code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 412 Precodition Failed: No se pudo actualizar la historia clinica
+     * </code>
+     * </pre>
+     * @param clienteId El ID del cliente al cual se le va a asociar la nueva historia clinica
+     * @param historiac JSONArray {@link HistoriaClinicaDetailDTO} - La historia clinica que se desea guardar.
+     * @return JSONArray {@link HistoriaClinicaDetailDTO}  - La historia clinica actualizada.
+     */
+    @PUT
+    public HistoriaClinicaDetailDTO replaceHistoriaC(@PathParam("clienteId") Long clienteId, HistoriaClinicaDetailDTO historiac) 
+    {
+        if(clienteLogic.getById(clienteId) == null)
+        {
+             throw new WebApplicationException("No existe un cliente con ese id", 404);
+        }
+        else
+        {
+           try
+           {
+               historiac.setId(hcLogic.get(clienteId).getId());
+               return new HistoriaClinicaDetailDTO(hcLogic.update(clienteId, historiac.toEntity()));
+           }
+           catch(BusinessLogicException e)
+           {
+               throw new WebApplicationException(e.getMessage(), 404);
+           }
+        }
+    }
+    
+    /**
+     * <h1>DELETE /api/clientes/{clienteId}/historiasc/ : Borrar la HistoriaClinica de un Cliente.</h1>
+     * <pre>Borra la HistoriaClinica de un CLiente cuyo id se recibe en la URL.
+     * Códigos de respuesta:<br>
+     * <code style="color: mediumseagreen; background-color: #eaffe0;">
+     * 200 OK Elimina la HistoriaClinica correspondiente al cliente con el id dado.</code>
+     * <code style="color: #c7254e; background-color: #f9f2f4;">
+     * 404 Not Found. No existe un cliente con el id dado, o dicho cliente no tiene una HistoriaClinica asociada.
+     * </code>
+     * </pre>
+     * @param clienteId El ID del Cliente del cual se va a eliminar la HistoriaClinica.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no se puede eliminar la HistoriaClinica.
+     */
+    @DELETE
+    public void deleteHistoriaC(@PathParam("clienteId") Long clienteId) throws BusinessLogicException {
+        if(clienteLogic.getById(clienteId) == null)
+        {
+             throw new WebApplicationException("No existe un cliente con ese id", 404);
+        } 
+        try
+        {
+            hcLogic.delete(clienteId);
+        }
+        catch(BusinessLogicException e)
+        {
+            throw new WebApplicationException(e.getMessage(), 404);
+        }
+    }
+}

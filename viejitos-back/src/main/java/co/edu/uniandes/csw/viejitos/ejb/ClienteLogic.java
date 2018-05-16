@@ -5,9 +5,11 @@
  */
 package co.edu.uniandes.csw.viejitos.ejb;
 
+import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,6 +28,12 @@ public class ClienteLogic {
 
     @Inject
     private ClientePersistence persistence;
+    
+    @Inject
+    private CalificacionPersistence cPersistence;
+    
+    @Inject
+    private CalificacionLogic cLogic;
 
     public ClienteEntity create(ClienteEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de una entidad de Cliente");
@@ -71,51 +79,38 @@ public class ClienteLogic {
         }
     }
     
-     /**
-     * Obtiene una instancia de HistoriaClinicaEntity asociada a una
-     * instancia de Cliente
-     *
-     * @param clienteId Identificador de la instancia de Cliente
-     * @return Instancia de HistoriaClinicaEntity asociada a la instancia
-     * de Cliente
-     */
-    public HistoriaClinicaEntity getHistoriaC(Long clienteId)
-    {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la historia clinica del cliente con id = {0}", clienteId);
-        return getById(clienteId).getHistoriaC();
+    public List<CalificacionEntity> getCalificaciones(Long clienteId) throws BusinessLogicException {
+        LOGGER.info("Inicia proceso de consultar todas las entidades de Calificacion");
+        ClienteEntity cliente = getById(clienteId);
+        if (cliente.getCalificaciones() == null || cliente.getCalificaciones().isEmpty()) {
+            throw new BusinessLogicException("El cliente que consulta aún no tiene calificaciones");
+        }
+        LOGGER.info("Termina proceso de consultar todas las entidades de Queja");
+        return cliente.getCalificaciones();
     }
     
-    /**
-     * Asocia una HistoriaClinica existente a un Cliente
-     *
-     * @param clienteId Identificador de la instancia de Cliente
-     * @param historiacId Identificador de la instancia de HistoriaClinica
-     * @return Instancia de HistoriaClinicaEntity que fue asociada a Cliente
-     * 
-     */
-    public HistoriaClinicaEntity addHistoriaC(Long clienteId, Long historiacId)
-    {
-        LOGGER.log(Level.INFO, "Inicia proceso de asociar una historia clinica al cliente con id = {0}", clienteId);
-        ClienteEntity clienteEntity = getById(clienteId);
-        HistoriaClinicaEntity historiacEntity = new HistoriaClinicaEntity();
-        historiacEntity.setId(historiacId);
-        clienteEntity.setHistoriaC(historiacEntity);
-        return getHistoriaC(clienteId);
+    public CalificacionEntity getCalificacionById(Long clienteId, Long calificacionId) throws BusinessLogicException {
+        List<CalificacionEntity> calificaciones = getCalificaciones(clienteId);
+        CalificacionEntity calificacion = cLogic.getById(calificacionId);
+        int index = calificaciones.indexOf(calificacion);
+        if (index >= 0) {
+            return calificaciones.get(index);
+        }
+        throw new BusinessLogicException("La calificacion no está asociada al cliente");
     }
     
-    /**
-     * Remplaza la instancia de HistoriaClinica asociada a una instancia de Cliente
-     * @param clienteId Identificador de la instancia de Cliente
-     * @param historiac Instancia de HistoriaClinicaEntity a asociar a instancia
-     * de Cliente
-     * @return HistoriaClinicaEntity asociada a la instancia de Cliente
-     * 
-     */
-    public HistoriaClinicaEntity replaceHistoriaC(Long clienteId, HistoriaClinicaEntity historiac)
-    {
-        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar la historia clinica del cliente con id = {0}", clienteId);
-        ClienteEntity clienteEntity = getById(clienteId);
-        clienteEntity.setHistoriaC(historiac);
-        return clienteEntity.getHistoriaC();
+    public CalificacionEntity addCalificacion(Long clienteId, CalificacionEntity entity) throws BusinessLogicException {
+        LOGGER.info("Inicia proceso de creación de una entidad de Calificacion");  
+        ClienteEntity cliente = getById(clienteId);
+        cliente.getCalificaciones().add(entity);
+        LOGGER.info("Termina proceso de creación de entidad de Calificacion");
+        return cPersistence.create(entity);
+    } 
+    
+    public void removeCalificacion(Long clienteId, Long id) {
+        ClienteEntity cliente = getById(clienteId);
+        CalificacionEntity calificacion = cLogic.getById(id);
+        cliente.getCalificaciones().remove(calificacion);
+        cPersistence.delete(calificacion);
     }
 }

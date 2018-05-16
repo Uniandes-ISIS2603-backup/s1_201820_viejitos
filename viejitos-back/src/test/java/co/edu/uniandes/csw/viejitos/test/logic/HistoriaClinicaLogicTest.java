@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.test.logic;
 
 import co.edu.uniandes.csw.viejitos.ejb.HistoriaClinicaLogic;
+import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.HistoriaClinicaPersistence;
@@ -46,6 +47,7 @@ public class HistoriaClinicaLogicTest
     private UserTransaction utx;
 
     private List<HistoriaClinicaEntity> data = new ArrayList<HistoriaClinicaEntity>();
+    private List<ClienteEntity> dataClientes = new ArrayList<ClienteEntity>();
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -82,6 +84,7 @@ public class HistoriaClinicaLogicTest
      */
     private void clearData() {
         em.createQuery("delete from HistoriaClinicaEntity").executeUpdate();
+        em.createQuery("delete from ClienteEntity").executeUpdate();
     }
     
     /**
@@ -89,9 +92,16 @@ public class HistoriaClinicaLogicTest
      * pruebas.
      */
     private void insertData() {
+        for (int i = 0; i < 4; i++) {
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
+            em.persist(entity);
+            dataClientes.add(entity);
+        }
+          
         for (int i = 0; i < 3; i++)
         {
             HistoriaClinicaEntity entity = factory.manufacturePojo(HistoriaClinicaEntity.class);
+            entity.setCliente(dataClientes.get(i+1));
             em.persist(entity);
             data.add(entity);
         }
@@ -103,7 +113,7 @@ public class HistoriaClinicaLogicTest
     @Test
     public void createHistoriaClinicaTest() throws BusinessLogicException{
         HistoriaClinicaEntity newEntity = factory.manufacturePojo(HistoriaClinicaEntity.class);
-        HistoriaClinicaEntity result = historiaCLogic.create(newEntity);
+        HistoriaClinicaEntity result = historiaCLogic.create(dataClientes.get(0).getId(), newEntity);
         Assert.assertNotNull(result);
         HistoriaClinicaEntity entity = em.find(HistoriaClinicaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
@@ -111,32 +121,14 @@ public class HistoriaClinicaLogicTest
         Assert.assertEquals(newEntity.getEnfermedades(), entity.getEnfermedades());
         Assert.assertEquals(newEntity.getMedicamentos(), entity.getMedicamentos());
         }
-    
-     /**
-     * Prueba para consultar la lista de HistoriasClinicas
-     */
-    @Test
-    public void getHistoriasClinicasTest() {
-        List<HistoriaClinicaEntity> list = historiaCLogic.getAll();
-        Assert.assertEquals(data.size(), list.size());
-        for (HistoriaClinicaEntity entity : list) {
-            boolean found = false;
-            for (HistoriaClinicaEntity storedEntity : data) {
-                if (entity.getId().equals(storedEntity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
-    
+   
     /**
      * Prueba para consultar una HistoriaClinica
      */
     @Test
-    public void getHistoriaClinicaTest() {
+    public void getHistoriaClinicaTest() throws BusinessLogicException {
         HistoriaClinicaEntity entity = data.get(0);
-        HistoriaClinicaEntity resultEntity = historiaCLogic.getById(entity.getId());
+        HistoriaClinicaEntity resultEntity = historiaCLogic.get(dataClientes.get(1).getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getCirugias(), resultEntity.getCirugias());
@@ -149,8 +141,9 @@ public class HistoriaClinicaLogicTest
      */
     @Test
     public void deleteHistoriaClinicaTest() throws BusinessLogicException {
+        ClienteEntity cliente = dataClientes.get(1);
         HistoriaClinicaEntity entity = data.get(0);
-        historiaCLogic.delete(entity);
+        historiaCLogic.delete(cliente.getId());
         HistoriaClinicaEntity deleted = em.find(HistoriaClinicaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
@@ -160,12 +153,13 @@ public class HistoriaClinicaLogicTest
      */
     @Test
     public void updateHistoriaClinicaTest() throws BusinessLogicException {
+        ClienteEntity cliente = dataClientes.get(1);
         HistoriaClinicaEntity entity = data.get(0);
         HistoriaClinicaEntity pojoEntity = factory.manufacturePojo(HistoriaClinicaEntity.class);
 
         pojoEntity.setId(entity.getId());
 
-        historiaCLogic.update(pojoEntity);
+        historiaCLogic.update(cliente.getId(), pojoEntity);
 
         HistoriaClinicaEntity resp = em.find(HistoriaClinicaEntity.class, entity.getId());
 

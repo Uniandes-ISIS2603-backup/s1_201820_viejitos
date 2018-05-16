@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.viejitos.ejb;
 
+import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
@@ -26,47 +27,57 @@ public class HistoriaClinicaLogic {
 
     @Inject
     private HistoriaClinicaPersistence persistence;
+    
+    @Inject
+    private ClienteLogic clienteLogic;
 
     //TODO: DONE
 
-    public HistoriaClinicaEntity create(HistoriaClinicaEntity entity) throws BusinessLogicException {
+    public HistoriaClinicaEntity create(Long clienteId, HistoriaClinicaEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de una entidad de HistoriaClinica");
-        // Invoca la persistencia para crear la entidad de HistoriaClinica
-
-//TODO: DONE. No hay ninguna regla de negocio   
-        persistence.create(entity);
-        LOGGER.info("Termina proceso de creación de entidad de HistoriaClinica");
-        return entity;
+        // Invoca la persistencia para crear la entidad de HistoriaClinica  
+        ClienteEntity cliente = clienteLogic.getById(clienteId);
+        if(!cliente.getHistoriaC().isEmpty())
+        {
+            throw new BusinessLogicException("El cliente ya tiene asociada una HistoriaClinica");
+        }
+        entity.setCliente(cliente);
+        LOGGER.info("Termina proceso de creación de entidad de Historia Clinica");
+        return persistence.create(entity);
     }
 
-    public List<HistoriaClinicaEntity> getAll() {
-        LOGGER.info("Inicia proceso de consultar todas las entidades de HistoriaClinica");
-        List<HistoriaClinicaEntity> entities = persistence.findAll();
-        LOGGER.info("Termina proceso de consultar todas las entidades de HistoriaClinica");
-        return entities;
+    public HistoriaClinicaEntity get(Long clienteId) throws BusinessLogicException {
+        LOGGER.info("Inicia proceso de consultar la entidad de HistoriaClinica asociada al Cliente con clienteId");
+        ClienteEntity cliente = clienteLogic.getById(clienteId);
+        if (cliente.getHistoriaC() == null || cliente.getHistoriaC().isEmpty())
+        {
+            throw new BusinessLogicException("El cliente no tiene asociada una HistoriaClinica");
+        }
+        LOGGER.info("Termina proceso de consultar la HistoriaClinica del cliente");
+        return cliente.getHistoriaC().get(0);
     }
 
-    public HistoriaClinicaEntity getById(Long id) {
-        return persistence.find(id);
-    }
-
-    public HistoriaClinicaEntity update(HistoriaClinicaEntity entity) {
-//TODO: DONE. No hay ninguna regla de negocio 
+    public HistoriaClinicaEntity update(Long clienteId, HistoriaClinicaEntity entity) throws BusinessLogicException {
+    //TODO: DONE. No hay ninguna regla de negocio 
+        LOGGER.info("Inicia proceso de actualizar HistoriaClinica");
+        ClienteEntity cliente = clienteLogic.getById(clienteId);
+        entity.setCliente(cliente);
+        if (cliente.getHistoriaC() == null || cliente.getHistoriaC().isEmpty()) {
+            throw new BusinessLogicException("El cliente no tiene una HistoriaClinica que actualizar");
+        }
         return persistence.update(entity);
     }
 
-    public void delete(HistoriaClinicaEntity entity) throws BusinessLogicException
+    public void delete(Long clienteId) throws BusinessLogicException
     {
         //TODO: DONE
-        if(persistence.find(entity.getId()) == null)
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de HistoriaClinica del Cliente con id={0}", clienteId);
+        HistoriaClinicaEntity entity = get(clienteId);
+        if(entity == null)
         {
-            throw new BusinessLogicException("No existe una entidad de HistoriaClinica con el id \"" + entity.getId() + "\"");
+           throw new BusinessLogicException("No existe una entidad de HistoriaClinica asociada al Cliente con el id \"" + clienteId + "\""); 
         }
-        else
-        {
-            LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de HistoriaClinica con id={0}", entity.getId());
-            persistence.delete(entity.getId());
-            LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de HistoriaClinica con id={0}", entity.getId());
-        }
+        persistence.delete(entity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de HistoriaClinica del Cliente con id={0}", clienteId);
     }
 }
