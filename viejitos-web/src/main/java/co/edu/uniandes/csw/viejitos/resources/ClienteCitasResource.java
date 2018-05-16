@@ -144,7 +144,7 @@ public class ClienteCitasResource {
      * @return JSON {@link CitaDetailDTO} - El arreglo de citas guardado en el cliente.
      */
     @PUT
-    public CitaDetailDTO replaceCita(@PathParam("clienteId") Long clienteId, CitaDetailDTO cita) {
+    public CitaDetailDTO replaceCita(@PathParam("clienteId") Long clienteId, CitaDetailDTO cita) throws BusinessLogicException {
         return new CitaDetailDTO(clienteLogic.replaceCita(clienteId, cita.toEntity()));
     }
     

@@ -91,79 +91,79 @@ public class ClienteServiciosResource {
     private ExecutorService executorService = java.util.concurrent.Executors.newCachedThreadPool();
     
      /**
-     * <h1>GET /api/enfermeros/{enfermerosId}/servicios/{servicioId} : Obtener servicio por id del enfermero por id.</h1>
-     * <pre>Busca el servicio con el id asociado dentro del enfermero con id asociado.
+     * <h1>GET /api/clientes/{clienteId}/servicios/{servicioId} : Obtener servicio por id del cliente por id.</h1>
+     * <pre>Busca el servicio con el id asociado dentro del cliente con id asociado.
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Devuelve el servicio correspondiente al id.
      * </code> 
      * <code style="color: #c7254e; background-color: #f9f2f4;">
-     * 404 Not Found No existe un servicio con el id dado dentro del enfermero.
+     * 404 Not Found No existe un servicio con el id dado dentro del cliente.
      * </code> 
      * </pre>
-     * @param enfermeroId Identificador del enfermero que se esta buscando. Este debe ser una cadena de dígitos.
+     * @param clienteId Identificador del cliente que se esta buscando. Este debe ser una cadena de dígitos.
      * @param servicioId Identificador del servicio que se esta buscando. Este debe ser una cadena de dígitos.
      * @return JSON {@link ServicioDetailDTO} - El servicio buscado
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no se encuentra el enfermero o el servicio.
+     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} - Error de lógica que se genera cuando no se encuentra el cliente o el servicio.
      */
     @GET
     @Path("{servicioId: \\d+}")
-    public ServicioDetailDTO getServicio(@PathParam("enfermeroId") Long enfermeroId, @PathParam("servicioId") Long servicioId) throws BusinessLogicException {
-        return new ServicioDetailDTO(enfermeroLogic.getServicio(enfermeroId, servicioId));
+    public ServicioDetailDTO getServicio(@PathParam("clienteId") Long clienteId, @PathParam("servicioId") Long servicioId) throws BusinessLogicException {
+        return new ServicioDetailDTO(clienteLogic.getServicio(clienteId, servicioId));
     }
     
      /**
-     * <h1>POST /api/enfermeros/{enfermerosId}/servicios/{serviciosId} : Guarda un servicio dentro del enfermero.</h1>
-     * <pre> Guarda un servicio dentro de un enfermero con la informacion que 
-     * recibe el la URL. Se devuelve el servicio que se guarda en el enfermero.
+     * <h1>POST /api/clientes/{clienteId}/servicios/{serviciosId} : Guarda un servicio dentro del cliente.</h1>
+     * <pre> Guarda un servicio dentro de un cliente con la informacion que 
+     * recibe el la URL. Se devuelve el servicio que se guarda en el cliente.
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Guardó el nuevo servicio .
      * </code>
      * </pre>
-     * @param enfermeroId Identificador del enfermero que se esta buscando. Este debe ser una cadena de dígitos.
+     * @param clienteId Identificador del cliente que se esta buscando. Este debe ser una cadena de dígitos.
      * @param servicioId Identificador del servicio que se desea guardar. Este debe ser una cadena de dígitos.
-     * @return JSON {@link ServicioDetailDTO} - El servicio guardado en el enfermero.
+     * @return JSON {@link ServicioDetailDTO} - El servicio guardado en el cliente.
      */
     @POST
     @Path("{servicioId: \\d+}")
-    public ServicioDetailDTO addServicio(@PathParam("enfermeroId") Long enfermeroId, @PathParam("servicioId") Long servicioId) {
-        return new ServicioDetailDTO(enfermeroLogic.addServicio(enfermeroId,servicioId));
+    public ServicioDetailDTO addServicio(@PathParam("clienteId") Long clienteId, @PathParam("servicioId") Long servicioId) {
+        return new ServicioDetailDTO(clienteLogic.addServicio(clienteId,servicioId));
     }
     
      /**
-     * <h1>PUT /api/enfermeros/{enfermeroId}/servicios/{servicioId} : Edita los servicios de un enfermero..</h1>
-     * <pre> Remplaza las instancias de Servicio asociadas a una instancia de Enfermero
+     * <h1>PUT /api/clientes/{clienteId}/servicios/{servicioId} : Edita los servicios de un cliente.</h1>
+     * <pre> Remplaza las instancias de Servicio asociadas a una instancia de Cliente
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
-     * 200 OK Guardó los servicios del enfermero.
+     * 200 OK Guardó los servicios del cliente.
      * </code>
      * </pre>
-     * @param enfermeroId Identificador del enfermero que se esta buscando. Este debe ser una cadena de dígitos.
-     * @param servicios JSONArray {@link ServicioDetailDTO} El arreglo de servicios nuevo para el enfermero.
-     * @return JSON {@link ServicioDetailDTO} - El arreglo de servicios guardado en el enfermero.
+     * @param clienteId Identificador del cliente que se esta buscando. Este debe ser una cadena de dígitos.
+     * @param servicios JSONArray {@link ServicioDetailDTO} El arreglo de servicios nuevo para el cliente.
+     * @return JSON {@link ServicioDetailDTO} - El arreglo de servicios guardado en el cliente.
      */
     @PUT
-    public List<ServicioDetailDTO> replaceServicios(@PathParam("enfermeroId") Long enfermeroId, List<ServicioDetailDTO> servicios) {
-        return serviciosListEntity2DTO(enfermeroLogic.replaceServicios(enfermeroId, serviciosListDTO2Entity(servicios)));
+    public List<ServicioDetailDTO> replaceServicios(@PathParam("clienteId") Long clienteId, List<ServicioDetailDTO> servicios) {
+        return serviciosListEntity2DTO(clienteLogic.replaceServicios(clienteId, serviciosListDTO2Entity(servicios)));
     }
     
      /**
-     * <h1>DELETE /api/enfermeros/{enfermeroId}/servicios/{servicioId} : Elimina un servicio dentro del enfermero.</h1>
-     * <pre> Elimina la referencia del servicio asociado al ID dentro del enfermero
+     * <h1>DELETE /api/clientes/{clienteId}/servicios/{servicioId} : Elimina un servicio dentro del cliente.</h1>
+     * <pre> Elimina la referencia del servicio asociado al ID dentro del cliente
      * con la informacion que recibe el la URL. 
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
      * 200 OK Se eliminó la referencia del servicio.
      * </code>
      * </pre>
-     * @param enfermeroId Identificador del enfermero que se esta buscando. Este debe ser una cadena de dígitos.
+     * @param clienteId Identificador del cliente que se esta buscando. Este debe ser una cadena de dígitos.
      * @param servicioId Identificador del servicio que se desea quitar. Este debe ser una cadena de dígitos.
      */
     @DELETE
     @Path("{servicioId: \\d+}")
-    public void removeServicio(@PathParam("enfermeroId") Long enfermeroId, @PathParam("servicioId") Long servicioId) {
-        enfermeroLogic.removeServicio(servicioId,enfermeroId);
+    public void removeServicio(@PathParam("clienteId") Long clienteId, @PathParam("servicioId") Long servicioId) {
+       clienteLogic.removeServicio(servicioId,clienteId);
     }
     
 }

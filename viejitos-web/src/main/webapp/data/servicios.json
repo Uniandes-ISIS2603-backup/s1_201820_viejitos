@@ -3,32 +3,32 @@
         "id": 1,
         "name": "Acompañamiento a cita médica",
         "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a una cita médica. Nuestro enfermero llegará a su lugar de residencia, se desplazarán a las instalaciones de su médico, lo esperará y lo acompañará devuelta a su residencia.",
-        "imagen": "http://yayoservicios.com/cms-assets/images/569623.cita-medica-adultomayor.jpg?rand=0.7777750594779718"
+        "imagen": "src/img/citamedica.jpg"
     }
     ,
     {
         "id": 2,
         "name": "Acompañamiento a exámenes médicos",
         "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a realizarse un examen médico. Nuestro enfermero llegará a su lugar de residencia, se desplazarán al laboratorio donde debe realizarse el examen, lo esperará y lo acompañará devuelta a su residencia.",
-        "imagen": "https://i.pinimg.com/originals/93/7f/e1/937fe10ff381452b171168c65915c088.jpg"
+        "imagen": "src/img/examenmedico.jpg"
     },
     {
         "id": 3,
         "name": "Acompañamiento a caminata",
         "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a realizar una caminata. Nuestro enfermero llegará a su lugar de residencia, realizarán la caminata en el espacio que usted desee, y lo acompañará devuelta a su residencia.",
-        "imagen": "http://chile.hwcglat.com/wp-content/uploads/2018/01/iStock-652195062.jpg"
+        "imagen": "src/img/caminata.jpg"
     },
     {
         "id": 4,
         "name": "Acompañamiento a un programa de ejercicio",
         "descripcion": "Usted podrá solicitar que uno de nuestros excelentes enfermeros lo acompañe a algún programa de ejercicio. Nuestro enfermero llegara a su lugar de residencia, se desplazarán a las instalaciones de su actividad, lo esperará y lo acompañará devuelta a su residencia.",
-        "imagen": "http://xn--hogaraoranzas-nkb.com/images/terapias%20hogar%20a%C3%B1oranza.jpg?crc=3835853506"
+        "imagen": "src/img/ejercicio.jpg"
     },
     
     {
         "id": 5,
         "name": "Acompañamiento a una actividad lúdica",
         
-        "imagen": "https://www.larepublica.net/images/2018/04/12/201804120934120.adultosFOTO.jpg"
+        "imagen": "src/img/ludica.jpg"
     }
 ]
