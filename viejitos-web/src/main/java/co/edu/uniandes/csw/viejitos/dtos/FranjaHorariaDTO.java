@@ -50,7 +50,7 @@ public class FranjaHorariaDTO {
      * Constructor por defecto
      */
     public FranjaHorariaDTO() {
-
+        //Constructor
     }
 
     public FranjaHorariaDTO(FranjaHorariaEntity entity) {

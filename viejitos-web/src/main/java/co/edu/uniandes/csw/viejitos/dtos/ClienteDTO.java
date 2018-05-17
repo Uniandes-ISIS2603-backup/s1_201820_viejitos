@@ -23,14 +23,9 @@ import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
  * <
  * pre>
  *
- *   {
- *      "id": 12345,
- *      "nombre": "John Doe",
- *      "login": "johndoe23",
- *      "contrasena": "jd124",
- *      "estado": 1,
- *      "tipo": 1
- *   }
+ * {
+ * "id": 12345, "nombre": "John Doe", "login": "johndoe23", "contrasena":
+ * "jd124", "estado": 1, "tipo": 1 }
  *
  * </pre>
  *
@@ -51,7 +46,7 @@ public class ClienteDTO {
     private String contrasena;
 
     public ClienteDTO() {
-
+        //Constructor
     }
 
     /**
@@ -61,14 +56,13 @@ public class ClienteDTO {
      * @param ClienteEntity: Es la entidad que se va a convertir a DTO
      */
     public ClienteDTO(ClienteEntity clienteEntity) {
-        if(clienteEntity!=null)
-        {
-        this.id = clienteEntity.getId();
-        this.nombre = clienteEntity.getNombre();
-        this.estado = clienteEntity.getEstado();
-        this.tipo = clienteEntity.getTipo();
-        this.login = clienteEntity.getLogin();
-        this.contrasena = clienteEntity.getContrasena();
+        if (clienteEntity != null) {
+            this.id = clienteEntity.getId();
+            this.nombre = clienteEntity.getNombre();
+            this.estado = clienteEntity.getEstado();
+            this.tipo = clienteEntity.getTipo();
+            this.login = clienteEntity.getLogin();
+            this.contrasena = clienteEntity.getContrasena();
         }
 
     }

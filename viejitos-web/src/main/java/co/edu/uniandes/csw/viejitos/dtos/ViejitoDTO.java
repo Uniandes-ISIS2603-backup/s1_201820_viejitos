@@ -26,8 +26,9 @@ package co.edu.uniandes.csw.viejitos.dtos;
 import co.edu.uniandes.csw.viejitos.entities.ViejitoEntity;
 
 /**
- * ViejitoDTO Objeto de transferencia de datos de la entidad de Viejito. Los DTO contienen las
- * represnetaciones de los JSON que se transfieren entre el cliente y el servidor.
+ * ViejitoDTO Objeto de transferencia de datos de la entidad de Viejito. Los DTO
+ * contienen las represnetaciones de los JSON que se transfieren entre el
+ * cliente y el servidor.
  * <p>
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
@@ -36,8 +37,7 @@ import co.edu.uniandes.csw.viejitos.entities.ViejitoEntity;
  *      "name: string,
  *      "atributo": string
  *   }
- * </pre>
- * Por ejemplo una entidad de Viejito se representa asi:<br>
+ * </pre> Por ejemplo una entidad de Viejito se representa asi:<br>
  * <pre>
  *
  *   {
@@ -50,94 +50,86 @@ import co.edu.uniandes.csw.viejitos.entities.ViejitoEntity;
  *
  * @author ISIS2603
  */
-public class ViejitoDTO
-{
-	private Long id;
+public class ViejitoDTO {
 
-	private String name;
+    private Long id;
 
-	private String atributo;
+    private String name;
 
-	/**
-	 * Constructor por defecto
-	 */
-	public ViejitoDTO( )
-	{
-	}
+    private String atributo;
 
-	/**
-	 * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
-	 * la entidad que viene de argumento.
-	 *
-	 * @param viejitoEntity: Es la entidad que se va a convertir a DTO
-	 */
-	public ViejitoDTO( ViejitoEntity viejitoEntity )
-	{
-		this.id = viejitoEntity.getId( );
-		this.name = viejitoEntity.getName( );
-		this.atributo = viejitoEntity.getAtributo( );
+    /**
+     * Constructor por defecto
+     */
+    public ViejitoDTO() {
+        //Constructor
+    }
 
-	}
+    /**
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param viejitoEntity: Es la entidad que se va a convertir a DTO
+     */
+    public ViejitoDTO(ViejitoEntity viejitoEntity) {
+        this.id = viejitoEntity.getId();
+        this.name = viejitoEntity.getName();
+        this.atributo = viejitoEntity.getAtributo();
 
-	/**
-	 * @return El ID de la entidad Viejito
-	 */
-	public Long getId( )
-	{
-		return id;
-	}
+    }
 
-	/**
-	 * @param id El nuevo ID
-	 */
-	public void setId( Long id )
-	{
-		this.id = id;
-	}
+    /**
+     * @return El ID de la entidad Viejito
+     */
+    public Long getId() {
+        return id;
+    }
 
-	/**
-	 * @return El nombre de la entidad Viejito
-	 */
-	public String getName( )
-	{
-		return name;
-	}
+    /**
+     * @param id El nuevo ID
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @param name El nuevo nombre
-	 */
-	public void setName( String name )
-	{
-		this.name = name;
-	}
+    /**
+     * @return El nombre de la entidad Viejito
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * @return El atrinuto de la entidad Viejito
-	 */
-	public String getAtributo( )
-	{
-		return atributo;
-	}
+    /**
+     * @param name El nuevo nombre
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * @param atributo El nuevo atributo de la entidad Viejito
-	 */
-	public void setAtributo( String atributo )
-	{
-		this.atributo = atributo;
-	}
+    /**
+     * @return El atrinuto de la entidad Viejito
+     */
+    public String getAtributo() {
+        return atributo;
+    }
 
-	/**
-	 * Convertir DTO a Entity
-	 *
-	 * @return Un Entity con los valores del DTO
-	 */
-	public ViejitoEntity toEntity( )
-	{
-		ViejitoEntity entity = new ViejitoEntity( );
-		entity.setId( this.id );
-		entity.setName( this.name );
-		entity.setAtributo( this.atributo );
-		return entity;
-	}
+    /**
+     * @param atributo El nuevo atributo de la entidad Viejito
+     */
+    public void setAtributo(String atributo) {
+        this.atributo = atributo;
+    }
+
+    /**
+     * Convertir DTO a Entity
+     *
+     * @return Un Entity con los valores del DTO
+     */
+    public ViejitoEntity toEntity() {
+        ViejitoEntity entity = new ViejitoEntity();
+        entity.setId(this.id);
+        entity.setName(this.name);
+        entity.setAtributo(this.atributo);
+        return entity;
+    }
 }

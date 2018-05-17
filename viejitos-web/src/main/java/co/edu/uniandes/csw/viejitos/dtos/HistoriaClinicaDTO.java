@@ -41,7 +41,7 @@ public class HistoriaClinicaDTO {
     private String cirugias;
 
     public HistoriaClinicaDTO() {
-
+        //Constructor
     }
 
     /**
@@ -52,8 +52,7 @@ public class HistoriaClinicaDTO {
      */
     public HistoriaClinicaDTO(HistoriaClinicaEntity historiaCEntity) {
         //DONE
-        if(historiaCEntity != null)
-        {
+        if (historiaCEntity != null) {
             this.id = historiaCEntity.getId();
             this.enfermedades = historiaCEntity.getEnfermedades();
             this.medicamentos = historiaCEntity.getMedicamentos();

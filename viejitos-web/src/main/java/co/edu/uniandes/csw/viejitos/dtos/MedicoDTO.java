@@ -61,7 +61,7 @@ public class MedicoDTO {
     private Long id;
 
     public MedicoDTO() {
-
+        //Constructor
     }
 
     public MedicoDTO(MedicoEntity entity) {

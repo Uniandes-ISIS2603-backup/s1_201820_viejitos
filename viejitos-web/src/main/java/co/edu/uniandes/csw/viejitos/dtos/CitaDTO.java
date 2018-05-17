@@ -60,7 +60,7 @@ public class CitaDTO {
     private Long id;
 
     public CitaDTO() {
-
+        //Constructor
     }
 
     /**
@@ -73,7 +73,7 @@ public class CitaDTO {
         if (entity != null) {
             this.fecha = entity.getFecha();
             this.hora = entity.getHora();
-            this.id=entity.getId();
+            this.id = entity.getId();
         }
     }
 
