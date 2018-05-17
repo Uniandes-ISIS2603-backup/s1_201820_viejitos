@@ -201,27 +201,27 @@ public class ClienteLogic {
         clienteEntity.getServicios().remove(servicio);
     }
      
-    public CitaEntity getCita(Long clienteId) throws BusinessLogicException {
-        LOGGER.info("Inicia proceso de consultar la entidad de Cita asociada al Cliente con clienteId");
-        ClienteEntity cliente = getById(clienteId);
-        if (cliente.getCita() == null || cliente.getCita().isEmpty())
-        {
-            throw new BusinessLogicException("El cliente no tiene asociada una Cita");
-        }
-        LOGGER.info("Termina proceso de consultar la Cita del cliente");
-        return cliente.getCita().get(0);
+    
+    public List<CitaEntity> listCitas(Long clienteId) {
+        return getById(clienteId).getCita();
     }
     
-     public CitaEntity addCita(Long clienteId, CitaEntity entity) throws BusinessLogicException {
-        LOGGER.info("Inicia proceso de creación de una entidad de Cita");  
-        ClienteEntity cliente = getById(clienteId);
-        if(!cliente.getCita().isEmpty())
-        {
-            throw new BusinessLogicException("El cliente ya tiene asociada una HistoriaClinica");
+    public CitaEntity getCita(Long clienteId, Long citaId) throws BusinessLogicException {
+        List<CitaEntity> citas = getById(clienteId).getCita();
+        CitaEntity cita = citaLogic.getById(citaId);
+        
+        int index = citas.indexOf(cita);
+        if (index >= 0) {
+            return citas.get(index);
         }
-        entity.setCliente(cliente);
-        LOGGER.info("Termina proceso de creación de entidad de Cita");
-        return citaPersistence.create(entity);
+        throw new BusinessLogicException("La cita no está asociada al cliente");
+    }
+    
+     public CitaEntity addCita(Long clienteId, Long citaId) {
+        ClienteEntity clienteEntity = getById(clienteId);
+        CitaEntity citaEntity = citaLogic.getById(citaId);
+        citaEntity.setCliente(clienteEntity);
+        return citaEntity;
     }
     
     public CitaEntity replaceCita(Long clienteId, CitaEntity entity) throws BusinessLogicException {
@@ -234,17 +234,13 @@ public class ClienteLogic {
         return citaPersistence.update(entity);
     }
     
-    public void deleteCita(Long clienteId) throws BusinessLogicException
+    public void deleteCita(Long clienteId, Long citaId)
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la entidad de Cita del Cliente con id={0}", clienteId);
-        CitaEntity entity = getCita(clienteId);
-        if(entity == null)
-        {
-           throw new BusinessLogicException("No existe una entidad de Cita asociada al Cliente con el id \"" + clienteId + "\""); 
-        }
-        citaPersistence.delete(entity.getId());
-        LOGGER.log(Level.INFO, "Termina proceso de borrar la entidad de Cita del Cliente con id={0}", clienteId);
+        ClienteEntity clienteEntity = getById(clienteId);
+        CitaEntity cita = citaLogic.getById(citaId);
+        cita.setCliente(null);
+        clienteEntity.getCita().remove(cita);
     }
-    }
+}
     
 
