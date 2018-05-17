@@ -6,16 +6,14 @@
 package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.CalificacionDetailDTO;
-import co.edu.uniandes.csw.viejitos.dtos.HistoriaClinicaDTO;
-import co.edu.uniandes.csw.viejitos.dtos.HistoriaClinicaDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.CalificacionLogic;
 import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
-import co.edu.uniandes.csw.viejitos.ejb.HistoriaClinicaLogic;
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
-import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -119,6 +117,7 @@ public class ClienteCalificacionResource
         }
         catch(BusinessLogicException e)
         {
+            LOGGER.log(Level.INFO, "El BusinessLogicException se transforma a webapp");
             throw new WebApplicationException(e.getMessage(), 404);
         }
     }
