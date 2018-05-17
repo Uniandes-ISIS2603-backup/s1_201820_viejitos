@@ -153,3 +153,12 @@
     font-size: 150%;
     color: white;
 }
+.infoI{
+    padding-left: 0;
+    max-width: 250px;
+    text-align: center;
+}
+.infoI.li{
+    text-align: center;
+
+}

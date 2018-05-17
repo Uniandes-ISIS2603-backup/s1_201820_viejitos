@@ -17,6 +17,8 @@
         'loginModule',
         'historialServiciosClienteModule',
         'inicioModule',
+        'citasClienteModule',
+        'historialServiciosEnfermeroModule',
         'calendariosEnfermeroModule'
     ]);
     // Resuelve problemas de las promesas
