@@ -1,0 +1,31 @@
+
+<div class="container-fluid">
+    <div class="col-md-4">
+        <h2> Información de la cita</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>   
+                    <th>Cliente</th>
+                    <th>Medico</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{currentCitaC.cliente.nombre}}</td>    
+                    <td>{{currentCitaC.medico.nombre}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2> Cancelar cita </h2>
+          <div class="panel panel-default">
+                   <div class="panel-body">
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <a class="btn btn-info" ui-sref="cancelarCitaCliente({id:historialActualCliente.id})"><span class="glyphicon glyphicon-plus-sign"></span> Cancelar Servicio</a>
+                        </div>
+                       
+                       
+                   </div>
+               </div>
+    </div>
+</div>
+
