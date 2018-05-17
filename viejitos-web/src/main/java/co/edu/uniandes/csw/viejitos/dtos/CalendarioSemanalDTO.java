@@ -54,6 +54,13 @@ public class CalendarioSemanalDTO {
     }
     
     /**
+     * constructor vacio
+    */
+    public CalendarioSemanalDTO()
+    {
+    }
+    
+    /**
      * @return la fecha de ultima modificacion
      */
     public Date getUltimaModificacion() {
@@ -79,13 +86,6 @@ public class CalendarioSemanalDTO {
      */
     public void setId(Long pId) {
         id = pId;
-    }
-
-    /**
-     * constructor vacio
-    */
-    public CalendarioSemanalDTO()
-    {
     }
 
     /**

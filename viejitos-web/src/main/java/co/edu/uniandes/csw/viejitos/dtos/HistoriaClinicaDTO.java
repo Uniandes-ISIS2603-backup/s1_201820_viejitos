@@ -51,7 +51,7 @@ public class HistoriaClinicaDTO {
      * @param HistoriaClinicaEntity: Es la entidad que se va a convertir a DTO
      */
     public HistoriaClinicaDTO(HistoriaClinicaEntity historiaCEntity) {
-        //TODO: DONE
+        //DONE
         if(historiaCEntity != null)
         {
             this.id = historiaCEntity.getId();

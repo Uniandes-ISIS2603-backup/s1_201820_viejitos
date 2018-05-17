@@ -57,7 +57,7 @@ public class HistoriaClinicaDetailDTO extends HistoriaClinicaDTO
     public HistoriaClinicaDetailDTO(HistoriaClinicaEntity entity)
     {
         super(entity);
-        //TODO  DONE
+        //DONE
         if(entity != null)
         {
             if (entity.getCliente()!= null) {
