@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.viejitos.dtos;
 
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
@@ -135,7 +136,7 @@ public class ClienteDetailDTO extends ClienteDTO {
     private List<QuejaDTO> quejas;
     private CalificacionDTO calificacion;
     private List<CalificacionDTO> calificaciones;
-    private CitaDTO cita;
+    private List<CitaDTO> cita;
     private MedicoDTO medico;
     private List<EnfermeroDTO> enfermeros;
     private List<HistoriaClinicaDTO> historiaC;
@@ -173,9 +174,10 @@ public class ClienteDetailDTO extends ClienteDTO {
         }
 
         if (entity.getCita() != null) {
-            this.cita = new CitaDTO(entity.getCita());
-        } else {
-            entity.setCita(null);
+            cita = new ArrayList<>();
+            for (CitaEntity entityCita : entity.getCita()) {
+                cita.add(new CitaDTO(entityCita));
+            }
         }
 
         if (entity.getMedico() != null) {
@@ -206,8 +208,12 @@ public class ClienteDetailDTO extends ClienteDTO {
             clienteE.setCalificacion(this.getCalificacion().toEntity());
         }
 
-        if (this.getCita() != null) {
-            clienteE.setCita(this.getCita().toEntity());
+        if (getCita() != null) {
+            List<CitaEntity> citaEntity = new ArrayList<>();
+            for (CitaDTO dtoCita : getCita()) {
+                citaEntity.add(dtoCita.toEntity());
+            }
+            clienteE.setCita(citaEntity);
         }
 
         if (getEnfermeros() != null) {
@@ -312,20 +318,6 @@ public class ClienteDetailDTO extends ClienteDTO {
     }
 
     /**
-     * @return the cita
-     */
-    public CitaDTO getCita() {
-        return cita;
-    }
-
-    /**
-     * @param cita the cita to set
-     */
-    public void setCita(CitaDTO cita) {
-        this.cita = cita;
-    }
-
-    /**
      * @return the medico
      */
     public MedicoDTO getMedico() {
@@ -365,6 +357,20 @@ public class ClienteDetailDTO extends ClienteDTO {
      */
     public void setHistoriaC(List<HistoriaClinicaDTO> historiaC) {
         this.historiaC = historiaC;
+    }
+
+    /**
+     * @return the cita
+     */
+    public List<CitaDTO> getCita() {
+        return cita;
+    }
+
+    /**
+     * @param cita the cita to set
+     */
+    public void setCita(List<CitaDTO> cita) {
+        this.cita = cita;
     }
 
 }
