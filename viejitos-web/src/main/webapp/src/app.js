@@ -77,6 +77,22 @@
                         return false;
                                      }
                 };
+                $rootScope.isMedico=function(){
+                    if(($rootScope.isAuthenticated) && (sessionStorage.getItem("rol")=='medico')){
+                        return true;
+                    }
+                    else{
+                        return false;
+                                     }
+                };
+                $rootScope.isEnfermero=function(){
+                    if(($rootScope.isAuthenticated) && (sessionStorage.getItem("rol")=='enfermero')){
+                        return true;
+                    }
+                    else{
+                        return false;
+                                     }
+                };
 
 
 
