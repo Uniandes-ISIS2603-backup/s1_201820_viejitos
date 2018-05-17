@@ -18,7 +18,8 @@
         'historialServiciosClienteModule',
         'inicioModule',
         'citasClienteModule',
-        'historialServiciosEnfermeroModule'
+        'historialServiciosEnfermeroModule',
+        'calendariosEnfermeroModule'
     ]);
     // Resuelve problemas de las promesas
     app.config(['$qProvider', function ($qProvider) {
