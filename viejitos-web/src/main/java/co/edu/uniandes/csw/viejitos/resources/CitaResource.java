@@ -7,8 +7,10 @@ package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.CitaDTO;
 import co.edu.uniandes.csw.viejitos.dtos.CitaDetailDTO;
+import co.edu.uniandes.csw.viejitos.dtos.ServicioDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.CitaLogic;
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
+import co.edu.uniandes.csw.viejitos.entities.ServicioEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.mappers.BusinessLogicExceptionMapper;
 import java.util.ArrayList;
@@ -137,11 +139,12 @@ public class CitaResource {
     @PUT
     @Path("{id: \\d+}")
     public CitaDTO updateCita(@PathParam("id") Long id, CitaDetailDTO detailDTO) throws BusinessLogicException {
-        CitaEntity e = logic.getById(id);
-        if (e == null) {
+        detailDTO.setId(id);
+        CitaEntity entity = logic.getById(id);
+        if (entity == null) {
             throw new WebApplicationException("El recurso /citas/" + id + " no existe.", 404);
         }
-        return new CitaDTO(logic.update(detailDTO.toEntity()));
+        return new CitaDetailDTO(logic.update(detailDTO.toEntity()));
     }
 
     /**
