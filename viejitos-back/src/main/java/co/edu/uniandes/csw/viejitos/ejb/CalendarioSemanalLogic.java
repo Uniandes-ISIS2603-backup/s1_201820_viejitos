@@ -9,6 +9,7 @@ package co.edu.uniandes.csw.viejitos.ejb;
 import co.edu.uniandes.csw.viejitos.entities.CalendarioSemanalEntity;
 import co.edu.uniandes.csw.viejitos.entities.EnfermeroEntity;
 import co.edu.uniandes.csw.viejitos.entities.FranjaHorariaEntity;
+import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.viejitos.persistence.CalendarioSemanalPersistence;
 import java.util.List;
@@ -364,6 +365,5 @@ public class CalendarioSemanalLogic {
         return entityEnf;
         
     }
- 
 
 }
