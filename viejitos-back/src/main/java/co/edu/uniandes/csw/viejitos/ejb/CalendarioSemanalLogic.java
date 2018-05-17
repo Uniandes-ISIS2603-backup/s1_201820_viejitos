@@ -365,5 +365,92 @@ public class CalendarioSemanalLogic {
         return entityEnf;
         
     }
+ 
+    /**
+     * Asigna una instancia de medico Existente a un calendario NUEVO, es decir que aun no existe(el calendario).
+     * @param idMedico
+     * @param calendarioId
+     * @return la entidad de medico
+     */
+    public CalendarioSemanalEntity setCalendariotoMedico(Long idMedico,Long calendarioId) throws BusinessLogicException
+    {
+        MedicoEntity entityMed =null;
+        CalendarioSemanalEntity entityCal= new CalendarioSemanalEntity();
+        if(idMedico!=null && calendarioId!=null)
+            {
+                LOGGER.log(Level.INFO, "Inicia proceso de obtener un medico con id  = {0}", idMedico);
+                entityMed = medicoLogic.getById(idMedico);
+                LOGGER.log(Level.INFO, "termina proceso de obtener un medico");
+
+                LOGGER.log(Level.INFO, "Inicia proceso de obtener un calendario con id  = {0}", calendarioId);
+               entityCal =getCalendario(calendarioId);
+                LOGGER.log(Level.INFO, "termina proceso de obtener un enfermero");
+                if(entityMed!=null && entityCal!=null)
+                {
+
+                    LOGGER.log(Level.INFO, "Inicia proceso de asignar a un  medico"+idMedico+ "con calendario con id  = {0}", calendarioId);
+                    entityMed.setCalendario(entityCal);
+                    medicoLogic.update(entityMed);
+                   LOGGER.log(Level.INFO, "finaliza proceso de asignar a un medico "+idMedico+"con calendario con id  = {0}", calendarioId);
+                 }    
+        }
+     return entityCal;
+    }
+    
+        /**
+     * 
+     * dado el id del medico entrega el calendario.
+     * @param  medicoId  la id del medico
+     *@return la entidad de calendario asociada a un medico con id dado
+     **/
+    public CalendarioSemanalEntity getCalendarioByMedico(Long medicoId)
+    {
+        CalendarioSemanalEntity cal=null;
+        if(medicoId!=null)
+        {
+        LOGGER.log(Level.INFO,"Inicia proceso de consultar medico con id={0}" , medicoId);
+       MedicoEntity enf= medicoLogic.getById(medicoId);
+       LOGGER.log(Level.INFO,"Finaliza porceso de consulta de medico con id={0}" , medicoId);
+        if(enf!=null)
+       {
+        cal=enf.getCalendario(); 
+      }          
+        }
+        
+    
+      
+     return cal;
+    
+    }
+    
+    /**
+     * dado el id de un medico le remueve su calendario
+     * @param idMedico
+     * @return el entidad de medico ya sin su calendario
+     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
+     */
+    //TODO ES posible que sobre y se pueda poner con setCalendarioToeEnfefermero
+    public MedicoEntity   removeCalendarioOfMedico(Long idMedico) throws BusinessLogicException
+    {
+        
+        MedicoEntity    entityMed=null;
+         LOGGER.log(Level.INFO, "Inicia proceso de obtener un medico con id  = {0}", idMedico);
+         if(idMedico!=null)
+             {
+         entityMed = medicoLogic.getById(idMedico);
+               if(entityMed!=null)
+               {
+             entityMed.setCalendario(null);
+             LOGGER.log(Level.INFO, "termina proceso de obtener un medico");
+       medicoLogic.update(entityMed);
+             LOGGER.log(Level.INFO, "finaliza proceso de asignar a un  medico "+idMedico);
+               }
+             
+             }
+       
+        
+        return entityMed;
+        
+    }
 
 }
