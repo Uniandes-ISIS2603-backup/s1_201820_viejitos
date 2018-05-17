@@ -9,10 +9,10 @@ import co.edu.uniandes.csw.viejitos.entities.FacturaEntity;
 import java.util.Date;
 
 /**
- * FacturaDTO Objeto de transferencia de datos de Facturas. Los DTO contienen las
- * representaciones de los JSON que se transfieren entre el cliente y el
+ * FacturaDTO Objeto de transferencia de datos de Facturas. Los DTO contienen
+ * las representaciones de los JSON que se transfieren entre el cliente y el
  * servidor.
- * 
+ *
  * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
  * <pre>
  *   {
@@ -25,11 +25,10 @@ import java.util.Date;
  *      "servicioPrestado": String,
  *      "nombreEmpresa": String
  *   }
- * </pre>
- * Por ejemplo una ciudad se representa asi:<br>
- * 
+ * </pre> Por ejemplo una ciudad se representa asi:<br>
+ *
  * <pre>
- * 
+ *
  *   {
  *      "id": 123,
  *      "costoTotal": 120100,
@@ -42,6 +41,7 @@ import java.util.Date;
  *   }
  *
  * </pre>
+ *
  * @author f.escobar
  */
 public class FacturaDTO {
@@ -50,59 +50,57 @@ public class FacturaDTO {
      * id de la factura
      */
     private Long id;
-    
+
     /**
      * costo total del servicio
      */
     private Double costoTotal;
-    
+
     /**
      * fecha de expedicion de la factura
      */
     private Date fechaExpedicion;
-    
+
     /**
      * descripcion del servicio
      */
     private String descripcion;
-    
+
     /**
      * nombre del cliente
      */
     private String nombreCliente;
-    
+
     /**
      * cedula del cliente
      */
     private Integer ccCliente;
-    
+
     /**
      * servicio que se prestó
      */
     private String servicioPrestado;
-    
+
     /**
      * nombre de la empresa
      */
     private String nombreEmpresa;
-    
+
     /**
      * Constructor
      */
-    public FacturaDTO()
-    {
-        
+    public FacturaDTO() {
+        //Constructor
     }
-    
+
     /**
-    * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
-    * la entidad que viene de argumento.
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
      * @param facturaEntity: Es la entidad que se va a convertir a DTO
      */
-    public FacturaDTO( FacturaEntity facturaEntity )
-    {
-        if(facturaEntity!=null)
-        {
+    public FacturaDTO(FacturaEntity facturaEntity) {
+        if (facturaEntity != null) {
             this.id = facturaEntity.getId();
             this.costoTotal = facturaEntity.getCostoTotal();
             this.fechaExpedicion = facturaEntity.getFechaExpedicion();
@@ -113,15 +111,15 @@ public class FacturaDTO {
             this.nombreEmpresa = facturaEntity.getNombreEmpresa();
         }
     }
-        
+
     /**
-    * Convertir DTO a Entity
-    * @return Un Entity con los valores del DTO
-    */
-    public FacturaEntity toEntity( )
-    {
-        FacturaEntity entity = new FacturaEntity( );
-	entity.setId(this.id);
+     * Convertir DTO a Entity
+     *
+     * @return Un Entity con los valores del DTO
+     */
+    public FacturaEntity toEntity() {
+        FacturaEntity entity = new FacturaEntity();
+        entity.setId(this.id);
         entity.setCostoTotal(this.costoTotal);
         entity.setFechaExpedicion(this.fechaExpedicion);
         entity.setDescripcion(this.descripcion);
@@ -131,7 +129,7 @@ public class FacturaDTO {
         entity.setNombreEmpresa(this.nombreEmpresa);
         return entity;
     }
-    
+
     /**
      * @return id
      */
@@ -145,7 +143,7 @@ public class FacturaDTO {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     /**
      * @return costoTotal
      */
@@ -210,7 +208,7 @@ public class FacturaDTO {
     }
 
     /**
-     * @param ccCliente la nueva ccCliente 
+     * @param ccCliente la nueva ccCliente
      */
     public void setCcCliente(Integer ccCliente) {
         this.ccCliente = ccCliente;
@@ -243,7 +241,5 @@ public class FacturaDTO {
     public void setNombreEmpresa(String nombreEmpresa) {
         this.nombreEmpresa = nombreEmpresa;
     }
-    
-    
-    
+
 }

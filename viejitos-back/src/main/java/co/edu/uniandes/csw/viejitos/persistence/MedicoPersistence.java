@@ -52,6 +52,7 @@ public class MedicoPersistence {
             MedicoEntity ent = q.getSingleResult();
             return ent;
         } catch (Exception e) {
+            LOGGER.log(Level.INFO, "El singleresult lanzo excepcion, se retorna null ");
             return null;
         }
     }
@@ -88,6 +89,7 @@ public class MedicoPersistence {
         try {
             return q.getResultList().get(0);
         } catch (Exception e) {
+             LOGGER.log(Level.INFO, "El resultlist lanzo excepcion, se retorna null ");
             return null;
         }
     }

@@ -10,8 +10,11 @@ import co.edu.uniandes.csw.viejitos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.viejitos.persistence.ClientePersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -38,6 +41,7 @@ public class ClienteResource {
 
     @Inject
     ClienteLogic cLogic;
+    private static final Logger LOGGER = Logger.getLogger(ClientePersistence.class.getName());
 
     /**
      * <h1>POST /api/clientes : Crear una entidad de Cliente.</h1>
@@ -59,6 +63,7 @@ public class ClienteResource {
         try {
             return new ClienteDTO(cLogic.create(dto.toEntity()));
         } catch (BusinessLogicException e) {
+            LOGGER.log(Level.INFO, "El BusinessLogicException se transforma a webapp");
             throw new WebApplicationException(e.getMessage(), 404);
         }
 

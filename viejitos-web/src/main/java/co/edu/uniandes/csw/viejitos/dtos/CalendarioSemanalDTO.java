@@ -58,6 +58,7 @@ public class CalendarioSemanalDTO {
     */
     public CalendarioSemanalDTO()
     {
+        //Constructor
     }
     
     /**

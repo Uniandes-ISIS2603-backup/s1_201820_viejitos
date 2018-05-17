@@ -78,6 +78,7 @@ public class CalificacionResource {
         try {
             logic.create(dto.toEntity());
         } catch (BusinessLogicException ex) {
+            LOGGER.log(Level.INFO, "El BusinessLogicException se transforma a webapp");
             throw new WebApplicationException(ex.getMessage(), 412);
         }
         return dto;
@@ -182,6 +183,7 @@ public class CalificacionResource {
                 logic.update(entidad);
             }
         } catch (BusinessLogicException ex) {
+            LOGGER.log(Level.INFO, "El BusinessLogicException se transforma a webapp");
             throw new WebApplicationException(ex.getMessage(), 412);
         }
        return dto;

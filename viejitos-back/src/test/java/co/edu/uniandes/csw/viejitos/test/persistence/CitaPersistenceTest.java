@@ -20,9 +20,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+ */
 package co.edu.uniandes.csw.viejitos.test.persistence;
-
 
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.MedicoEntity;
@@ -50,6 +49,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class CitaPersistenceTest {
+
     /**
      *
      * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
@@ -67,8 +67,8 @@ public class CitaPersistenceTest {
     }
 
     /**
-     * Inyección de la dependencia a la clase MedicoPersistence cuyos métodos
-     * se van a probar.
+     * Inyección de la dependencia a la clase MedicoPersistence cuyos métodos se
+     * van a probar.
      */
     @Inject
     private CitaPersistence citaPersistence;
@@ -79,8 +79,6 @@ public class CitaPersistenceTest {
      */
     @PersistenceContext
     private EntityManager em;
-
-
 
     /**
      * Limpia las tablas que están implicadas en la prueba.
@@ -101,6 +99,7 @@ public class CitaPersistenceTest {
      */
     @Inject
     UserTransaction utx;
+
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
@@ -110,15 +109,16 @@ public class CitaPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            
+
             CitaEntity entity = factory.manufacturePojo(CitaEntity.class);
 
             em.persist(entity);
-            
+
             data.add(entity);
         }
     }
- /**
+
+    /**
      * Configuración inicial de la prueba.
      *
      *
@@ -158,10 +158,11 @@ public class CitaPersistenceTest {
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
     }
-            /**
+
+    /**
      * Prueba para consultar la lista de Citas.
      *
-     * 
+     *
      */
     @Test
     public void getCitasTest() {
@@ -177,10 +178,11 @@ public class CitaPersistenceTest {
             Assert.assertTrue(found);
         }
     }
-     /**
+
+    /**
      * Prueba para consultar una Cita.
      *
-     * 
+     *
      */
     @Test
     public void getCitaTest() {
@@ -193,7 +195,7 @@ public class CitaPersistenceTest {
     /**
      * Prueba para eliminar una Cita.
      *
-     * 
+     *
      */
     @Test
     public void deleteCitaTest() {
@@ -206,7 +208,7 @@ public class CitaPersistenceTest {
     /**
      * Prueba para actualizar una Cita.
      *
-     * 
+     *
      */
     @Test
     public void updateCitaTest() {

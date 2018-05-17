@@ -43,7 +43,7 @@ public class QuejaDTO {
      * Constructor por defecto
      */
     public QuejaDTO() {
-
+        //Constructor
     }
 
     /**

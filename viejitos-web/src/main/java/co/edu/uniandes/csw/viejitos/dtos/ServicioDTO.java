@@ -56,7 +56,7 @@ public class ServicioDTO {
      * Constructor por defecto
      */
     public ServicioDTO() {
-
+        //Constructor
     }
 
     /**

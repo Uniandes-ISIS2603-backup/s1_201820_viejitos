@@ -66,7 +66,8 @@ public class MedicoResource {
      * <h1>GET /api/medicos : Obtener todas las entidades de Medico.</h1>
      * <p>
      * <
-     * pre>Busca y devuelve todas las entidades de Medico que existen en la aplicacion.
+     * pre>Busca y devuelve todas las entidades de Medico que existen en la
+     * aplicacion.
      *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
@@ -89,7 +90,8 @@ public class MedicoResource {
      * <h1>GET /api/medicos/{id} : Obtener una entidad de Medico por id.</h1>
      * <p>
      * <
-     * pre>Busca la entidad de Medico con el id asociado recibido en la URL y la devuelve.
+     * pre>Busca la entidad de Medico con el id asociado recibido en la URL y la
+     * devuelve.
      *
      * Codigos de respuesta:
      * <code style="color: mediumseagreen; background-color: #eaffe0;">
@@ -169,8 +171,8 @@ public class MedicoResource {
         if (e == null) {
             throw new WebApplicationException("El recurso /medicos/" + id + " no existe.", 404);
         }
-        
-         logic.delete(e);
-        
+
+        logic.delete(e);
+
     }
 }

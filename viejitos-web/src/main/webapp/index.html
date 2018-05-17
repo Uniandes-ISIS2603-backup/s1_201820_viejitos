@@ -72,12 +72,12 @@
         <script src="src/modules/calendarios/franja.create.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/calendarios/enfermero.assign.ctrl.js" type="text/javascript"></script>
 
-         <!--calendariosEnfermero-->
+        <!--calendariosEnfermero-->
         <script src="src/modules/miCalendario/calendarios.mod.js" type="text/javascript"></script>
         <script src="src/modules/miCalendario/calendarios.ctrl.js" type="text/javascript"></script>
 
-        
-        
+
+
         <!--login-->
 
         <script src="src/modules/login/login.mod.js" type="text/javascript"></script>
@@ -94,12 +94,12 @@
         <script src="src/modules/historialServiciosCliente/historialServicios.createFactura.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/historialServiciosCliente/delete/historialServicios.delete.ctrl.js" type="text/javascript"></script>"
         <script src="src/modules/historialServiciosCliente/historialServicios.createCalificacion.ctrl.js" type="text/javascript"></script>
-         <!-- CitasCliente -->
+        <!-- CitasCliente -->
         <script src="src/modules/citasCliente/citasCliente.mod.js" type="text/javascript"></script>
         <script src="src/modules/citasCliente/citasCliente.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/citasCliente/citasCliente.detail.ctrl.js" type="text/javascript"></script>
         <script src="src/modules/citasCliente/citasCliente.new.ctrl.js" type="text/javascript"></script>
-        
+
         <!--serviciosEnfermero-->
         <script src="src/modules/serviciosEnfermero/historialServicios.mod.js" type="text/javascript"></script>
         <script src="src/modules/serviciosEnfermero/historialServicios.ctrl.js" type="text/javascript"></script>
@@ -107,12 +107,12 @@
         <script src="src/modules/serviciosEnfermero/delete/historialServicios.delete.ctrl.js" type="text/javascript"></script>"
         <script src="src/modules/serviciosEnfermero/historialServicios.createCalificacion.ctrl.js" type="text/javascript"></script>
 
-            
-        
-        
+
+
+
         <script src="src/modules/inicio/inicio.mod.js" type="text/javascript"></script>
         <script src="src/modules/inicio/inicio.ctrl.js" type="text/javascript"></script>
-        
+
         <link rel="stylesheet" href="./style.css">
         <script src="src/app.js" type="text/javascript"></script> 
         <script src="src/http-interceptor.factory.js" type="text/javascript"></script>
@@ -160,35 +160,32 @@
                             <li class="barranavitem"ng-if="isAdmin()"><a class="vinculo" ui-sref="calificacionesList">Calificaciones</a></li>
                             <li class="barranavitem"ng-if="isAdmin()"><a class="vinculo" ui-sref="enfermerosList">Enfermeros</a></li>
                             <li class="barranavitem"ng-if="isAdmin()"><a class="vinculo" ui-sref="citasList">Citas</a></li>
-                            <li class="barranavitem"ng-if="isCliente()"><a class="vinculo" ui-sref="citasCList">Citas</a></li>
                             <li class="barranavitem"ng-if="isAdmin()"><a class="vinculo" ui-sref="medicosList">Medicos</a></li>
                             <li class="barranavitem"ng-if="isAdmin()"><a class="vinculo" ui-sref="calendariosList" ng-if="isAdmin()">Calendarios</a></li>
                             <li class="barranavitem"ng-if="isAdmin()"><a class="vinculo" ui-sref="historialServiciosList" ng-if= "isAdmin()">Historial Servicios</a></li>
-                            <li class="barranavitem"><a class="vinculo" ui-sref="historialServiciosClienteList" ng-if="isCliente()">Mis servicios</a></li>
-                            <li class="barranavitem"><a class="vinculo" ui-sref="historialServiciosEnfermeroList" ng-if="isEnfermero()">Mis servicios</a></li>
-                           <li class="barranavitem"ng-if="isEnfermero()"><a class="vinculo" ui-sref="calendariosEnfermeroList" ng-if="isEnfermero()">my schedule</a></li>
 
-                            
-                            
+
+
                         </ul>
                     </div>
                 </div>
-                 <div ng-if="isAuthenticated()">
+                <div ng-if="isAuthenticated()">
                     <div class="col-sm-12" ng-if="isAuthenticated()">
                         <div ng-if="isAuthenticated()" ng-if="isMedico()" ng-if="isCliente()" ng-if="isEnfermero()" class="col-sm-2">
-                            <h2>Mi perfil</h2>
-                            <div class="col-lg-6"ng-if="isAuthenticated()">
+                            <h2>Mi perfil,{{currentUser}}</h2>
+                            <div class="col-lg-8"ng-if="isAuthenticated()">
                                 <img class="imagen img-responsive" src="src\img\senior-happy-winning-computer-game.jpg" alt="persona">
                             </div>
-                            <div class="col-lg-6">
-                            {{currentUser}}<br>
-                            <div class="btn-group-vertical"ng-if="isAuthenticated()">
-                                <button type="button" class="btn btn-default btn-lg" ui-sref="historialServiciosClienteList"  ng-if="isMedico()">Mis citas</button>
-                                <button type="button" class="btn btn-default btn-lg"ui-sref="citasCList" ng-if="isCliente()">Mis citas</button>
-                                <button type="button" class="btn btn-default btn-lg"ng-if="isCliente()"  ui-sref="historialServiciosClienteList">Mis servicios</button>
-                                <button type="button" class="btn btn-default btn-lg" ng-if="isEnfermero()" ui-sref="historialServiciosEnfermeroList">Mis servicios</button>
-                             
-                            </div>
+                            <div class="col-lg-4">
+                                <div class="btn-group-vertical"ng-if="isAuthenticated()">
+                                    <button type="button" class="btn btn-default btn-lg" ui-sref="historialServiciosClienteList"  ng-if="isMedico()">Mis citas</button>
+                                    <button type="button" class="btn btn-default btn-lg"ui-sref="citasCList" ng-if="isCliente()">Mis citas</button>
+                                    <button type="button" class="btn btn-default btn-lg"ng-if="isCliente()"  ui-sref="historialServiciosClienteList">Mis servicios</button>
+                                    <button type="button" class="btn btn-default btn-lg" ng-if="isEnfermero()" ui-sref="historialServiciosEnfermeroList">Mis servicios</button>
+                                    <button type="button" class="btn btn-default btn-lg" ng-if="isEnfermero()" ui-sref="calendariosEnfermeroList">Mis calendario</button>
+                                    <button type="button" class="btn btn-default btn-lg" ng-if="isCliente()" ui-sref="calendariosEnfermeroList">Mis calendario</button>
+                                    <button type="button" class="btn btn-default btn-lg" ng-if="isMedico()" ui-sref="calendariosEnfermeroList">Mis calendario</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -257,61 +254,61 @@
                         </div>
                     </div>
 
-                      <!---->
-                      <hr>
-                      <!--Integrantes-->
-                      <div id = "integrantes">
-                          <h2>El equipo de desarrollo</h2>
-                          <div>
-                              <div class ="col-lg-2 odddev">
-                                  <img src="src/img/dev-female.png" alt="Líder y desarrolladora" width="200">
-                                  <h4 class='nombreI'>Laura Pardo Borrero</h4><br>
-                                    <ul>
-                                        <li>Correo: <a ui-sref="mailto:l.pardo@uniandes.edu.co"> l.pardo@uniandes.edu.co</a></li>
-                                        <li>Carrera: Ingeniería Mecánica - Ingeniería de Sistemas</li>
-                                    </ul>
-                              </div>
-                              <div class ="col-lg-2 evdev">
-                                  <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
-                                  <h4 class='nombreI'>Juan José Silva Reyes</h4><br>
-                                    <ul>
-                                        <li>Correo: <a ui-sref="mailto:jj.silva@uniandes.edu.co"> jj.silva@uniandes.edu.co</a></li>
-                                        <li>Carrera: Ingeniería de Sistemas</li>
-                                    </ul>
-                              </div>
-                              <div class ="col-lg-2 odddev">
-                                  <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
-                                  <h4 class='nombreI'>Juan Sebastián Espitia Acero</h4>
-                                    <ul>
-                                        <li>Correo: <a ui-sref="mailto:js.espitia@uniandes.edu.co"> js.espitia@uniandes.edu.co</a></li>
-                                        <li>Carrera: Ingeniería de Sistemas</li>
-                                    </ul>
-                              </div>
-                              <div class ="col-lg-2 evdev">
-                                  <img src="src/img/dev-female.png" alt="Desarrolladora" width="200"> 
-                                  <h4 class='nombreI'>Camila Gómez Schrader</h4>
-                                    <ul>
-                                        <li>Correo: <a ui-sref="mailto:c.gomezs@uniandes.edu.co"> c.gomezs@uniandes.edu.co</a></li>
-                                        <li>Carrera: Ingeniería Industrial - Ingeniería de Sistemas</li>
-                                    </ul>
-                              </div>
-                              <div class ="col-lg-2 odddev">
-                                  <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
-                                  <h4 class='nombreI'>Leonel Francisco Naranjo Forero</h4>
-                                    <ul>
-                                        <li>Correo: <a ui-sref="mailto:lf.naranjo11@uniandes.edu.co"> lf.naranjo11@uniandes.edu.co</a></li>
-                                        <li>Carrera: Ingeniería Electrica - Ingeniería de Sistemas</li>
-                                    </ul>
-                              </div>
-                              <div class ="col-lg-2 evdev">
-                                  <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
-                                  <h4 class='nombreI'>Felipe Escobar Ávila</h4><br>
-                                    Correo: <a ui-sref="mailto:f.escobar@uniandes.edu.co"> f.escobar@uniandes.edu.co</a>
-                                    Carrera: Ingeniería Industrial - Ingeniería de Sistemas
-                              </div>
-                          </div>
-                      </div>
-  <!---->
+                    <!---->
+                    <hr>
+                    <!--Integrantes-->
+                    <div id = "integrantes">
+                        <h2>El equipo de desarrollo</h2>
+                        <div>
+                            <div class ="col-lg-2 odddev">
+                                <img src="src/img/dev-female.png" alt="Líder y desarrolladora" width="200">
+                                <h4 class='nombreI'>Laura Pardo Borrero</h4><br>
+                                <ul>
+                                    <li>Correo: <a ui-sref="mailto:l.pardo@uniandes.edu.co"> l.pardo@uniandes.edu.co</a></li>
+                                    <li>Carrera: Ingeniería Mecánica - Ingeniería de Sistemas</li>
+                                </ul>
+                            </div>
+                            <div class ="col-lg-2 evdev">
+                                <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
+                                <h4 class='nombreI'>Juan José Silva Reyes</h4><br>
+                                <ul>
+                                    <li>Correo: <a ui-sref="mailto:jj.silva@uniandes.edu.co"> jj.silva@uniandes.edu.co</a></li>
+                                    <li>Carrera: Ingeniería de Sistemas</li>
+                                </ul>
+                            </div>
+                            <div class ="col-lg-2 odddev">
+                                <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
+                                <h4 class='nombreI'>Juan Sebastián Espitia Acero</h4>
+                                <ul>
+                                    <li>Correo: <a ui-sref="mailto:js.espitia@uniandes.edu.co"> js.espitia@uniandes.edu.co</a></li>
+                                    <li>Carrera: Ingeniería de Sistemas</li>
+                                </ul>
+                            </div>
+                            <div class ="col-lg-2 evdev">
+                                <img src="src/img/dev-female.png" alt="Desarrolladora" width="200"> 
+                                <h4 class='nombreI'>Camila Gómez Schrader</h4>
+                                <ul>
+                                    <li>Correo: <a ui-sref="mailto:c.gomezs@uniandes.edu.co"> c.gomezs@uniandes.edu.co</a></li>
+                                    <li>Carrera: Ingeniería Industrial - Ingeniería de Sistemas</li>
+                                </ul>
+                            </div>
+                            <div class ="col-lg-2 odddev">
+                                <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
+                                <h4 class='nombreI'>Leonel Francisco Naranjo Forero</h4>
+                                <ul>
+                                    <li>Correo: <a ui-sref="mailto:lf.naranjo11@uniandes.edu.co"> lf.naranjo11@uniandes.edu.co</a></li>
+                                    <li>Carrera: Ingeniería Electrica - Ingeniería de Sistemas</li>
+                                </ul>
+                            </div>
+                            <div class ="col-lg-2 evdev">
+                                <img src="src/img/dev-male.png" alt="Desarrollador" width="200">
+                                <h4 class='nombreI'>Felipe Escobar Ávila</h4><br>
+                                Correo: <a ui-sref="mailto:f.escobar@uniandes.edu.co"> f.escobar@uniandes.edu.co</a>
+                                Carrera: Ingeniería Industrial - Ingeniería de Sistemas
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
                 </div> 
             </div>
     </body>

@@ -35,11 +35,10 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *      "password: string,
  *      "rol": string
  *   }
- * </pre>
- * Por ejemplo una reseña se representa asi:<br>
- * 
+ * </pre> Por ejemplo una reseña se representa asi:<br>
+ *
  * <pre>
- * 
+ *
  *   {
  *      "username": Juan Pérez,
  *      "password: 123456,
@@ -47,18 +46,18 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *   }
  *
  * </pre>
+ *
  * @author ISIS2603
  */
 public class UserDTO {
-    
 
-   private String username;
-   private String password;
-   private String rol;
-   
-    public UserDTO(){}
+    private String username;
+    private String password;
+    private String rol;
 
-  
+    public UserDTO() {
+        //Constructor
+    }
 
     /**
      * @return the password
@@ -102,6 +101,4 @@ public class UserDTO {
         this.username = username;
     }
 
-  
-    
 }

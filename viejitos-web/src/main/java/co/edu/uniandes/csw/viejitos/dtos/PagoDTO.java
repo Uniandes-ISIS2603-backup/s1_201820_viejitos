@@ -25,7 +25,7 @@ import java.util.Date;
  * }
  * </pre> Por ejemplo una ciudad se representa asi:<br>
  *
- <pre>
+ * <pre>
  *
  * {
  * "id": 123456,
@@ -67,7 +67,7 @@ public class PagoDTO {
      * Constructor
      */
     public PagoDTO() {
-
+        //Constructor
     }
 
     /**
