@@ -9,7 +9,6 @@
                   $rootScope.edit = false;
 
                $scope.idcliente=sessionStorage.getItem("id");
-                console.log(sessionStorage.getItem("id"));
            
               if (($scope.idcliente !== undefined) && ($scope.idcliente !== null)) {
                 $http.get("api/clientes/"  + $scope.idcliente).then(function (response) {
@@ -31,8 +30,7 @@
                 $scope.solicitServicio = function () {
                     $http.post("api/servicios", $scope.data).then(function (response) {
                         $scope.serv = response.data.id;
-                        console.log($scope.serv);
-                        console.log($scope.data.enfermero);
+                 
                         $http.post("api/clientes/" + sessionStorage.getItem("id")+"/servicios/"+$scope.serv).then(function(response){
                             $http.post("api/enfermeros/"+ $scope.data.enfermero+"/servicios/"+$scope.serv).then(function(response){
                                 $state.go('serviciosList', {reload: true});

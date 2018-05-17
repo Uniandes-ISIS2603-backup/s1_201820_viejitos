@@ -19,7 +19,6 @@
          */
         function ($scope, $http,  $state) {
             var id = $state.params.id;
-            console.log($state.params);
             /**
              * @ngdoc function
              * @name deleteAuthor
