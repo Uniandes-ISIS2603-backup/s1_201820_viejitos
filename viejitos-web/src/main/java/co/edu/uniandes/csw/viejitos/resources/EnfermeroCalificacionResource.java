@@ -10,10 +10,11 @@ import co.edu.uniandes.csw.viejitos.ejb.CalificacionLogic;
 import co.edu.uniandes.csw.viejitos.ejb.EnfermeroLogic;
 import co.edu.uniandes.csw.viejitos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+import co.edu.uniandes.csw.viejitos.persistence.EnfermeroPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -55,6 +56,7 @@ public class EnfermeroCalificacionResource {
     @Inject
     private CalificacionLogic cLogic;
 
+    private static final Logger LOGGER = Logger.getLogger(EnfermeroPersistence.class.getName());
     /**
      * <h1>GET /api/enfermeros/{enfermeroId}/calificaciones : Obtener las
      * calificaciones de un enfermero.</h1>

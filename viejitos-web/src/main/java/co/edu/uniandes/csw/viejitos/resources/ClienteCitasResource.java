@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.viejitos.resources;
 
 import co.edu.uniandes.csw.viejitos.dtos.CitaDetailDTO;
-import co.edu.uniandes.csw.viejitos.dtos.ServicioDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;

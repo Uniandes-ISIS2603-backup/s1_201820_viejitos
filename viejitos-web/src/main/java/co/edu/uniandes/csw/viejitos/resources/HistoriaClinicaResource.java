@@ -11,8 +11,9 @@ import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.viejitos.ejb.HistoriaClinicaLogic;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+import co.edu.uniandes.csw.viejitos.persistence.HistoriaClinicaPersistence;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -54,6 +55,8 @@ public class HistoriaClinicaResource {
 
     @Inject
     private HistoriaClinicaLogic hcLogic;
+    
+    private static final Logger LOGGER = Logger.getLogger(HistoriaClinicaPersistence.class.getName());
 
     /**
      * Convierte una HistoriaClinicaEntity a una HistoriaClinicaDetailDTO.
