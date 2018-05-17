@@ -50,7 +50,7 @@ public class CitaEntity extends BaseEntity implements Serializable {
     
     private String hora;
     @PodamExclude
-    @OneToOne(fetch = FetchType.EAGER, targetEntity = ClienteEntity.class, cascade = CascadeType.PERSIST)
+    @ManyToOne
     private ClienteEntity cliente;
     @PodamExclude
     @ManyToOne( fetch = FetchType.EAGER)

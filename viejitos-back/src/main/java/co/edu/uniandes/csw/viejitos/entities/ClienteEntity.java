@@ -51,9 +51,9 @@ public class ClienteEntity extends BaseEntity implements Serializable
     @PodamExclude
     private List<CalificacionEntity> calificaciones;
     
-    @OneToOne(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST)
     @PodamExclude
-    private CitaEntity cita;
+    private List<CitaEntity> cita;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @PodamExclude
@@ -208,20 +208,6 @@ public class ClienteEntity extends BaseEntity implements Serializable
     }
 
     /**
-     * @return the cita
-     */
-    public CitaEntity getCita() {
-        return cita;
-    }
-
-    /**
-     * @param cita the cita to set
-     */
-    public void setCita(CitaEntity cita) {
-        this.cita = cita;
-    }
-
-    /**
      * @return the medico
      */
     public MedicoEntity getMedico() {
@@ -247,6 +233,20 @@ public class ClienteEntity extends BaseEntity implements Serializable
      */
     public void setHistoriaC(List<HistoriaClinicaEntity> historiaC) {
         this.historiaC = historiaC;
+    }
+
+    /**
+     * @return the cita
+     */
+    public List<CitaEntity> getCita() {
+        return cita;
+    }
+
+    /**
+     * @param cita the cita to set
+     */
+    public void setCita(List<CitaEntity> cita) {
+        this.cita = cita;
     }
 
     
