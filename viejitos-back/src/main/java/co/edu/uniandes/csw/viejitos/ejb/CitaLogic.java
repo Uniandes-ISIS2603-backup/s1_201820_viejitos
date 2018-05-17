@@ -77,12 +77,12 @@ public class CitaLogic {
         if (entity.getFecha().before(d)) {
             throw new BusinessLogicException("La fecha de la cita es antes de la fecha de hoy");
         }
-        if (medicoPersistence.find(entity.getMedico().getId()) == null) {
+        /**if (medicoPersistence.find(entity.getMedico().getId()) == null) {
             throw new BusinessLogicException("El medico con el id " + entity.getId());
         }
         if (clientePersistence.find(entity.getCliente().getId()) == null) {
             throw new BusinessLogicException("El cliente con el id " + entity.getId());
-        }
+        }*/
         return persistence.update(entity);
     }
 

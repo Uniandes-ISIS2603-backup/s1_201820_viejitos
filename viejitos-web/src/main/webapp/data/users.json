@@ -29,9 +29,9 @@
     },
     {
         "id": 4,
-        "name": "Espitia",
+        "name": "espitia",
         "user": "espitia",
-        "password": "espitia123",
+        "password": "espitia",
         "birthDate": "1990/06/17",
         "rol": "enfermero",
         "token": 123
