@@ -189,64 +189,6 @@ public class ClienteLogicTest
         Assert.assertEquals(pojoEntity.getTipo(), resp.getTipo());
     }
     
-    
-      /**
-     * Prueba para obtener una colección de instancias de Citas asociados a una
-     * instancia Enfermero
-     */
-    @Test
-    public void listCitasTest() {
-        CitaEntity list = clienteLogic.listCitas(data.get(0).getId());
-        Assert.assertEquals(citasData.get(0), list);
-    }
-    
-       /**
-     * Prueba para asociar una cita existente a un Cliente
-     */
-    @Test
-    public void addCitaTest() {
-        ClienteEntity entity = data.get(0);
-        CitaEntity citaEntity = citasData.get(1);
-        CitaEntity response = clienteLogic.addCita(entity.getId(), citaEntity.getId());
-
-        Assert.assertNotNull(response);
-        Assert.assertEquals(citaEntity.getId(), response.getId());
-    }
-    
-     /**
-     * Prueba para remplazar las instancias de citas asociadas a una instancia
-     * de Cliente
-     */
-    @Test
-    public void replaceCitaTest() {
-        ClienteEntity entity = data.get(0);
-        CitaEntity list = citasData.get(2);
-        try {
-            clienteLogic.replaceCita(entity.getId(), list);
-        } catch (BusinessLogicException ex) {
-            Logger.getLogger(ClienteLogicTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        entity = clienteLogic.getById(entity.getId());
-        Assert.assertFalse(entity.getCita() == citasData.get(0));
-        Assert.assertFalse(entity.getCita() == citasData.get(1));
-        Assert.assertTrue(entity.getCita() == citasData.get(2));
-    }
-    
-    /**
-     * Prueba para desasociar una cita existente de un cliente existente 
-     * @throws co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException
-     */
-    @Test
-    public void removeCitaTest() throws BusinessLogicException {
-        try {
-            clienteLogic.removeCita(data.get(0).getId(), citasData.get(2).getId());
-            CitaEntity response = clienteLogic.getCita(data.get(0).getId(), citasData.get(2).getId());
-        } catch (BusinessLogicException e) {
-        }
-
-    }
-    
     /**
      * Prueba para obtener una colección de instancias de Servicios asociados a una
      * instancia Cliente
