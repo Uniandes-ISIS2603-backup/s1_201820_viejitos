@@ -18,7 +18,7 @@
          * estado actual de la navegación definida en el módulo.
          */
         function ($scope, $http,  $state) {
-            var id = $state.params.id;
+            //var id = $state.params.id;
             console.log($state.params);
             /**
              * @ngdoc function
