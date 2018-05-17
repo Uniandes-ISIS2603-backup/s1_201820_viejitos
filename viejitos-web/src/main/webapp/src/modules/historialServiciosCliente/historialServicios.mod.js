@@ -89,7 +89,22 @@
                                 controller: 'historialServiciosClienteCreateCalificacionCtrl',
                                 controllerAs: 'ctrl'
                             }
-                        }});
+                        }})
+                            .state('cancelarServicioCliente', {
+                        url: '/ClienteServicioCancel',
+                        params: {
+                            id: null
+                        },
+                        views: {
+                            'mainView': {
+                                templateUrl:  'src/modules/historialServiciosCliente/delete/historialServicios.delete.html',
+                                controller: 'serviciosClienteCancelCtrl',
+                                controllerAs: 'ctrl'
+                            }
+                        }})
+           
+            
+            ;
         }
     ]);
 })(window.angular);
