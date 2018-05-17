@@ -15,26 +15,33 @@
                 $http.get("api/clientes/"  + $scope.idcliente).then(function (response) {
                     $scope.cliente = response.data;
                 });
-                  }
+              }
                    
-            $scope.data = {};
-               $scope.data.finalizado="false";
-               $scope.data.descripcion=$state.params.servicioDesc;
-               if($state.params.servicioTipo!==null)
-                    $scope.data.tipo=($state.params.servicioTipo).toString();
-                       
-             
-            $scope.solicitServicio = function () {
-                $http.post("api/servicios", $scope.data).then(function (response) {
-                    $scope.serv = response.data.id;
-                    console.log($scope.serv);
-                    $http.post("api/clientes/" + sessionStorage.getItem("id")+"/servicios/"+$scope.serv,).then(function(response){
-                        $state.go('serviciosList', {reload: true});
-                    });
-                });
-            };
+            $http.get("api/enfermeros").then(function (response){
+                $scope.enfermeros = response.data;
+            });
             
-        }
+                $scope.data = {};
+                $scope.data.finalizado="false";
+                $scope.data.descripcion=$state.params.servicioDesc;
+                if($state.params.servicioTipo!==null)
+                    $scope.data.tipo=($state.params.servicioTipo).toString();
+
+
+                $scope.solicitServicio = function () {
+                    $http.post("api/servicios", $scope.data).then(function (response) {
+                        $scope.serv = response.data.id;
+                        console.log($scope.serv);
+                        console.log($scope.data.enfermero);
+                        $http.post("api/clientes/" + sessionStorage.getItem("id")+"/servicios/"+$scope.serv).then(function(response){
+                            $http.post("api/enfermeros/"+ $scope.data.enfermero+"/servicios/"+$scope.serv).then(function(response){
+                                $state.go('serviciosList', {reload: true});
+                            });
+                        });
+                    });
+                };
+            
+            }
     ]);
 }
 )(window.angular);

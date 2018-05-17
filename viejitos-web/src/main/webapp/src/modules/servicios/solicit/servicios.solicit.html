@@ -20,6 +20,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="historialServicioHora" class="col-sm-2">Enfermeros:</label>
+                            <input list="enfermerosDisponibles" name="enfermerosD" id="historialServicioHora" required ng-model="data.enfermero" class="col-sm-6"/>
+                            <datalist id="enfermerosDisponibles" ng-repeat="enfermeroActual in enfermeros">
+                                <option>{{enfermeroActual.id}}</option>
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="form-group col-sm-4" ng-if="!historialServicio.$valid">
                         </div> 
                     </div> 

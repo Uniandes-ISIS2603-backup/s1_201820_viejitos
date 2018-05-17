@@ -15,7 +15,8 @@
         'calendariosModule',
         'historialServiciosModule',
         'loginModule',
-        'historialServiciosClienteModule'
+        'historialServiciosClienteModule',
+        'inicioModule'
     ]);
     // Resuelve problemas de las promesas
     app.config(['$qProvider', function ($qProvider) {
@@ -28,7 +29,7 @@
            
                  
                
-                var requireLogin = false
+                var requireLogin = false;
                      //   $state.current.data.requireLogin
                 var roles = []
                 //$state.current.data.roles
