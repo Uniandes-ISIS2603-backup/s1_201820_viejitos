@@ -16,8 +16,9 @@
         'historialServiciosModule',
         'loginModule',
         'historialServiciosClienteModule',
-        'historialServiciosEnfermeroModule',
-        'inicioModule'
+        'inicioModule',
+        'citasClienteModule',
+        'historialServiciosEnfermeroModule'
     ]);
     // Resuelve problemas de las promesas
     app.config(['$qProvider', function ($qProvider) {
