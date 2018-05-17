@@ -35,12 +35,24 @@ import java.util.Date;
  * @author lf.naranjo11
  */
 
-//TODO:DONE Completar y Revisar la documentación proque es un copy/paste de franja
+//DONE Completar y Revisar la documentación proque es un copy/paste de franja
 public class CalendarioSemanalDTO {
 
     private Long id;
     private Date ultimaModficacion;
 
+     /**
+     * Constructor por defecto
+     */
+    public CalendarioSemanalDTO(CalendarioSemanalEntity entity) {
+        if (entity != null) {
+            this.id = entity.getId();
+            this.ultimaModficacion = entity.getUltimaModficacion();
+
+        }
+
+    }
+    
     /**
      * @return la fecha de ultima modificacion
      */
@@ -67,18 +79,6 @@ public class CalendarioSemanalDTO {
      */
     public void setId(Long pId) {
         id = pId;
-    }
-
-    /**
-     * Constructor por defecto
-     */
-    public CalendarioSemanalDTO(CalendarioSemanalEntity entity) {
-        if (entity != null) {
-            this.id = entity.getId();
-            this.ultimaModficacion = entity.getUltimaModficacion();
-
-        }
-
     }
 
     /**

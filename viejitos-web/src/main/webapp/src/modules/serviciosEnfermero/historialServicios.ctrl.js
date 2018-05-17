@@ -8,7 +8,6 @@
             if((sessionStorage.getItem("id") !== undefined) && (sessionStorage.getItem("id") !== null) ){ 
                 $http.get('api/enfermeros/'+sessionStorage.getItem("id")+"/servicios").then(function (response) {
                 $scope.historialServiciosRecordsEnfermero = response.data;
-                console.log($scope.historialServiciosRecordsEnfermero);
             });
         }
     }
