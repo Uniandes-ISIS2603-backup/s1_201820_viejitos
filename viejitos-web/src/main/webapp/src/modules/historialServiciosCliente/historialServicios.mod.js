@@ -77,6 +77,18 @@
                                 controller: 'historialServiciosClienteCreateFacturaCtrl',
                                 controllerAs: 'ctrl'
                             }
+                        }})
+                    .state('ClientecalificacionCreate', {
+                        url: '/ClientecalificacionCreate',
+                        params: {
+                            id: null
+                        },
+                        views: {
+                            'mainView': {
+                                templateUrl: basePath + 'historialServicios.createCalificacion.html',
+                                controller: 'historialServiciosClienteCreateCalificacionCtrl',
+                                controllerAs: 'ctrl'
+                            }
                         }});
         }
     ]);
