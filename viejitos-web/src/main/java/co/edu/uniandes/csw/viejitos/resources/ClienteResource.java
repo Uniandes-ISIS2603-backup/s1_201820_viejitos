@@ -10,8 +10,10 @@ import co.edu.uniandes.csw.viejitos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.viejitos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.exceptions.BusinessLogicException;
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -59,6 +61,7 @@ public class ClienteResource {
         try {
             return new ClienteDTO(cLogic.create(dto.toEntity()));
         } catch (BusinessLogicException e) {
+            LOGGER.log(Level.INFO, "El BusinessLogicException se transforma a webapp");
             throw new WebApplicationException(e.getMessage(), 404);
         }
 
