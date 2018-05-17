@@ -40,6 +40,7 @@ public class ViejitoDetailDTO extends ViejitoDTO
 	 */
 	public ViejitoDetailDTO( )
 	{
+            super();
 	}
 
 	/**
