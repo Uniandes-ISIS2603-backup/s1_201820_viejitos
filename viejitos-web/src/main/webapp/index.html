@@ -177,17 +177,18 @@
                     <div class="col-sm-12" ng-if="isAuthenticated()">
                         <div ng-if="isAuthenticated()" ng-if="isMedico()" ng-if="isCliente()" ng-if="isEnfermero()" class="col-sm-2">
                             <h2>Mi perfil</h2>
-                            <div ng-if="isAuthenticated()">
-                                <img class="imagen img-responsive" src="src\img\senior-happy-winning-computer-game-16618160.jpg" alt="persona">
+                            <div class="col-lg-6"ng-if="isAuthenticated()">
+                                <img class="imagen img-responsive" src="src\img\senior-happy-winning-computer-game.jpg" alt="persona">
                             </div>
+                            <div class="col-lg-6">
                             {{currentUser}}<br>
                             <div class="btn-group-vertical"ng-if="isAuthenticated()">
-                                <button type="button" class="btn btn-default btn-lg"ng-if="isMedico()">Mis citas</button>
-                                <button type="button" class="btn btn-default btn-lg" ng-if="isCliente()">Mis citas</button>
+                                <button type="button" class="btn btn-default btn-lg" ui-sref="historialServiciosClienteList"  ng-if="isMedico()">Mis citas</button>
+                                <button type="button" class="btn btn-default btn-lg"ui-sref="citasCList" ng-if="isCliente()">Mis citas</button>
                                 <button type="button" class="btn btn-default btn-lg"ng-if="isCliente()"  ui-sref="historialServiciosClienteList">Mis servicios</button>
                                 <button type="button" class="btn btn-default btn-lg" ng-if="isEnfermero()" ui-sref="historialServiciosEnfermeroList">Mis servicios</button>
-                                <button type="button" class="btn btn-default btn-lg"ng-if="isCliente()">Mis calificaciones</button>
-                                <button type="button" class="btn btn-default btn-lg" ng-if="isEnfermero()">Mis calificaciones</button>
+                             
+                            </div>
                             </div>
                         </div>
                     </div>
