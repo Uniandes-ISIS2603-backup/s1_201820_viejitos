@@ -127,7 +127,7 @@ public class EnfermeroDetailDTO extends EnfermeroDTO {
     @Override
     public EnfermeroEntity toEntity() {
         EnfermeroEntity entidad = super.toEntity();
-        //TODO:DONE this.calendar puede ser null
+        //DONE this.calendar puede ser null
         if(this.calendar!=null)
             entidad.setCalendario(this.calendar.toEntity());
         List<CalificacionEntity> cals = new ArrayList<>();

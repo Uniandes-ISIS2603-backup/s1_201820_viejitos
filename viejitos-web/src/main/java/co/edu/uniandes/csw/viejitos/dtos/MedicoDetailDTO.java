@@ -67,7 +67,7 @@ package co.edu.uniandes.csw.viejitos.dtos;
  *
  * @author l.pardo
  */
-//TODO: DONE
+//DONE
 import co.edu.uniandes.csw.viejitos.entities.CitaEntity;
 import co.edu.uniandes.csw.viejitos.entities.ClienteEntity;
 import co.edu.uniandes.csw.viejitos.entities.HistoriaClinicaEntity;
