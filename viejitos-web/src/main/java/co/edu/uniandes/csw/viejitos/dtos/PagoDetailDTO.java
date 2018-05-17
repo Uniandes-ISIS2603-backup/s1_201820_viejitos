@@ -63,11 +63,10 @@ public class PagoDetailDTO extends PagoDTO {
     public PagoDetailDTO(PagoEntity entity) {
         super(entity); // TODO: DONE se debe enviar en entity
         //TODO  DONE entity puede ser null
-        if(entity != null )
-        {
-            if (entity.getServicio() != null) {
-                this.servicio = new ServicioDTO(entity.getServicio());
-            }
+        if (entity != null && entity.getServicio() != null) {
+
+            this.servicio = new ServicioDTO(entity.getServicio());
+
         }
     }
 
